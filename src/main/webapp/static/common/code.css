@@ -1,0 +1,178 @@
+.content {
+  padding: 10px 25px;
+}
+.hierarchy {
+  background: #333;
+  color: #fff;
+}
+.plugins-list li {
+  width: 50%;
+  float: left;
+}
+pre {
+  border: none;
+}
+
+.sidebar {
+  margin-top: 0;
+  padding-top: 0!important;
+}
+.box .main-header {
+  z-index: 1000;
+  position: relative;
+}
+.treeview .nav li a:hover,
+.treeview .nav li a:active {
+  background: transparent;
+}
+p {
+  padding: 0!important;
+}
+/* Hemisu Light */
+/* Original theme - http://noahfrederick.com/vim-color-scheme-hemisu/ */
+pre.prettyprint {
+  background: white;
+  font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  border: 1px solid #dedede!important;
+  padding: 10px;
+  max-height: 300px;
+  width: auto;
+  overflow: auto!important;
+}
+pre{
+	font-size: 14px;
+}
+pre.prettyprint > code {
+  width: auto;
+  overflow: auto!important;
+}
+
+.pln {
+  color: #111111;
+}
+
+@media screen {
+  .str {
+    color: #739200;
+  }
+
+  .kwd {
+    color: #739200;
+  }
+
+  .com {
+    color: #999999;
+  }
+
+  .typ {
+    color: #ff0055;
+  }
+
+  .lit {
+    color: #538192;
+  }
+
+  .pun {
+    color: #111111;
+  }
+
+  .opn {
+    color: #111111;
+  }
+
+  .clo {
+    color: #111111;
+  }
+
+  .tag {
+    color: #111111;
+  }
+
+  .atn {
+    color: #739200;
+  }
+
+  .atv {
+    color: #ff0055;
+  }
+
+  .dec {
+    color: #111111;
+  }
+
+  .var {
+    color: #111111;
+  }
+
+  .fun {
+    color: #538192;
+  }
+}
+@media print, projection {
+  .str {
+    color: #006600;
+  }
+
+  .kwd {
+    color: #006;
+    font-weight: bold;
+  }
+
+  .com {
+    color: #600;
+    font-style: italic;
+  }
+
+  .typ {
+    color: #404;
+    font-weight: bold;
+  }
+
+  .lit {
+    color: #004444;
+  }
+
+  .pun, .opn, .clo {
+    color: #444400;
+  }
+
+  .tag {
+    color: #006;
+    font-weight: bold;
+  }
+
+  .atn {
+    color: #440044;
+  }
+
+  .atv {
+    color: #006600;
+  }
+}
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+pre code {
+    padding: 0;
+        padding-top: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+    font-size: inherit;
+    color: inherit;
+    white-space: pre-wrap;
+    background-color: transparent;
+    border-radius: 0;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+}
+code, kbd, pre, samp {
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+}

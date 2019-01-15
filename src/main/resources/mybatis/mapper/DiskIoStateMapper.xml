@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.host.DiskIoStateDao">
+	<resultMap id="resultMap" type="com.entity.host.DiskIoState">
+		<id column="ID" property="id" jdbcType="CHAR" />
+		<result column="ACCOUNT_ID" property="accountId" jdbcType="CHAR" />
+		<result column="ACCOUNT" property="account" jdbcType="CHAR" />
+		<result column="HOST_NAME" property="hostname" jdbcType="CHAR" />
+		<result column="RS" property="rs" jdbcType="CHAR" />
+		<result column="WS" property="ws" jdbcType="CHAR" />
+		<result column="RKBS" property="rkBS" jdbcType="CHAR" />
+		<result column="WKBS" property="wkBS" jdbcType="CHAR" />
+		<result column="AWAIT" property="await" jdbcType="CHAR" />
+		<result column="AVGQUSZ" property="avgquSz" jdbcType="CHAR" />
+		<result column="UTIL" property="util" jdbcType="CHAR" />
+		<result column="DATE_STR" property="dateStr" jdbcType="CHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="tableColumnList">
+		ID,ACCOUNT_ID, ACCOUNT,HOST_NAME, RS, WS, RKBS,WKBS,AWAIT,AVGQUSZ,UTIL,DATE_STR,CREATE_TIME
+	</sql>
+	
+	<sql id="queryByParams">
+		<if test="accountId != null">
+			<![CDATA[ AND ACCOUNT_ID  = #{accountId} ]]>
+		</if>
+		<if test="account != null">
+			<![CDATA[ AND ACCOUNT  = #{account} ]]>
+		</if>
+		<if test="hostname != null">
+			<![CDATA[ AND HOST_NAME = #{hostname} ]]>
+		</if>
+		<if test="startTime != null and endTime !=null and startTime !='' and endTime != '' ">
+			<![CDATA[ AND CREATE_TIME >= #{startTime} and CREATE_TIME <=#{endTime}]]>
+		</if>
+	</sql>
+	
+	<select id="selectById" resultMap="resultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM DISKIO_STATE
+		WHERE ID=#{id} 
+	</select>
+	
+	
+	<delete id="deleteByAccountAndDate"  parameterType="map">
+		DELETE FROM DISKIO_STATE WHERE  ACCOUNT_ID  = #{accountId}  <![CDATA[ AND CREATE_TIME <=#{endTime}]]>
+	</delete>
+	
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		DELETE FROM DISKIO_STATE
+		WHERE ID = #{id}
+	</delete>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE FROM
+		DISKIO_STATE
+		WHERE ID IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<insert id="save" parameterType="com.entity.host.DiskIoState">
+		INSERT INTO DISKIO_STATE
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >ID,</if>
+      		<if test="accountId != null" >ACCOUNT_ID,</if>
+      		<if test="account != null" >ACCOUNT,</if>
+      		<if test="hostname != null" > HOST_NAME,</if>
+      		<if test="rs != null">RS,</if>
+      		<if test="ws != null">WS,</if>
+      		<if test="rkBS != null">RKBS,</if>
+      		<if test="wkBS != null">WKBS,</if>
+      		<if test="await != null">AWAIT,</if>
+      		<if test="avgquSz != null" >AVGQUSZ,</if>
+      		<if test="util != null" >UTIL,</if>
+      		<if test="dateStr != null" >DATE_STR,</if>
+      		<if test="createTime != null" >CREATE_TIME</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >#{id},</if>
+      		<if test="accountId != null" >#{accountId},</if>
+      		<if test="account != null" >#{account},</if>
+      		<if test="hostname != null" >#{hostname},</if>
+      		<if test="rs != null" >#{rs},</if>
+      		<if test="ws != null" >#{ws},</if>
+      		<if test="rkBS != null" >#{rkBS},</if>
+      		<if test="wkBS != null" >#{wkBS},</if>
+      		<if test="await != null" >#{await},</if>
+      		<if test="avgquSz != null" >#{avgquSz},</if>
+      		<if test="util != null" >#{util},</if>
+      		<if test="dateStr != null" >#{dateStr},</if>
+      		<if test="createTime != null" >#{createTime}</if>
+    	</trim>
+	</insert>
+	
+	<insert id="insertList" parameterType="java.util.List" >
+	      INSERT INTO DISKIO_STATE (ID, ACCOUNT_ID, ACCOUNT,HOST_NAME,RS, WS, RKBS,WKBS,AWAIT,AVGQUSZ,UTIL,DATE_STR,CREATE_TIME)  VALUES
+	      <foreach collection="list" item="item" index="index" separator="," >  
+	        (#{item.id},#{item.accountId},#{item.account},#{item.hostname},#{item.rs},#{item.ws},#{item.rkBS},#{item.wkBS},
+	        #{item.await},#{item.avgquSz},#{item.util},#{item.dateStr},#{item.createTime})  
+	      </foreach>
+	 </insert>
+	
+	
+	  <select id="selectAllByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM DISKIO_STATE t
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	<select id="selectByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM DISKIO_STATE
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	
+</mapper>
