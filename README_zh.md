@@ -2,6 +2,8 @@
 
 linux性能监测工具，运维监控，网络吞吐率，服务器cpu监控，内存监控
 
+![a.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/a.jpg)
+
 ## 依赖环境
 
 1.JDK1.8
@@ -22,12 +24,17 @@ Linux 3.10.0-514.el7.x86_64 (localhost.localdomain) 	2019年01月10日 	_x86_64_
 13时40分26秒  all    0.60    0.00    0.19    0.16    0.00    0.03    0.00    0.00    0.00   99.02
 ```
 
+## 源码使用
 
-## 配置参数
+用eclispe新建一个web maven工程，使用src来替换新建工程的src目录，使用pom.xml替换新建工程里的pom.xml，设置好jdk即可。
 
-application.properties配置数据库链接信息
+sql文件夹是数据库创建脚本，在mysql新建名为dats的数据库，执行dats.sql脚本
 
-host.properties配置监控服务器信息，格式为ip=端口//用户名//密码，可以配置多个，尽量不要使用root账号
+application.properties，配置数据库链接信息
+
+host.properties，配置监控服务器信息，格式为ip=端口//用户名//密码，可以配置多个，尽量不要使用root账号
+
+因为本应用会通过配置的host.properties信息来从目标服务器获取运行状态，所以被监控的服务器不需要安装本应用。
 
 ## 监控指标
 
@@ -59,8 +66,6 @@ avgqu-sz：向设备发出的请求平均数量。如果这个数值大于1，�
 服务器每3天会清空连接失败的服务器信息，所以3天后你就看不到连接失败的服务器信息了。目前暂不支持手动操作，全部由系统自动处理。
 
 同时系统会定时清除30天前的监控信息。
-
-![a.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/a.jpg)
 
 ## 告警提示规则
 

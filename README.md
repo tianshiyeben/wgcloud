@@ -4,6 +4,8 @@ Linux performance monitoring tools, operation and maintenance monitoring, networ
 
 [中文版README](https://github.com/tianshiyeben/wgcloud/blob/master/README_zh.md)
 
+![a.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/a.jpg)
+
 ## Dependent environment
 
 1.JDK1.8
@@ -25,11 +27,17 @@ Linux 3.10.0-514.el7.x86_64 (localhost.localdomain) 	2019年01月10日 	_x86_64_
 ```
 
 
-## configuration parameter
+## Source code usage
 
-application.properties，Configure database link information
+To build a new web Maven project with eclispe, use SRC to replace the SRC directory of the new project, use pom. XML to replace the pom. XML in the new project, and set jdk.
 
-host.properties，Configure monitor server information in the format of IP = port // username // password, you can configure multiple，Try not to use root account
+SQL folder is the database creation script. Create a new database named dats in MySQL and execute the dats. SQL script
+
+Application. properties, configure database link information
+
+Host. properties, configure monitoring server information in the format of IP = port // username // password, you can configure more than one, try not to use root account
+
+Because the application will get the running status from the target server by configuring the host. properties information, the monitored server does not need to install the application.
 
 ## Monitoring index
 
@@ -64,8 +72,6 @@ The server empties the failed server information every three days, so you can't 
 
 At the same time, the system will regularly clear the monitoring information 30 days ago.
 
-![a.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/a.jpg)
-
 ## Warning prompt rule
 
 The threshold of system memory usage is 99%. If it exceeds sending mail, it will not be repeated 24 hours.
@@ -82,7 +88,7 @@ http://localhost:9000/wgcloud
 
 Login account/password：admin/111111
 
-## userinfo
+## contact
 
 email：wg900@qq.com
 
