@@ -91,5 +91,7 @@ http://localhost:9000/wgcloud
 
 邮件：wg900@qq.com
 
+QQ群：623503772
+
 
 
