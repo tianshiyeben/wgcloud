@@ -1,12 +1,14 @@
 ## WGCLOUD
 
-Linux performance monitoring tools, operation and maintenance monitoring, network throughput, server CPU monitoring, memory monitoring
-
-[中文版README](https://github.com/tianshiyeben/wgcloud/blob/master/README_zh.md)
+linux性能监测工具，运维监控，网络吞吐率，服务器cpu监控，内存监控。[English README](https://github.com/tianshiyeben/wgcloud/blob/master/README_en.md)
 
 ![a.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/a.jpg)
 
-## Dependent environment
+![b.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/b.jpg)
+
+![c.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/c.jpg)
+
+## 依赖环境
 
 1.JDK1.8
 
@@ -14,9 +16,9 @@ Linux performance monitoring tools, operation and maintenance monitoring, networ
 
 3.mysql5.6+
 
-4.CentOS 6.4 or above, Red Hat 6.4 or above, not supported by other systems
+4.CentOS6.4或以上，Red Hat6.4或以上，其他系统暂不支持
 
-5.Check whether the monitored HOST host has installed sysstat. The following information indicates that it has been installed. If not, please install it through Yum install sysstat.
+5.检测被监控的HOST主机是否已经安装sysstat，如下信息说明已经安装，如果没有请通过yum install sysstat安装
 
 ```
 [root@localhost ~]# mpstat
@@ -26,69 +28,68 @@ Linux 3.10.0-514.el7.x86_64 (localhost.localdomain) 	2019年01月10日 	_x86_64_
 13时40分26秒  all    0.60    0.00    0.19    0.16    0.00    0.03    0.00    0.00    0.00   99.02
 ```
 
+## 源码使用
 
-## Source code usage
+用eclispe新建一个web maven工程，使用src来替换新建工程的src目录，使用pom.xml替换新建工程里的pom.xml，设置好jdk即可。
 
-To build a new web Maven project with eclispe, use SRC to replace the SRC directory of the new project, use pom. XML to replace the pom. XML in the new project, and set jdk.
+sql文件夹是数据库创建脚本，在mysql新建名为dats的数据库，执行dats.sql脚本
 
-SQL folder is the database creation script. Create a new database named dats in MySQL and execute the dats. SQL script
+application.properties，配置数据库链接信息
 
-Application. properties, configure database link information
+host.properties，配置监控服务器信息，格式为ip=端口//用户名//密码，可以配置多个，尽量不要使用root账号
 
-Host. properties, configure monitoring server information in the format of IP = port // username // password, you can configure more than one, try not to use root account
+因为本应用会通过配置的host.properties信息来从目标服务器获取运行状态，所以被监控的服务器不需要安装本应用。
 
-Because the application will get the running status from the target server by configuring the host. properties information, the monitored server does not need to install the application.
-
-## Monitoring index
+## 监控指标
 
 ```
-%usr: User CPU time (%)
-%sys: core time (%)
-%idle: idle time (%)
-%iowait: IO wait time (%)
-Rxpck/s: Packets received per second
-Txpck/s: Packets sent per second
-RxkB/s: KB received per second
-TxkB/s: KB sent per second
-Active/s: The number of locally initiated TCP connections per second, both created through connection calls
-Pasve/s: Number of remotely initiated TCP connections per second, that is, TCP connections created through accept calls
-%CPU: Process occupancy CPU utilization
-%MEM: Percentage of physical and total memory used by processes
-R/s, w/s, rkB/s, wkB/s: Represents the number of reads and writes per second and the amount of reads and writes per second (kilobytes), respectively. Excessive reading and writing may cause performance problems.
-Await: The average waiting time for an IO operation in milliseconds. This is the time spent by applications interacting with disks, including IO waiting and actual operation.
-If this value is too large, it may be that the hardware device has encountered bottlenecks or malfunctions.
-Avgqu-sz: The average number of requests to the device. If this value is greater than 1, it may be that the hardware device is saturated (some front-end hardware devices support parallel writing).
-%util: Equipment utilization. This value indicates the busyness of the device, and the empirical value is that if it exceeds 60, it may affect IO performance (referring to the average waiting time for IO operations).
-If it reaches 100%, the hardware is saturated.
+%usr：用户态的CPU时间（%）
+%sys：核心时间（%））
+%idle：空闲时间（%）
+%iowait：IO等待时间（%）
+rxpck/s：每秒钟接收的数据包
+txpck/s：每秒钟发送的数据包
+rxkB/s：每秒钟接收的kb
+txkB/s：每秒钟发送的kb
+active/s：每秒本地发起的TCP连接数，既通过connect调用创建的TCP连接
+passive/s：每秒远程发起的TCP连接数，即通过accept调用创建的TCP连接
+%CPU：进程占用CPU的使用率
+%MEM：进程使用的物理内存和总内存的百分比
+r/s, w/s, rkB/s, wkB/s：分别表示每秒读写次数和每秒读写数据量（千字节）。读写量过大，可能会引起性能问题。
+await：IO操作的平均等待时间，单位是毫秒。这是应用程序在和磁盘交互时，需要消耗的时间，包括IO等待和实际操作的耗时。
+如果这个数值过大，可能是硬件设备遇到了瓶颈或者出现故障。
+avgqu-sz：向设备发出的请求平均数量。如果这个数值大于1，可能是硬件设备已经饱和（部分前端硬件设备支持并行写入）。
+%util：设备利用率。这个数值表示设备的繁忙程度，经验值是如果超过60，可能会影响IO性能（可以参照IO操作平均等待时间）。
+如果到达100%，说明硬件设备已经饱和。
 ```
 
-![b.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/b.jpg)
-
-## How to delete the server information when the connection fails
-
-The server empties the failed server information every three days, so you can't see the failed server information after three days. At present, manual operation is not supported, all of which are handled automatically by the system.
 
 
+## 连接失败的服务器信息怎么删除
 
-At the same time, the system will regularly clear the monitoring information 30 days ago.
+服务器每3天会清空连接失败的服务器信息，所以3天后你就看不到连接失败的服务器信息了。目前暂不支持手动操作，全部由系统自动处理。
 
-## Warning prompt rule
+同时系统会定时清除30天前的监控信息。
 
-The threshold of system memory usage is 99%. If it exceeds sending mail, it will not be repeated 24 hours.
+## 告警提示规则
 
-The alarm percentage threshold of process memory monitoring is 99%. If the alarm percentage exceeds the sending mail, it will not be repeated 24 hours.
+系统内存使用率阈值99%，超过发送邮件，24小时不会重复发。
 
-Process CPU usage monitoring alarm percentage threshold of 99%, more than sending mail, 24 hours will not be repeated.
+进程内存监控报警百分比阈值99%，超过发送邮件，24小时不会重复发。
 
-If you don't want to receive alert notification, you can turn off the alert in applications. properties.
+进程CPU使用率监控报警百分比阈值99%，超过发送邮件，24小时不会重复发。
 
-## Access address
+若不想接受告警通知，可在applications.properties里，关闭提示。
+
+## 访问地址
 
 http://localhost:9000/wgcloud
 
-Login account/password：admin/111111
+登陆账号/密码：admin/111111
 
-## contact
+## 联系
 
-email：wg900@qq.com
+邮件：wg900@qq.com
+
+
 
