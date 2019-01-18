@@ -87,6 +87,8 @@ http://localhost:9000/wgcloud
 
 登陆账号/密码：admin/111111
 
+应用运行版本请加qq群后，在群文件下载
+
 ## 联系
 
 邮件：wg900@qq.com
