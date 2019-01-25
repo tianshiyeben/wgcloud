@@ -95,5 +95,9 @@ http://localhost:9000/wgcloud
 
 QQ群：623503772
 
+## 赞赏
+
+![赞赏](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/zanshang.jpg)
+
 
 
