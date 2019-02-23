@@ -58,6 +58,7 @@
 				<filtering>true</filtering>
 				<includes>
 					<include>*.*</include>
+					<include>**/*.xml</include>
 				</includes>
 			</resource>
 		</resources>

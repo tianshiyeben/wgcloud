@@ -55,7 +55,7 @@
 						</a>
        </c:if> --%>
        <c:if test="${list== null || fn:length(list) == 0}">
-       		&nbsp;&nbsp;&nbsp;&nbsp;暂时没有数据，猜您还未部署客户端？如果已部署成功，请耐心等待30分钟
+       		&nbsp;&nbsp;&nbsp;&nbsp;暂时没有数据，如果已部署成功，请耐心等待30分钟
        </c:if>
        <c:forEach items="${list}"  var="dash" >
       			<div class="col-lg-3 col-xs-6">
