@@ -41,7 +41,7 @@
 	
 	
 	<delete id="deleteByAccountAndDate"  parameterType="map">
-		DELETE FROM CPU_STATE WHERE  ACCOUNT_ID  = #{accountId}  <![CDATA[ AND CREATE_TIME <=#{endTime}]]>
+		DELETE FROM TCP_STATE WHERE  ACCOUNT_ID  = #{accountId}  <![CDATA[ AND CREATE_TIME <=#{endTime}]]>
 	</delete>
 	
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">

@@ -56,7 +56,6 @@ public class MonitorDayJobImpl extends TimerTask {
 		String oneDayBefore = DateUtil.getDateBefore(nowTime, 3);
 		//30天前时间
 		String sevenDayBefore = DateUtil.getDateBefore(nowTime, 30);
-		Map<String, Object> params = new HashMap<String,Object>();
 		Map<String, Object> paramsDel = new HashMap<String,Object>();
 		SystemInfoDao systemInfoDao = (SystemInfoDao)ApplicationContextHelper.getBean(SystemInfoDao.class);
 		CpuStateDao cpuStateDao = (CpuStateDao)ApplicationContextHelper.getBean(CpuStateDao.class);
@@ -73,6 +72,7 @@ public class MonitorDayJobImpl extends TimerTask {
 		try {
 			appInfoList = appInfoDao.selectAllByParams(null);
 			paramsDel.put(StaticKeys.SEARCH_END_TIME,sevenDayBefore);
+			paramsDel.put("accountId",StaticKeys.ADMIN_ACCOUNT);
 			
 			//执行删除操作begin
 			if(paramsDel.get(StaticKeys.SEARCH_END_TIME)!=null&&!"".equals(paramsDel.get(StaticKeys.SEARCH_END_TIME))){

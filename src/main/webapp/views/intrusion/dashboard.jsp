@@ -84,6 +84,5 @@
   <!-- Footer -->
   <jsp:include page="/common/footer.jsp"></jsp:include>
   <script type="text/javascript" src="${ctx}/static/js/jQuery/jquery-2.2.3.min.js"></script>
-  <script type="text/javascript" src="${ctx}/static/js/hostList.js"></script>
 </body>
 </html>

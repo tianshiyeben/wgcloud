@@ -8,7 +8,7 @@ linux性能监测工具，运维监控，网络吞吐率，服务器cpu监控，
 
 ![c.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/c.jpg)
 
-## 依赖环境
+## 运行环境
 
 1.JDK1.8
 
@@ -30,7 +30,7 @@ Linux 3.10.0-514.el7.x86_64 (localhost.localdomain) 	2019年01月10日 	_x86_64_
 
 ## 源码使用
 
-用eclispe新建一个web maven工程，使用src来替换新建工程的src目录，使用pom.xml替换新建工程里的pom.xml，设置好jdk即可。
+用eclispe新建一个java web maven工程，使用src替换新建工程的src目录，使用pom.xml替换新建工程里的pom.xml，设置好jdk1.8即可。
 
 sql文件夹是数据库创建脚本，在mysql新建名为dats的数据库，执行dats.sql脚本
 
@@ -38,7 +38,7 @@ application.properties，配置数据库链接信息
 
 host.properties，配置监控服务器信息，格式为ip=端口//用户名//密码，可以配置多个，尽量不要使用root账号
 
-因为本应用会通过配置的host.properties信息来从目标服务器获取运行状态，所以被监控的服务器不需要安装本应用。
+因为本应用会通过host.properties信息来从监控服务器获取运行状态，所以被监控的服务器不需要安装本应用。
 
 ## 监控指标
 
@@ -79,7 +79,7 @@ avgqu-sz：向设备发出的请求平均数量。如果这个数值大于1，�
 
 进程CPU使用率监控报警百分比阈值99%，超过发送邮件，24小时不会重复发。
 
-若不想接受告警通知，可在applications.properties里，关闭提示。
+若不想接受告警通知，可在applications.properties里关闭。
 
 ## 访问地址
 

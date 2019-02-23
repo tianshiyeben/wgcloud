@@ -11,7 +11,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.java.version>1.8</project.build.java.version>
 	</properties>
-	<!-- maven jar仓库配置，用于增加私有仓库或者国内仓库 -->
 	<repositories>
 		<repository>
 			<id>nexus-aliyun</id>
@@ -31,7 +30,6 @@
 			<url>http://repo1.maven.org/maven2/</url>
 		</repository>
 	</repositories>
-	<!-- maven plugin仓库配置，用于增加私有仓库或者国内仓库 -->
 	<pluginRepositories>
 		<pluginRepository>
 			<id>nexus-aliyun</id>
@@ -63,10 +61,8 @@
 				</includes>
 			</resource>
 		</resources>
-		<!--当项目没有规定目标时的默认值-->
 		<defaultGoal>install</defaultGoal>
 		<plugins>
-			<!-- java编译插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -83,7 +79,6 @@
         		<version>3.1.0</version>
         		<configuration>
 					<webXml>src\main\webapp\WEB-INF\web.xml</webXml>
-              		<!-- 指定jsp等文件所在位置 -->   
                 	<warSourceDirectory>src\main\webapp</warSourceDirectory>
               		<webResources>
             			<resource>

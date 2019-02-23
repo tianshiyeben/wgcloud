@@ -116,40 +116,6 @@ public class DashboardService {
 		return strBuffer.toString();
 	}
 	
-	//以下注释为内存柱状图显示
-	/**
-	 * 组装内存使用情况图表字符串
-	 * @param memList
-	 * @return
-	 *//*
-	public String memStateChar(List<MemState> memList){
-		Collections.reverse(memList);
-		StringBuffer strBuffer = new StringBuffer("{title:{text:'内存已使用百分比',subtext:''},tooltip : {trigger: 'axis'},");
-		strBuffer.append("legend: {data:['已使用百分比']},");
-		strBuffer.append("xAxis:[{"+LINE_FALSE+"type:'category',boundaryGap:true,data:[");
-		for(MemState stat:memList){
-			strBuffer.append("'"+stat.getDateStr()+"',");
-		}
-		strBuffer.append("],");
-		strBuffer.append("axisLabel:{interval:0,rotate:30,margin:2}}],");
-		strBuffer.append("yAxis:[{"+LINE_FALSE+"type:'value',axisLabel:{formatter:'{value}%'}}],");
-		strBuffer.append("series:[");
-		strBuffer.append("{name:'已使用百分比',type:'bar',");
-		if(memList.size()<=StaticKeys.BAR_SIZE){
-			strBuffer.append("barWidth: 32,");
-		}
-		strBuffer.append("itemStyle: {normal: {color: '#BA55D3'}},data:[");
-//		strBuffer.append("{name:'已使用百分比',type:'bar',barWidth: 35,itemStyle: {normal: {");
-//		strBuffer.append("color: function(params) { var colorList = ['#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',");
-//		strBuffer.append("'#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD','#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'");
-//		strBuffer.append(",'#AE8463','#1BCA63','#FAD120','#F3A10B','#50C0DD','#B7504B','#C1E279','#F4E101','#F0005A','#22C0C0'");
-//		strBuffer.append("];return colorList[params.dataIndex%25]}}},data:[");
-		for(MemState stat:memList){
-			strBuffer.append(stat.getUsePer()+",");
-		}
-		strBuffer.append("]}]}");
-		return strBuffer.toString();
-	}*/
 	
 	/**
 	 * 组装网络设备的吞吐率图表字符串
@@ -424,7 +390,6 @@ public class DashboardService {
 	 * @param accountInfo
 	 */
 	public void setDateParam(String am,String date,Map<String, Object> params){
-		//测试帐号不加时间条件
 		if("am1".equals(am)){
 			params.put(StaticKeys.SEARCH_START_TIME, date+" 00:00:00");
 			params.put(StaticKeys.SEARCH_END_TIME, date+" 05:59:59");
