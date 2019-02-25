@@ -42,7 +42,7 @@ public class AppStateService{
 		 for(AppState as : recordList){
 			 as.setId(UUIDUtil.getUUID());
 		 }
-		 appStateDao.saveRecord(recordList);
+		 appStateDao.insertList(recordList);
 	}
 	
 	public int deleteByAppInfoId(String appInfoId) throws Exception {

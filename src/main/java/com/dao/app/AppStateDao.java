@@ -30,7 +30,7 @@ public interface  AppStateDao {
     
     public void save(AppState AppState) throws Exception;
     
-    public void saveRecord(List<AppState> recordList) throws Exception;
+    public void insertList(List<AppState> recordList) throws Exception;
     
     public int deleteByAppInfoId(String appInfoId) throws Exception;
    
