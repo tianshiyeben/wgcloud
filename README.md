@@ -18,7 +18,7 @@ linux性能监测工具，运维监控，网络吞吐率，服务器cpu监控，
 
 4.CentOS6.4或以上，Red Hat6.4或以上，其他系统暂不支持
 
-5.检测被监控的HOST主机是否已经安装sysstat，如下信息说明已经安装，如果没有请通过yum install sysstat安装
+5.检测被监控主机是否已经安装sysstat，如下信息说明已经安装，如果没有请通过yum install sysstat安装
 
 ```
 [root@localhost ~]# mpstat
@@ -30,15 +30,15 @@ Linux 3.10.0-514.el7.x86_64 (localhost.localdomain) 	2019年01月10日 	_x86_64_
 
 ## 源码使用
 
-用eclispe新建一个java web maven工程，使用src替换新建工程的src目录，使用pom.xml替换新建工程里的pom.xml，设置好jdk1.8即可。
+在eclispe新建一个java web maven工程，使用src替换新建工程的src目录，使用pom.xml替换工程里的pom.xml，设置好jdk1.8即可。
 
-sql文件夹是数据库创建脚本，在mysql新建名为dats的数据库，执行dats.sql脚本
+sql文件夹里是数据库脚本，在mysql新建名为dats的数据库，然后执行dats.sql脚本初始化表。
 
-application.properties，配置数据库链接信息
+application.properties，配置数据库链接等信息，里面有注释说明。
 
-host.properties，配置监控服务器信息，格式为ip=端口//用户名//密码，可以配置多个，尽量不要使用root账号
+host.properties，配置被监控主机信息，格式为ip=端口//主机用户名//主机密码，可以配置多个，尽量不要使用root账号。
 
-因为本应用会通过host.properties信息来从监控服务器获取运行状态，所以被监控的服务器不需要安装本应用。
+本应用会通过host.properties信息来读取被监控主机状态，所以被监控主机不需要安装WGCLOUD。
 
 ## 监控指标
 
@@ -69,7 +69,7 @@ avgqu-sz：向设备发出的请求平均数量。如果这个数值大于1，�
 
 服务器每3天会清空连接失败的服务器信息，所以3天后你就看不到连接失败的服务器信息了。目前暂不支持手动操作，全部由系统自动处理。
 
-同时系统会定时清除30天前的监控信息。
+同时系统会定时清除30天前的监控数据信息。
 
 ## 告警提示规则
 
@@ -81,21 +81,44 @@ avgqu-sz：向设备发出的请求平均数量。如果这个数值大于1，�
 
 若不想接受告警通知，可在applications.properties里关闭。
 
-## 访问地址
+
+
+## 更新记录
+
+- 2019.2.26
+
+  修复了清楚历史数据的任务机制
+
+  修复了应用监控的bug
+
+  删除多余的注释及其他优化
+
+
+## 访问
 
 http://localhost:9000/wgcloud
 
 登陆账号/密码：admin/111111
 
-tomcat下可运行的安装包请加qq群后，在群文件下载
+
 
 ## 联系
 
-邮件：wg900@qq.com
-
 QQ群：623503772
 
+
+
+## 下载
+
+Tomcat下可运行的war包请加qq群后，在群文件下载
+
+
+
 ## 赞赏
+
+开源不易，如果你觉得本项目帮助到你了，请给作者一点点鼓励。
+
+
 
 ![赞赏](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/zanshang.jpg)
 
