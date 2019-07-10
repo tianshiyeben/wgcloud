@@ -2,7 +2,7 @@
 
 linux性能监测工具，运维监控，网络吞吐率，服务器cpu监控，内存监控。[English README](https://github.com/tianshiyeben/wgcloud/blob/master/README_en.md)
 
-WAR包下载请拉到最底部。
+WAR包下载请拉到本页最底部。
 
 ![a.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/a.jpg)
 
@@ -16,7 +16,7 @@ WAR包下载请拉到最底部。
 
 2.tomcat8.5+
 
-3.mysql5.6+
+3.mysql5.6 或 5.7
 
 4.CentOS6.4或以上，Red Hat6.4或以上，其他系统暂不支持
 
@@ -100,6 +100,8 @@ avgqu-sz：向设备发出的请求平均数量。如果这个数值大于1，�
 
 http://localhost:9000/wgcloud
 
+其中替换为自己的ip和tomcat端口
+
 登陆账号/密码：admin/111111
 
 
@@ -112,7 +114,7 @@ QQ群：623503772
 
 ## 下载
 
-Tomcat下可运行的war包请加qq群后，在群文件下载
+Tomcat下可运行的war包请加qq群后，在群文件下载。qq群不验证，自由加入。
 
 
 
