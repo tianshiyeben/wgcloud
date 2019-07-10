@@ -2,6 +2,8 @@
 
 linux性能监测工具，运维监控，网络吞吐率，服务器cpu监控，内存监控。[English README](https://github.com/tianshiyeben/wgcloud/blob/master/README_en.md)
 
+WAR包下载请拉到最底部。
+
 ![a.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/a.jpg)
 
 ![b.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/b.jpg)
