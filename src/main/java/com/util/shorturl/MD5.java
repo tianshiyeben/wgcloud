@@ -66,8 +66,4 @@ public class MD5 {
         return resultString;
     }
 
-    public static void main(String[] args) {
-        MD5 getMD5 = new MD5();
-        System.out.println(getMD5.GetMD5Code("weiguanyun1"));
-    }
 }

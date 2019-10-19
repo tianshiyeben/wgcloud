@@ -67,27 +67,40 @@ public class CtrCommond {
 	 */
 	public static String doCommond(Connection conn,String cmd){
 		String result = "";
-        try {
-            if(conn==null){
-            	System.out.println("请先链接服务器");
-            }else{
-                Session sess = conn.openSession();
-                sess.execCommand(cmd);
-                InputStream stdout = new StreamGobbler(sess.getStdout());
-    			BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(stdout));
-    			while(true){
-    				String line = stdoutReader.readLine();
-    				if (line == null)
-    					break;
-    				result+=line+StaticKeys.SPLIT_BR;
-    			}
-    			//连接的Session和Connection对象都需要关闭 
-    			stdoutReader.close();
-                sess.close();
+        
+        if(conn==null){
+        	System.out.println("请先链接服务器");
+        }else{
+        	Session sess = null;
+        	BufferedReader stdoutReader = null;
+        	try {
+	            sess = conn.openSession();
+	            sess.execCommand(cmd);
+				stdoutReader = new BufferedReader(new InputStreamReader( new StreamGobbler(sess.getStdout())));
+				while(true){
+					String line = stdoutReader.readLine();
+					if (line == null)
+						break;
+					result+=line+StaticKeys.SPLIT_BR;
+				}
+        	} catch (IOException e) {
+            	System.out.println("执行linux命令错误："+e);
+            } finally {
+            	//连接的Session和Connection对象都需要关闭 
+            	if (stdoutReader != null) {
+            		try {
+						stdoutReader.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+                }
+                if (sess != null) {
+                    sess.close();
+                }
             }
-        } catch (IOException e) {
-        	System.out.println("执行linux命令错误："+e);
         }
+        
         if(result.endsWith(StaticKeys.SPLIT_BR)){
         	result =  result.substring(0, result.length()-StaticKeys.SPLIT_BR.length());
         }
