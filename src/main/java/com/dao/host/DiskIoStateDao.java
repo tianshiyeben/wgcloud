@@ -11,7 +11,7 @@ import com.entity.host.DiskIoState;
  *
  * @ClassName:DiskIoStateDao.java     
  * @version V1.0 
- * @author: wgcloud     
+ * @author: http://www.wgstart.com     
  * @date: 2019年1月14日
  * @Description: 查看磁盘IO使用情况
  * @Copyright: 2019 wgcloud. All rights reserved.

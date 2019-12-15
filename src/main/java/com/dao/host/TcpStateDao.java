@@ -11,7 +11,7 @@ import com.entity.host.TcpState;
  *
  * @ClassName:TcpStateDao.java     
  * @version V1.0 
- * @author: wgcloud     
+ * @author: http://www.wgstart.com     
  * @date: 2019年1月14日
  * @Description: 查看TCP连接状态
  * @Copyright: 2019 wgcloud. All rights reserved.

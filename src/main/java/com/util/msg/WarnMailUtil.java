@@ -17,7 +17,7 @@ import com.util.staticvar.StaticKeys;
  *
  * @ClassName:WarnMailUtil.java     
  * @version V1.0 
- * @author: wgcloud     
+ * @author: http://www.wgstart.com     
  * @date: 2019年1月14日
  * @Description: WarnMailUtil.java
  * @Copyright: 2019 wgcloud. All rights reserved.
@@ -29,7 +29,7 @@ public class WarnMailUtil {
 	
 	public static final String title_suffix = "【WGCLOUD】";
 	
-	public static final String wish_con = "，<a target='_blank' href='http://www.wg900.com'>www.wg900.com</a><p>祝生活愉快";
+	public static final String wish_con = "，<a target='_blank' href='http://www.wgstart.com'>www.wgstart.com</a><p>祝生活愉快";
 	
 	public static final String content_suffix = "<p>WGCLOUD团队敬上";
 	

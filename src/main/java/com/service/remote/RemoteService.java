@@ -23,7 +23,7 @@ import com.util.staticvar.StaticKeys;
  *
  * @ClassName:RemoteService.java     
  * @version V1.0 
- * @author: wgcloud     
+ * @author: http://www.wgstart.com     
  * @date: 2019年1月14日
  * @Description: 远程客户端提交信息管理
  * @Copyright: 2019 wgcloud. All rights reserved.

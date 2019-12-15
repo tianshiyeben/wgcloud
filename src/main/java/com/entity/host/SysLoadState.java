@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @ClassName:SysLoadState.java     
  * @version V1.0 
- * @author: wgcloud     
+ * @author: http://www.wgstart.com     
  * @date: 2019年1月14日
  * @Description: uptime查看系统负载状态
  * @Copyright: 2019 wgcloud. All rights reserved.

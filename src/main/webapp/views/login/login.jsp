@@ -21,7 +21,7 @@
 <div class="login-box">
 		<div class="login-box-content">
 			<div class="login-logo">
-				<a href="#" target="_blank"><img src="${ctx}/static/hierapolis/assets/images/logo-atmosfero-w.gif"></a>
+				<a href="http://www.wgstart.com/" target="_blank"><img src="${ctx}/static/hierapolis/assets/images/logo-atmosfero-w.gif"></a>
 	  		</div>
 			<div class="login-box-body">
 			<p class="login-box-msg"><label style="color:red;font-weight:bold;"><c:out value="${error}" /></label></p>

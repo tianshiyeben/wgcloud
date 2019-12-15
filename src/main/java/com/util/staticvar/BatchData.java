@@ -19,7 +19,7 @@ import com.entity.host.TcpState;
  *
  * @ClassName:BatchData.java     
  * @version V1.0 
- * @author: wgcloud     
+ * @author: http://www.wgstart.com     
  * @date: 2019年1月14日
  * @Description: 临时存贮监控数据的静态工具类
  * @Copyright: 2019 wgcloud. All rights reserved.

@@ -21,7 +21,7 @@ import com.util.staticvar.BatchData;
  *
  * @ClassName:BatchCommitJobImpl.java     
  * @version V1.0 
- * @author: wgcloud     
+ * @author: http://www.wgstart.com     
  * @date: 2019年1月14日
  * @Description: 每5分钟39秒时候批量提交监控数据
  * @Copyright: 2019 wgcloud. All rights reserved.

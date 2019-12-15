@@ -7,7 +7,7 @@ import java.util.Date;
  *
  * @ClassName:LogInfo.java     
  * @version V1.0 
- * @author: wgcloud     
+ * @author: http://www.wgstart.com     
  * @date: 2019年1月14日
  * @Description: 日志信息
  * @Copyright: 2019 wgcloud. All rights reserved.

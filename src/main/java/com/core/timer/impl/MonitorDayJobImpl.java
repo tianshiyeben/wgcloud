@@ -32,7 +32,7 @@ import com.util.staticvar.StaticKeys;
  *
  * @ClassName:MonitorDayJobImpl.java     
  * @version V1.0 
- * @author: wgcloud     
+ * @author: http://www.wgstart.com     
  * @date: 2019年1月14日
  * @Description: 每天1点删除历史信息
  * @Copyright: 2019 wgcloud. All rights reserved.

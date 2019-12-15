@@ -17,7 +17,7 @@ import com.util.UUIDUtil;
  *
  * @ClassName:AppStateService.java     
  * @version V1.0 
- * @author: wgcloud     
+ * @author: http://www.wgstart.com     
  * @date: 2019年1月14日
  * @Description: AppStateService.java
  * @Copyright: 2019 wgcloud. All rights reserved.

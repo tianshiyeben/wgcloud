@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
  *
  * @ClassName:MD5.java     
  * @version V1.0 
- * @author: wgcloud     
+ * @author: http://www.wgstart.com     
  * @date: 2019年1月14日
  * @Description: MD5.java
  * @Copyright: 2019 wgcloud. All rights reserved.
@@ -66,8 +66,4 @@ public class MD5 {
         return resultString;
     }
 
-    public static void main(String[] args) {
-        MD5 getMD5 = new MD5();
-        System.out.println(getMD5.GetMD5Code("weiguanyun1"));
-    }
 }

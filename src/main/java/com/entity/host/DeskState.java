@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @ClassName:DeskState.java     
  * @version V1.0 
- * @author: wgcloud     
+ * @author: http://www.wgstart.com     
  * @date: 2019年1月14日
  * @Description: 查看磁盘大小使用信息
  * @Copyright: 2019 wgcloud. All rights reserved.

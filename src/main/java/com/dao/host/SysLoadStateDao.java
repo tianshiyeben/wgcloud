@@ -11,7 +11,7 @@ import com.entity.host.SysLoadState;
  *
  * @ClassName:SysLoadStateDao.java     
  * @version V1.0 
- * @author: wgcloud     
+ * @author: http://www.wgstart.com     
  * @date: 2019年1月14日
  * @Description: 查看uptime查看系统负载状态
  * @Copyright: 2019 wgcloud. All rights reserved.

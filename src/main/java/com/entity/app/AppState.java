@@ -11,7 +11,7 @@ import com.util.DateUtil;
  *
  * @ClassName:AppState.java     
  * @version V1.0 
- * @author: wgcloud     
+ * @author: http://www.wgstart.com     
  * @date: 2019年1月14日
  * @Description: app状态监控
  * @Copyright: 2019 wgcloud. All rights reserved.

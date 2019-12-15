@@ -11,7 +11,7 @@ import com.entity.host.NetIoState;
  *
  * @ClassName:NetIoStateDao.java     
  * @version V1.0 
- * @author: wgcloud     
+ * @author: http://www.wgstart.com     
  * @date: 2019年1月14日
  * @Description: 查看网络设备的吞吐率
  * @Copyright: 2019 wgcloud. All rights reserved.
