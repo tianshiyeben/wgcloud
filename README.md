@@ -46,3 +46,10 @@ agent端负责上报服务器指标数据。
 
 http://www.wgstart.com/docs12.html
 
+
+
+## 支持开源
+
+
+
+![c.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/wxzf.jpg)
