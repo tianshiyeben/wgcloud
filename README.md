@@ -50,6 +50,6 @@ http://www.wgstart.com/docs12.html
 
 ## 支持开源
 
-
+如果您觉得本应用项目对你有帮助，可以赞赏一下作者。万水千山总是情，一块十块都是情！
 
 ![c.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/wxzf.jpg)
