@@ -1,0 +1,19 @@
+server:
+  port: 9998
+  servlet:
+    context-path: /wgcloud-agent
+spring:
+  application:
+    name: wgcloud-agent
+#日志文件输出路径
+logging:
+  path: ./log
+
+#自定义配置参数
+base:
+  #wgcloud-server端访问地址
+  serverUrl: http://localhost:9999
+  #本机ip，不要用localhost或127.0.0.1
+  bindIp: 192.168.1.2
+  #监控本机进程id，可以为空
+  appId:

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wgcloud.mapper.DbTableCountMapper">
+	<resultMap id="resultMap" type="com.wgcloud.entity.DbTableCount">
+		<id column="ID" property="id" jdbcType="CHAR" />
+		<result column="DB_TABLE_ID" property="dbTableId" jdbcType="CHAR" />
+		<result column="TABLE_COUNT" property="tableCount" jdbcType="BIGINT" />
+		<result column="DATE_STR" property="dateStr" jdbcType="CHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="tableColumnList">
+		ID,DB_TABLE_ID, TABLE_COUNT,DATE_STR,CREATE_TIME
+	</sql>
+
+
+	<sql id="queryByParams">
+		<if test="dbTableId != null">
+			<![CDATA[ AND DB_TABLE_ID = #{dbTableId} ]]>
+		</if>
+		<if test="startTime != null and endTime !=null and startTime !='' and endTime != '' ">
+			<![CDATA[ AND CREATE_TIME >= #{startTime} and CREATE_TIME <=#{endTime}]]>
+		</if>
+	</sql>
+
+	<select id="selectById" resultMap="resultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM DB_TABLE_COUNT 
+		WHERE ID=#{id} 
+	</select>
+	
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		DELETE FROM DB_TABLE_COUNT 
+		WHERE ID = #{id}
+	</delete>
+
+	<delete id="deleteByDate"  parameterType="map">
+		DELETE FROM DB_TABLE_COUNT WHERE   <![CDATA[  CREATE_TIME <=#{endTime}]]>
+	</delete>
+
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE FROM
+		DB_TABLE_COUNT 
+		WHERE ID IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<insert id="insertList" parameterType="java.util.List" >
+		INSERT INTO DB_TABLE_COUNT (ID,DB_TABLE_ID,TABLE_COUNT,DATE_STR,CREATE_TIME)  VALUES
+		<foreach collection="list" item="item" index="index" separator="," >
+			(#{item.id},#{item.dbTableId},#{item.tableCount},#{item.dateStr},#{item.createTime})
+		</foreach>
+	</insert>
+
+	<insert id="save" parameterType="com.wgcloud.entity.DbTableCount">
+		INSERT INTO DB_TABLE_COUNT 
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >ID,</if>
+      		<if test="dbTableId != null" >DB_TABLE_ID,</if>
+      		<if test="tableCount != null">TABLE_COUNT,</if>
+      		<if test="dateStr != null">DATE_STR,</if>
+      		<if test="createTime != null" >CREATE_TIME</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >#{id},</if>
+      		<if test="dbTableId != null" >#{dbTableId},</if>
+      		<if test="tableCount != null" >#{tableCount},</if>
+      		<if test="dateStr != null" >#{dateStr},</if>
+      		<if test="createTime != null" >#{createTime}</if>
+    	</trim>
+	</insert>
+
+
+	<update id="updateById" parameterType="com.wgcloud.entity.DbTableCount">
+		UPDATE DB_TABLE_COUNT
+		<set>
+			<if test="dbTableId != null">
+				DB_TABLE_ID = #{dbTableId},
+			</if>
+			<if test="tableCount != null">
+				TABLE_COUNT = #{tableCount},
+			</if>
+			<if test="dateStr != null">
+				DATE_STR = #{dateStr},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime}
+			</if>
+		</set>
+		WHERE ID = #{id}
+	</update>
+
+	<select id="countByParams" parameterType="map" resultType="java.lang.Integer">
+		SELECT count(*)  FROM DB_TABLE_COUNT t
+		<where>
+			<include refid="queryByParams" />
+		</where>
+	</select>
+
+
+	<select id="selectAllByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM DB_TABLE_COUNT t
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME ASC
+	</select>
+	
+	<select id="selectByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM DB_TABLE_COUNT
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME ASC
+	</select>
+	
+	
+</mapper>

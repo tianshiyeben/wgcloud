@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <div  th:replace="common/header.html"></div>
+
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div th:replace="common/chart.html"></div>
+
+<div class="wrapper">
+
+  <div th:replace="common/navbar.html"></div>
+
+  <div th:replace="common/aside.html"></div>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1></h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+
+            </ol>
+          </div>
+        </div>
+
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">日志列表</h3>
+        <div class="card-tools">
+          <div class="float-sm-right">
+            <!-- SEARCH FORM -->
+            <form class="form-inline ml-3" th:action="@{'/log/list'}">
+              <div class="input-group input-group-sm">
+                <input class="form-control form-control-navbar" name="hostname" th:value="${logInfo.hostname}" type="search" placeholder="输入摘要关键字" aria-label="Search">
+                <div class="input-group-append">
+                  <button class="btn btn-navbar" type="submit">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th style="width: 80px">序号</th>
+            <th>摘要</th>
+            <th>日期</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <th:block th:each="item,iterStat : ${page.list}">
+            <tr>
+              <td th:text="${iterStat.index+1}">1</td>
+              <td th:text="${item.hostname}">Update software</td>
+              <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}">Update software</td>
+              <td> <button type="button"  th:onclick="view([[${item.id}]])"  class="btn btn-block bg-gradient-primary btn-sm">查看</button></td>
+            </tr>
+          </th:block>
+
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+      <div th:replace="common/page.html"></div>
+    </div>
+    <!-- /.card -->
+
+
+  </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <div th:replace="common/footer.html"></div>
+
+</div>
+<!-- ./wrapper -->
+
+<script th:src="@{'/static/js/log.js'}"></script>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wgcloud.mapper.MailSetMapper">
+	<resultMap id="resultMap" type="com.wgcloud.entity.MailSet">
+		<id column="ID" property="id" jdbcType="CHAR" />
+		<result column="SEND_MAIL" property="sendMail" jdbcType="CHAR" />
+		<result column="FROM_MAIL_NAME" property="fromMailName" jdbcType="CHAR" />
+		<result column="FROM_PWD" property="fromPwd" jdbcType="CHAR" />
+		<result column="SMTP_HOST" property="smtpHost" jdbcType="CHAR" />
+		<result column="SMTP_PORT" property="smtpPort" jdbcType="CHAR" />
+		<result column="SMTP_SSL" property="smtpSSL" jdbcType="CHAR" />
+		<result column="TO_MAIL" property="toMail" jdbcType="CHAR" />
+		<result column="CPU_PER" property="cpuPer" jdbcType="CHAR" />
+		<result column="MEM_PER" property="memPer" jdbcType="CHAR" />
+		<result column="HEATH_PER" property="heathPer" jdbcType="CHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="tableColumnList">
+		ID,SEND_MAIL, FROM_MAIL_NAME, FROM_PWD, SMTP_HOST,SMTP_PORT,SMTP_SSL,TO_MAIL,CPU_PER,MEM_PER,CREATE_TIME,HEATH_PER
+	</sql>
+
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE FROM
+		MAIL_SET
+		WHERE ID IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<insert id="save" parameterType="com.wgcloud.entity.MailSet">
+		INSERT INTO MAIL_SET
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >ID,</if>
+      		<if test="fromMailName != null" > FROM_MAIL_NAME,</if>
+      		<if test="fromPwd != null">FROM_PWD,</if>
+      		<if test="smtpHost != null">SMTP_HOST,</if>
+      		<if test="smtpPort != null">SMTP_PORT,</if>
+      		<if test="smtpSSL != null">SMTP_SSL,</if>
+      		<if test="toMail != null">TO_MAIL,</if>
+      		<if test="cpuPer != null" >CPU_PER,</if>
+      		<if test="memPer != null" >MEM_PER,</if>
+			<if test="heathPer != null" >HEATH_PER,</if>
+      		<if test="sendMail != null" >SEND_MAIL,</if>
+      		<if test="createTime != null" >CREATE_TIME</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >#{id},</if>
+      		<if test="fromMailName != null" >#{fromMailName},</if>
+      		<if test="fromPwd != null" >#{fromPwd},</if>
+      		<if test="smtpHost != null" >#{smtpHost},</if>
+      		<if test="smtpPort != null" >#{smtpPort},</if>
+      		<if test="smtpSSL != null" >#{smtpSSL},</if>
+      		<if test="toMail != null" >#{toMail},</if>
+      		<if test="cpuPer != null" >#{cpuPer},</if>
+      		<if test="memPer != null" >#{memPer},</if>
+			<if test="heathPer != null" >#{heathPer},</if>
+      		<if test="sendMail != null" >#{sendMail},</if>
+      		<if test="createTime != null" >#{createTime}</if>
+    	</trim>
+	</insert>
+
+	<update id="updateById" parameterType="com.wgcloud.entity.MailSet">
+		UPDATE MAIL_SET
+		<set>
+			<if test="fromMailName != null">
+				FROM_MAIL_NAME = #{fromMailName},
+			</if>
+			<if test="fromPwd != null">
+				FROM_PWD= #{fromPwd},
+			</if>
+			<if test="smtpHost != null" >
+				SMTP_HOST= #{smtpHost},
+			</if>
+			<if test="smtpPort != null" >
+				SMTP_PORT= #{smtpPort},
+			</if>
+			<if test="smtpSSL != null" >
+				SMTP_SSL= #{smtpSSL},
+			</if>
+			<if test="toMail != null" >
+				TO_MAIL= #{toMail},
+			</if>
+				CPU_PER= #{cpuPer},
+				MEM_PER= #{memPer},
+				HEATH_PER= #{heathPer},
+			<if test="sendMail != null" >
+				SEND_MAIL= #{sendMail},
+			</if>
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	
+	  <select id="selectAllByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM MAIL_SET t
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	<select id="selectByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM MAIL_SET
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	
+</mapper>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <div  th:replace="common/header.html"></div>
+
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div th:replace="common/chart.html"></div>
+
+<div class="wrapper">
+
+  <div th:replace="common/navbar.html"></div>
+
+  <div th:replace="common/aside.html"></div>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1></h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item active"></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+  <div class="col-md-10">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">预警邮件(不需要告警，可以删除或设置不发送即可)</h3>
+      </div>
+      <!-- /.card-header -->
+      <!-- form start -->
+        <form role="form" id="form1" method="post" th:action="@{'/mailset/save'}">
+            <input type="hidden" name="id" th:value="${mailSet.id}"/>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1"><font color="red">*</font>是否发送告警邮件</label>
+                    <select class="form-control"   name="sendMail" id="sendMail">
+                        <option value="0">不发送</option>
+                        <option value="1">发送</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fromMailName"><font color="red">*</font>发送邮箱帐号</label>
+                    <input type="text"  th:value="${mailSet.fromMailName}" autocomplete="off" class="validate[required,maxSize[40],custom[email]] form-control" name="fromMailName" id="fromMailName" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="fromPwd"><font color="red">*</font>发送邮箱密码</label>
+                    <input type="password"  th:value="${mailSet.fromPwd}"  class="validate[required,maxSize[20]] form-control" name="fromPwd" id="fromPwd" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="fromMailName"><font color="red">*</font>发送邮箱SMTP服务器</label>
+                    <input type="text" th:value="${mailSet.smtpHost}" autocomplete="off" class="validate[required,maxSize[40]] form-control" name="smtpHost" id="smtpHost" placeholder="如：smtp.qq.com">
+                </div>
+                <div class="form-group">
+                    <label><font color="red">*</font>是否启用安全链接(SSL)</label>
+                    <select class="form-control"   onchange="setSmtpPort()"  name="smtpSSL" id="smtpSSL">
+                        <option value="0">不启用</option>
+                        <option value="1">启用</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fromMailName"><font color="red">*</font>发送邮箱的SMTP端口,25或465</label>
+                    <input type="text"  th:value="${mailSet.smtpPort}" autocomplete="off" class="validate[required,custom[number],maxSize[5]] form-control" name="smtpPort" id="smtpPort" placeholder="">
+                </div>
+
+                <div class="form-group">
+                    <label for="fromMailName"><font color="red">*</font>接受邮件,多个邮件用;隔开</label>
+                    <input type="text" th:value="${mailSet.toMail}"  autocomplete="off" class="validate[required,maxSize[200]] form-control" name="toMail" id="toMail" placeholder="">
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" name="cpuPer"  checked value="1" class="form-check-input" id="cpuPer">
+                    <label class="form-check-label" for="cpuPer" title="CPU使用率超过98%发送邮件告警">CPU告警</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox"  name="memPer" checked value="1" class="form-check-input" id="memPer">
+                    <label class="form-check-label" for="memPer" title="内存使用率超过98%发送邮件告警">内存告警</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox"  name="heathPer"  checked value="1" class="form-check-input" id="heathPer">
+                    <label class="form-check-label" for="heathPer" title="服务健康检测扫描接口返回状态码不是200时候，发送邮件告警">服务接口告警</label>
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">保存</button>
+                <button type="button"  th:onclick="del([[${mailSet.id}]])"  class="btn bg-gradient-danger">删除</button>
+            </div>
+
+        </form>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+
+  </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <div th:replace="common/footer.html"></div>
+
+</div>
+<!-- ./wrapper -->
+<link rel="stylesheet" th:href="@{'/static/js/jQuery/validationEngine.jquery.css'}" type="text/css"/>
+<script th:src="@{'/static/js/jQuery/jquery.validationEngine-zh_CN.js'}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{'/static/js/jQuery/jquery.validationEngine.js'}" type="text/javascript" charset="utf-8"></script>
+<script th:inline="javascript">
+    $(document).ready(function(){
+        $("#form1").validationEngine();
+        $("#sendMail").val([[${mailSet.sendMail}]]);
+        $("#smtpSSL").val([[${mailSet.smtpSSL}]]);
+        var cpuPer = [[${mailSet.cpuPer}]];
+        var memPer = [[${mailSet.memPer}]];
+        var heathPer = [[${mailSet.heathPer}]];
+        if(cpuPer!=''&&cpuPer!=null){
+            $("#cpuPer").attr('checked',true);
+        }else{
+            $("#cpuPer").removeAttr("checked");
+        }
+        if(memPer!=''&&memPer!=null){
+            $("#memPer").attr('checked',true);
+        }else{
+            $("#memPer").removeAttr("checked");
+        }
+        if(heathPer!=''&&heathPer!=null){
+            $("#heathPer").attr('checked',true);
+        }else{
+            $("#heathPer").removeAttr("checked");
+        }
+    });
+
+    function del(id) {
+        if(confirm('你确定要删除吗？')){
+            window.location.href = "/wgcloud/mailset/del?id="+id;
+        }
+    }
+
+    function setSmtpPort(){
+        if($("#smtpSSL").val()=='0'){
+            $("#smtpPort").val('25')
+        }
+        if($("#smtpSSL").val()=='1'){
+            $("#smtpPort").val('465')
+        }
+    }
+    var msg = [[${msg}]];
+    if(msg!=''){
+        toastr.success(msg);
+    }
+</script>
+</body>
+</html>

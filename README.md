@@ -10,17 +10,19 @@ agent端负责上报服务器指标数据。
 
 3.支持主流服务器平台Linux, Windows, Solaris, AIX, HP-UX等。
 
-4.可支持数百台服务器同时在线监控。
+4.运行所需sigar的so，dll文件请到下载链接下载安装包，解压后在lib下。
 
 5.采用微服务springboot+bootstrap实现
 
 ## **下载**
 
-http://www.wgstart.com
+<http://www.wgstart.com/docs.html>
+
+## **开源协议**
+
+<http://www.wgstart.com/docs12.html>
 
 
-
-![a.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo1.jpg)
 
 ![b.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo2.jpg)
 
@@ -42,5 +44,5 @@ http://www.wgstart.com
 
 ## 联系
 
-QQ群：623503772
+http://www.wgstart.com/docs12.html
 

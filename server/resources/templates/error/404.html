@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <div  th:replace="common/header.html"></div>
+
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div th:replace="common/chart.html"></div>
+
+<div class="wrapper">
+
+  <div th:replace="common/navbar.html"></div>
+
+  <div th:replace="common/aside.html"></div>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>404 找不到页面</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#"></a></li>
+              <li class="breadcrumb-item active"></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="error-page">
+        <h2 class="headline text-warning"> 404</h2>
+
+        <div class="error-content">
+          <h3><i class="fas fa-exclamation-triangle text-warning"></i> 糟糕！找不到网页</h3>
+
+          <p>
+            我们找不到您想要的页面。同时，您联系我们提供帮助。
+          </p>
+
+        </div>
+        <!-- /.error-content -->
+      </div>
+      <!-- /.error-page -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <div th:replace="common/footer.html"></div>
+
+</div>
+<!-- ./wrapper -->
+
+</body>
+</html>

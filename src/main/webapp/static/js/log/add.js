@@ -1,5 +1,0 @@
-
-function cancel(){
-	history.back();
-}
-

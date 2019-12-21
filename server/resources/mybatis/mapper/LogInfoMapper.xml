@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wgcloud.mapper.LogInfoMapper">
+	<resultMap id="resultMap" type="com.wgcloud.entity.LogInfo">
+		<id column="ID" property="id" jdbcType="CHAR" />
+		<result column="HOST_NAME" property="hostname" jdbcType="CHAR" />
+		<result column="INFO_CONTENT" property="infoContent" jdbcType="CHAR" />
+		<result column="STATE" property="state" jdbcType="CHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="tableColumnList">
+		ID,HOST_NAME, INFO_CONTENT, STATE,CREATE_TIME
+	</sql>
+	
+	<sql id="queryByParams">
+		<if test="hostname != null">
+			<![CDATA[ AND HOST_NAME LIKE  CONCAT('%',#{hostname},'%')]]>
+		</if>
+		<if test="startTime != null and endTime !=null and startTime !='' and endTime != '' ">
+			<![CDATA[ AND CREATE_TIME >= #{startTime} and CREATE_TIME <=#{endTime}]]>
+		</if>
+	</sql>
+	
+	
+	<select id="selectById" resultMap="resultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM LOG_INFO WHERE ID=#{id} 
+	</select>
+	
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		DELETE FROM LOG_INFO WHERE ID = #{id}
+	</delete>
+	
+	<delete id="deleteByDate"  parameterType="map">
+		DELETE FROM LOG_INFO WHERE <![CDATA[  CREATE_TIME <=#{endTime}]]>
+	</delete>
+	
+	
+	<delete id="deleteByAccHname"  parameterType="map">
+		DELETE FROM LOG_INFO WHERE ACCOUNT = #{account} AND HOST_NAME = #{hostname}
+	</delete>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE FROM LOG_INFO WHERE ID IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<insert id="insertList" parameterType="java.util.List" >
+		INSERT INTO LOG_INFO (ID,HOST_NAME,INFO_CONTENT,STATE,CREATE_TIME)  VALUES
+		<foreach collection="list" item="item" index="index" separator="," >
+			(#{item.id},#{item.hostname},#{item.infoContent},#{item.state},#{item.createTime})
+		</foreach>
+	</insert>
+
+	<insert id="save" parameterType="com.wgcloud.entity.LogInfo">
+		INSERT INTO LOG_INFO
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >ID,</if>
+      		<if test="hostname != null" > HOST_NAME,</if>
+      		<if test="infoContent != null">INFO_CONTENT,</if>
+      		<if test="state != null" >STATE,</if>
+      		<if test="createTime != null" >CREATE_TIME</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >#{id},</if>
+      		<if test="hostname != null" >#{hostname},</if>
+      		<if test="infoContent != null" >#{infoContent},</if>
+      		<if test="state != null" >#{state},</if>
+      		<if test="createTime != null" >#{createTime}</if>
+    	</trim>
+	</insert>
+
+
+	<select id="countByParams" parameterType="map" resultType="java.lang.Integer">
+		SELECT count(*)  FROM LOG_INFO t
+		<where>
+			<include refid="queryByParams" />
+		</where>
+	</select>
+
+
+	  <select id="selectAllByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM LOG_INFO t
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	<select id="selectByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM LOG_INFO
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	
+</mapper>

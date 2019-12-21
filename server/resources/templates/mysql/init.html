@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <div  th:replace="common/header.html"></div>
+
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div th:replace="common/chart.html"></div>
+
+<div class="wrapper">
+
+  <div th:replace="common/navbar.html"></div>
+
+  <div th:replace="common/aside.html"></div>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1></h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item active"></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+  <div class="col-md-10">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">数据源配置</h3>
+      </div>
+      <!-- /.card-header -->
+      <!-- form start -->
+        <form role="form" id="form1"  method="post"  th:action="@{'/dbInfo/save'}">
+            <input type="hidden" name="id" th:value="${dbInfo.id}"/>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1"><font color="red">*</font>数据库类型</label>
+                    <select class="validate[required] form-control" onchange="setPort();"  name="dbType" id="dbType">
+                        <option value="mysql">mysql</option>
+                        <option value="oracle">oracle</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fromMailName"><font color="red">*</font>用户名</label>
+                    <input type="text"  th:value="${dbInfo.user}" autocomplete="off" class="validate[required,maxSize[40]] form-control" name="user" id="user" placeholder="输入数据库用户名">
+                </div>
+                <div class="form-group">
+                    <label for="fromPwd"><font color="red">*</font>密码</label>
+                    <input type="password"  th:value="${dbInfo.passwd}" class="validate[required,maxSize[40]] form-control" name="passwd" id="passwd" placeholder="输入数据库密码">
+                </div>
+                <div class="form-group">
+                    <label for="fromMailName"><font color="red">*</font>数据库IP</label>
+                    <input type="text" th:value="${dbInfo.ip}" autocomplete="off" class="validate[required,maxSize[40]] form-control" name="ip" id="ip" placeholder="输入数据库服务器ip">
+                </div>
+                <div class="form-group">
+                    <label for="fromMailName"><font color="red">*</font>数据库端口</label>
+                    <input type="text"  th:value="${dbInfo.port}" autocomplete="off" class="validate[required,custom[number],maxSize[10]] form-control" name="port" id="port" placeholder="输入数据库端口">
+                </div>
+                <div class="form-group">
+                    <label for="fromMailName"><font color="red">*</font>数据库名称</label>
+                    <input type="text"  th:value="${dbInfo.dbName}" autocomplete="off" class="validate[required,maxSize[50]] form-control" name="dbName" id="dbName" placeholder="输入数据库名称">
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">保存</button>
+                <button type="button"  th:onclick="del([[${dbInfo.id}]])"  class="btn bg-gradient-danger">删除</button>
+            </div>
+
+        </form>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+
+  </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <div th:replace="common/footer.html"></div>
+
+</div>
+<!-- ./wrapper -->
+<link rel="stylesheet" th:href="@{'/static/js/jQuery/validationEngine.jquery.css'}" type="text/css"/>
+<script th:src="@{'/static/js/jQuery/jquery.validationEngine-zh_CN.js'}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{'/static/js/jQuery/jquery.validationEngine.js'}" type="text/javascript" charset="utf-8"></script>
+<script th:inline="javascript">
+    $(document).ready(function(){
+        $("#form1").validationEngine();
+        $("#dbType").val([[${dbInfo.dbType}]]);
+    });
+
+    function setPort(){
+        if($("#dbType").val()=='mysql'){
+            $("#port").val('3306')
+        }
+        if($("#dbType").val()=='oracle'){
+            $("#port").val('1521')
+        }
+    }
+
+    function del(id) {
+        if(confirm('你确定要删除吗？')){
+            window.location.href = "/wgcloud/dbInfo/del?id="+id;
+        }
+    }
+    toastr.options.timeOut = 15000;
+    var msg = [[${msg}]];
+    var code = [[${code}]];
+    var code1 = [[${code1}]];
+    var msg1 = [[${msg1}]];
+    if(code!=""){
+        if(msg!='' && code=="0"){
+            toastr.success(msg);
+        }
+        if(msg1!='' && code1=="0"){
+            toastr.success(msg1);
+        }
+        if(msg1!='' && code1=="1"){
+            toastr.error(msg1);
+        }
+    }
+
+
+</script>
+</body>
+</html>

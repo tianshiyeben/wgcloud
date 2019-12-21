@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <div  th:replace="common/header.html"></div>
+
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div th:replace="common/chart.html"></div>
+
+<div class="wrapper">
+
+  <div th:replace="common/navbar.html"></div>
+
+  <div th:replace="common/aside.html"></div>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1></h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item active"></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+  <div class="col-md-12">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title" th:text="${systemInfo.hostname}">详细信息</h3>
+          <div class=" float-sm-right">
+              <a th:href="@{'/dash/systemInfoList'}">返回</a>
+          </div>
+      </div>
+      <!-- /.card-header -->
+      <!-- form start -->
+      <form role="form">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="exampleInputEmail1">系统信息</label>
+              <div>系统描述：<span th:text="${systemInfo.versionDetail}"></span>，版本：<span th:text="${systemInfo.version}"></span>，cpu核数：<span th:text="${systemInfo.cpuCoreNum}"></span>
+                  ，cpu型号：<span th:text="${systemInfo.cpuXh}"></span></div>
+          </div>
+        </div>
+        <!-- /.card-body -->
+      </form>
+      <!-- /.card-body -->
+
+        <label style="margin-left: .9rem">磁盘信息</label>
+        <div class="row">
+            <div class="col-12 table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>盘符名称</th>
+                        <th>磁盘空间</th>
+                        <th>已使用</th>
+                        <th>可用</th>
+                        <th>已使用%</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="item : ${deskStateList}">
+                        <tr>
+                            <td th:text="${item.fileSystem}"></td>
+                            <td th:text="${item.size}"></td>
+                            <td th:text="${item.used}"></td>
+                            <td th:text="${item.avail}"></td>
+                            <td th:text="${item.usePer}"></td>
+                        </tr>
+                    </th:block>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.col -->
+        </div>
+
+
+    </div>
+    <!-- /.card -->
+
+
+  </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <div th:replace="common/footer.html"></div>
+
+</div>
+<!-- ./wrapper -->
+
+<script th:src="@{'/static/js/host.js'}"></script>
+
+
+</body>
+</html>
