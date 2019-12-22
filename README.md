@@ -1,18 +1,16 @@
 ## WGCLOUD-v2.1
 
-服务器集群监控，ES集群监控，CPU监控，内存监控，DevOps运维工具，数据安全监控，性能指标数据可视化。
+核心模块包括：服务器集群监控，ES集群监控，CPU监控，内存监控，数据安全监控，服务心跳检测。
 
 1.采用服务端和客户端协同工作方式，更轻量，更高效，可支持数百台服务器在线监控。
 
-2.server端负责接受数据，处理数据，展示数据。
+2.server端负责接受数据，处理数据，生成图表展示。agent端负责定时上报指标数据。
 
-agent端负责上报服务器指标数据。
+3.支持主流服务器平台安装部署，如Linux, Windows, Solaris, AIX, HP-UX等。
 
-3.支持主流服务器平台Linux, Windows, Solaris, AIX, HP-UX等。
+4.运行所需sigar的so，dll文件，请到下载agent安装包。
 
-4.运行所需sigar的so，dll文件请到下载链接下载安装包，解压后在lib下。
-
-5.采用微服务springboot+bootstrap实现
+5.WGCLOUD采用微服务springboot+bootstrap实现，为反哺开源社区，二次开源。
 
 ## **下载**
 
