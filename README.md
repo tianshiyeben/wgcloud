@@ -24,11 +24,11 @@ agent端负责上报服务器指标数据。
 
 
 
-![b.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo2.jpg)
+![WGCLOUD监控主面板](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo2.jpg)
 
-![c.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo3.jpg)
+![WGCLOUD监控主机列表](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo3.jpg)
 
-![c.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo4.jpg)
+![WGCLOUD监控图表](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo4.jpg)
 
 ![c.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo5.jpg)
 
