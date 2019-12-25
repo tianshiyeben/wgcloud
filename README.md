@@ -22,11 +22,11 @@
 
 
 
-![WGCLOUD监控主面板](https://github.com/tianshiyeben/wgcloud/tree/master/demo/demo2.jpg)
+![WGCLOUD监控主面板](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo2.jpg)
 
-![WGCLOUD监控主机列表](https://github.com/tianshiyeben/wgcloud/tree/master/demo/demo3.jpg)
+![WGCLOUD监控主机列表](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo3.jpg)
 
-![WGCLOUD监控图表](https://github.com/tianshiyeben/wgcloud/tree/master/demo/demo4.jpg)
+![WGCLOUD监控图表](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo4.jpg)
 
 
 
