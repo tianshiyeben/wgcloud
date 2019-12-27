@@ -1,4 +1,8 @@
-![WGCLOUD](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/logo.png)
+<p align="center">
+  <a href="http://www.wgstart.com">
+    <img src="https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/logo.png">
+  </a>
+ </p>
 
 ## WGCLOUD-v2.1
 
