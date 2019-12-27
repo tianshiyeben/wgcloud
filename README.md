@@ -1,3 +1,5 @@
+![WGCLOUD](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/logo.png)
+
 ## WGCLOUD-v2.1
 
 核心模块包括：服务器集群监控，ES集群监控，CPU监控，内存监控，数据安全监控，服务心跳检测。
