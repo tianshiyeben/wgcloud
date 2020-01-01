@@ -14,9 +14,9 @@
 
 3.支持主流服务器平台安装部署，如Linux, Windows, Solaris, AIX, HP-UX等。
 
-4.运行所需sigar的so，dll文件，请下载agent安装包。
+4.运行所需sigar的so，dll文件，请下载agent安装包，在lib下。
 
-5.WGCLOUD采用微服务springboot+bootstrap实现，为反哺开源社区，二次开源。
+5.WGCLOUD采用微服务springboot+bootstrap，完美实现了分布式监控系统，为反哺开源社区，二次开源。
 
 ## **下载**
 
