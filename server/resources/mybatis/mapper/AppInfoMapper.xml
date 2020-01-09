@@ -81,6 +81,33 @@
 			(#{item.id},#{item.hostname},#{item.appPid},#{item.appName},#{item.createTime},#{item.cpuPer},#{item.memPer})
 		</foreach>
 	</insert>
+
+	<update id="updateList" parameterType="java.util.List" >
+		<foreach collection="list" item="item" index="index" separator=";" >
+			UPDATE APP_INFO
+			<set>
+				<if test="item.hostname != null">
+					HOST_NAME = #{item.hostname},
+				</if>
+				<if test="item.appPid != null">
+					APP_PID = #{item.appPid},
+				</if>
+				<if test="item.appName != null">
+					APP_NAME = #{item.appName},
+				</if>
+				<if test="item.cpuPer != null">
+					CPU_PER = #{item.cpuPer},
+				</if>
+				<if test="item.memPer != null">
+					MEM_PER = #{item.memPer},
+				</if>
+				<if test="item.createTime != null" >
+					CREATE_TIME= #{item.createTime}
+				</if>
+			</set>
+			WHERE ID = #{item.id}
+		</foreach>
+	</update>
 	
 	
 	<update id="updateById" parameterType="com.wgcloud.entity.AppInfo">

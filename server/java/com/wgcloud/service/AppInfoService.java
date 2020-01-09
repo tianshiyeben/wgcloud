@@ -52,6 +52,9 @@ public class AppInfoService{
 
 	@Transactional
 	public void saveRecord(List<AppInfo> recordList) throws Exception {
+		if(recordList.size()<1){
+			return;
+		}
 		for(AppInfo as : recordList){
 			as.setId(UUIDUtil.getUUID());
 		}

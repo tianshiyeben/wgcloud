@@ -70,7 +70,7 @@
 
 
 	<update id="updateList" parameterType="java.util.List" >
-		<foreach collection="list" item="item" index="index" separator="," >
+		<foreach collection="list" item="item" index="index" separator=";" >
 		UPDATE SYSTEM_INFO
 		<set>
 			<if test="item.hostname != null">
