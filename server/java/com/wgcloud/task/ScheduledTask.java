@@ -203,14 +203,21 @@ public class ScheduledTask {
                     logInfoService.saveRecord(LOG_INFO_LIST);
                 }
                 if(BatchData.DESK_STATE_LIST.size()>0){
-                    String hostname = BatchData.DESK_STATE_LIST.get(0).getHostname();
-                    Map<String, Object> paramsDel = new HashMap<String,Object>();
-                    paramsDel.put("hostname",hostname);
-                    deskStateService.deleteByAccHname(paramsDel);
+                   Map<String, Object> paramsDel = new HashMap<String,Object>();
 
                     List<DeskState> DESK_STATE_LIST  =  new ArrayList<DeskState>();
                     DESK_STATE_LIST.addAll(BatchData.DESK_STATE_LIST);
                     BatchData.DESK_STATE_LIST.clear();
+                    List<String> hostnameList  =  new ArrayList<String>();
+                    for(DeskState deskState : DESK_STATE_LIST){
+                        if(!hostnameList.contains(deskState.getHostname())){
+                            hostnameList.add(deskState.getHostname());
+                        }
+                    }
+                    for(String hostname : hostnameList){
+                        paramsDel.put("hostname",hostname);
+                        deskStateService.deleteByAccHname(paramsDel);
+                    }
                     deskStateService.saveRecord(DESK_STATE_LIST);
                 }
                 if(BatchData.SYSTEM_INFO_LIST.size()>0){
