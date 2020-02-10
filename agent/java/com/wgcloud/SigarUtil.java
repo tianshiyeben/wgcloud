@@ -111,29 +111,34 @@ public class SigarUtil {
         double usePerSum = 0;
         FileSystem fslist[] = sigar.getFileSystemList();
         for (int i = 0; i < fslist.length; i++) {
-            DeskState deskState = new DeskState();
-            FileSystem fs = fslist[i];
-            deskState.setFileSystem(fs.getDevName());
-            deskState.setHostname(commonConfig.getBindIp());
-            FileSystemUsage usage = sigar.getFileSystemUsage(fs.getDirName());
-            usedSum+=(usage.getUsed()/1024/1024);
-            deskState.setUsed((usage.getUsed()/1024/1024)+"G");
-            availSum+=(usage.getAvail()/1024/1024);
-            deskState.setAvail((usage.getAvail()/1024/1024)+"G");
-            sizeSum+=(usage.getTotal()/1024/1024);
-            deskState.setSize((usage.getTotal()/1024/1024)+"G");
-            double usePercent = FormatUtil.formatDouble(usage.getUsePercent()* 100D,2) ;
-            usePerSum+=usePercent;
-            deskState.setUsePer(usePercent+"%");
-            deskState.setCreateTime(t);
-            list.add(deskState);
+			 try{
+				DeskState deskState = new DeskState();
+				FileSystem fs = fslist[i];
+				deskState.setFileSystem(fs.getDevName());
+				deskState.setHostname(commonConfig.getBindIp());
+				FileSystemUsage usage = sigar.getFileSystemUsage(fs.getDirName());
+				usedSum+=(usage.getUsed()/1024/1024);
+				deskState.setUsed((usage.getUsed()/1024/1024)+"G");
+				availSum+=(usage.getAvail()/1024/1024);
+				deskState.setAvail((usage.getAvail()/1024/1024)+"G");
+				sizeSum+=(usage.getTotal()/1024/1024);
+				deskState.setSize((usage.getTotal()/1024/1024)+"G");
+				double usePercent = FormatUtil.formatDouble(usage.getUsePercent()* 100D,2) ;
+				usePerSum+=usePercent;
+				deskState.setUsePer(usePercent+"%");
+				deskState.setCreateTime(t);
+				list.add(deskState);
+			 }catch (SigarException e){
+                logger.error(e.toString());
+            }
         }
         DeskState deskStateSum = new DeskState();
         deskStateSum.setHostname(commonConfig.getBindIp());
         deskStateSum.setAvail(availSum+"G");
         deskStateSum.setFileSystem("总计");
         deskStateSum.setSize(sizeSum+"G");
-        deskStateSum.setUsePer(usePerSum+"%");
+        double sumUsePercent = FormatUtil.formatDouble(((double) usedSum/(double)sizeSum)* 100D,2) ;
+        deskStateSum.setUsePer(sumUsePercent+"%");
         deskStateSum.setUsed(usedSum+"G");
         deskStateSum.setCreateTime(FormatUtil.getDateBefore(t,1));
         list.add(deskStateSum);
