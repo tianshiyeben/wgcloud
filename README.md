@@ -4,9 +4,9 @@
   </a>
  </p>
 
-## WGCLOUD-v2.1
+## WGCLOUD-v2.3
 
-是基于微服务架构的分布式监控平台，核心模块包括：服务器集群监控，ES集群监控，CPU监控，内存监控，数据安全监控，服务心跳检测，应用进程管理，监控告警信息推送。
+是基于微服务架构的分布式监控平台，核心模块包括：服务器集群监控，ES集群监控，CPU监控，内存监控，数据监控，服务心跳检测，应用进程管理，监控告警信息推送。[english readme](<https://github.com/tianshiyeben/wgcloud/blob/master/README_en.md>)
 
 1.采用服务端和客户端协同工作方式，更轻量，更高效，可支持数百台服务器在线监控。
 
@@ -16,7 +16,9 @@
 
 4.运行所需sigar的so，dll文件，请下载agent安装包，在lib文件夹下。
 
-5.WGCLOUD采用微服务springboot+bootstrap，完美实现了分布式监控系统，为反哺开源社区，二次开源。
+5.运行所需sql脚本，在安装包里，解压后就能看到。
+
+6.WGCLOUD采用微服务springboot+bootstrap，完美实现了分布式监控系统，为反哺开源社区，二次开源。
 
 ## **下载**
 
@@ -47,7 +49,7 @@
 
 ## 联系
 
-http://www.wgstart.com/docs12.html
+tianshiyeben@qq.com
 
 
 

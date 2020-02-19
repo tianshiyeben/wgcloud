@@ -14,6 +14,9 @@ public class CommonConfig {
 
 	//admin管理员密码
 	private  String admindPwd= "111111";
+	private  String wgToken = "";
+	private  Double memWarnVal = 98d;
+	private  Double cpuWarnVal = 98d;
 
 
 	public String getAdmindPwd() {
@@ -24,4 +27,33 @@ public class CommonConfig {
 		this.admindPwd = admindPwd;
 	}
 
+	public String getWgToken() {
+		return wgToken;
+	}
+
+	public void setWgToken(String wgToken) {
+		this.wgToken = wgToken;
+	}
+
+	public Double getMemWarnVal() {
+		if(memWarnVal==null){
+			return 98d;
+		}
+		return memWarnVal;
+	}
+
+	public void setMemWarnVal(Double memWarnVal) {
+		this.memWarnVal = memWarnVal;
+	}
+
+	public Double getCpuWarnVal() {
+		if(cpuWarnVal==null){
+			return 98d;
+		}
+		return cpuWarnVal;
+	}
+
+	public void setCpuWarnVal(Double cpuWarnVal) {
+		this.cpuWarnVal = cpuWarnVal;
+	}
 }

@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  *
  * @ClassName:DbInfoService.java
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: DbInfoService.java
@@ -36,6 +36,7 @@ public class DbInfoService {
 	public void save(DbInfo DbInfo) throws Exception {
 		DbInfo.setId(UUIDUtil.getUUID());
 		DbInfo.setCreateTime(DateUtil.getNowTime());
+		DbInfo.setDbState("1");
 		dbInfoMapper.save(DbInfo);
 	}
 

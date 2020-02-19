@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  *
  * @ClassName:AppState.java     
- * @version v2.1
+ * @version V2.3
  * @author: wgcloud     
  * @date: 2019年11月16日
  * @Description: app状态监控

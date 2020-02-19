@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 /**
  *
  * @ClassName:DbInfo.java
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: 检查系统入侵信息
@@ -19,7 +19,13 @@ public class DbInfo extends BaseEntity{
 	 * 
 	 */
 	private static final long serialVersionUID = 879979812204191283L;
-	
+
+
+	/**
+	 * 连接别名
+	 */
+	private String aliasName;
+
 
 	/**
 	 * 数据库类型，mysql或则oracle
@@ -50,7 +56,12 @@ public class DbInfo extends BaseEntity{
 	 * 数据库名称
 	 */
 	private String dbName;
-    
+
+	/**
+	 * 数据库连接状态,1正常，2失败
+	 */
+	private String dbState;
+
     /**
      * 创建时间
      */
@@ -110,5 +121,21 @@ public class DbInfo extends BaseEntity{
 
 	public void setDbName(String dbName) {
 		this.dbName = dbName;
+	}
+
+	public String getDbState() {
+		return dbState;
+	}
+
+	public void setDbState(String dbState) {
+		this.dbState = dbState;
+	}
+
+	public String getAliasName() {
+		return aliasName;
+	}
+
+	public void setAliasName(String aliasName) {
+		this.aliasName = aliasName;
 	}
 }

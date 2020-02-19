@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  *
  * @ClassName:DbTableMapper.java
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: DbTableDao.java
@@ -28,6 +28,10 @@ public interface DbTableMapper {
     public void save(DbTable DbTable) throws Exception;
 
     public int deleteById(String[] id) throws Exception;
+
+    public int deleteByDbInfoId(String dbInfoId) throws Exception;
+
+    public void updateList(List<DbTable> recordList) throws Exception;
 
     public int countByParams(Map<String, Object> params) throws Exception;
 

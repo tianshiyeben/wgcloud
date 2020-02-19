@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  *
  * @ClassName:HeathMonitorMapper.java
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: HeathMonitorDao.java
@@ -37,5 +37,5 @@ public interface HeathMonitorMapper {
 
     public void updateList(List<HeathMonitor> recordList) throws Exception;
     
-    public HeathMonitor updateById(HeathMonitor HeathMonitor) throws Exception;
+    public void updateById(HeathMonitor HeathMonitor) throws Exception;
 }

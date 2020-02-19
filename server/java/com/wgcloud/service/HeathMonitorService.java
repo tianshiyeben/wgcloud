@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  *
  * @ClassName:HeathMonitorService.java
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: HeathMonitorService.java
@@ -65,12 +65,12 @@ public class HeathMonitorService {
 		return heathMonitorMapper.deleteById(id);
 	}
 	
-	public HeathMonitor updateById(HeathMonitor HeathMonitor)
+	public void updateById(HeathMonitor HeathMonitor)
 			throws Exception {
 		if(StringUtils.isEmpty(HeathMonitor.getHeathUrl())){
 			HeathMonitor.setHeathUrl(HeathMonitor.getHeathUrl().trim());
 		}
-		return heathMonitorMapper.updateById(HeathMonitor);
+		 heathMonitorMapper.updateById(HeathMonitor);
 	}
 
 	public HeathMonitor selectById(String id)  throws Exception{

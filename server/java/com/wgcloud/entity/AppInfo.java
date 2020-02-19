@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  *
  * @ClassName:AppInfo.java     
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: app端口信息
@@ -31,9 +31,14 @@ public class AppInfo extends BaseEntity{
 	 * 应用进程ID
 	 */
     private String appPid;
+
+	/**
+	 * 进程获取途径，1进程id号，2进程pid文件
+	 */
+	private String appType;
     
     /**
-	 * 应用进程名称
+	 * 进程名称
 	 */
     private String appName;
 
@@ -46,6 +51,12 @@ public class AppInfo extends BaseEntity{
 	 * cpu使用率
 	 */
 	private Double cpuPer;
+
+
+	/**
+	 * 进程状态，1正常，2下线
+	 */
+	private String state;
 
 
 	/**
@@ -102,5 +113,21 @@ public class AppInfo extends BaseEntity{
 
 	public void setCpuPer(Double cpuPer) {
 		this.cpuPer = cpuPer;
+	}
+
+	public String getAppType() {
+		return appType;
+	}
+
+	public void setAppType(String appType) {
+		this.appType = appType;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 }

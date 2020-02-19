@@ -3,7 +3,7 @@ package com.wgcloud.entity;
 /**
  *
  * @ClassName:DashboardView.java     
- * @version v2.1
+ * @version V2.3
  * @author: wgcloud     
  * @date: 2019年11月16日
  * @Description: 主面板概要信息

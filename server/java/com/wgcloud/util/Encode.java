@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 /**
  *
  * @ClassName:Encode.java     
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: Encode.java
@@ -252,12 +252,12 @@ public class Encode {
     	String   mytext2 = null;
 		try {
 			mytext = URLEncoder.encode("中华",   "utf-8");
-			   mytext2   =   urlDecode(mytext,   "utf-8");  
+			   mytext2   =   urlDecode(mytext,   "utf-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}     
-    	   
+		}
+
     	   System.out.println(mytext);
     	   System.out.println(mytext2);
     }

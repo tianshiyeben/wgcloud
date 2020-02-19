@@ -4,7 +4,7 @@
     <a href="http://www.wgstart.com"  target="_blank" class="brand-link">
         <img th:src="@{'/static/logincss/logo.png'}"  class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">WGCLOUD-v2.1</span>
+        <span class="brand-text font-weight-light">WGCLOUD-v2.3</span>
     </a>
 
     <!-- Sidebar -->
@@ -28,11 +28,11 @@
 
                 <th:block th:if="${#strings.startsWith(session.menuActive,'1')}">
                     <li class="nav-item has-treeview menu-open">
-                        <a href="#" class="nav-link active">
+                        <a href="javascript:void(0);" class="nav-link active">
                 </th:block>
                 <th:block th:unless="${#strings.startsWith(session.menuActive,'1')}">
                     <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                        <a  href="javascript:void(0);" class="nav-link">
                 </th:block>
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
@@ -60,7 +60,7 @@
                                 <a th:href="@{'/dash/systemInfoList'}" class="nav-link">
                             </th:block>
                                 <i class="nav-icon fas fa-chart-pie"></i>
-                                <p>服务器列表</p>
+                                <p>主机管理</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -71,7 +71,7 @@
                                 <a th:href="@{'/appInfo/list'}" class="nav-link">
                             </th:block>
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>进程列表</p>
+                                <p>进程管理</p>
                             </a>
                         </li>
                     </ul>
@@ -80,11 +80,11 @@
 
                 <th:block th:if="${#strings.startsWith(session.menuActive,'4')}">
                     <li class="nav-item has-treeview menu-open">
-                        <a href="#" class="nav-link active">
+                        <a  href="javascript:void(0);" class="nav-link active">
                 </th:block>
                 <th:block th:unless="${#strings.startsWith(session.menuActive,'4')}">
                     <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                        <a  href="javascript:void(0);" class="nav-link">
                 </th:block>
                 <i class="nav-icon fas fa-table"></i>
                 <p>
@@ -101,7 +101,7 @@
                             <a th:href="@{'/dbInfo/list'}" class="nav-link">
                         </th:block>
                         <i class="far fa-circle nav-icon"></i>
-                        <p>数据源设置</p>
+                        <p>数据源管理</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -121,11 +121,11 @@
 
                 <th:block th:if="${#strings.startsWith(session.menuActive,'5')}">
                     <li class="nav-item has-treeview menu-open">
-                        <a href="#" class="nav-link active">
+                        <a  href="javascript:void(0);" class="nav-link active">
                 </th:block>
                 <th:block th:unless="${#strings.startsWith(session.menuActive,'5')}">
                     <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                        <a  href="javascript:void(0);" class="nav-link">
                 </th:block>
                 <i class="nav-icon fas fa-tree"></i>
                 <p>
@@ -159,11 +159,11 @@
 
                 <th:block th:if="${#strings.startsWith(session.menuActive,'2')}">
                     <li class="nav-item has-treeview menu-open">
-                        <a href="#" class="nav-link active">
+                        <a  href="javascript:void(0);" class="nav-link active">
                 </th:block>
                 <th:block th:unless="${#strings.startsWith(session.menuActive,'2')}">
                     <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                        <a  href="javascript:void(0);" class="nav-link">
                 </th:block>
                 <i class="nav-icon fas fa-copy"></i>
                 <p>
@@ -191,11 +191,11 @@
 
                 <th:block th:if="${#strings.startsWith(session.menuActive,'3')}">
                     <li class="nav-item has-treeview menu-open">
-                        <a href="#" class="nav-link active">
+                        <a  href="javascript:void(0);" class="nav-link active">
                 </th:block>
                 <th:block th:unless="${#strings.startsWith(session.menuActive,'3')}">
                     <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                        <a  href="javascript:void(0);" class="nav-link">
                 </th:block>
                 <i class="nav-icon far fa-envelope"></i>
                 <p>

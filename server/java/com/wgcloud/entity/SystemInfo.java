@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  *
  * @ClassName:SystemInfo.java     
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: 查看系统信息
@@ -57,6 +57,12 @@ public class SystemInfo extends BaseEntity{
      * CPU型号信息
      */
     private String cpuXh;
+
+
+	/**
+	 * 主机状态，1正常，2下线
+	 */
+	private String state;
     
     
     /**
@@ -130,5 +136,13 @@ public class SystemInfo extends BaseEntity{
 
 	public void setCpuPer(Double cpuPer) {
 		this.cpuPer = cpuPer;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 }

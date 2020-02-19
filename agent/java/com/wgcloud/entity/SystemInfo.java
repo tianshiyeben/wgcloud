@@ -1,22 +1,24 @@
 package com.wgcloud.entity;
 
+import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
  *
- * @ClassName:SystemInfo.java     
- * @version v2.1
- * @author: wgcloud     
+ * @ClassName:SystemInfo.java
+ * @version V2.3
+ * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: 查看系统信息
- * @Copyright: 2019-2022 wgcloud. All rights reserved.
+ * @Copyright: 2019-2020 wgcloud. All rights reserved.
  *
  */
-public class SystemInfo extends BaseEntity {
-	
+public class SystemInfo extends BaseEntity{
+
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 879979812204191283L;
 
@@ -29,40 +31,46 @@ public class SystemInfo extends BaseEntity {
 	/**
 	 * 系统版本信息
 	 */
-    private String version;
+	private String version;
 
-    /**
+	/**
 	 *系统版本详细信息
 	 */
-    private String versionDetail;
-    
-    /**
+	private String versionDetail;
+
+	/**
 	 *内存使用率
 	 */
-    private Double memPer;
-    
-    /**
-   	 * core的个数(即核数)
-   	 */
-    private String cpuCoreNum;
-    
-    /**
-     * cpu使用率
-     */
-    private Double cpuPer;
-    
-    /**
-     * CPU型号信息
-     */
-    private String cpuXh;
-    
-    
-    /**
-     * 创建时间
-     */
-    private Date createTime;
+	private Double memPer;
 
-    
+	/**
+	 * core的个数(即核数)
+	 */
+	private String cpuCoreNum;
+
+	/**
+	 * cpu使用率
+	 */
+	private Double cpuPer;
+
+	/**
+	 * CPU型号信息
+	 */
+	private String cpuXh;
+
+
+	/**
+	 * 主机状态，1正常，2下线
+	 */
+	private String state;
+
+
+	/**
+	 * 创建时间
+	 */
+	private Date createTime;
+
+
 	public String getVersion() {
 		return version;
 	}
@@ -128,5 +136,13 @@ public class SystemInfo extends BaseEntity {
 
 	public void setCpuPer(Double cpuPer) {
 		this.cpuPer = cpuPer;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 }

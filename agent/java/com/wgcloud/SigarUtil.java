@@ -13,7 +13,7 @@ import java.util.List;
 /**
  *
  * @ClassName:SigarUtil.java
- * @version V1.0
+ * @version V2.3
  * @author: wgcloud
  * @date: 2019年11月16日
  * @Description: SigarUtil.java
@@ -29,6 +29,7 @@ public class SigarUtil {
     private static  Runtime r = Runtime.getRuntime();
     private static  Sigar sigar = new Sigar();
     private static   OperatingSystem OS = OperatingSystem.getInstance();
+
 
 
     /**
@@ -64,7 +65,7 @@ public class SigarUtil {
         double sys = 0;
         double wait = 0;
         double idle = 0;
-        for (int i = 0; i < infos.length; i++) {
+        for (int i = 0; i < infos.length; i++) {// 不管是单块CPU还是多CPU都适用
             CpuInfo info = infos[i];
             sys+=Double.valueOf(FormatUtil.delChar(CpuPerc.format(cpuList[i].getCombined())));
             wait+=Double.valueOf(FormatUtil.delChar(CpuPerc.format(cpuList[i].getWait())));
@@ -77,6 +78,7 @@ public class SigarUtil {
         cpuState.setHostname(commonConfig.getBindIp());
         return cpuState;
     }
+
 
 
     /**
@@ -95,6 +97,7 @@ public class SigarUtil {
         }
         systemInfo.setVersion(OS.getVersion());
         systemInfo.setVersionDetail(OS.getDescription()+" "+OS.getArch());
+        systemInfo.setState("1");
         return systemInfo;
     }
 
@@ -111,24 +114,24 @@ public class SigarUtil {
         double usePerSum = 0;
         FileSystem fslist[] = sigar.getFileSystemList();
         for (int i = 0; i < fslist.length; i++) {
-			 try{
-				DeskState deskState = new DeskState();
-				FileSystem fs = fslist[i];
-				deskState.setFileSystem(fs.getDevName());
-				deskState.setHostname(commonConfig.getBindIp());
-				FileSystemUsage usage = sigar.getFileSystemUsage(fs.getDirName());
-				usedSum+=(usage.getUsed()/1024/1024);
-				deskState.setUsed((usage.getUsed()/1024/1024)+"G");
-				availSum+=(usage.getAvail()/1024/1024);
-				deskState.setAvail((usage.getAvail()/1024/1024)+"G");
-				sizeSum+=(usage.getTotal()/1024/1024);
-				deskState.setSize((usage.getTotal()/1024/1024)+"G");
-				double usePercent = FormatUtil.formatDouble(usage.getUsePercent()* 100D,2) ;
-				usePerSum+=usePercent;
-				deskState.setUsePer(usePercent+"%");
-				deskState.setCreateTime(t);
-				list.add(deskState);
-			 }catch (SigarException e){
+            try{
+                DeskState deskState = new DeskState();
+                FileSystem fs = fslist[i];
+                deskState.setFileSystem(fs.getDevName());
+                deskState.setHostname(commonConfig.getBindIp());
+                FileSystemUsage usage = sigar.getFileSystemUsage(fs.getDirName());
+                usedSum+=(usage.getUsed()/1024/1024);
+                deskState.setUsed((usage.getUsed()/1024/1024)+"G");
+                availSum+=(usage.getAvail()/1024/1024);
+                deskState.setAvail((usage.getAvail()/1024/1024)+"G");
+                sizeSum+=(usage.getTotal()/1024/1024);
+                deskState.setSize((usage.getTotal()/1024/1024)+"G");
+                double usePercent = FormatUtil.formatDouble(usage.getUsePercent()* 100D,2) ;
+                usePerSum+=usePercent;
+                deskState.setUsePer(usePercent+"%");
+                deskState.setCreateTime(t);
+                list.add(deskState);
+            }catch (SigarException e){
                 logger.error(e.toString());
             }
         }

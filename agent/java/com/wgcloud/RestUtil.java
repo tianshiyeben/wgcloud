@@ -16,7 +16,7 @@ import java.util.List;
 /**
  *
  * @ClassName:RestUtil.java
- * @version V1.0
+ * @version V2.3
  * @author: wgcloud
  * @date: 2019年11月16日
  * @Description: RestUtil.java
@@ -28,14 +28,19 @@ public class RestUtil {
 
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private CommonConfig commonConfig;
 
-    public JSONObject post(String url, JSONObject jsonObject){
+    public String post(String url, JSONObject jsonObject){
+        if(null!=jsonObject){
+            jsonObject.put("wgToken",MD5Utils.GetMD5Code(commonConfig.getWgToken()));
+        }
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
         headers.add("Accept", MediaType.APPLICATION_JSON_UTF8.toString());
         HttpEntity<String> httpEntity = new HttpEntity<>(JSONUtil.parse(jsonObject).toString(), headers);
         ResponseEntity<String> responseEntity  =  restTemplate.postForEntity(url,httpEntity, String.class);
-        return JSONUtil.parseObj(responseEntity.getBody());
+        return responseEntity.getBody();
     }
 
     public JSONObject post(String url){

@@ -35,7 +35,7 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">服务器列表</h3>
+        <h3 class="card-title">主机列表</h3>
       </div>
       <!-- /.card-header -->
       <div class="card-body">
@@ -44,8 +44,8 @@
           <tr>
             <th style="width: 80px">序号</th>
             <th>IP</th>
-            <th>内存使用率%</th>
-            <th>CPU使用率%</th>
+            <th>内存%</th>
+            <th>CPU%</th>
             <th>更新时间</th>
               <th>操作</th>
           </tr>
@@ -54,7 +54,14 @@
           <th:block th:each="item,iterStat : ${page.list}">
             <tr>
               <td th:text="${iterStat.index+1}">1</td>
-              <td th:text="${item.hostname}">Update software</td>
+              <td>
+                  <th:block th:if="${item.state  == '2'}">
+                      <span title="超过10分钟未上报状态，可能已下线" style="color:red"  th:text="${item.hostname}"></span>
+                  </th:block>
+                  <th:block th:if="${item.state  != '2'}">
+                      <span   th:text="${item.hostname}"></span>
+                  </th:block>
+              </td>
               <td style="font-size:1.2rem">
                   <th:block th:if="${item.memPer >= 90}">
                       <span class="badge bg-danger" th:text="${item.memPer}"></span>
@@ -79,7 +86,9 @@
               </td>
               <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}">Update software</td>
               <td> <button type="button"  th:onclick="view([[${item.id}]])"  class="btn btn-primary">系统信息</button>
-                  <button type="button"  th:onclick="viewChart([[${item.id}]])"  class="btn btn-primary">图表</button></td>
+                  <button type="button"  th:onclick="viewChart([[${item.id}]])"  class="btn btn-primary">图表</button>
+                  <button type="button"  th:onclick="del([[${item.id}]])"  class="btn bg-gradient-danger">删除</button></td>
+
             </tr>
           </th:block>
 

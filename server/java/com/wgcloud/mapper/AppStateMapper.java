@@ -10,7 +10,7 @@ import com.wgcloud.entity.AppState;
 /**
  *
  * @ClassName:AppStateDao.java     
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: AppStateDao.java

@@ -9,11 +9,13 @@
 		<result column="IP" property="ip" jdbcType="CHAR" />
 		<result column="DBNAME" property="dbName" jdbcType="CHAR" />
 		<result column="PORT" property="port" jdbcType="CHAR" />
+		<result column="DB_STATE" property="dbState" jdbcType="CHAR" />
+		<result column="ALIAS_NAME" property="aliasName" jdbcType="CHAR" />
 		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	
 	<sql id="tableColumnList">
-		ID,DBTYPE, USER,PASSWD,CREATE_TIME,IP,PORT,DBNAME
+		ID,DBTYPE, USER,PASSWD,CREATE_TIME,IP,PORT,DBNAME,DB_STATE,ALIAS_NAME
 	</sql>
 	
 	
@@ -61,6 +63,8 @@
 			<if test="ip != null">IP,</if>
 			<if test="port != null">PORT,</if>
 			<if test="dbName != null">DBNAME,</if>
+			<if test="dbState != null">DB_STATE,</if>
+			<if test="aliasName != null">ALIAS_NAME,</if>
       		<if test="createTime != null" >CREATE_TIME</if>
     	</trim>
     	<trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -71,6 +75,8 @@
 			<if test="ip != null" >#{ip},</if>
 			<if test="port != null" >#{port},</if>
 			<if test="dbName != null" >#{dbName},</if>
+			<if test="dbState != null" >#{dbState},</if>
+			<if test="aliasName != null" >#{aliasName},</if>
       		<if test="createTime != null" >#{createTime}</if>
     	</trim>
 	</insert>
@@ -96,6 +102,12 @@
 			</if>
 			<if test="dbName != null">
 				DBNAME = #{dbName},
+			</if>
+			<if test="dbState != null">
+				DB_STATE = #{dbState},
+			</if>
+			<if test="aliasName != null">
+				ALIAS_NAME = #{aliasName},
 			</if>
 			<if test="createTime != null">
 				CREATE_TIME = #{createTime}

@@ -95,7 +95,7 @@
 		<where>
 			<include refid="queryByParams" />
 		</where>
-		 ORDER BY CREATE_TIME DESC
+		 ORDER BY CREATE_TIME DESC,USE_PER DESC
 	</select>
 	
 	<select id="selectByParams" parameterType="map" resultMap="resultMap">
@@ -105,7 +105,7 @@
 		<where>
 			<include refid="queryByParams" />
 		</where>
-		 ORDER BY CREATE_TIME DESC
+		 ORDER BY CREATE_TIME DESC,USE_PER DESC
 	</select>
 	
 </mapper>

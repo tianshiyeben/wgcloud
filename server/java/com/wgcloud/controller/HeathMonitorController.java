@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  *
  * @ClassName:HeathMonitorController.java
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: HeathMonitorController.java
@@ -60,7 +60,7 @@ public class HeathMonitorController {
 			model.addAttribute("pageUrl", "/heathMonitor/list?1=1");
 			model.addAttribute("page", pageInfo);
 		} catch (Exception e) {
-			logger.error("查询心跳监控错误",e);
+			logger.error("查询服务心跳监控错误",e);
 			logInfoService.save("查询心跳监控错误",e.toString(),StaticKeys.LOG_ERROR);
 
 		}
@@ -85,7 +85,7 @@ public class HeathMonitorController {
 			}
 
 		} catch (Exception e) {
-			logger.error("保存心跳监控错误：",e);
+			logger.error("保存服务心跳监控错误：",e);
 			logInfoService.save(HeathMonitor.getAppName(),"保存心跳监控错误："+e.toString(),StaticKeys.LOG_ERROR);
 		}
     	 return "redirect:/heathMonitor/list";
@@ -102,7 +102,7 @@ public class HeathMonitorController {
 	 */
 	@RequestMapping(value="edit")
 	public String edit(Model model,HttpServletRequest request) {
-		String errorMsg = "编辑心跳监控：";
+		String errorMsg = "编辑服务心跳监控：";
 		String id = request.getParameter("id");
 		HeathMonitor heathMonitor = new HeathMonitor();
 		if(StringUtils.isEmpty(id)){
@@ -129,7 +129,7 @@ public class HeathMonitorController {
      */
     @RequestMapping(value="view")
     public String view(Model model,HttpServletRequest request) {
-    	String errorMsg = "查看心跳监控：";
+    	String errorMsg = "查看服务心跳监控：";
     	String id = request.getParameter("id");
 		String date = request.getParameter("date");
     	HeathMonitor heathMonitor = new HeathMonitor();
@@ -154,11 +154,12 @@ public class HeathMonitorController {
      */
     @RequestMapping(value="del")
     public String delete(Model model,HttpServletRequest request,RedirectAttributes redirectAttributes) {
-    	String errorMsg = "删除心跳监控错误：";
+    	String errorMsg = "删除服务心跳监控错误：";
     	HeathMonitor HeathMonitor = new HeathMonitor();
 		try {
 			if(!StringUtils.isEmpty(request.getParameter("id"))){
 				HeathMonitor = heathMonitorService.selectById(request.getParameter("id"));
+				logInfoService.save("删除服务心跳监控："+HeathMonitor.getAppName(),"删除服务心跳监控："+HeathMonitor.getAppName()+"："+HeathMonitor.getHeathUrl(),StaticKeys.LOG_ERROR);
 				heathMonitorService.deleteById(request.getParameter("id").split(","));
 			}
 		} catch (Exception e) {

@@ -3,8 +3,17 @@ function searchByPara(){
 	window.location.href = "/wgcloud/log/list?account="+escape(escape(account));
 }
 
+function add() {
+	window.location.href = "/wgcloud/appInfo/edit";
+}
+
+
 function view(id) {
 	window.location.href = "/wgcloud/appInfo/view?id="+id;
+}
+
+function edit(id){
+	window.location.href = "/wgcloud/appInfo/edit?id="+id;
 }
 
 function del(id) {

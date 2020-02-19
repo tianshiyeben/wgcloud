@@ -40,7 +40,7 @@
   <div class="col-md-12">
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title" th:text="${appInfo.hostname}">详细信息</h3>(每5分钟监控)
+        <h3 class="card-title" th:text="${appInfo.hostname}">进程信息</h3>(每1分钟监控)
         <div class=" float-sm-right">
           <a th:href="@{'/appInfo/list'}">返回</a>
         </div>
@@ -50,8 +50,8 @@
       <form role="form">
         <div class="card-body">
           <div class="form-group">
-            <label for="exampleInputEmail1">进程ID</label>
-              <div  th:text="${appInfo.appPid}"></div>
+            <label for="exampleInputEmail1">进程</label>
+              <div  th:text="${appInfo.hostname}+'，名称：'+${appInfo.appName}+'，进程ID：'+${appInfo.appPid}"></div>
           </div>
         </div>
         <!-- /.card-body -->
@@ -111,7 +111,7 @@
         container: 'cpuStateJson',
         forceFit: true,
         height: 500,
-        padding: [30, 20, 70, 30]
+        padding: [30, 40, 70, 40]
       });
       chart.axis('dateStr', {
         label: {
@@ -133,8 +133,11 @@
       chart.legend({
         position: 'top-center'
       });
-      chart.source(appStateJson);
-      chart.scale('cpuPer',{alias: 'cpu使用率'});
+      chart.source(appStateJson, {
+        cpuPer: {
+          alias: 'cpu使用率'
+        }
+      });
       chart.scale('dateStr',{tickCount: 12,alias: '时间'});
       chart.line().position('dateStr*cpuPer').color('#1890ff');
       chart.render();
@@ -144,7 +147,7 @@
         container: 'memStateJson',
         forceFit: true,
         height: 500,
-        padding: [30, 20, 70, 30]
+        padding: [30, 40, 70, 40]
       });
       chart2.axis('dateStr', {
         label: {
@@ -166,8 +169,11 @@
       chart2.legend({
         position: 'top-center'
       });
-      chart2.source(appStateJson);
-      chart2.scale('memPer', {alias: '内存占用M'});
+      chart2.source(appStateJson, {
+        memPer: {
+          alias: '内存占用M'
+        }
+      });
       chart2.scale('dateStr', {tickCount: 12, alias: '时间'});
       chart2.line().position('dateStr*memPer').color('#1890ff');
       chart2.render();

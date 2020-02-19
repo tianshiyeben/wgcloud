@@ -10,7 +10,7 @@ import com.wgcloud.entity.*;
 /**
  *
  * @ClassName:BatchData.java     
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: 临时存贮监控数据的静态工具类

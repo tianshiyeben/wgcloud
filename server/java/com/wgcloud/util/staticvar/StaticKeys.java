@@ -6,7 +6,7 @@ import com.wgcloud.entity.MailSet;
 /**
  *
  * @ClassName:StaticKeys.java     
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: StaticKeys.java
@@ -32,25 +32,11 @@ public class StaticKeys {
 	
 	//session存贮登录信息的标识
 	public static String LOGIN_KEY = "LOGIN_KEY";
-	
-	//日志成功标记
-	public static final String LOG_SUCCESS = "0";
+
 	
 	//日志失败标记
 	public static final String LOG_ERROR = "1";
-	
-	// 00:00:00
-	public static final String MIN_SECOND_START = " 00:00:00";
-	
-	// 23:59:59
-	public static final String MIN_SECOND_END = " 23:59:59";
-	
-	//链接服务器错误标识
-	public static final String CONN_HOST_ERROR = "connerror";
-	
-	//发送报警短信邮件标识
-	public static final String SEND_WARN = "1";
-	
+
 	//不发送报警短信邮件标识
 	public static final String NO_SEND_WARN = "0";
 	

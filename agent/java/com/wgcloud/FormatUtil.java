@@ -1,5 +1,7 @@
 package com.wgcloud;
 
+import cn.hutool.core.io.FileUtil;
+import com.wgcloud.entity.AppInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,5 +54,42 @@ public class FormatUtil {
         return now.getTime();
     }
 
+    /**
+     * m转为g
+     * @param str
+     * @return
+     */
+    public static double mToG(String str){
+        double result = 0;
+        double mod = 1024;
+        if(str.contains("M")){
+            double f = Double.valueOf(str.replace("M", ""));
+            result = f/mod;
+        }else if(str.contains("K")){
+            double f = Double.valueOf(str.replace("K", ""));
+            result = (f/mod)/mod;
+        }else if(str.contains("T")){
+            double f = Double.valueOf(str.replace("T", ""));
+            result = f*1024;
+        }else if(str.contains("G")){
+            result = Double.valueOf(str.replace("G", ""));
+        }
+        return formatDouble(result,2);
+    }
 
+    public static String getPidByFile(AppInfo appInfo){
+        if("1".equals(appInfo.getAppType())){
+            return appInfo.getAppPid();
+        }else {
+            try {
+                String pid =  FileUtil.readString(appInfo.getAppPid(), "UTF-8");
+                if(!StringUtils.isEmpty(pid)){
+                    return pid.trim();
+                }
+            }catch (Exception e){
+                logger.error("获取PID文件错误",e);
+            }
+        }
+        return "";
+    }
 }

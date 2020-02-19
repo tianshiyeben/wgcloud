@@ -36,6 +36,22 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">进程列表</h3>
+        <div class=" float-sm-right">
+          <!-- SEARCH FORM -->
+          <form class="form-inline ml-3" th:action="@{'/appInfo/list'}">
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" name="hostname" autocomplete="off" th:value="${appInfo.hostname}" type="search" placeholder="输入ip" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" onclick="add()" class="btn btn-block btn-primary btn-sm">添加</button>
+              </div>
+
+            </div>
+          </form>
+
+        </div>
       </div>
       <!-- /.card-header -->
       <div class="card-body">
@@ -44,7 +60,7 @@
           <tr>
             <th style="width: 80px">序号</th>
             <th>IP</th>
-            <th>进程ID</th>
+            <th>进程名称</th>
             <th>内存使用M</th>
             <th>CPU使用率%</th>
             <th>更新时间</th>
@@ -56,7 +72,14 @@
             <tr>
               <td th:text="${iterStat.index+1}">1</td>
               <td th:text="${item.hostname}">Update software</td>
-              <td th:text="${item.appPid}">Update software</td>
+              <td>
+                <th:block th:if="${item.state  == '2'}">
+                  <span title="超过10分钟未上报状态，可能已下线" style="color:red"  th:text="${item.appName}"></span>
+                </th:block>
+                <th:block th:if="${item.state  != '2'}">
+                  <span   th:text="${item.appName}"></span>
+                </th:block>
+              </td>
               <td th:text="${item.memPer}">Update software</td>
               <td  style="font-size:1.2rem">
                   <th:block th:if="${item.cpuPer >= 90}">
@@ -71,6 +94,7 @@
               </td>
               <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}">Update software</td>
               <td>
+                <button type="button"  th:onclick="edit([[${item.id}]])"  class="btn bg-gradient-primary">编辑</button>
                 <button type="button"  th:onclick="del([[${item.id}]])"  class="btn bg-gradient-danger">删除</button>
                 <button type="button"  th:onclick="view([[${item.id}]])"  class="btn bg-gradient-primary">图表</button></td>
             </tr>

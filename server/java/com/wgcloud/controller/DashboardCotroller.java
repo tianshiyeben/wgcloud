@@ -1,16 +1,15 @@
 package com.wgcloud.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.json.JSONUtil;
 import com.github.pagehelper.PageInfo;
 import com.wgcloud.dto.ChartInfo;
+import com.wgcloud.dto.MessageDto;
 import com.wgcloud.entity.*;
 import com.wgcloud.service.*;
 import com.wgcloud.util.FormatUtil;
@@ -25,11 +24,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.wgcloud.util.DateUtil;
 import com.wgcloud.util.staticvar.StaticKeys;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
  * @ClassName:DashboardCotroller.java     
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: DashboardCotroller.java
@@ -95,7 +95,7 @@ public class DashboardCotroller {
 				a = (double)memPerSize_90/totalSystemInfoSize;
 			}
 			ChartInfo memPerSize_90_chart = new ChartInfo();
-			memPerSize_90_chart.setItem("内存使用率>90%主机数");
+			memPerSize_90_chart.setItem("内存>90%");
 			memPerSize_90_chart.setCount(memPerSize_90);
 			memPerSize_90_chart.setPercent(FormatUtil.formatDouble(a,2));
 			chartInfoList.add(memPerSize_90_chart);
@@ -108,7 +108,7 @@ public class DashboardCotroller {
 				b = (double)memPerSize_50_90/totalSystemInfoSize;
 			}
 			ChartInfo memPerSize_50_90_chart = new ChartInfo();
-			memPerSize_50_90_chart.setItem("内存使用率>50%且<90%主机数");
+			memPerSize_50_90_chart.setItem("内存>50%且<90%");
 			memPerSize_50_90_chart.setCount(memPerSize_50_90);
 			memPerSize_50_90_chart.setPercent(FormatUtil.formatDouble(b,2));
 			chartInfoList.add(memPerSize_50_90_chart);
@@ -121,7 +121,7 @@ public class DashboardCotroller {
 				c = (double)cpuPerSize_90/totalSystemInfoSize;
 			}
 			ChartInfo cpuPerSize_90_chart = new ChartInfo();
-			cpuPerSize_90_chart.setItem("CPU使用率>90%主机数");
+			cpuPerSize_90_chart.setItem("CPU>90%");
 			cpuPerSize_90_chart.setCount(cpuPerSize_90);
 			cpuPerSize_90_chart.setPercent(FormatUtil.formatDouble(c,2));
 			chartInfoList.add(cpuPerSize_90_chart);
@@ -135,7 +135,7 @@ public class DashboardCotroller {
 				d = (double)perSize_90_90/totalSystemInfoSize;
 			}
 			ChartInfo perSize_90_90_chart = new ChartInfo();
-			perSize_90_90_chart.setItem("CPU和内存使用率>90%主机数");
+			perSize_90_90_chart.setItem("CPU和内存>90%");
 			perSize_90_90_chart.setCount(perSize_90_90);
 			perSize_90_90_chart.setPercent(FormatUtil.formatDouble(d,2));
 			chartInfoList.add(perSize_90_90_chart);
@@ -149,13 +149,14 @@ public class DashboardCotroller {
 				e = (double)perSize_50_50/totalSystemInfoSize;
 			}
 			ChartInfo perSize_50_50_chart = new ChartInfo();
-			perSize_50_50_chart.setItem("CPU和内存使用率<50%主机数");
+			perSize_50_50_chart.setItem("CPU和内存<50%");
 			perSize_50_50_chart.setCount(perSize_50_50);
 			perSize_50_50_chart.setPercent(FormatUtil.formatDouble(e,2));
 			chartInfoList.add(perSize_50_50_chart);
 			model.addAttribute("chartInfoList",  JSONUtil.parseArray(chartInfoList));
 			params.clear();
 
+			params.put("cpuPer",90);
 			int memPerSizeApp = appInfoService.countByParams(params);
 			model.addAttribute("memPerSizeApp", memPerSizeApp);
 			params.clear();
@@ -169,6 +170,9 @@ public class DashboardCotroller {
 
 			Long  dbTableSum = dbTableService.sumByParams(params);
 			model.addAttribute("dbTableSum",dbTableSum==null?0:dbTableSum);
+
+			PageInfo pageInfoDbTableList = dbTableService.selectByParams(params,1,20);
+			model.addAttribute("dbTableList",JSONUtil.parseArray(pageInfoDbTableList.getList()));
 
 			int  dbInfoSize = dbInfoService.countByParams(params);
 			model.addAttribute("dbInfoSize",dbInfoSize);
@@ -241,6 +245,32 @@ public class DashboardCotroller {
 		return "host/view";
 	}
 
+	/**
+	 * 删除主机
+	 * @param id
+	 * @param model
+	 * @param request
+	 * @param redirectAttributes
+	 * @return
+	 */
+	@RequestMapping(value="del")
+	public String delete(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		String errorMsg = "删除主机信息错误：";
+		try {
+			if(!StringUtils.isEmpty(request.getParameter("id"))){
+				String[] ids = request.getParameter("id").split(",");
+				for(String id : ids){
+					SystemInfo sys = systemInfoService.selectById(id);
+					logInfoService.save("删除主机："+sys.getHostname(),sys.getHostname(),StaticKeys.LOG_ERROR);
+				}
+				systemInfoService.deleteById(ids);
+			}
+		} catch (Exception e) {
+			logger.error(errorMsg,e);
+			logInfoService.save(errorMsg,e.toString(),StaticKeys.LOG_ERROR);
+		}
+		return "redirect:/dash/systemInfoList";
+	}
 
 
 	/**
@@ -272,10 +302,12 @@ public class DashboardCotroller {
 			model.addAttribute("dateList", dashboardService.getDateList());
 			List<CpuState> cpuStateList = cpuStateService.selectAllByParams(params);
 			model.addAttribute("cpuStateList", JSONUtil.parseArray(cpuStateList));
+			model.addAttribute("cpuStateMaxVal",findCpuMaxVal(cpuStateList ));
 			List<MemState> memStateList = memStateService.selectAllByParams(params);
 			model.addAttribute("memStateList", JSONUtil.parseArray(memStateList));
 			List<SysLoadState> ysLoadSstateList = sysLoadStateService.selectAllByParams(params);
 			model.addAttribute("ysLoadSstateList",  JSONUtil.parseArray(ysLoadSstateList));
+			model.addAttribute("ysLoadSstateMaxVal",findLoadMaxVal(ysLoadSstateList ));
 
 		} catch (Exception e) {
 			logger.error("服务器图形报表错误：",e);
@@ -286,7 +318,47 @@ public class DashboardCotroller {
 	
 	
 
-	
+	private double findCpuMaxVal(List<CpuState> cpuStateList ){
+		double maxval = 0;
+		if(!CollectionUtil.isEmpty(cpuStateList)) {
+			for (CpuState cpuState : cpuStateList) {
+				if (null != cpuState.getIdle() && cpuState.getIdle() > maxval) {
+					maxval = cpuState.getIdle();
+				}
+				if (null != cpuState.getSys() && cpuState.getSys() > maxval) {
+					maxval = cpuState.getSys();
+				}
+				if (null != cpuState.getIowait() && cpuState.getIowait() > maxval) {
+					maxval = cpuState.getIowait();
+				}
+			}
+		}
+		if(maxval==0){
+			maxval=100;
+		}
+		return Math.ceil(maxval);
+	}
+
+	private double findLoadMaxVal(List<SysLoadState> ysLoadSstateList ){
+		double maxval = 0;
+		if(!CollectionUtil.isEmpty(ysLoadSstateList)) {
+			for (SysLoadState sysLoadState : ysLoadSstateList) {
+				if (null != sysLoadState.getOneLoad() && sysLoadState.getOneLoad() > maxval) {
+					maxval = sysLoadState.getOneLoad();
+				}
+				if (null != sysLoadState.getFiveLoad() && sysLoadState.getFiveLoad() > maxval) {
+					maxval = sysLoadState.getFiveLoad();
+				}
+				if (null != sysLoadState.getFifteenLoad() && sysLoadState.getFifteenLoad() > maxval) {
+					maxval = sysLoadState.getFifteenLoad();
+				}
+			}
+		}
+		if(maxval==0){
+			maxval=1;
+		}
+		return Math.ceil(maxval);
+	}
 
 	
 }

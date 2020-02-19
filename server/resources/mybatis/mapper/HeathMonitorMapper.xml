@@ -76,7 +76,7 @@
 
 
 	<update id="updateList" parameterType="java.util.List" >
-		<foreach collection="list" item="item" index="index" separator=";">
+		<foreach collection="list" item="item" index="index"  separator=";">
 			UPDATE HEATH_MONITOR
 			<set>
 				<if test="item.appName != null">

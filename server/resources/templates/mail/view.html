@@ -40,7 +40,7 @@
   <div class="col-md-10">
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">预警邮件(不需要告警，可以删除或设置不发送即可)</h3>
+        <h3 class="card-title">预警邮件(发送内存，CPU，服务接口告警，若不需要，可以删除或停用)</h3>
       </div>
       <!-- /.card-header -->
       <!-- form start -->
@@ -48,15 +48,15 @@
             <input type="hidden" name="id" th:value="${mailSet.id}"/>
             <div class="card-body">
                 <div class="form-group">
-                    <label for="exampleInputEmail1"><font color="red">*</font>是否发送告警邮件</label>
+                    <label for="exampleInputEmail1"><font color="red">*</font>是否启用告警邮件</label>
                     <select class="form-control"   name="sendMail" id="sendMail">
-                        <option value="0">不发送</option>
-                        <option value="1">发送</option>
+                        <option value="0">停用</option>
+                        <option value="1">启用</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="fromMailName"><font color="red">*</font>发送邮箱帐号</label>
-                    <input type="text"  th:value="${mailSet.fromMailName}" autocomplete="off" class="validate[required,maxSize[40],custom[email]] form-control" name="fromMailName" id="fromMailName" placeholder="">
+                    <input type="text"  th:value="${mailSet.fromMailName}" autocomplete="off" class="validate[required,maxSize[40],custom[email]] form-control" name="fromMailName" id="fromMailName" placeholder="123456@qq.com">
                 </div>
                 <div class="form-group">
                     <label for="fromPwd"><font color="red">*</font>发送邮箱密码</label>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="form-group">
                     <label for="fromMailName"><font color="red">*</font>发送邮箱SMTP服务器</label>
-                    <input type="text" th:value="${mailSet.smtpHost}" autocomplete="off" class="validate[required,maxSize[40]] form-control" name="smtpHost" id="smtpHost" placeholder="如：smtp.qq.com">
+                    <input type="text" th:value="${mailSet.smtpHost}" autocomplete="off" class="validate[required,maxSize[40]] form-control" name="smtpHost" id="smtpHost" placeholder="如smtp.qq.com">
                 </div>
                 <div class="form-group">
                     <label><font color="red">*</font>是否启用安全链接(SSL)</label>
@@ -80,9 +80,9 @@
 
                 <div class="form-group">
                     <label for="fromMailName"><font color="red">*</font>接受邮件,多个邮件用;隔开</label>
-                    <input type="text" th:value="${mailSet.toMail}"  autocomplete="off" class="validate[required,maxSize[200]] form-control" name="toMail" id="toMail" placeholder="">
+                    <input type="text" th:value="${mailSet.toMail}"  autocomplete="off" class="validate[required,maxSize[200]] form-control" name="toMail" id="toMail" placeholder="123@qq.com;456@qq.com">
                 </div>
-                <div class="form-check">
+                <!--<div class="form-check">
                     <input type="checkbox" name="cpuPer"  checked value="1" class="form-check-input" id="cpuPer">
                     <label class="form-check-label" for="cpuPer" title="CPU使用率超过98%发送邮件告警">CPU告警</label>
                 </div>
@@ -93,7 +93,7 @@
                 <div class="form-check">
                     <input type="checkbox"  name="heathPer"  checked value="1" class="form-check-input" id="heathPer">
                     <label class="form-check-label" for="heathPer" title="服务健康检测扫描接口返回状态码不是200时候，发送邮件告警">服务接口告警</label>
-                </div>
+                </div>-->
 
             </div>
             <!-- /.card-body -->
@@ -129,7 +129,7 @@
         $("#form1").validationEngine();
         $("#sendMail").val([[${mailSet.sendMail}]]);
         $("#smtpSSL").val([[${mailSet.smtpSSL}]]);
-        var cpuPer = [[${mailSet.cpuPer}]];
+        /*var cpuPer = [[${mailSet.cpuPer}]];
         var memPer = [[${mailSet.memPer}]];
         var heathPer = [[${mailSet.heathPer}]];
         if(cpuPer!=''&&cpuPer!=null){
@@ -146,7 +146,7 @@
             $("#heathPer").attr('checked',true);
         }else{
             $("#heathPer").removeAttr("checked");
-        }
+        }*/
     });
 
     function del(id) {

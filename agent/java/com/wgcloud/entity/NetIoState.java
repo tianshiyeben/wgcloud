@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  *
  * @ClassName:NetIoState.java     
- * @version v2.1
+ * @version V2.3
  * @author: wgcloud     
  * @date: 2019年11月16日
  * @Description: 网络设备的吞吐率

@@ -10,11 +10,12 @@
 		<result column="CPU_PER" property="cpuPer" jdbcType="DOUBLE" />
 		<result column="CPU_CORE_NUM" property="cpuCoreNum" jdbcType="CHAR" />
 		<result column="CPU_XH" property="cpuXh" jdbcType="CHAR" />
+		<result column="STATE" property="state" jdbcType="CHAR" />
 		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	
 	<sql id="tableColumnList">
-		ID,HOST_NAME, VERSION, VERSION_DETAIL, MEM_PER, CPU_PER,CPU_CORE_NUM,CPU_XH,CREATE_TIME
+		ID,HOST_NAME, VERSION, VERSION_DETAIL, MEM_PER, CPU_PER,CPU_CORE_NUM,CPU_XH,CREATE_TIME,STATE
 	</sql>
 	
 	<sql id="queryByParams">
@@ -62,9 +63,9 @@
 	</delete>
 
 	<insert id="insertList" parameterType="java.util.List" >
-		INSERT INTO SYSTEM_INFO (ID,HOST_NAME, VERSION, VERSION_DETAIL, MEM_PER, CPU_PER,CPU_CORE_NUM,CPU_XH,CREATE_TIME)  VALUES
+		INSERT INTO SYSTEM_INFO (ID,HOST_NAME, VERSION, VERSION_DETAIL, MEM_PER, CPU_PER,CPU_CORE_NUM,CPU_XH,CREATE_TIME,STATE)  VALUES
 		<foreach collection="list" item="item" index="index" separator="," >
-			(#{item.id},#{item.hostname},#{item.version},#{item.versionDetail},#{item.memPer},#{item.cpuPer},#{item.cpuCoreNum},#{item.cpuXh},#{item.createTime})
+			(#{item.id},#{item.hostname},#{item.version},#{item.versionDetail},#{item.memPer},#{item.cpuPer},#{item.cpuCoreNum},#{item.cpuXh},#{item.createTime},#{item.state})
 		</foreach>
 	</insert>
 
@@ -94,6 +95,9 @@
 			<if test="item.cpuXh != null" >
 				CPU_XH= #{item.cpuXh},
 			</if>
+			<if test="item.state != null" >
+				STATE= #{item.state},
+			</if>
 			<if test="item.createTime != null" >
 				CREATE_TIME= #{item.createTime}
 			</if>
@@ -113,6 +117,7 @@
       		<if test="cpuPer != null" >CPU_PER,</if>
       		<if test="cpuCoreNum != null" >CPU_CORE_NUM,</if>
       		<if test="cpuXh != null" >CPU_XH,</if>
+			<if test="state != null" >STATE,</if>
       		<if test="createTime != null" >CREATE_TIME</if>
     	</trim>
     	<trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -124,6 +129,7 @@
       		<if test="cpuPer != null" >#{cpuPer},</if>
       		<if test="cpuCoreNum != null" >#{cpuCoreNum},</if>
       		<if test="cpuXh != null" >#{cpuXh},</if>
+			<if test="state != null" >#{state},</if>
       		<if test="createTime != null" >#{createTime}</if>
     	</trim>
 	</insert>
@@ -151,6 +157,9 @@
 			</if>
 			<if test="cpuXh != null" >
 				CPU_XH= #{cpuXh},
+			</if>
+			<if test="state != null" >
+				STATE= #{state},
 			</if>
 			<if test="createTime != null" >
 				CREATE_TIME= #{createTime}

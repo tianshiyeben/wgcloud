@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <div  th:replace="common/header.html"></div>
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div th:replace="common/chart.html"></div>
+
+<div class="wrapper">
+
+  <div th:replace="common/navbar.html"></div>
+
+  <div th:replace="common/aside.html"></div>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1></h1>
+          </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item active"></li>
+                </ol>
+            </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+  <div class="col-md-10">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">添加进程监控</h3>
+          <div class=" float-sm-right">
+              <a th:href="@{'/appInfo/list'}">返回</a>
+          </div>
+      </div>
+      <!-- /.card-header -->
+      <!-- form start -->
+        <form role="form" id="form1" th:action="@{'/appInfo/save'}">
+            <input type="hidden" name="id" th:value="${appInfo.id}"/>
+            <div class="card-body">
+                <div class="form-group">
+                    <label><font color="red">*</font>监控主机</label>
+                    <select  name="hostname" id="hostname"  class="validate[required] form-control select2" style="width: 100%;">
+                        <option value="">请选择</option>
+                        <th:block th:each="item,iterStat : ${systemInfoList}">
+                            <option  data-select2-id="" th:attr="data-select2-id=${item.hostname}" th:text="${item.hostname}">Alabama</option>
+                        </th:block>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><font color="red">*</font>获取进程方法</label>
+                    <select class="validate[required] form-control"  name="appType" id="appType">
+                        <option value="">请选择</option>
+                        <option value="1">进程ID号</option>
+                        <option value="2">PID文件路径</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><font color="red">*</font>进程ID号或PID文件路径</label>
+                    <input type="text" autocomplete="off"  th:value="${appInfo.appPid}" class="validate[required,maxSize[200]] form-control" name="appPid" id="appPid" placeholder="输入进程ID号如9639或PID文件完整路径如/apache-activemq-5.15.11/data/activemq.pid">
+                </div>
+                <div class="form-group">
+                    <label><font color="red">*</font>进程名称</label>
+                    <input type="text" autocomplete="off"  th:value="${appInfo.appName}" class="validate[required,maxSize[200]] form-control" name="appName" id="appName" placeholder="如ERP系统">
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">保存</button>
+                <button type="button"  th:onclick="goback()"  class="btn bg-gradient-danger">返回</button>
+            </div>
+
+        </form>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+
+  </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <div th:replace="common/footer.html"></div>
+
+</div>
+<!-- ./wrapper -->
+<link rel="stylesheet" th:href="@{'/static/js/jQuery/validationEngine.jquery.css'}" type="text/css"/>
+<script th:src="@{'/static/js/jQuery/jquery.validationEngine-zh_CN.js'}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{'/static/js/jQuery/jquery.validationEngine.js'}" type="text/javascript" charset="utf-8"></script>
+<script th:inline="javascript">
+    $(document).ready(function(){
+        $("#form1").validationEngine();
+        //Initialize Select2 Elements
+        $('.select2').select2()
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
+
+        $("#hostname").val([[${appInfo.hostname}]]).select2();
+        $("#appType").val([[${appInfo.appType}]]);
+    });
+
+    function goback() {
+        window.location.href = "/wgcloud/appInfo/list";
+    }
+</script>
+</body>
+</html>

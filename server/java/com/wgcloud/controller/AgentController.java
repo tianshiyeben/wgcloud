@@ -7,11 +7,13 @@ import cn.hutool.json.JSONUtil;
 import com.wgcloud.entity.*;
 import com.wgcloud.service.LogInfoService;
 import com.wgcloud.service.SystemInfoService;
+import com.wgcloud.util.TokenUtils;
 import com.wgcloud.util.UUIDUtil;
 import com.wgcloud.util.msg.WarnMailUtil;
 import com.wgcloud.util.staticvar.BatchData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 /**
  *
  * @ClassName:AgentController.java
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: AgentController.java
@@ -47,20 +49,28 @@ public class AgentController {
     private LogInfoService logInfoService;
 	@Resource
 	private SystemInfoService systemInfoService;
+	@Autowired
+	private TokenUtils tokenUtils;
 
 	@ResponseBody
 	@RequestMapping("/minTask")
 	public JSONObject minTask(@RequestBody String paramBean) {
 		JSONObject agentJsonObject = (JSONObject) JSONUtil.parse(paramBean);
+		JSONObject resultJson = new JSONObject();
+		if(!tokenUtils.checkAgentToken(agentJsonObject)){
+			logger.error("token is invalidate");
+			resultJson.put("result","error：token is invalidate");
+			return resultJson;
+		}
 		JSONObject cpuState = agentJsonObject.getJSONObject("cpuState");
 		JSONObject memState = agentJsonObject.getJSONObject("memState");
 		JSONObject sysLoadState = agentJsonObject.getJSONObject("sysLoadState");
-		JSONObject appInfo = agentJsonObject.getJSONObject("appInfo");
-		JSONObject appState = agentJsonObject.getJSONObject("appState");
+		JSONArray appInfoList = agentJsonObject.getJSONArray("appInfoList");
+		JSONArray appStateList = agentJsonObject.getJSONArray("appStateList");
 		JSONObject logInfo = agentJsonObject.getJSONObject("logInfo");
-		CpuState cpuState1 = null;
-		MemState memState1 = null;
-		JSONObject resultJson = new JSONObject();
+		JSONObject systemInfo = agentJsonObject.getJSONObject("systemInfo");
+		JSONArray deskStateList = agentJsonObject.getJSONArray("deskStateList");
+
 		try{
 
 			if(logInfo!=null){
@@ -72,7 +82,6 @@ public class AgentController {
 				CpuState bean = new CpuState();
 				BeanUtil.copyProperties(cpuState,bean);
 				BatchData.CPU_STATE_LIST.add(bean);
-				cpuState1 = bean;
 				Runnable runnable = () -> {
 					WarnMailUtil.sendCpuWarnInfo(bean);
 				};
@@ -83,7 +92,6 @@ public class AgentController {
 				MemState bean = new MemState();
 				BeanUtil.copyProperties(memState,bean);
 				BatchData.MEM_STATE_LIST.add(bean);
-				memState1 = bean;
 				Runnable runnable = () -> {
 					WarnMailUtil.sendWarnInfo(bean);
 				};
@@ -94,20 +102,27 @@ public class AgentController {
 				BeanUtil.copyProperties(sysLoadState,bean);
 				BatchData.SYSLOAD_STATE_LIST.add(bean);
 			}
-			if(appInfo!=null && appState!=null){
-				String id  = UUIDUtil.getUUID();
-				AppInfo beanAppInfo = new AppInfo();
-				BeanUtil.copyProperties(appInfo,beanAppInfo);
-				AppState beanAppState = new AppState();
-				BeanUtil.copyProperties(appState,beanAppState);
-				beanAppInfo.setId(id);
-				beanAppState.setAppInfoId(beanAppInfo.getHostname()+"-"+beanAppInfo.getAppPid());
-				BatchData.APP_INFO_LIST.add(beanAppInfo);
-				BatchData.APP_STATE_LIST.add(beanAppState);
+			if(appInfoList!=null && appStateList!=null){
+				List<AppInfo> appInfoResList = JSONUtil.toList(appInfoList, AppInfo.class);
+				for(AppInfo appInfo : appInfoResList) {
+					BatchData.APP_INFO_LIST.add(appInfo);
+				}
+				List<AppState> appStateResList = JSONUtil.toList(appStateList, AppState.class);
+				for(AppState appState : appStateResList) {
+					BatchData.APP_STATE_LIST.add(appState);
+				}
 			}
-			SystemInfo systemInfo = systemInfoService.updateMemCpu(memState1,cpuState1);
 			if(systemInfo!=null){
-				systemInfoService.updateById(systemInfo);
+				SystemInfo bean = new SystemInfo();
+				BeanUtil.copyProperties(systemInfo,bean);
+				BatchData.SYSTEM_INFO_LIST.add(bean);
+			}
+			if (deskStateList != null) {
+				for (Object jsonObjects : deskStateList) {
+					DeskState bean = new DeskState();
+					BeanUtil.copyProperties(jsonObjects, bean);
+					BatchData.DESK_STATE_LIST.add(bean);
+				}
 			}
 			resultJson.put("result","success");
 		}catch (Exception e){
@@ -118,41 +133,4 @@ public class AgentController {
 		}
 	}
 
-	@ResponseBody
-	@RequestMapping("/dayTask")
-	public JSONObject dayTask(@RequestBody String paramBean) {
-		JSONObject agentJsonObject = (JSONObject) JSONUtil.parse(paramBean);
-		JSONObject logInfo = agentJsonObject.getJSONObject("logInfo");
-		JSONObject systemInfo = agentJsonObject.getJSONObject("systemInfo");
-		JSONArray deskStateList = agentJsonObject.getJSONArray("deskStateList");
-		JSONObject resultJson = new JSONObject();
-		try {
-			if (logInfo != null) {
-				LogInfo bean = new LogInfo();
-				BeanUtil.copyProperties(logInfo, bean);
-				BatchData.LOG_INFO_LIST.add(bean);
-			}
-			if (systemInfo != null) {
-				SystemInfo bean = new SystemInfo();
-				BeanUtil.copyProperties(systemInfo, bean);
-				BatchData.SYSTEM_INFO_LIST.add(bean);
-			}
-			if (deskStateList != null) {
-				for (Object jsonObjects : deskStateList) {
-					DeskState bean = new DeskState();
-					BeanUtil.copyProperties(jsonObjects, bean);
-					BatchData.DESK_STATE_LIST.add(bean);
-				}
-			}
-			resultJson.put("result", "success");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			resultJson.put("result", "error："+e.toString());
-		} finally {
-			return resultJson;
-		}
-	}
-
-    
 }

@@ -46,3 +46,9 @@ mybatis:
 base:
   #登陆账号admin的密码
   admindPwd: 111111
+  #通信token，agent端和此保持一致
+  wgToken: wgcloud
+  #监控主机内存使用率%报警值，超过此值即发送邮件报警
+  memWarnVal: 98
+  #监控主机cpu使用率%报警值，超过此值即发送邮件报警
+  cpuWarnVal: 98

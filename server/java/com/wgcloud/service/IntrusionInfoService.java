@@ -17,7 +17,7 @@ import com.wgcloud.util.UUIDUtil;
 /**
  *
  * @ClassName:IntrusionInfoService.java     
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: IntrusionInfoService.java

@@ -40,7 +40,7 @@
   <div class="col-md-12">
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title" th:text="${dbTable.remark}">详细信息</h3>(每2小时监控)
+        <h3 class="card-title" th:text="${dbTable.remark}">详细信息</h3>(每2小时扫描)
         <div class=" float-sm-right">
           <a th:href="@{'/dbTable/list'}">返回</a>
         </div>
@@ -91,7 +91,7 @@
         container: 'cpuStateJson',
         forceFit: true,
         height: 500,
-        padding: [30, 20, 70, 30]
+        padding: [30, 40, 70, 40]
       });
       chart.axis('dateStr', {
         label: {
@@ -113,8 +113,11 @@
       chart.legend({
         position: 'top-center'
       });
-      chart.source(dbTableCountsJson);
-      chart.scale('tableCount',{alias: '数据量'});
+      chart.source(dbTableCountsJson, {
+        tableCount: {
+          alias: '数据量'
+        }
+      });
       chart.scale('dateStr',{tickCount: 12,alias: '时间'});
       chart.line().position('dateStr*tableCount').color('#1890ff');
       chart.render();

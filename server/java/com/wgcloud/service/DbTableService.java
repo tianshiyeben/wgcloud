@@ -6,6 +6,7 @@ import com.wgcloud.entity.DbTable;
 import com.wgcloud.mapper.DbTableMapper;
 import com.wgcloud.util.DateUtil;
 import com.wgcloud.util.UUIDUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +17,7 @@ import java.util.Map;
 /**
  *
  * @ClassName:DbTableService.java
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: DbTableService.java
@@ -51,10 +52,26 @@ public class DbTableService {
 	public int deleteById(String[] id) throws Exception {
 		return dbTableMapper.deleteById(id);
 	}
+
+	@Transactional
+	public int deleteByDbInfoId(String dbInfoId) throws Exception {
+		if(StringUtils.isEmpty(dbInfoId)){
+			return 0;
+		}
+		return dbTableMapper.deleteByDbInfoId(dbInfoId);
+	}
 	
 	public void updateById(DbTable DbTable)
 			throws Exception {
 		 dbTableMapper.updateById(DbTable);
+	}
+
+	@Transactional
+	public void updateRecord(List<DbTable> recordList) throws Exception {
+		if(recordList.size()<1){
+			return;
+		}
+		dbTableMapper.updateList(recordList);
 	}
 
 	public DbTable selectById(String id)  throws Exception{

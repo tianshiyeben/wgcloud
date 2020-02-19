@@ -7,6 +7,7 @@ import java.util.Map;
 import com.github.pagehelper.PageInfo;
 import com.wgcloud.entity.CpuState;
 import com.wgcloud.entity.MemState;
+import com.wgcloud.util.FormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  *
  * @ClassName:SystemInfoService.java     
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: SystemInfoService.java
@@ -66,30 +67,6 @@ public class SystemInfoService{
 	@Transactional
 	public void updateById(SystemInfo SystemInfo) throws Exception {
 			systemInfoMapper.updateById(SystemInfo);
-	}
-
-	public SystemInfo updateMemCpu(MemState memState, CpuState cpuState) throws Exception {
-		Map<String, Object> paramsDel = new HashMap<String,Object>();
-		paramsDel.put("hostname",memState.getHostname());
-		List<SystemInfo> list = selectAllByParams(paramsDel);
-		SystemInfo systemInfo = null;
-		if(list.size()>0) {
-			systemInfo = list.get(0);
-			if(memState!=null) {
-				systemInfo.setVersionDetail(systemInfo.getVersion()+"，总内存："+memState.getTotal()+"M");
-				systemInfo.setMemPer(memState.getUsePer());
-				systemInfo.setCreateTime(memState.getCreateTime());
-			}else{
-				systemInfo.setMemPer(0d);
-			}
-			if(cpuState!=null) {
-				systemInfo.setCpuPer(cpuState.getSys());
-				systemInfo.setCreateTime(memState.getCreateTime());
-			}else{
-				systemInfo.setCpuPer(0d);
-			}
-		}
-		return systemInfo;
 	}
 
 	public int deleteById(String[] id) throws Exception {

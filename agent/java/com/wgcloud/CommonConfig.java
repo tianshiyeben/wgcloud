@@ -15,7 +15,7 @@ public class CommonConfig {
 
 	private  String bindIp = "";
 
-	private  String appId = "";
+	private  String wgToken = "";
 
 	public String getServerUrl() {
 		return serverUrl;
@@ -33,11 +33,11 @@ public class CommonConfig {
 		this.bindIp = bindIp;
 	}
 
-	public String getAppId() {
-		return appId;
+	public String getWgToken() {
+		return wgToken;
 	}
 
-	public void setAppId(String appId) {
-		this.appId = appId;
+	public void setWgToken(String wgToken) {
+		this.wgToken = wgToken;
 	}
 }

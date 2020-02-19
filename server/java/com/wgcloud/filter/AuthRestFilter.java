@@ -23,7 +23,8 @@ public class AuthRestFilter implements Filter {
 	
 	static Logger log  = LoggerFactory.getLogger(AuthRestFilter.class);
 
-    String[] static_resource = {"/agent/minTask","/agent/dayTask","login/toLogin","login/login","/code/get",".css",".js",".jpg",".png",".ico",".gif","font",".eot",".woff",".svg",".ttf",".woff2"};
+    String[] static_resource = {"/agent/minTask","/agent/dayTask","login/toLogin","login/login","appInfo/agentList",
+            "/code/get",".css",".js",".jpg",".png",".ico",".gif","font",".eot",".woff",".svg",".ttf",".woff2"};
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -66,7 +67,7 @@ public class AuthRestFilter implements Filter {
             session.setAttribute("menuActive","12");
             return;
         }
-        if(uri.indexOf("/appInfo/list")>-1 || uri.indexOf("/appInfo/view")>-1){
+        if(uri.indexOf("/appInfo")>-1){
             session.setAttribute("menuActive","13");
             return;
         }

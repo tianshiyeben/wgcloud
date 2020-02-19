@@ -10,7 +10,7 @@ import com.wgcloud.entity.AppInfo;
 /**
  *
  * @ClassName:AppInfoDao.java     
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: AppInfoDao.java
@@ -31,6 +31,8 @@ public interface AppInfoMapper {
     public void save(AppInfo AppInfo) throws Exception;
 
     public void insertList(List<AppInfo> recordList) throws Exception;
+
+    public void updateList(List<AppInfo> recordList) throws Exception;
     
     public int deleteById(String[] id) throws Exception;
 

@@ -6,7 +6,6 @@
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<div th:replace="common/chart.html"></div>
 
 <div class="wrapper">
 
@@ -63,7 +62,7 @@
 
                 <p>进程占用CPU>90%</p>
               </div>
-              <a th:href="@{'/dash/systemInfoList'}" class="small-box-footer">更多 <i class="fas fa-arrow-circle-right"></i></a>
+              <a th:href="@{'/appInfo/list'}" class="small-box-footer">更多 <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -101,7 +100,7 @@
               <div class="inner">
                 <h3 th:text="${dbTableSum}"></h3>
 
-                <p>数据表合计数据量</p>
+                <p>数据表总计数据量</p>
               </div>
               <a th:href="@{'/dbTable/list'}" class="small-box-footer">更多 <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -156,14 +155,20 @@
 
             </div>
             <!-- /.card -->
-          </section></div>
+          </section>
+          <section class="col-lg-5 connectedSortable ui-sortable">
+            <div class="card" id="dbTableList">
+
+            </div>
+          </section>
+        </div>
 
 
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
   </div>
-
+  <div th:replace="common/chart.html"></div>
   <div th:replace="common/footer.html"></div>
 
 </div>
@@ -173,6 +178,7 @@
 <script th:inline="javascript">
 
   const data = [[${chartInfoList}]];
+
   const chart = new G2.Chart({
     container: 'chartInfoList',
     forceFit: true,
@@ -224,6 +230,56 @@
   chart.render();
   interval.setSelected(data[0]);
 
+  const data2 = [[${dbTableList}]];
+  const chart2 = new G2.Chart({
+    container: 'dbTableList',
+    forceFit: true,
+    height: 500,
+    padding: [ 20, 40, 50, 124 ]
+  });
+  chart2.source(data2, {
+    value: {
+      min: 0,
+      nice: false,
+      alias: '条'
+    }
+  });
+  chart2.axis('tableName', {
+    label: {
+      textStyle: {
+        fill: '#8d8d8d',
+        fontSize: 12
+      }
+    },
+    tickLine: {
+      alignWithLabel: false,
+      length: 0
+    },
+    line: {
+      lineWidth: 0
+    }
+  });
+  chart2.axis('value', {
+    label: null,
+    title: {
+      offset: 30,
+      textStyle: {
+        fontSize: 12,
+        fontWeight: 300
+      }
+    }
+  });
+  chart2.legend(false);
+  chart2.coord().transpose();
+  chart2.interval().position('tableName*value').size(26)
+          .opacity(1)
+          .label('value', {
+            textStyle: {
+              fill: '#8d8d8d'
+            },
+            offset: 10
+          });
+  chart2.render();
 </script>
 </body>
 </html>

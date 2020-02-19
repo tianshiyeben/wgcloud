@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  *
  * @ClassName:CpuState.java     
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: 查看CPU使用情况

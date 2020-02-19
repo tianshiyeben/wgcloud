@@ -2,6 +2,7 @@ package com.wgcloud.controller;
 
 import cn.hutool.json.JSONUtil;
 import com.github.pagehelper.PageInfo;
+import com.wgcloud.entity.DbInfo;
 import com.wgcloud.entity.DbTable;
 import com.wgcloud.entity.DbTableCount;
 import com.wgcloud.service.DbInfoService;
@@ -28,7 +29,7 @@ import java.util.Map;
 /**
  *
  * @ClassName:DbTableController.java
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: DbTableController.java
@@ -62,8 +63,16 @@ public class DbTableController {
 	public String DbTableList(DbTable DbTable, Model model) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		try {
-			PageInfo pageInfo  = dbTableService.selectByParams(params, DbTable.getPage(), DbTable.getPageSize());
+			PageInfo<DbTable> pageInfo  = dbTableService.selectByParams(params, DbTable.getPage(), DbTable.getPageSize());
 			PageUtil.initPageNumber(pageInfo,model);
+			List<DbInfo> dbInfoList = dbInfoService.selectAllByParams(params);
+			for(DbTable dbTable : pageInfo.getList()){
+				for(DbInfo dbInfo : dbInfoList){
+					if(dbInfo.getId().equals(dbTable.getDbInfoId())){
+						dbTable.setTableName(dbInfo.getAliasName());
+					}
+				}
+			}
 			model.addAttribute("pageUrl", "/dbTable/list?1=1");
 			model.addAttribute("page", pageInfo);
 		} catch (Exception e) {
@@ -91,6 +100,8 @@ public class DbTableController {
 				for(String sqlinkey : sqlinkeys){
 					if(whereVal.indexOf(sqlinkey)>-1){
 						model.addAttribute("dbTable", DbTable);
+						List<DbInfo>  dbInfoList = dbInfoService.selectAllByParams(new HashMap<>());
+						model.addAttribute("dbInfoList", dbInfoList);
 						model.addAttribute("msg", "where语句含有sql敏感字符"+sqlinkey+"，请检查");
 						return "mysql/add";
 					}
@@ -125,6 +136,8 @@ public class DbTableController {
 			if(!StringUtils.isEmpty(id)){
 				 dbTableInfo =  dbTableService.selectById(id);
 			}
+			List<DbInfo>  dbInfoList = dbInfoService.selectAllByParams(new HashMap<>());
+			model.addAttribute("dbInfoList", dbInfoList);
 			model.addAttribute("dbTable", dbTableInfo);
 		} catch (Exception e) {
 			logger.error("查看数据表错误：",e);
@@ -173,10 +186,10 @@ public class DbTableController {
     @RequestMapping(value="del")
     public String delete(Model model,HttpServletRequest request,RedirectAttributes redirectAttributes) {
     	String errorMsg = "删除数据源表信息错误：";
-    	DbTable DbTable = new DbTable();
 		try {
 			if(!StringUtils.isEmpty(request.getParameter("id"))){
-				DbTable = dbTableService.selectById(request.getParameter("id"));
+				DbTable dbTable = dbTableService.selectById(request.getParameter("id"));
+				logInfoService.save("删除数据表："+dbTable.getTableName(),"删除数据表："+dbTable.getTableName(),StaticKeys.LOG_ERROR);
 				dbTableService.deleteById(request.getParameter("id").split(","));
 			}
 		} catch (Exception e) {

@@ -1,6 +1,7 @@
 package com.wgcloud.task;
 
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.wgcloud.entity.*;
 import com.wgcloud.mapper.*;
 import com.wgcloud.service.*;
@@ -26,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 /**
  *
  * @ClassName:ScheduledTask.java
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: ScheduledTask.java
@@ -83,27 +84,135 @@ public class ScheduledTask {
     @Autowired
     ConnectionUtil connectionUtil;
 
+    /**
+     * 20秒后执行
+     * 初始化操作
+     */
+    @Scheduled(initialDelay = 20000L, fixedRate = 600 * 60 * 1000)
+    public   void initTask() {
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            List<MailSet> list  = mailSetService.selectAllByParams(params);
+            if(list.size()>0){
+                StaticKeys.mailSet = list.get(0);
+            }
+        } catch (Exception e) {
+            logger.error("初始化操作错误",e);
+        }
+
+    }
+
+
+
+    /**
+     * 300秒后执行
+     * 检测主机是否已经下线，检测进程是否下线
+     */
+    @Scheduled(initialDelay = 300000L, fixedRate = 15 * 60 * 1000)
+    public   void hostDownCheckTask() {
+        Date date = DateUtil.getNowTime();
+        long delayTime = 600*1000;
+
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            List<SystemInfo> list  = systemInfoService.selectAllByParams(params);
+            if(!CollectionUtil.isEmpty(list)){
+                List<SystemInfo> updateList = new ArrayList<SystemInfo>();
+                List<LogInfo> logInfoList =  new ArrayList<LogInfo>();
+                for(SystemInfo systemInfo : list){
+                    if(!StringUtils.isEmpty( WarnPools.MEM_WARN_MAP.get(systemInfo.getId()))){
+                        continue;
+                    }
+                   Date createTime =  systemInfo.getCreateTime();
+                   long diff = date.getTime()-createTime.getTime();
+                   if(diff>delayTime){
+                       systemInfo.setState("2");
+                       LogInfo logInfo = new LogInfo();
+                       logInfo.setHostname("主机下线："+systemInfo.getHostname());
+                       logInfo.setInfoContent("超过10分钟未上报状态，可能已下线："+systemInfo.getHostname());
+                       logInfo.setState(StaticKeys.LOG_ERROR);
+                       logInfoList.add(logInfo);
+                       updateList.add(systemInfo);
+                       WarnPools.MEM_WARN_MAP.put(systemInfo.getId(),"1");
+                   }
+                }
+                if(updateList.size()>0){
+                    systemInfoService.updateRecord(updateList);
+                }
+                if(logInfoList.size()>0){
+                    logInfoService.saveRecord(logInfoList);
+                }
+            }
+        } catch (Exception e) {
+            logger.error("检测主机是否下线错误",e);
+        }
+
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            List<AppInfo> list  = appInfoService.selectAllByParams(params);
+            if(!CollectionUtil.isEmpty(list)){
+                List<AppInfo> updateList = new ArrayList<AppInfo>();
+                List<LogInfo> logInfoList =  new ArrayList<LogInfo>();
+                for(AppInfo appInfo : list){
+                    if(!StringUtils.isEmpty( WarnPools.MEM_WARN_MAP.get(appInfo.getId()))){
+                        continue;
+                    }
+                    Date createTime =  appInfo.getCreateTime();
+                    long diff = date.getTime()-createTime.getTime();
+                    if(diff>delayTime){
+                        appInfo.setState("2");
+                        LogInfo logInfo = new LogInfo();
+                        logInfo.setHostname("进程下线IP："+appInfo.getHostname()+"，名称："+appInfo.getAppName());
+                        logInfo.setInfoContent("超过10分钟未上报状态，可能已下线IP："+appInfo.getHostname()+"，名称："+appInfo.getAppName()+"，进程ID："+appInfo.getAppPid());
+                        logInfo.setState(StaticKeys.LOG_ERROR);
+                        logInfoList.add(logInfo);
+                        updateList.add(appInfo);
+                        WarnPools.MEM_WARN_MAP.put(appInfo.getId(),"1");
+                    }
+                }
+                if(updateList.size()>0){
+                    appInfoService.updateRecord(updateList);
+                }
+                if(logInfoList.size()>0){
+                    logInfoService.saveRecord(logInfoList);
+                }
+            }
+        } catch (Exception e) {
+            logger.error("检测进程是否下线错误",e);
+        }
+
+    }
+
+
 
     /**
      * 90秒后执行，之后每隔10分钟执行, 单位：ms。
+     * 检测心跳
      */
     @Scheduled(initialDelay = 90000L, fixedRate = 10 * 60 * 1000)
     public   void heathMonitorTask() {
         Map<String, Object> params = new HashMap<>();
         List<HeathMonitor> heathMonitors = new ArrayList<HeathMonitor>();
+        List<LogInfo> logInfoList =  new ArrayList<LogInfo>();
         Date date = DateUtil.getNowTime();
-        String sql = "";
-        Long tableCount = 0l;
         try {
             List<HeathMonitor>  heathMonitorAllList = heathMonitorService.selectAllByParams(params);
             if(heathMonitorAllList.size()>0){
                 for(HeathMonitor h : heathMonitorAllList){
+                    if(!StringUtils.isEmpty( WarnPools.MEM_WARN_MAP.get(h.getId()))){
+                        continue;
+                    }
                     int status = 500;
                      status = restUtil.get(h.getHeathUrl());
                     h.setCreateTime(date);
                     h.setHeathStatus(status+"");
                     heathMonitors.add(h);
                     if(!"200".equals(h.getHeathStatus())) {
+                        LogInfo logInfo = new LogInfo();
+                        logInfo.setHostname("服务接口心跳检测异常："+h.getAppName());
+                        logInfo.setInfoContent("服务接口心跳检测异常："+h.getAppName()+"，"+h.getHeathUrl()+"，返回状态"+h.getHeathStatus());
+                        logInfo.setState(StaticKeys.LOG_ERROR);
+                        logInfoList.add(logInfo);
                         Runnable runnable = () -> {
                             WarnMailUtil.sendHeathInfo(h);
                         };
@@ -111,6 +220,9 @@ public class ScheduledTask {
                     }
                 }
                 heathMonitorService.updateRecord(heathMonitors);
+                if(logInfoList.size()>0){
+                    logInfoService.saveRecord(logInfoList);
+                }
             }
         } catch (Exception e) {
             logger.error("服务健康检测任务错误",e);
@@ -122,33 +234,41 @@ public class ScheduledTask {
 
     /**
      * 60秒后执行，之后每隔120分钟执行, 单位：ms。
+     * 数据表监控
      */
     @Scheduled(initialDelay = 60000L, fixedRate = 120 * 60 * 1000)
     public   void tableCountTask() {
         Map<String, Object> params = new HashMap<>();
+        List<DbTable> dbTablesUpdate = new ArrayList<DbTable>();
         List<DbTableCount> dbTableCounts = new ArrayList<DbTableCount>();
         Date date = DateUtil.getNowTime();
         String sql = "";
         Long tableCount = 0l;
         try {
             List<DbInfo>  dbInfos = dbInfoService.selectAllByParams(params);
-            if(dbInfos.size()>0){
+            for(DbInfo dbInfo : dbInfos) {
+                params.put("dbInfoId",dbInfo.getId());
                 List<DbTable>  dbTables = dbTableService.selectAllByParams(params);
-                if(dbTables.size()>0){
-                    for(DbTable dbTable : dbTables){
-                        sql = RDSConnection.query_table_count.replace("{tableName}",dbTable.getTableName())  + dbTable.getWhereVal();
-                        tableCount = connectionUtil.queryTableCount(dbInfos.get(0),sql);
-                        DbTableCount dbTableCount = new DbTableCount();
-                        dbTableCount.setCreateTime(date);
-                        dbTableCount.setDbTableId(dbTable.getId());
-                        dbTableCount.setTableCount(tableCount);
-                        dbTableCounts.add(dbTableCount);
-                        dbTable.setDateStr(DateUtil.getDateTimeString(date));
-                        dbTable.setTableCount(tableCount);
-                        dbTableService.updateById(dbTable);
+                for (DbTable dbTable : dbTables) {
+                    String whereAnd = "";
+                    if(!StringUtils.isEmpty(dbTable.getWhereVal())){
+                        whereAnd = " and ";
                     }
+                    sql = RDSConnection.query_table_count.replace("{tableName}", dbTable.getTableName()) +whereAnd+ dbTable.getWhereVal();
+                    tableCount = connectionUtil.queryTableCount(dbInfo, sql);
+                    DbTableCount dbTableCount = new DbTableCount();
+                    dbTableCount.setCreateTime(date);
+                    dbTableCount.setDbTableId(dbTable.getId());
+                    dbTableCount.setTableCount(tableCount);
+                    dbTableCounts.add(dbTableCount);
+                    dbTable.setDateStr(DateUtil.getDateTimeString(date));
+                    dbTable.setTableCount(tableCount);
+                    dbTablesUpdate.add(dbTable);
                 }
+            }
+            if(dbTableCounts.size()>0){
                 dbTableCountService.saveRecord(dbTableCounts);
+                dbTableService.updateRecord(dbTablesUpdate);
             }
         } catch (Exception e) {
             logger.error("数据表监控任务错误",e);
@@ -157,9 +277,10 @@ public class ScheduledTask {
     }
 
     /**
-     * 30秒后执行，之后每隔2分钟执行, 单位：ms。
+     * 30秒后执行，之后每隔1分钟执行, 单位：ms。
+     * 批量提交数据
      */
-    @Scheduled(initialDelay = 30000L, fixedRate = 2 * 60 * 1000)
+    @Scheduled(initialDelay = 30000L, fixedRate = 1 * 60 * 1000)
     public synchronized  void commitTask() {
         logger.info("批量提交监控数据任务开始----------"+DateUtil.getCurrentDateTime());
         try {
@@ -203,7 +324,7 @@ public class ScheduledTask {
                     logInfoService.saveRecord(LOG_INFO_LIST);
                 }
                 if(BatchData.DESK_STATE_LIST.size()>0){
-                   Map<String, Object> paramsDel = new HashMap<String,Object>();
+                    Map<String, Object> paramsDel = new HashMap<String,Object>();
 
                     List<DeskState> DESK_STATE_LIST  =  new ArrayList<DeskState>();
                     DESK_STATE_LIST.addAll(BatchData.DESK_STATE_LIST);
@@ -229,19 +350,11 @@ public class ScheduledTask {
                     List<SystemInfo>   insertList = new ArrayList<SystemInfo>();
                     List<SystemInfo>   savedList = systemInfoService.selectAllByParams(paramsDel);
                     for(SystemInfo systemInfo : SYSTEM_INFO_LIST){
+                        boolean issaved = false;
                         for(SystemInfo systemInfoS : savedList){
                             if(systemInfoS.getHostname().equals(systemInfo.getHostname())){
                                 systemInfo.setId(systemInfoS.getId());
                                 updateList.add(systemInfo);
-                            }
-                        }
-                    }
-                    systemInfoService.updateRecord(updateList);
-
-                    for(SystemInfo systemInfo : SYSTEM_INFO_LIST){
-                        boolean issaved = false;
-                        for(SystemInfo systemInfoS :savedList){
-                            if(systemInfoS.getHostname().equals(systemInfo.getHostname())){
                                 issaved = true;
                                 break;
                             }
@@ -250,21 +363,34 @@ public class ScheduledTask {
                             insertList.add(systemInfo);
                         }
                     }
+                    systemInfoService.updateRecord(updateList);
                     systemInfoService.saveRecord(insertList);
-
                 }
                 if(BatchData.APP_INFO_LIST.size()>0){
                     Map<String, Object> paramsDel = new HashMap<String,Object>();
-                    for(AppInfo appInfo : BatchData.APP_INFO_LIST){
-                        paramsDel.put("hostname",appInfo.getHostname());
-                        paramsDel.put("appPid",appInfo.getAppPid());
-                        appInfoService.deleteByHostName(paramsDel);
-                    }
-
                     List<AppInfo> APP_INFO_LIST  =  new ArrayList<AppInfo>();
                     APP_INFO_LIST.addAll(BatchData.APP_INFO_LIST);
                     BatchData.APP_INFO_LIST.clear();
-                    appInfoService.saveRecord(APP_INFO_LIST);
+
+                    List<AppInfo>   updateList = new ArrayList<AppInfo>();
+                    List<AppInfo>   insertList = new ArrayList<AppInfo>();
+                    List<AppInfo>   savedList = appInfoService.selectAllByParams(paramsDel);
+                    for(AppInfo systemInfo : APP_INFO_LIST){
+                        boolean issaved = false;
+                        for(AppInfo systemInfoS : savedList){
+                            if(systemInfoS.getAppPid().equals(systemInfo.getAppPid())){
+                                systemInfo.setId(systemInfoS.getId());
+                                updateList.add(systemInfo);
+                                issaved = true;
+                                break;
+                            }
+                        }
+                        if(!issaved){
+                            insertList.add(systemInfo);
+                        }
+                    }
+                    appInfoService.updateRecord(updateList);
+                    appInfoService.saveRecord(insertList);
                 }
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -301,15 +427,15 @@ public class ScheduledTask {
 
     /**
      *每天凌晨1:10执行
+     * 删除历史数据，15天
      */
     @Scheduled(cron = "0 10 1 * * ?")
     public void clearHisdataTask() {
         logger.info("定时清空历史数据任务开始----------"+DateUtil.getCurrentDateTime());
         WarnPools.clearOldData();//清空发告警邮件的记录
         String nowTime = DateUtil.getCurrentDateTime();
-        //30天前时间
-        String thrityDayBefore = DateUtil.getDateBefore(nowTime, 30);
-        String dayBefore_15 = DateUtil.getDateBefore(nowTime, 15);
+        //15天前时间
+        String thrityDayBefore = DateUtil.getDateBefore(nowTime, 15);
         Map<String, Object> paramsDel = new HashMap<String,Object>();
         try {
             paramsDel.put(StaticKeys.SEARCH_END_TIME,thrityDayBefore);
@@ -325,19 +451,18 @@ public class ScheduledTask {
                 appStateMapper.deleteByDate(paramsDel);
                 systemInfoMapper.deleteByAccountAndDate(paramsDel);
                 intrusionInfoMapper.deleteByAccountAndDate(paramsDel);
-                //删除30天前的日志信息
+                //删除15天前的日志信息
                 logInfoMapper.deleteByDate(paramsDel);
                 //删除15天前数据库表统计信息
-                paramsDel.put(StaticKeys.SEARCH_END_TIME,dayBefore_15);
                 dbTableCountService.deleteByDate(paramsDel);
+
+                logInfoService.save("定时清空历史数据完成","定时清空历史数据完成：",StaticKeys.LOG_ERROR);
             }
             //执行删除操作end
 
-
-
         } catch (Exception e) {
             logger.error("定时清空历史数据任务出错：",e);
-            logInfoService.save("clearHisdataTask","定时清空历史数据错误："+e.toString(),StaticKeys.LOG_ERROR);
+            logInfoService.save("定时清空历史数据错误","定时清空历史数据错误："+e.toString(),StaticKeys.LOG_ERROR);
         }
         logger.info("定时清空历史数据任务结束----------"+DateUtil.getCurrentDateTime());
     }

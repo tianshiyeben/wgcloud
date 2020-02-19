@@ -20,7 +20,7 @@ import com.wgcloud.util.staticvar.StaticKeys;
 /**
  *
  * @ClassName:LoginCotroller.java     
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: LoginCotroller.java
@@ -73,18 +73,17 @@ public class LoginCotroller {
     	String code = request.getParameter(StaticKeys.SESSION_CODE);
     	HttpSession session = request.getSession();
     	try {
-	    	if(!StringUtils.isEmpty(userName)&&!StringUtils.isEmpty(passwd)&&!StringUtils.isEmpty(code)){
+	    	if(!StringUtils.isEmpty(userName )&& !StringUtils.isEmpty(passwd) && !StringUtils.isEmpty(code)){
 	    		if(!code.equals(session.getAttribute(StaticKeys.SESSION_CODE))){
 	    			model.addAttribute("error", "验证码错误");
         	    	return "login/login";
 	    		}
 				AccountInfo accountInfo = new AccountInfo();
-				if(MD5.GetMD5Code(commonConfig.getAdmindPwd()).equals(passwd)){
-					accountInfo.setAccount("admin");
-					accountInfo.setId("admin");
+				if(MD5.GetMD5Code(commonConfig.getAdmindPwd()).equals(passwd) && StaticKeys.ADMIN_ACCOUNT.equals(userName)){
+					accountInfo.setAccount(StaticKeys.ADMIN_ACCOUNT);
+					accountInfo.setId(StaticKeys.ADMIN_ACCOUNT);
 					request.getSession().setAttribute(StaticKeys.LOGIN_KEY, accountInfo);
 					return "redirect:/dash/main";
-//                    return "index";
 				}
 	    	}
     	} catch (Exception e) {

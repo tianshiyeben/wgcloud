@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.github.pagehelper.PageInfo;
+import com.wgcloud.entity.SystemInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ import com.wgcloud.util.UUIDUtil;
 /**
  *
  * @ClassName:AppInfoService.java     
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: AppInfoService.java
@@ -72,10 +73,18 @@ public class AppInfoService{
 		}
 		return appInfoMapper.deleteById(id);
 	}
-	
-	public AppInfo updateById(AppInfo AppInfo)
+
+	@Transactional
+	public void updateRecord(List<AppInfo> recordList) throws Exception {
+		if(recordList.size()<1){
+			return;
+		}
+		appInfoMapper.updateList(recordList);
+	}
+
+	public void updateById(AppInfo AppInfo)
 			throws Exception {
-		return appInfoMapper.updateById(AppInfo);
+		appInfoMapper.updateById(AppInfo);
 	}
 
 	public AppInfo selectById(String id)  throws Exception{

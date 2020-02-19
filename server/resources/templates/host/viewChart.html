@@ -40,7 +40,7 @@
   <div class="col-md-12">
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title" th:text="${systemInfo.hostname}">详细信息</h3>(每5分钟监控)
+        <h3 class="card-title" th:text="${systemInfo.hostname}">详细信息</h3>(每1分钟监控)
           <div class=" float-sm-right">
               <a th:href="@{'/dash/systemInfoList'}">返回</a>
           </div>
@@ -71,7 +71,7 @@
         <label style="margin-left: .9rem">内存使用率%</label>
         <div id="memStateJson"></div>
 
-        <label style="margin-left: .9rem">系统负载曲线</label>
+        <label style="margin-left: .9rem">系统负载</label>
         <div id="ysLoadSstateJson"></div>
     </div>
     <!-- /.card -->
@@ -102,7 +102,7 @@
             container: 'cpuStateJson',
             forceFit: true,
             height: 500,
-            padding: [30, 20, 70, 30]
+            padding: [30, 40, 70, 40]
         });
 
         chart.axis('dateStr', {
@@ -112,13 +112,8 @@
                 }
             }
         });
-        chart.axis('sys', {
-            label: {
-                textStyle: {
-                    fill: '#aaaaaa'
-                }
-            }
-        });
+        chart.axis('iowait', false);
+        chart.axis('idle', false);
         chart.tooltip({
             crosshairs: false
         });
@@ -126,13 +121,26 @@
             position: 'top-center'
         });
 
-        chart.source(cpuStateJson);
-        chart.scale('sys',{alias: '使用率'});
-        chart.scale('idle',{alias: '空闲率'});
-        chart.scale('iowait',{alias: '等待率'});
+        chart.source(cpuStateJson, {
+            sys: {
+                alias: '使用率',
+                min: 0,
+                max: [[${cpuStateMaxVal}]]
+            },
+            idle: {
+                alias: '空闲率',
+                min: 0,
+                max: [[${cpuStateMaxVal}]]
+            },
+            iowait: {
+                alias: '等待率',
+                min: 0,
+                max: [[${cpuStateMaxVal}]]
+            }
+        });
         chart.scale('dateStr',{tickCount: 12,alias: '时间'});
-        chart.line().position('dateStr*idle').color('#1890ff');
         chart.line().position('dateStr*sys').color('#2fc25b');
+        chart.line().position('dateStr*idle').color('#1890ff');
         chart.line().position('dateStr*iowait').color('#ffca0b');
         chart.render();
 
@@ -140,7 +148,7 @@
             container: 'memStateJson',
             forceFit: true,
             height: 500,
-            padding: [30, 20, 70, 30]
+            padding: [30, 40, 70, 40]
         });
         chart2.axis('dateStr', {
             label: {
@@ -162,8 +170,11 @@
         chart2.legend({
             position: 'top-center'
         });
-        chart2.source(memStateJson);
-        chart2.scale('usePer',{alias: '使用率'});
+        chart2.source(memStateJson, {
+            usePer: {
+                alias: '使用率'
+            }
+        });
         chart2.scale('dateStr',{tickCount: 12,alias: '时间'});
         chart2.line().position('dateStr*usePer').color('#1890ff');
         chart2.render();
@@ -172,8 +183,7 @@
             container: 'ysLoadSstateJson',
             forceFit: true,
             height: 500,
-            width: 2000,
-            padding: [30, 20, 70, 30]
+            padding: [30, 40, 70, 40]
         });
         chart3.axis('dateStr', {
             label: {
@@ -182,16 +192,31 @@
                 }
             }
         });
+        chart3.axis('fiveLoad', false);
+        chart3.axis('fifteenLoad', false);
         chart3.tooltip({
             crosshairs: false
         });
         chart3.legend({
             position: 'top-center'
         });
-        chart3.source(ysLoadSstateJson);
-        chart3.scale('oneLoad',{alias: '1分钟'});
-        chart3.scale('fiveLoad',{alias: '5分钟'});
-        chart3.scale('fifteenLoad',{alias: '15分钟'});
+        chart3.source(ysLoadSstateJson, {
+            oneLoad: {
+                alias: '1分钟',
+                min: 0,
+                max: [[${ysLoadSstateMaxVal}]]
+            },
+            fiveLoad: {
+                alias: '5分钟',
+                min: 0,
+                max: [[${ysLoadSstateMaxVal}]]
+            },
+            fifteenLoad: {
+                alias: '15分钟',
+                min: 0,
+                max: [[${ysLoadSstateMaxVal}]]
+            }
+        });
         chart3.scale('dateStr',{tickCount: 12,alias: '时间'});
         chart3.line().position('dateStr*oneLoad').color('#1890ff');
         chart3.line().position('dateStr*fiveLoad').color('#2fc25b');

@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 /**
  *
  * @ClassName:DbTable.java
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: 检查系统入侵信息
@@ -18,6 +18,13 @@ public class DbTable extends BaseEntity{
 	 * 
 	 */
 	private static final long serialVersionUID = 879979812204191283L;
+
+
+	/**
+	 * 数据源
+	 */
+	private String dbInfoId;
+
 
 	/**
 	 * 表名称
@@ -35,6 +42,8 @@ public class DbTable extends BaseEntity{
     private String remark;
 
     private Long tableCount;
+
+    private Long value;
 
 	private String dateStr;
     
@@ -89,5 +98,21 @@ public class DbTable extends BaseEntity{
 
 	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
+	}
+
+	public Long getValue() {
+		return tableCount;
+	}
+
+	public void setValue(Long value) {
+		this.value = value;
+	}
+
+	public String getDbInfoId() {
+		return dbInfoId;
+	}
+
+	public void setDbInfoId(String dbInfoId) {
+		this.dbInfoId = dbInfoId;
 	}
 }

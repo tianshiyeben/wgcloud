@@ -3,7 +3,7 @@
 <head>
 	<base href="./" th:href="'/'"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>WGClOUD集群监控</title>
+<title>WGClOUD集群监控平台</title>
 <link type="text/css" rel="stylesheet" th:href="@{'/static/logincss/components.css'}" />
 <link type="text/css" rel="stylesheet" th:href="@{'/static/logincss/fix.css'}" />
 <link type="text/css" rel="stylesheet" th:href="@{'/static/logincss/suri-bootstrap.css'}" />
@@ -42,7 +42,7 @@
            
         	<div class="form-group">
            	<div class="col-sm-12">
-           	<table><tr><td><input id="code" style="width:255px" name="valcode" placeholder="请填写验证码" maxlength="80" class="validate[required] form-control" autocomplete="off" type="text"></td>
+           	<table><tr><td><input id="code" style="width:255px" name="valcode" placeholder="请填写验证码" maxlength="80" class="validate[required,maxSize[4]] form-control" autocomplete="off" type="text"></td>
               <td><a href="javascript:changeImg()" title="看不清？点击换一张"><img th:src="@{'/code/get'}" id="imgObj"  width="70" height="32" /></a></td></tr></table>
             	</div>
           	</div>
@@ -63,13 +63,12 @@
 
 
 	<center>
-		&nbsp;<a target="_blank" href='http://www.wgstart.com'> ©2019-2020  www.wgstart.com 版权所有</a>
+		&nbsp;<a target="_blank" href='http://www.wgstart.com'> ©2019-<span id="copyyear">now</span>  www.wgstart.com . All rights reserved.</a>
 	</center>
     <link rel="stylesheet" th:href="@{'/static/js/jQuery/validationEngine.jquery.css'}" type="text/css"/>
     <script th:src="@{'/static/js/jQuery/jquery-3.2.0.min.js'}"></script>
     <script th:src="@{'/static/js/jQuery/jquery.validationEngine-zh_CN.js'}" type="text/javascript" charset="utf-8"></script>
     <script th:src="@{'/static/js/jQuery/jquery.validationEngine.js'}" type="text/javascript" charset="utf-8"></script>
-    <script src="http://www.wgstart.com/wgcloud/js/new-version.min.js"></script>
     <script type="text/javascript" th:src="@{'/static/common/md5.js'}"></script>
     <script type="text/javascript" th:src="@{'/static/js/login.js'}"></script>
 </body>

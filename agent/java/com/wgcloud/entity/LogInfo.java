@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  *
  * @ClassName:LogInfo.java     
- * @version v2.1
+ * @version V2.3
  * @author: wgcloud     
  * @date: 2019年11月16日
  * @Description: 日志信息

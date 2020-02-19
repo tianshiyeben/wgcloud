@@ -51,6 +51,15 @@
             <input type="hidden" name="id" th:value="${dbTable.id}"/>
             <div class="card-body">
                 <div class="form-group">
+                    <label><font color="red">*</font>数据源</label>
+                    <select class="validate[required] form-control"  name="dbInfoId" id="dbInfoId">
+                        <option value="">请选择</option>
+                        <th:block th:each="item,iterStat : ${dbInfoList}">
+                            <option   th:value="${item.id}" th:text="${item.aliasName}">Alabama</option>
+                        </th:block>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="fromMailName"><font color="red">*</font>表名称</label>
                     <input type="text" autocomplete="off"  th:value="${dbTable.tableName}" class="validate[required,maxSize[40]] form-control" name="tableName" id="tableName" placeholder="输入数据库中的表名称，如：Order">
                 </div>
@@ -96,6 +105,7 @@
 <script th:inline="javascript">
     $(document).ready(function(){
         $("#form1").validationEngine();
+        $("#dbInfoId").val([[${dbTable.dbInfoId}]]);
     });
 
     function goback() {

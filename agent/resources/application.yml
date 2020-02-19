@@ -15,5 +15,5 @@ base:
   serverUrl: http://localhost:9999
   #本机ip，不要用localhost或127.0.0.1
   bindIp: 192.168.1.2
-  #监控本机进程id，可以为空
-  appId:
+  #通信token，请和server端配置的wgToken保持一致
+  wgToken: wgcloud

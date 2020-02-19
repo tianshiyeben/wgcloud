@@ -1,6 +1,7 @@
 package com.wgcloud.util.jdbc;
 
 import com.wgcloud.entity.DbInfo;
+import com.wgcloud.service.DbInfoService;
 import com.wgcloud.service.LogInfoService;
 import com.wgcloud.util.staticvar.StaticKeys;
 import org.slf4j.Logger;
@@ -14,7 +15,7 @@ import javax.annotation.Resource;
 /**
  *
  * @ClassName:ConnectionUtil.java
- * @version v2.1
+ * @version v2.3
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: ConnectionUtil.java
@@ -26,13 +27,11 @@ public class ConnectionUtil {
     private static final Logger logger = LoggerFactory.getLogger(ConnectionUtil.class);
     @Resource
     private  LogInfoService logInfoService;
+    @Resource
+    private DbInfoService dbInfoService;
 
-    private static JdbcTemplate jdbcTemplate;
-
-      public JdbcTemplate getJdbcTemplate(DbInfo dbInfo){
-        if(jdbcTemplate!=null){
-            return jdbcTemplate;
-        }
+      public JdbcTemplate getJdbcTemplate(DbInfo dbInfo) throws Exception {
+        JdbcTemplate jdbcTemplate =null;
         String driver = "";
         String url = "";
         if("mysql".equals(dbInfo.getDbType())){
@@ -56,19 +55,33 @@ public class ConnectionUtil {
             }else{
                 jdbcTemplate.queryForRowSet(RDSConnection.ORACLE_VERSION);
             }
-
+            dbInfo.setDbState("1");
+            dbInfoService.updateById(dbInfo);
             return jdbcTemplate;
         }catch (Exception e){
             jdbcTemplate=null;
             logger.error("连接数据库错误",e);
-            logInfoService.save("连接数据库错误："+dbInfo.getIp()+":"+dbInfo.getPort(),e.toString(), StaticKeys.LOG_ERROR);
+            logInfoService.save("连接数据库错误："+dbInfo.getAliasName(),"IP："+dbInfo.getIp()+"，端口："+dbInfo.getPort()+"，数据库别名："
+                    +dbInfo.getAliasName()+"，错误信息："+e.toString(), StaticKeys.LOG_ERROR);
+            dbInfo.setDbState("2");
+            dbInfoService.updateById(dbInfo);
         }
         return null;
     }
 
-    public  long queryTableCount(DbInfo dbInfo,String sql) throws Exception{
-        JdbcTemplate jdbcTemplate =  getJdbcTemplate( dbInfo);
-        return jdbcTemplate.queryForObject(sql,Long.class);
+    public  long queryTableCount(DbInfo dbInfo,String sql) {
+          try {
+              JdbcTemplate jdbcTemplate = getJdbcTemplate(dbInfo);
+              if(null==jdbcTemplate){
+                  return 0;
+              }
+              return jdbcTemplate.queryForObject(sql, Long.class);
+          }catch (Exception e){
+              logger.error("统计数据表错误：",e);
+              logInfoService.save("统计数据表错误："+dbInfo.getAliasName(),"IP："+dbInfo.getIp()+"，端口："+dbInfo.getPort()+"，数据库别名："
+                      +dbInfo.getAliasName()+"，错误信息："+e.toString(), StaticKeys.LOG_ERROR);
+              return 0;
+          }
     }
 
 }

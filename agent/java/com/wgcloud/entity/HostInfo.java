@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  *
  * @ClassName:HostInfo.java     
- * @version v2.1
+ * @version V2.3
  * @author: wgcloud     
  * @date: 2019年11月16日
  * @Description: host的IP密码等信息
