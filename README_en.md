@@ -6,7 +6,7 @@
 
 ## WGCLOUD-v2.3
 
-It is a distributed monitoring platform based on microservice architecture. The core modules include: server cluster monitoring, ES cluster monitoring, CPU monitoring, memory monitoring, data monitoring, service heartbeat detection, application process management, monitoring alarm information push.
+It is a distributed monitoring platform based on microservice architecture. The core modules include: server cluster monitoring, ES cluster monitoring, CPU monitoring, memory monitoring, data monitoring, service heartbeat detection,, disk monitoring, system load monitoring,application process management, monitoring alarm information push.
 
 1.Adopt the collaborative work mode of server and client, which is lighter, more efficient, and can support hundreds of servers online monitoring.
 
