@@ -6,25 +6,27 @@
 
 ## WGCLOUD-v2.3
 
-是基于微服务架构的分布式监控平台，核心模块包括：服务器集群监控，ES集群监控，CPU监控，内存监控，数据监控，服务心跳检测，应用进程管理，磁盘监控，系统负载监控，监控告警信息推送。[english readme](<https://github.com/tianshiyeben/wgcloud/blob/master/README_en.md>)
+[中文版README](https://github.com/tianshiyeben/wgcloud/blob/master/README_zh.md)
 
-1.采用服务端和客户端协同工作方式，更轻量，更高效，可支持数百台服务器在线监控。
+Wgcloud is a distributed monitoring platform based on Java language. Its core modules include: server cluster monitoring, ES cluster monitoring, CPU monitoring, memory monitoring, data monitoring, service heartbeat detection, application process management, disk IO monitoring, system load monitoring, monitoring alarm information push.
 
-2.server端负责接受数据，处理数据，生成图表展示。agent端负责定时上报指标数据。
+1.Adopt the collaborative work mode of server and client, which is lighter, more efficient, and can support hundreds of servers online monitoring.
 
-3.支持主流服务器平台安装部署，如Linux, Windows, Solaris, AIX, HP-UX等。
+2.The server is responsible for receiving data, processing data and generating charts. The agent side is responsible for regularly reporting the indicator data.
 
-4.运行所需sigar的so，dll文件，请下载agent安装包，在lib文件夹下。
+3.Support the installation and deployment of mainstream server platforms, such as Linux, windows, Solaris, AIX, HP-UX, etc.
 
-5.运行所需sql脚本，在安装包里，解压后就能看到。
+4.Run the so and DLL files of the required sigar. Please download the agent installation package in the Lib folder.
 
-6.WGCLOUD采用微服务springboot+bootstrap，完美实现了分布式监控系统，为反哺开源社区，二次开源。
+5.Run the required SQL script, and you can see it in the installation package after decompression.
 
-## **下载**
+6.Wgcloud adopts the microservice springboot + bootstrap to realize the distributed monitoring system perfectly, which is open-source community and secondary open-source.
+
+## download
 
 <http://www.wgstart.com/docs.html>
 
-## **开源协议**
+## **Open source protocol**
 
 <http://www.wgstart.com/docs12.html>
 
@@ -39,7 +41,7 @@
 
 
 
-## 运行环境
+## Running environment
 
 1.JDK1.8
 
@@ -47,14 +49,14 @@
 
 
 
-## 联系
+## contact
 
 tianshiyeben@qq.com
 
 
 
-## 支持开源
+## Support open source
 
-如果您觉得本应用项目对你有帮助，可以赞赏一下作者。万水千山总是情，一块十块都是情！
+If you think this application project is helpful to you, you can appreciate the author. Thousands of rivers and mountains are always in love!
 
 ![c.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/wxzf.jpg)
