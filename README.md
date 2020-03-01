@@ -30,6 +30,10 @@ Wgcloud is a distributed monitoring platform based on Java language. Its core mo
 
 <http://www.wgstart.com/docs12.html>
 
+## **Developing documents**
+
+<http://www.wgstart.com/help/docs3.html>
+
 
 
 ![WGCLOUD监控主面板](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo2.jpg)
