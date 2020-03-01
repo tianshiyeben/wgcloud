@@ -28,6 +28,10 @@ WGCLOUD基于java语言开发，是微服务架构的分布式监控平台，核
 
 <http://www.wgstart.com/docs12.html>
 
+## **开发文档**
+
+<http://www.wgstart.com/help/docs3.html>
+
 
 
 ![WGCLOUD监控主面板](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo2.jpg)
