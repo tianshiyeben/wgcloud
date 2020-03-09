@@ -6,7 +6,7 @@
 
 ## WGCLOUD-v2.3
 
-WGCLOUD基于java语言开发，是微服务架构的分布式监控平台，核心模块包括：服务器集群监控，ES集群监控，CPU监控，内存监控，数据监控(mysql，oracle，pg等)，服务心跳检测，应用进程管理，磁盘监控，系统负载监控，监控告警信息推送。[english readme](<https://github.com/tianshiyeben/wgcloud/blob/master/README_en.md>)
+WGCLOUD基于java语言开发，是微服务架构的分布式监控平台，核心模块包括：服务器集群监控，ES集群监控，CPU监控，内存监控，数据监控(mysql，oracle，pg等)，服务心跳检测，应用进程管理，磁盘IO监控，系统负载监控，监控告警信息推送。[english readme](<https://github.com/tianshiyeben/wgcloud/blob/master/README_en.md>)
 
 1.采用服务端和客户端协同工作方式，更轻量，更高效，可支持数百台服务器在线监控。
 
