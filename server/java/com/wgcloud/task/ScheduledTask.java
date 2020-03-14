@@ -254,7 +254,11 @@ public class ScheduledTask {
                     if(!StringUtils.isEmpty(dbTable.getWhereVal())){
                         whereAnd = " and ";
                     }
-                    sql = RDSConnection.query_table_count.replace("{tableName}", dbTable.getTableName()) +whereAnd+ dbTable.getWhereVal();
+                    if("postgresql".equals(dbInfo.getDbType())){
+                         sql = RDSConnection.query_table_count_pg.replace("{tableName}", dbTable.getTableName()) +whereAnd+ dbTable.getWhereVal();
+                    }else {
+                        sql = RDSConnection.query_table_count.replace("{tableName}", dbTable.getTableName()) + whereAnd + dbTable.getWhereVal();
+                    }
                     tableCount = connectionUtil.queryTableCount(dbInfo, sql);
                     DbTableCount dbTableCount = new DbTableCount();
                     dbTableCount.setCreateTime(date);
@@ -378,7 +382,7 @@ public class ScheduledTask {
                     for(AppInfo systemInfo : APP_INFO_LIST){
                         boolean issaved = false;
                         for(AppInfo systemInfoS : savedList){
-                            if(systemInfoS.getAppPid().equals(systemInfo.getAppPid())){
+                            if(systemInfoS.getHostname().equals(systemInfo.getHostname()) && systemInfoS.getAppPid().equals(systemInfo.getAppPid())){
                                 systemInfo.setId(systemInfoS.getId());
                                 updateList.add(systemInfo);
                                 issaved = true;

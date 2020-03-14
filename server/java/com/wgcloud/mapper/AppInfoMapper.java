@@ -42,5 +42,5 @@ public interface AppInfoMapper {
 
     public int countByParams(Map<String, Object> params) throws Exception;
     
-    public AppInfo updateById(AppInfo AppInfo) throws Exception;
+    public int updateById(AppInfo AppInfo) throws Exception;
 }
