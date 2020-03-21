@@ -14,10 +14,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -36,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 public class ScheduledTask {
 
     private Logger logger  = LoggerFactory.getLogger(ScheduledTask.class);
-    public static List<AppInfo> appInfoList = new ArrayList<AppInfo>();
+    public static List<AppInfo> appInfoList =  Collections.synchronizedList(new ArrayList<AppInfo>());
     @Autowired
     private RestUtil restUtil;
     @Autowired
@@ -49,13 +47,15 @@ public class ScheduledTask {
     /**
      * 线程池
      */
-    static ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 40, 2, TimeUnit.MINUTES, new LinkedBlockingDeque<>());
+    static ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 2, TimeUnit.MINUTES, new LinkedBlockingDeque<>());
 
     /**
      * 60秒后执行，每隔90秒执行, 单位：ms。
      */
-    @Scheduled(initialDelay = 60 * 1000L, fixedRate = 90 * 1000)
+    @Scheduled(initialDelay = 59 * 1000L, fixedRate = 90 * 1000)
     public void minTask() {
+        List<AppInfo> APP_INFO_LIST_CP =  new ArrayList<AppInfo>();
+        APP_INFO_LIST_CP.addAll(appInfoList);
         JSONObject jsonObject = new JSONObject();
         LogInfo logInfo = new LogInfo();
         Timestamp t = FormatUtil.getNowTime();
@@ -105,10 +105,10 @@ public class ScheduledTask {
                 jsonObject.put("deskStateList", deskStateList);
             }
             //进程信息
-            if(appInfoList.size()>0){
+            if(APP_INFO_LIST_CP.size()>0){
                 List<AppInfo> appInfoResList = new ArrayList<>();
                 List<AppState> appStateResList = new ArrayList<>();
-                for(AppInfo appInfo : appInfoList){
+                for(AppInfo appInfo : APP_INFO_LIST_CP){
                     appInfo.setHostname(commonConfig.getBindIp());
                     appInfo.setCreateTime(t);
                     appInfo.setState("1");
@@ -150,7 +150,7 @@ public class ScheduledTask {
      * 30秒后执行，每隔5分钟执行, 单位：ms。
      * 获取监控进程
      */
-    @Scheduled(initialDelay = 30 * 1000L, fixedRate = 5 * 60 * 1000)
+    @Scheduled(initialDelay = 28 * 1000L, fixedRate = 300 * 1000)
     public void appInfoListTask() {
         JSONObject jsonObject = new JSONObject();
         LogInfo logInfo = new LogInfo();
