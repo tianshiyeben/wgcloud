@@ -1,8 +1,9 @@
 <p align="center">
   <a href="http://www.wgstart.com">
-    <img src="https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/logo.png">
+    <img src="./demo/logo.png">
   </a>
  </p>
+
 
 ## WGCLOUD-v2.3
 
@@ -34,11 +35,11 @@ WGCLOUD基于java语言开发，是高性能高并发的分布式监控平台，
 
 
 
-![WGCLOUD监控主面板](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo2.jpg)
+![WGCLOUD监控主面板](./demo/demo2.jpg)
 
-![WGCLOUD监控主机列表](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo3.jpg)
+![WGCLOUD监控主机列表](./demo/demo3.jpg)
 
-![WGCLOUD监控图表](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo4.jpg)
+![WGCLOUD监控图表](./demo/demo4.jpg)
 
 
 
@@ -61,4 +62,4 @@ tianshiyeben@qq.com
 
 如果您觉得本应用项目对你有帮助，可以赞赏一下作者。万水千山总是情，一块十块都是情！
 
-![c.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/wxzf.jpg)
+![c.jpg](./demo/wxzf.jpg)

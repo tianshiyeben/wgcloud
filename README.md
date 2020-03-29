@@ -1,8 +1,9 @@
 <p align="center">
   <a href="http://www.wgstart.com">
-    <img src="https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/logo.png">
+    <img src="./demo/logo.png">
   </a>
  </p>
+
 
 ## WGCLOUD-v2.3
 
@@ -36,11 +37,11 @@ Wgcloud is a distributed monitoring platform based on Java language. Its core mo
 
 
 
-![WGCLOUD监控主面板](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo2.jpg)
+![WGCLOUD监控主面板](./demo/demo2.jpg)
 
-![WGCLOUD监控主机列表](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo3.jpg)
+![WGCLOUD监控主机列表](./demo/demo3.jpg)
 
-![WGCLOUD监控图表](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/demo4.jpg)
+![WGCLOUD监控图表](./demo/demo4.jpg)
 
 
 
@@ -63,4 +64,4 @@ tianshiyeben@qq.com
 
 If you think this application project is helpful to you, you can appreciate the author. Thousands of rivers and mountains are always in love!
 
-![c.jpg](https://raw.githubusercontent.com/tianshiyeben/wgcloud/master/demo/wxzf.jpg)
+![c.jpg](./demo/wxzf.jpg)
