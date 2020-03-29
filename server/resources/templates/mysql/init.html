@@ -56,6 +56,9 @@
                     <select class="validate[required] form-control" onchange="setPort();"  name="dbType" id="dbType">
                         <option value="mysql">mysql</option>
                         <option value="oracle">oracle</option>
+                        <option value="postgresql">postgresql</option>
+                        <option value="sqlserver">sqlserver</option>
+                        <option value="db2">db2</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -142,6 +145,15 @@
         }
         if($("#dbType").val()=='oracle'){
             $("#port").val('1521')
+        }
+        if($("#dbType").val()=='postgresql'){
+            $("#port").val('5432')
+        }
+        if($("#dbType").val()=='sqlserver'){
+            $("#port").val('1433')
+        }
+        if($("#dbType").val()=='db2'){
+            $("#port").val('5000')
         }
     }
 

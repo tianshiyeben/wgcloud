@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>WGCLOUD公众看板/主机列表(请收藏)</title>
   <div  th:replace="common/header.html"></div>
 
 
@@ -10,19 +11,26 @@
 
 <div class="wrapper">
 
-  <div th:replace="common/navbar.html"></div>
-
-  <div th:replace="common/aside.html"></div>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="margin-left: 10px">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1></h1>
-          </div>
+            <div class="col-sm-6" id="fuwuqixinxi">
+                <a href="http://www.wgstart.com"  target="_blank">
+                    <img th:src="@{'/static/logincss/logo.png'}" style="height:25px;width:25px;opacity: .8" class="brand-image img-circle elevation-3"
+                    >&nbsp;WGCLOUD-v2.3.5
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item "><a href="/wgcloud/dash/main?dashView=1">监控概要</a></li>
+                    <li class="breadcrumb-item active">主机列表</li>
+                    <li class="breadcrumb-item active"><a  target="_blank" href="https://www.wgstart.com/elasticsearch-head/index.html">ES监控工具</a></li>
+                </ol>
+            </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -34,9 +42,6 @@
 
   <div class="col-md-12">
     <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">主机列表</h3>
-      </div>
       <!-- /.card-header -->
       <div class="card-body">
         <table class="table table-bordered">
@@ -63,6 +68,7 @@
                       <span   th:text="${item.hostname}"></span>
                   </th:block>
               </td>
+
               <td style="font-size:1.2rem">
                   <th:block th:if="${item.memPer >= 90}">
                       <span class="badge bg-danger" th:text="${item.memPer}"></span>
@@ -86,15 +92,12 @@
                   </th:block>
               </td>
               <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}">Update software</td>
-                <td th:text="${item.hostRemark}"></td>
-              <td>
-                  <button type="button" class="btn btn-default" data-toggle="modal" th:onclick="setHostRemark([[${item.hostname}]],[[${item.hostId}]],[[${item.hostRemark}]])" data-target="#modal-default">
-                     备注
-                  </button>
-                  <button type="button"  th:onclick="view([[${item.id}]])"  class="btn btn-primary">系统信息</button>
-                  <button type="button"  th:onclick="viewChart([[${item.id}]])"  class="btn btn-primary">图表</button>
-                  <button type="button"  th:onclick="viewApps([[${item.hostname}]])"  class="btn btn-primary">进程</button>
-                  <button type="button"  th:onclick="del([[${item.id}]])"  class="btn bg-gradient-danger">删除</button></td>
+                <td th:text="${item.hostRemark}">
+
+                </td>
+                <td> <button type="button"  th:onclick="viewDashView([[${item.id}]])"  class="btn btn-primary">系统信息</button>
+                    <button type="button"  th:onclick="viewChartDashView([[${item.id}]])"  class="btn btn-primary">图表</button>
+                 </td>
 
             </tr>
           </th:block>
@@ -116,41 +119,10 @@
   </div>
 
 
-
-    <div class="modal fade" id="modal-default">
-        <div class="modal-dialog">
-            <form method="post" id="form2" th:action="@{'/host/save'}">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">编辑机组</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>
-                        <input type="hidden" id="ip" name="ip"/>
-                        <input type="hidden" id="id" name="id"/>
-                        <input type="text"  autocomplete="off" class="validate[required,maxSize[40] form-control" name="remark" id="remark" placeholder="华南区">
-                    </p>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" onclick="ajaxSaveRemark()" class="btn btn-primary">保存</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-
   <div th:replace="common/footer.html"></div>
-    <script th:src="@{'/static/js/jQuery/jquery.form.min.js'}" type="text/javascript" charset="utf-8"></script>
 
 </div>
 <!-- ./wrapper -->
-
 <script th:src="@{'/static/js/host.js'}"></script>
-
 </body>
 </html>

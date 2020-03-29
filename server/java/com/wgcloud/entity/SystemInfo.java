@@ -70,6 +70,9 @@ public class SystemInfo extends BaseEntity{
      */
     private Date createTime;
 
+    private String hostId;
+    private String hostRemark;
+
     
 	public String getVersion() {
 		return version;
@@ -144,5 +147,21 @@ public class SystemInfo extends BaseEntity{
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public String getHostId() {
+		return hostId;
+	}
+
+	public void setHostId(String hostId) {
+		this.hostId = hostId;
+	}
+
+	public String getHostRemark() {
+		return hostRemark;
+	}
+
+	public void setHostRemark(String hostRemark) {
+		this.hostRemark = hostRemark;
 	}
 }

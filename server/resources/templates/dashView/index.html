@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>WGCLOUD公众看板(请收藏)</title>
   <div  th:replace="common/header.html"></div>
+
 
 
 </head>
@@ -9,19 +11,25 @@
 
 <div class="wrapper">
 
-  <div th:replace="common/navbar.html"></div>
-
-  <div th:replace="common/aside.html"></div>
-
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="margin-left: 10px">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6" id="fuwuqixinxi" style="display: none">
-            <h1 class="m-0 text-dark">服务器信息</h1>
+          <div class="col-sm-6" id="fuwuqixinxi">
+            <a href="http://www.wgstart.com"  target="_blank">
+              <img th:src="@{'/static/logincss/logo.png'}" style="height:25px;width:25px;opacity: .8" class="brand-image img-circle elevation-3"
+              >&nbsp;WGCLOUD-v2.3.5
+            </a>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item active">监控概要</li>
+              <li class="breadcrumb-item "><a href="/wgcloud/dash/systemInfoList?dashView=1">主机列表</a></li>
+              <li class="breadcrumb-item active"><a  target="_blank" href="https://www.wgstart.com/elasticsearch-head/index.html">ES监控工具</a></li>
+            </ol>
           </div><!-- /.col -->
          <!-- <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -50,7 +58,6 @@
 
                 <p>监控进程</p>
               </div>
-              <a th:href="@{'/appInfo/list'}" class="small-box-footer">更多 <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -62,7 +69,6 @@
 
                 <p>进程占用CPU>90%</p>
               </div>
-              <a th:href="@{'/appInfo/list'}" class="small-box-footer">更多 <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -74,7 +80,6 @@
 
                 <p>数据源</p>
               </div>
-              <a th:href="@{'/dbInfo/list'}" class="small-box-footer">更多 <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -86,7 +91,6 @@
 
                 <p>监控数据表数量</p>
               </div>
-              <a th:href="@{'/dbTable/list'}" class="small-box-footer">更多 <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
         </div>
@@ -102,7 +106,6 @@
 
                 <p>数据表总数据量</p>
               </div>
-              <a th:href="@{'/dbTable/list'}" class="small-box-footer">更多 <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -114,7 +117,6 @@
 
                 <p>服务接口数量</p>
               </div>
-              <a th:href="@{'/heathMonitor/list'}" class="small-box-footer">更多 <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -126,7 +128,6 @@
 
                 <p>异常服务接口</p>
               </div>
-              <a th:href="@{'/heathMonitor/list'}" class="small-box-footer">更多 <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -139,7 +140,6 @@
 
                 <p>已产生系统日志</p>
               </div>
-              <a th:href="@{'/log/list'}"class="small-box-footer">更多 <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
         </div>

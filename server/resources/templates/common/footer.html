@@ -3,7 +3,7 @@
 	<strong>Copyright &copy;2019-<span id="copyyear">now</span> <a target="_blank" href="http://www.wgstart.com">www.wgstart.com</a>.</strong>
 	All rights reserved.
 	<div class="float-right d-none d-sm-inline-block">
-		<span id="newversion"></span><b id="nowversion">Version 2.3</b>
+		<span id="newversion"></span><b id="nowversion">Version 2.3.5</b>
 	</div>
 </footer>
 
@@ -53,17 +53,3 @@
 <script th:src="@{'/static/AdminLTE/plugins/toastr/toastr.min.js'}"></script>
 <!-- AdminLTE for demo purposes -->
 <script th:src="@{'/static/AdminLTE/dist/js/demo.js'}"></script>
-
-<script type="text/javascript">
-	function doHandleYear() {
-		var myDate = new Date();
-		var tYear = myDate.getFullYear();
-		$("#copyyear").html(tYear);
-	}
-
-	function getVersion(){
-		$.getScript("http://www.wgstart.com/wgcloud/js/new-version.min.js");
-	}
-	doHandleYear();
-	setTimeout("getVersion()",10000);
-</script>

@@ -3,6 +3,7 @@ package com.wgcloud.controller;
 import com.wgcloud.entity.MailSet;
 import com.wgcloud.service.LogInfoService;
 import com.wgcloud.service.MailSetService;
+import com.wgcloud.util.msg.WarnMailUtil;
 import com.wgcloud.util.staticvar.StaticKeys;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -64,6 +65,13 @@ public class MailSetController {
 		if(!StringUtils.isEmpty(msg)){
 			if(msg.equals("save")) {
 				model.addAttribute("msg", "保存成功");
+			}else if(msg.equals("test")) {
+				String result = request.getParameter("result");
+				if("success".equals(result)) {
+					model.addAttribute("msg", "测试发送成功");
+				}else{
+					model.addAttribute("msg", "测试发送失败，请查看日志");
+				}
 			}else{
 				model.addAttribute("msg", "删除成功");
 			}
@@ -97,6 +105,23 @@ public class MailSetController {
     	 return "redirect:/mailset/list?msg=save";
     }
 
+	@RequestMapping(value="test")
+	public String test(MailSet mailSet, Model model,HttpServletRequest request) {
+		String result = "success";
+		try {
+			if(StringUtils.isEmpty(mailSet.getId())) {
+				mailSetService.save(mailSet);
+			}else{
+				mailSetService.updateById(mailSet);
+			}
+			StaticKeys.mailSet = mailSet;
+			 result =  WarnMailUtil.sendMail(mailSet.getToMail(),"WGCLOUD测试邮件发送","WGCLOUD测试邮件发送");
+		} catch (Exception e) {
+			logger.error("测试邮件设置信息错误：",e);
+			logInfoService.save("测试邮件设置信息错误",e.toString(),StaticKeys.LOG_ERROR);
+		}
+		return "redirect:/mailset/list?msg=test&result="+result;
+	}
 
 	/**
 	 * 删除告警邮件信息

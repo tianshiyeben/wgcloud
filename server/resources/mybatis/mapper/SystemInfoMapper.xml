@@ -185,21 +185,15 @@
 
 	  <select id="selectAllByParams" parameterType="map" resultMap="resultMap">
 		SELECT
-		<include refid="tableColumnList" />
-		FROM SYSTEM_INFO t
-		<where>
-			<include refid="queryByParams" />
-		</where>
+		a.ID,a.HOST_NAME, a.VERSION, a.VERSION_DETAIL, a.MEM_PER, a.CPU_PER,a.CPU_CORE_NUM,a.CPU_XH,a.CREATE_TIME,a.STATE,b.ID as hostId,b.REMARK as hostRemark
+		FROM SYSTEM_INFO as a LEFT JOIN HOST_INFO as b ON  a.HOST_NAME = b.IP
 		 ORDER BY CPU_PER,MEM_PER DESC
 	</select>
 	
 	<select id="selectByParams" parameterType="map" resultMap="resultMap">
 		SELECT
-		<include refid="tableColumnList" />
-		FROM SYSTEM_INFO
-		<where>
-			<include refid="queryByParams" />
-		</where>
+		a.ID,a.HOST_NAME, a.VERSION, a.VERSION_DETAIL, a.MEM_PER, a.CPU_PER,a.CPU_CORE_NUM,a.CPU_XH,a.CREATE_TIME,a.STATE,b.ID as hostId,b.REMARK as hostRemark
+		FROM SYSTEM_INFO as a LEFT JOIN HOST_INFO as b ON  a.HOST_NAME = b.IP
 		 ORDER BY CPU_PER,MEM_PER DESC
 	</select>
 	

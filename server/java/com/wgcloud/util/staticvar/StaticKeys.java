@@ -33,12 +33,14 @@ public class StaticKeys {
 	//session存贮登录信息的标识
 	public static String LOGIN_KEY = "LOGIN_KEY";
 
+	public static String DASH_VIEW_ACCOUNT = "dashView";
+
 	
 	//日志失败标记
 	public static final String LOG_ERROR = "1";
 
 	//不发送报警短信邮件标识
-	public static final String NO_SEND_WARN = "0";
+	public static final String NO_SEND_WARN = "false";
 	
 	public static String SPLIT_BR = "</br>";//换行标识
 	
@@ -47,6 +49,8 @@ public class StaticKeys {
 	public static String SPLIT_DH = ",";//逗号
 	
 	public static String SPLIT_SXG = "//";//双反斜杠
+
+	public static String DOWN_STATE = "2";
 
 	public static MailSet mailSet = null;
 

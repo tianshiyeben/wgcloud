@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -53,8 +54,11 @@ public class RestUtil {
         try {
             ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
             return responseEntity.getStatusCodeValue();
+        }catch (HttpClientErrorException e){
+            logger.error("服务接口检测任务错误",e);
+            return e.getRawStatusCode();
         }catch (Exception e){
-            logger.error("服务健康检测任务错误",e);
+            logger.error("服务接口检测任务错误",e);
             return 500;
         }
     }

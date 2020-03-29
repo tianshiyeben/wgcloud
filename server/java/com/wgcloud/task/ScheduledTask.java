@@ -2,6 +2,7 @@ package com.wgcloud.task;
 
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.wgcloud.config.CommonConfig;
 import com.wgcloud.entity.*;
 import com.wgcloud.mapper.*;
 import com.wgcloud.service.*;
@@ -44,7 +45,6 @@ public class ScheduledTask {
      */
     static ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 40, 2, TimeUnit.MINUTES, new LinkedBlockingDeque<>());
 
-
     @Autowired
     SystemInfoService systemInfoService;
     @Autowired
@@ -83,6 +83,8 @@ public class ScheduledTask {
     private RestUtil restUtil;
     @Autowired
     ConnectionUtil connectionUtil;
+    @Autowired
+    CommonConfig commonConfig;
 
     /**
      * 20秒后执行
@@ -108,10 +110,10 @@ public class ScheduledTask {
      * 300秒后执行
      * 检测主机是否已经下线，检测进程是否下线
      */
-    @Scheduled(initialDelay = 300000L, fixedRate = 15 * 60 * 1000)
+    @Scheduled(initialDelay = 300000L, fixedRate = 20 * 60 * 1000)
     public   void hostDownCheckTask() {
         Date date = DateUtil.getNowTime();
-        long delayTime = 600*1000;
+        long delayTime = 900*1000;
 
         try {
             Map<String, Object> params = new HashMap<String, Object>();
@@ -120,20 +122,31 @@ public class ScheduledTask {
                 List<SystemInfo> updateList = new ArrayList<SystemInfo>();
                 List<LogInfo> logInfoList =  new ArrayList<LogInfo>();
                 for(SystemInfo systemInfo : list){
-                    if(!StringUtils.isEmpty( WarnPools.MEM_WARN_MAP.get(systemInfo.getId()))){
-                        continue;
-                    }
+
                    Date createTime =  systemInfo.getCreateTime();
                    long diff = date.getTime()-createTime.getTime();
                    if(diff>delayTime){
-                       systemInfo.setState("2");
+                       if(!StringUtils.isEmpty( WarnPools.MEM_WARN_MAP.get(systemInfo.getId()))){
+                           continue;
+                       }
+                       systemInfo.setState(StaticKeys.DOWN_STATE);
                        LogInfo logInfo = new LogInfo();
                        logInfo.setHostname("主机下线："+systemInfo.getHostname());
                        logInfo.setInfoContent("超过10分钟未上报状态，可能已下线："+systemInfo.getHostname());
                        logInfo.setState(StaticKeys.LOG_ERROR);
                        logInfoList.add(logInfo);
                        updateList.add(systemInfo);
-                       WarnPools.MEM_WARN_MAP.put(systemInfo.getId(),"1");
+                       Runnable runnable = () -> {
+                           WarnMailUtil.sendHostDown(systemInfo,true);
+                       };
+                       executor.execute(runnable);
+                   }else{
+                       if(!StringUtils.isEmpty(WarnPools.MEM_WARN_MAP.get(systemInfo.getId()))){
+                           Runnable runnable = () -> {
+                               WarnMailUtil.sendHostDown(systemInfo,false);
+                           };
+                           executor.execute(runnable);
+                       }
                    }
                 }
                 if(updateList.size()>0){
@@ -154,20 +167,31 @@ public class ScheduledTask {
                 List<AppInfo> updateList = new ArrayList<AppInfo>();
                 List<LogInfo> logInfoList =  new ArrayList<LogInfo>();
                 for(AppInfo appInfo : list){
-                    if(!StringUtils.isEmpty( WarnPools.MEM_WARN_MAP.get(appInfo.getId()))){
-                        continue;
-                    }
+
                     Date createTime =  appInfo.getCreateTime();
                     long diff = date.getTime()-createTime.getTime();
                     if(diff>delayTime){
-                        appInfo.setState("2");
+                        if(!StringUtils.isEmpty( WarnPools.MEM_WARN_MAP.get(appInfo.getId()))){
+                            continue;
+                        }
+                        appInfo.setState(StaticKeys.DOWN_STATE);
                         LogInfo logInfo = new LogInfo();
                         logInfo.setHostname("进程下线IP："+appInfo.getHostname()+"，名称："+appInfo.getAppName());
                         logInfo.setInfoContent("超过10分钟未上报状态，可能已下线IP："+appInfo.getHostname()+"，名称："+appInfo.getAppName()+"，进程ID："+appInfo.getAppPid());
                         logInfo.setState(StaticKeys.LOG_ERROR);
                         logInfoList.add(logInfo);
                         updateList.add(appInfo);
-                        WarnPools.MEM_WARN_MAP.put(appInfo.getId(),"1");
+                        Runnable runnable = () -> {
+                            WarnMailUtil.sendAppDown(appInfo,true);
+                        };
+                        executor.execute(runnable);
+                    }else{
+                        if(!StringUtils.isEmpty(WarnPools.MEM_WARN_MAP.get(appInfo.getId()))){
+                            Runnable runnable = () -> {
+                                WarnMailUtil.sendAppDown(appInfo,false);
+                            };
+                            executor.execute(runnable);
+                        }
                     }
                 }
                 if(updateList.size()>0){
@@ -181,6 +205,7 @@ public class ScheduledTask {
             logger.error("检测进程是否下线错误",e);
         }
 
+
     }
 
 
@@ -189,8 +214,9 @@ public class ScheduledTask {
      * 90秒后执行，之后每隔10分钟执行, 单位：ms。
      * 检测心跳
      */
-    @Scheduled(initialDelay = 90000L, fixedRate = 10 * 60 * 1000)
+    @Scheduled(initialDelay = 90000L,  fixedRateString = "${base.heathTimes}")
     public   void heathMonitorTask() {
+        logger.info("heathMonitorTask------------"+DateUtil.getDateTimeString(new Date()));
         Map<String, Object> params = new HashMap<>();
         List<HeathMonitor> heathMonitors = new ArrayList<HeathMonitor>();
         List<LogInfo> logInfoList =  new ArrayList<LogInfo>();
@@ -199,24 +225,31 @@ public class ScheduledTask {
             List<HeathMonitor>  heathMonitorAllList = heathMonitorService.selectAllByParams(params);
             if(heathMonitorAllList.size()>0){
                 for(HeathMonitor h : heathMonitorAllList){
-                    if(!StringUtils.isEmpty( WarnPools.MEM_WARN_MAP.get(h.getId()))){
-                        continue;
-                    }
                     int status = 500;
                      status = restUtil.get(h.getHeathUrl());
                     h.setCreateTime(date);
                     h.setHeathStatus(status+"");
                     heathMonitors.add(h);
                     if(!"200".equals(h.getHeathStatus())) {
+                        if(!StringUtils.isEmpty( WarnPools.MEM_WARN_MAP.get(h.getId()))){
+                            continue;
+                        }
                         LogInfo logInfo = new LogInfo();
-                        logInfo.setHostname("服务接口心跳检测异常："+h.getAppName());
-                        logInfo.setInfoContent("服务接口心跳检测异常："+h.getAppName()+"，"+h.getHeathUrl()+"，返回状态"+h.getHeathStatus());
+                        logInfo.setHostname("服务接口检测异常："+h.getAppName());
+                        logInfo.setInfoContent("服务接口检测异常："+h.getAppName()+"，"+h.getHeathUrl()+"，返回状态"+h.getHeathStatus());
                         logInfo.setState(StaticKeys.LOG_ERROR);
                         logInfoList.add(logInfo);
                         Runnable runnable = () -> {
-                            WarnMailUtil.sendHeathInfo(h);
+                            WarnMailUtil.sendHeathInfo(h,true);
                         };
                         executor.execute(runnable);
+                    }else{
+                        if(!StringUtils.isEmpty(WarnPools.MEM_WARN_MAP.get(h.getId()))){
+                            Runnable runnable = () -> {
+                                WarnMailUtil.sendHeathInfo(h,false);
+                            };
+                            executor.execute(runnable);
+                        }
                     }
                 }
                 heathMonitorService.updateRecord(heathMonitors);
@@ -225,8 +258,8 @@ public class ScheduledTask {
                 }
             }
         } catch (Exception e) {
-            logger.error("服务健康检测任务错误",e);
-            logInfoService.save("服务健康检测错误",e.toString(),StaticKeys.LOG_ERROR);
+            logger.error("服务接口检测任务错误",e);
+            logInfoService.save("服务接口检测错误",e.toString(),StaticKeys.LOG_ERROR);
         }
     }
 
@@ -236,7 +269,7 @@ public class ScheduledTask {
      * 60秒后执行，之后每隔120分钟执行, 单位：ms。
      * 数据表监控
      */
-    @Scheduled(initialDelay = 60000L, fixedRate = 120 * 60 * 1000)
+    @Scheduled(initialDelay = 60000L, fixedRateString = "${base.dbTableTimes}")
     public   void tableCountTask() {
         Map<String, Object> params = new HashMap<>();
         List<DbTable> dbTablesUpdate = new ArrayList<DbTable>();

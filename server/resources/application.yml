@@ -48,7 +48,28 @@ base:
   admindPwd: 111111
   #通信token，agent端和此保持一致
   wgToken: wgcloud
+  #是否开启公众看板，yes开启，no关闭，公众看板页面无需登陆
+  dashView: yes
+  #数据表监控间隔,单位毫秒，默认60分钟
+  dbTableTimes: 3600000
+  #服务接口监控间隔，单位毫秒，默认10分钟
+  heathTimes: 600000
+
+#告警配置
+mail:
+  #告警邮件总开关，yes开启，no关闭
+  allWarnMail: yes
   #监控主机内存使用率%报警值，超过此值即发送邮件报警
   memWarnVal: 98
   #监控主机cpu使用率%报警值，超过此值即发送邮件报警
   cpuWarnVal: 98
+  #内存告警邮件，yes开启，no关闭。总开关开启后，此处设置才会生效。以下开关均遵循此规则。
+  memWarnMail: yes
+  #CPU告警邮件，yes开启，no关闭
+  cpuWarnMail: yes
+  #主机下线告警邮件，yes开启，no关闭
+  hostDownWarnMail: yes
+  #进程下线告警邮件，yes开启，no关闭
+  appDownWarnMail: yes
+  #服务接口告警邮件，yes开启，no关闭
+  heathWarnMail: yes

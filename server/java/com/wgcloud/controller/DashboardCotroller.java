@@ -69,6 +69,8 @@ public class DashboardCotroller {
 	private LogInfoService logInfoService;
 	@Autowired
 	HeathMonitorService heathMonitorService;
+	@Autowired
+	HostInfoService hostInfoService;
 	
     /**
      * 根据条件查询host列表
@@ -78,8 +80,6 @@ public class DashboardCotroller {
      */
 	@RequestMapping(value="main")
 	public String mainList(Model model,HttpServletRequest request) {
-		List<DashboardView> dashboardList = new ArrayList();
-		List<SystemInfo> systemInfoList = null;
 		Map<String, Object> params = new HashMap<String, Object>();
 		List<ChartInfo> chartInfoList = new ArrayList<ChartInfo>();
 		try {
@@ -190,7 +190,11 @@ public class DashboardCotroller {
 			logger.error("主面板信息异常：",e);
 			logInfoService.save("dash/main","主面板信息错误："+e.toString(),StaticKeys.LOG_ERROR);
 		}
-		return "index";
+		if(request.getParameter(StaticKeys.DASH_VIEW_ACCOUNT) != null){
+			return "dashView/index";
+		}else{
+			return "index";
+		}
 	}
 
 	/**
@@ -200,7 +204,7 @@ public class DashboardCotroller {
 	 * @return
 	 */
 	@RequestMapping(value="systemInfoList")
-	public String systemInfoList(SystemInfo systemInfo,Model model) {
+	public String systemInfoList(SystemInfo systemInfo,Model model,HttpServletRequest request) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		try {
 			PageInfo pageInfo = systemInfoService.selectByParams(params, systemInfo.getPage(), systemInfo.getPageSize());
@@ -211,7 +215,11 @@ public class DashboardCotroller {
 			logger.error("查询服务器列表错误：",e);
 			logInfoService.save("查询服务器列表错误",e.toString(),StaticKeys.LOG_ERROR);
 		}
-		return "host/list";
+		if(request.getParameter(StaticKeys.DASH_VIEW_ACCOUNT) != null){
+			return "dashView/list";
+		}else{
+			return "host/list";
+		}
 	}
 
 
@@ -242,7 +250,12 @@ public class DashboardCotroller {
 			logger.error("服务器详细信息错误：",e);
 			logInfoService.save(hostname,"查看服务器详细信息错误",e.toString());
 		}
-		return "host/view";
+		if(request.getParameter(StaticKeys.DASH_VIEW_ACCOUNT) != null){
+			return "dashView/view";
+		}else{
+			return "host/view";
+		}
+
 	}
 
 	/**
@@ -261,6 +274,9 @@ public class DashboardCotroller {
 				String[] ids = request.getParameter("id").split(",");
 				for(String id : ids){
 					SystemInfo sys = systemInfoService.selectById(id);
+					if(!StringUtils.isEmpty(sys.getHostname())) {
+						hostInfoService.deleteByIp(sys.getHostname().split(","));
+					}
 					logInfoService.save("删除主机："+sys.getHostname(),sys.getHostname(),StaticKeys.LOG_ERROR);
 				}
 				systemInfoService.deleteById(ids);
@@ -313,7 +329,11 @@ public class DashboardCotroller {
 			logger.error("服务器图形报表错误：",e);
 			logInfoService.save(hostname,"图形报表错误",e.toString());
 		}
-		return "host/viewChart";
+		if(request.getParameter(StaticKeys.DASH_VIEW_ACCOUNT) != null){
+			return "dashView/viewChart";
+		}else{
+			return "host/viewChart";
+		}
 	}
 	
 	

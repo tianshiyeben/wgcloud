@@ -96,6 +96,17 @@
             <artifactId>commons-email</artifactId>
             <version>1.5</version>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.2</version>
+        </dependency>
+        <!-- SqlServer -->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>sqljdbc4</artifactId>
+            <version>4.0</version>
+        </dependency>
         <!-- 热部署 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

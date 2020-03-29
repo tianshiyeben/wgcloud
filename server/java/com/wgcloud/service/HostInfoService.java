@@ -43,10 +43,15 @@ public class HostInfoService {
 	public int deleteById(String[] id) throws Exception {
 		return hostInfoMapper.deleteById(id);
 	}
+
+	@Transactional
+	public int deleteByIp(String[] ip) throws Exception {
+		return hostInfoMapper.deleteByIp(ip);
+	}
 	
-	public HostInfo updateById(HostInfo HostInfo)
+	public void updateById(HostInfo HostInfo)
 			throws Exception {
-		return hostInfoMapper.updateById(HostInfo);
+		 hostInfoMapper.updateById(HostInfo);
 	}
 
 	public HostInfo selectById(String id)  throws Exception{

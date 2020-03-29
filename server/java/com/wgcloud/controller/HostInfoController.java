@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
@@ -80,10 +81,19 @@ public class HostInfoController {
      * @param request
      * @return
      */
+	@ResponseBody
     @RequestMapping(value="save")
     public String saveHostInfo(HostInfo HostInfo, Model model,HttpServletRequest request) {
     	 try {
-    		 hostInfoService.save(HostInfo);
+    	 	 if(StringUtils.isEmpty(HostInfo.getId())){
+				 hostInfoService.save(HostInfo);
+			 }else{
+				 HostInfo ho =  hostInfoService.selectById(HostInfo.getId());
+				 ho.setIp(HostInfo.getIp());
+				 ho.setRemark(HostInfo.getRemark());
+				 hostInfoService.updateById(ho);
+			 }
+
 		} catch (Exception e) {
 			logger.error("保存监控主机错误：",e);
 			logInfoService.save(HostInfo.getIp(),"保存监控主机错误："+e.toString(),StaticKeys.LOG_ERROR);

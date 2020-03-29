@@ -28,6 +28,8 @@ public interface HostInfoMapper {
     public void save(HostInfo HostInfo) throws Exception;
 
     public int deleteById(String[] id) throws Exception;
+
+    public int deleteByIp(String[] ip) throws Exception;
     
-    public HostInfo updateById(HostInfo HostInfo) throws Exception;
+    public int updateById(HostInfo HostInfo) throws Exception;
 }

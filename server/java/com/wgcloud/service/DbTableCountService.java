@@ -60,9 +60,9 @@ public class DbTableCountService {
 		return dbTableCountMapper.deleteById(id);
 	}
 	
-	public DbTableCount updateById(DbTableCount DbTableCount)
+	public void updateById(DbTableCount DbTableCount)
 			throws Exception {
-		return dbTableCountMapper.updateById(DbTableCount);
+		 dbTableCountMapper.updateById(DbTableCount);
 	}
 
 	public DbTableCount selectById(String id)  throws Exception{

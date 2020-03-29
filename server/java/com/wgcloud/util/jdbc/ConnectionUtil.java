@@ -37,6 +37,15 @@ public class ConnectionUtil {
         if("mysql".equals(dbInfo.getDbType())){
             driver = RDSConnection.driver_mysql;
             url = RDSConnection.url_mysql;
+        }else if("postgresql".equals(dbInfo.getDbType())){
+              driver = RDSConnection.driver_postgresql;
+              url = RDSConnection.url_postgresql;
+        }else if("sqlserver".equals(dbInfo.getDbType())){
+            driver = RDSConnection.driver_sqlserver;
+            url = RDSConnection.url_sqlserver;
+        }else if("db2".equals(dbInfo.getDbType())){
+            driver = RDSConnection.driver_db2;
+            url = RDSConnection.url_db2;
         }else{
             driver = RDSConnection.driver_oracle;
             url = RDSConnection.url_oracle;
@@ -52,6 +61,12 @@ public class ConnectionUtil {
             jdbcTemplate = new JdbcTemplate(dataSource);
             if("mysql".equals(dbInfo.getDbType())){
                 jdbcTemplate.queryForRowSet(RDSConnection.MYSQL_VERSION);
+            }else if("postgresql".equals(dbInfo.getDbType())){
+                jdbcTemplate.queryForRowSet(RDSConnection.MYSQL_VERSION);
+            }else if("sqlserver".equals(dbInfo.getDbType())){
+                jdbcTemplate.queryForRowSet(RDSConnection.SQLSERVER_VERSION);
+            }else if("db2".equals(dbInfo.getDbType())){
+                jdbcTemplate.queryForRowSet(RDSConnection.DB2_VERSION);
             }else{
                 jdbcTemplate.queryForRowSet(RDSConnection.ORACLE_VERSION);
             }

@@ -1,11 +1,14 @@
 package com.wgcloud.filter;
 
 
+import com.wgcloud.config.CommonConfig;
 import com.wgcloud.entity.AccountInfo;
 import com.wgcloud.util.staticvar.StaticKeys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -23,8 +26,13 @@ public class AuthRestFilter implements Filter {
 	
 	static Logger log  = LoggerFactory.getLogger(AuthRestFilter.class);
 
+    @Autowired
+    CommonConfig commonConfig;
+
     String[] static_resource = {"/agent/minTask","/agent/dayTask","login/toLogin","login/login","appInfo/agentList",
             "/code/get",".css",".js",".jpg",".png",".ico",".gif","font",".eot",".woff",".svg",".ttf",".woff2"};
+
+    String[] dash_views = {"/dash/main","/dash/systemInfoList","/dash/detail","/dash/chart"};
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -39,6 +47,14 @@ public class AuthRestFilter implements Filter {
             if (uri.indexOf(ss) != -1) {
                 filterChain.doFilter(servletRequest, servletResponse);
                 return;
+            }
+        }
+        if(accountInfo==null){
+            for (String ss : dash_views) {
+                if (uri.indexOf(ss) != -1 && "true".equals(commonConfig.getDashView()) && request.getParameter(StaticKeys.DASH_VIEW_ACCOUNT) != null) {
+                    filterChain.doFilter(servletRequest, servletResponse);
+                    return;
+                }
             }
         }
         if(accountInfo==null){

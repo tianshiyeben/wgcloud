@@ -40,7 +40,7 @@
   <div class="col-md-10">
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">添加服务健康检测接口(每10分钟检测心跳，响应状态码200即为成功)</h3>
+        <h3 class="card-title">添加服务接口检测(响应状态码200即为成功)</h3>
           <div class=" float-sm-right">
               <a th:href="@{'/heathMonitor/list'}">返回</a>
           </div>
@@ -55,7 +55,7 @@
                     <input type="text" autocomplete="off"  th:value="${heathMonitor.appName}" class="validate[required,maxSize[50]] form-control" name="appName" id="appName" placeholder="输入应用服务名称">
                 </div>
                 <div class="form-group">
-                    <label for="fromPwd"><font color="red">*</font>服务健康检测接口URL（必须为http接口，get请求方式，状态码为200即为正常）</label>
+                    <label for="fromPwd"><font color="red">*</font>服务接口URL（必须为http，get请求方式，返回状态码为200即为正常）</label>
                     <input type="text" autocomplete="off"  th:value="${heathMonitor.heathUrl}" class="validate[required,maxSize[255]] form-control" name="heathUrl" id="heathUrl" placeholder="如http://192.168.1.1:9999/wgcloud/heath">
                 </div>
             </div>

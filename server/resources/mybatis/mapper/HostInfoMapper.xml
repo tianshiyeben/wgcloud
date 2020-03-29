@@ -38,6 +38,16 @@
 		</foreach>
 	</delete>
 
+	<delete id="deleteByIp" parameterType="java.lang.String">
+		DELETE FROM HOST_INFO
+		WHERE IP IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+
+
 	<insert id="save" parameterType="com.wgcloud.entity.HostInfo">
 		INSERT INTO HOST_INFO 
     	<trim prefix="(" suffix=")" suffixOverrides="," >
@@ -46,6 +56,7 @@
 			<if test="port != null" >PORT,</if>
 			<if test="passwd != null" >PASSWD,</if>
 			<if test="root != null" >ROOT,</if>
+			<if test="remark != null" >REMARK,</if>
       		<if test="createTime != null" >CREATE_TIME</if>
     	</trim>
     	<trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -54,6 +65,7 @@
 			<if test="port != null" >#{port},</if>
 			<if test="passwd != null" >#{passwd},</if>
 			<if test="root != null" >#{root},</if>
+			<if test="remark != null" >#{remark},</if>
       		<if test="createTime != null" >#{createTime}</if>
     	</trim>
 	</insert>
@@ -73,6 +85,9 @@
 			</if>
 			<if test="root != null">
 				ROOT = #{root},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark},
 			</if>
 
 		</set>

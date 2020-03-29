@@ -33,7 +33,7 @@ public interface DbTableCountMapper {
 
     public int countByParams(Map<String, Object> params) throws Exception;
 
-    public DbTableCount updateById(DbTableCount DbTableCount) throws Exception;
+    public int updateById(DbTableCount DbTableCount) throws Exception;
 
     public int deleteByDate(Map<String, Object> map) throws Exception;
 }

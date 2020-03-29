@@ -74,7 +74,7 @@
               <td th:text="${item.hostname}">Update software</td>
               <td>
                 <th:block th:if="${item.state  == '2'}">
-                  <span title="超过10分钟未上报状态，可能已下线" style="color:red"  th:text="${item.appName}"></span>
+                  <span title="超过10分钟未上报状态，可能已下线" style="color:red;font-weight: 500;"  th:text="${item.appName}"></span>
                 </th:block>
                 <th:block th:if="${item.state  != '2'}">
                   <span   th:text="${item.appName}"></span>
