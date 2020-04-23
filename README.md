@@ -5,7 +5,7 @@
  </p>
 
 
-## WGCLOUD-v2.3
+## WGCLOUD-v2.3.5
 
 [中文版README](https://github.com/tianshiyeben/wgcloud/blob/master/README_zh.md)
 
@@ -17,7 +17,7 @@ Wgcloud is a distributed monitoring platform based on Java language. Its core mo
 
 3.Support the installation and deployment of mainstream server platforms, such as Linux, windows, Solaris, AIX, HP-UX, etc.
 
-4.Run the so and DLL files of the required sigar. Please download the agent installation package in the Lib folder.
+4.Run the so and DLL files of the required sigar. Please download the agent installation package in the wgcloud-agent/lib folder.
 
 5.Run the required SQL script, and you can see it in the installation package after decompression.
 
@@ -25,15 +25,11 @@ Wgcloud is a distributed monitoring platform based on Java language. Its core mo
 
 ## download
 
-<http://www.wgstart.com/docs.html>
+<http://www.wgstart.com>
 
-## **Open source protocol**
+## **Demo**
 
-<http://www.wgstart.com/docs12.html>
 
-## **Developing documents**
-
-<http://www.wgstart.com/help/docs3.html>
 
 
 
