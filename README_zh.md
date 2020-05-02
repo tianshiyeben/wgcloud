@@ -21,7 +21,7 @@ WGCLOUD基于java语言开发，是高性能高并发的分布式监控平台，
 
 1.因wgcloud使用springboot框架开发，需要分别新建maven工程wgcloud-server和wgcloud-agent
 
-2.然后将server和agent下的源码和pom文件，分别拷贝到刚新建的工程wgcloud-server和wgcloud-agent里，覆盖对应的目录
+2.然后将wgcloud-server和wgcloud-agent下的源码和pom文件，分别拷贝到刚新建的工程wgcloud-server和wgcloud-agent里，覆盖对应的目录
 
 3.运行所需sql脚本（本项目使用mysql数据库），在sql文件夹下，在mysql数据库里创建数据库wgcloud，导入wgcloud.sql即可。
 
