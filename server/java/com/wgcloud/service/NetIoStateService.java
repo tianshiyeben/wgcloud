@@ -41,6 +41,9 @@ public class NetIoStateService{
 	}
 	
 	public void saveRecord(List<NetIoState> recordList) throws Exception {
+		if(recordList.size()<1){
+			return;
+		}
 		 for(NetIoState as : recordList){
 			 as.setId(UUIDUtil.getUUID());
 			 as.setDateStr(DateUtil.getDateTimeString(as.getCreateTime()));

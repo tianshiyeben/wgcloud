@@ -10,6 +10,7 @@ import cn.hutool.json.JSONUtil;
 import com.github.pagehelper.PageInfo;
 import com.wgcloud.dto.ChartInfo;
 import com.wgcloud.dto.MessageDto;
+import com.wgcloud.dto.NetIoStateDto;
 import com.wgcloud.entity.*;
 import com.wgcloud.service.*;
 import com.wgcloud.util.FormatUtil;
@@ -171,7 +172,7 @@ public class DashboardCotroller {
 			Long  dbTableSum = dbTableService.sumByParams(params);
 			model.addAttribute("dbTableSum",dbTableSum==null?0:dbTableSum);
 
-			PageInfo pageInfoDbTableList = dbTableService.selectByParams(params,1,20);
+			PageInfo pageInfoDbTableList = dbTableService.selectByParams(params,1,10);
 			model.addAttribute("dbTableList",JSONUtil.parseArray(pageInfoDbTableList.getList()));
 
 			int  dbInfoSize = dbInfoService.countByParams(params);
@@ -324,6 +325,11 @@ public class DashboardCotroller {
 			List<SysLoadState> ysLoadSstateList = sysLoadStateService.selectAllByParams(params);
 			model.addAttribute("ysLoadSstateList",  JSONUtil.parseArray(ysLoadSstateList));
 			model.addAttribute("ysLoadSstateMaxVal",findLoadMaxVal(ysLoadSstateList ));
+			List<NetIoState> netIoStateList = netIoStateService.selectAllByParams(params);
+			List<NetIoStateDto> netIoStateDtoList= toNetIoStateDto(netIoStateList);
+			model.addAttribute("netIoStateList",  JSONUtil.parseArray(netIoStateDtoList));
+			model.addAttribute("netIoStateBytMaxVal",findNetIoStateBytMaxVal(netIoStateDtoList));
+			model.addAttribute("netIoStatePckMaxVal",findNetIoStatePckMaxVal(netIoStateDtoList));
 
 		} catch (Exception e) {
 			logger.error("服务器图形报表错误：",e);
@@ -380,5 +386,58 @@ public class DashboardCotroller {
 		return Math.ceil(maxval);
 	}
 
+	private List<NetIoStateDto> toNetIoStateDto(List<NetIoState> netIoStateList ){
+		List<NetIoStateDto> dtoList = new ArrayList<>();
+		for(NetIoState netIoState : netIoStateList){
+			NetIoStateDto dto = new NetIoStateDto();
+			dto.setCreateTime(netIoState.getCreateTime());
+			dto.setDateStr(netIoState.getDateStr());
+			dto.setHostname(netIoState.getHostname());
+			dto.setRxbyt(Integer.valueOf(netIoState.getRxbyt()));
+			dto.setRxpck(Integer.valueOf(netIoState.getRxpck()));
+			dto.setTxbyt(Integer.valueOf(netIoState.getTxbyt()));
+			dto.setTxpck(Integer.valueOf(netIoState.getTxpck()));
+			dtoList.add(dto);
+		}
+		return dtoList;
+	}
+
+	private double findNetIoStateBytMaxVal(List<NetIoStateDto> netIoStateList ){
+		double maxval = 0;
+		if(!CollectionUtil.isEmpty(netIoStateList)) {
+			for (NetIoStateDto netIoState : netIoStateList) {
+				if (null != netIoState.getRxbyt() && netIoState.getRxbyt() > maxval) {
+					maxval = netIoState.getRxbyt();
+				}
+				if (null != netIoState.getTxbyt() && netIoState.getTxbyt() > maxval) {
+					maxval = netIoState.getTxbyt();
+				}
+
+			}
+		}
+		if(maxval==0){
+			maxval=1;
+		}
+		return Math.ceil(maxval);
+	}
+
+	private double findNetIoStatePckMaxVal(List<NetIoStateDto> netIoStateList ){
+		double maxval = 0;
+		if(!CollectionUtil.isEmpty(netIoStateList)) {
+			for (NetIoStateDto netIoState : netIoStateList) {
+				if (null != netIoState.getRxpck() && netIoState.getRxpck() > maxval) {
+					maxval = netIoState.getRxpck();
+				}
+				if (null != netIoState.getTxpck() && netIoState.getTxpck() > maxval) {
+					maxval = netIoState.getTxpck();
+				}
+
+			}
+		}
+		if(maxval==0){
+			maxval=1;
+		}
+		return Math.ceil(maxval);
+	}
 	
 }

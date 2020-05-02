@@ -101,7 +101,7 @@
 		<where>
 			<include refid="queryByParams" />
 		</where>
-		 ORDER BY CREATE_TIME DESC
+		 ORDER BY CREATE_TIME ASC
 	</select>
 	
 	<select id="selectByParams" parameterType="map" resultMap="resultMap">

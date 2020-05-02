@@ -69,6 +69,7 @@ public class AgentController {
 		JSONArray appStateList = agentJsonObject.getJSONArray("appStateList");
 		JSONObject logInfo = agentJsonObject.getJSONObject("logInfo");
 		JSONObject systemInfo = agentJsonObject.getJSONObject("systemInfo");
+		JSONObject netIoState = agentJsonObject.getJSONObject("netIoState");
 		JSONArray deskStateList = agentJsonObject.getJSONArray("deskStateList");
 
 		try{
@@ -101,6 +102,11 @@ public class AgentController {
 				SysLoadState bean = new SysLoadState();
 				BeanUtil.copyProperties(sysLoadState,bean);
 				BatchData.SYSLOAD_STATE_LIST.add(bean);
+			}
+			if(netIoState!=null){
+				NetIoState bean = new NetIoState();
+				BeanUtil.copyProperties(netIoState,bean);
+				BatchData.NETIO_STATE_LIST.add(bean);
 			}
 			if(appInfoList!=null && appStateList!=null){
 				List<AppInfo> appInfoResList = JSONUtil.toList(appInfoList, AppInfo.class);

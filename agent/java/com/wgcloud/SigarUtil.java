@@ -328,30 +328,44 @@ public class SigarUtil {
         return null;
     }
 
-   /* public static void net() throws Exception {
+   public static NetIoState net() throws Exception {
         String ifNames[] = sigar.getNetInterfaceList();
-
+       int rxBytesSum=0;
+       int txBytesSum=0;
+       int rxPackets=0;
+       int txPackets=0;
         for (int i = 0; i < ifNames.length; i++) {
             String name = ifNames[i];
             NetInterfaceConfig ifconfig = sigar.getNetInterfaceConfig(name);
-            System.out.println("网络设备名:    " + name);// 网络设备名
+          /*  System.out.println("网络设备名:    " + name);// 网络设备名
             System.out.println("IP地址:    " + ifconfig.getAddress());// IP地址
-            System.out.println("子网掩码:    " + ifconfig.getNetmask());// 子网掩码
+            System.out.println("子网掩码:    " + ifconfig.getNetmask());// 子网掩码*/
             if ((ifconfig.getFlags() & 1L) <= 0L) {
-                System.out.println("!IFF_UP...skipping getNetInterfaceStat");
+                logger.error("!IFF_UP...skipping getNetInterfaceStat");
                 continue;
             }
             NetInterfaceStat ifstat = sigar.getNetInterfaceStat(name);
-            System.out.println(name + "接收的总包裹数:" + ifstat.getRxPackets());// 接收的总包裹数
+         /*   System.out.println(name + "接收的总包裹数:" + ifstat.getRxPackets());// 接收的总包裹数
             System.out.println(name + "发送的总包裹数:" + ifstat.getTxPackets());// 发送的总包裹数
             System.out.println(name + "接收到的总字节数:" + ifstat.getRxBytes()/1024/1024);// 接收到的总字节数
             System.out.println(name + "发送的总字节数:" + ifstat.getTxBytes()/1024/1024);// 发送的总字节数
             System.out.println(name + "接收到的错误包数:" + ifstat.getRxErrors());// 接收到的错误包数
             System.out.println(name + "发送数据包时的错误数:" + ifstat.getTxErrors());// 发送数据包时的错误数
             System.out.println(name + "接收时丢弃的包数:" + ifstat.getRxDropped());// 接收时丢弃的包数
-            System.out.println(name + "发送时丢弃的包数:" + ifstat.getTxDropped());// 发送时丢弃的包数
+            System.out.println(name + "发送时丢弃的包数:" + ifstat.getTxDropped());// 发送时丢弃的包数*/
+            rxBytesSum+=(ifstat.getRxBytes()/1024);
+            txBytesSum+=(ifstat.getTxBytes()/1024);
+            rxPackets+=ifstat.getRxPackets();
+            txPackets+=ifstat.getTxPackets();
         }
-    }*/
+        NetIoState netIoState = new NetIoState();
+        netIoState.setRxbyt(rxBytesSum+"");
+       netIoState.setTxbyt(txBytesSum+"");
+       netIoState.setRxpck(rxPackets+"");
+       netIoState.setTxpck(txPackets+"");
+       netIoState.setHostname(commonConfig.getBindIp());
+       return netIoState;
+    }
 
     /*public static void ethernet() throws SigarException {
         Sigar sigar = null;

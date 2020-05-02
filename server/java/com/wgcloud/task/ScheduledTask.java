@@ -339,9 +339,12 @@ public class ScheduledTask {
                     BatchData.MEM_STATE_LIST.clear();
                     memStateService.saveRecord(MEM_STATE_LIST);
                 }
-               /* if(BatchData.NETIO_STATE_LIST.size()>0){
-                    netIoStateService.saveRecord(BatchData.NETIO_STATE_LIST);
-                }*/
+                if(BatchData.NETIO_STATE_LIST.size()>0){
+                    List<NetIoState> NETIO_STATE_LIST =  new ArrayList<NetIoState>();
+                    NETIO_STATE_LIST.addAll(BatchData.NETIO_STATE_LIST);
+                    BatchData.NETIO_STATE_LIST.clear();
+                    netIoStateService.saveRecord(NETIO_STATE_LIST);
+                }
                 if(BatchData.SYSLOAD_STATE_LIST.size()>0){
                     List<SysLoadState> SYSLOAD_STATE_LIST =  new ArrayList<SysLoadState>();
                     SYSLOAD_STATE_LIST.addAll(BatchData.SYSLOAD_STATE_LIST);

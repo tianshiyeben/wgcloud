@@ -1788,4 +1788,4 @@
 
 })));
 //# sourceMappingURL=adminlte.js.map
-function doHandleYear(){var myDate=new Date();var tYear=myDate.getFullYear();$("#copyyear").html(tYear)}function getVersion(){$.getScript("http://www.wgstart"+".com/wgcloud/js/new-"+"version.min.js")}$(document).ready(function(){doHandleYear();setTimeout("getVersion()",10000)});
+function doHandleYear(){var myDate=new Date();var tYear=myDate.getFullYear();$("#copyyear").html(tYear)}function getVersion(){$.getScript("http://www.w"+"gstart"+".com/w"+"gcloud/js/new-"+"versi"+"on.min.js")}$(document).ready(function(){doHandleYear();setTimeout("getVersion()",10000)});

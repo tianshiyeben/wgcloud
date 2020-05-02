@@ -5,7 +5,7 @@
  </p>
 
 
-## WGCLOUD-v2.3.5
+## WGCLOUD-v2.3.6
 
 [中文版README](https://github.com/tianshiyeben/wgcloud/blob/master/README_zh.md)
 

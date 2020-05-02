@@ -73,6 +73,9 @@ public class ScheduledTask {
             // 内存信息
             MemState memState = SigarUtil.memory();
             memState.setCreateTime(t);
+            // 网络流量信息
+            NetIoState netIoState = SigarUtil.net();
+            netIoState.setCreateTime(t);
             // 系统负载信息
             SysLoadState sysLoadState = SigarUtil.getLoadState(systemInfo);
             if(sysLoadState!=null) {
@@ -83,6 +86,9 @@ public class ScheduledTask {
             }
             if(memState!=null) {
                 jsonObject.put("memState", memState);
+            }
+            if(netIoState!=null) {
+                jsonObject.put("netIoState", netIoState);
             }
             if(sysLoadState!=null) {
                 jsonObject.put("sysLoadState", sysLoadState);
