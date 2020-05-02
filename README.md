@@ -17,11 +17,17 @@ Wgcloud is a distributed monitoring platform based on Java language. Its core mo
 
 3.Support the installation and deployment of mainstream server platforms, such as Linux, windows, Solaris, AIX, HP-UX, etc.
 
-4.Run the so and DLL files of the required sigar. Please download the agent installation package in the wgcloud-agent/lib folder.
+4.Wgcloud adopts the microservice springboot + bootstrap to realize the distributed monitoring system perfectly, which is open-source community and secondary open-source.
 
-5.Run the required SQL script, and you can see it in the installation package after decompression.
+## **Source code use**
 
-6.Wgcloud adopts the microservice springboot + bootstrap to realize the distributed monitoring system perfectly, which is open-source community and secondary open-source.
+1.Because wgcloud is developed with spring boot framework, it is necessary to build new Maven projects, wgcloud server and wgcloud agent respectively
+
+2.Then copy the source code and POM files under the server and agent to the newly-built project wgcloud server and wgcloud agent respectively, and overwrite the corresponding directory
+
+3.Run the required SQL script (MySQL database is used in this project). Under the SQL folder, create the database wgcloud in MySQL database and import wgcloud.sql.
+
+4.The so, DLL and other files of sigar required for the operation of wgcloud agent are in the installation package, extracted in the wgcloud agent / lib folder.
 
 ## download
 
