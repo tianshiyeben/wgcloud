@@ -27,7 +27,7 @@ Wgcloud is a distributed monitoring platform based on Java language. Its core mo
 
 3.Run the required SQL script (MySQL database is used in this project). Under the SQL folder, create the database wgcloud in MySQL database and import wgcloud.sql.
 
-4.In the installation package (**Note: not in the warehouse**), click the download link below to download the installation package. After downloading, unzip it. In the wgcloud agent / lib folder.
+4.So, DLL and other files of sigar required for wgcloud agent to run are listed in sigarLibs.zip It can be used after decompression.
 
 ## download
 

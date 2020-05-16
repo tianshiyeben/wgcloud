@@ -25,7 +25,7 @@ WGCLOUD基于java语言开发，是高性能高并发的分布式监控平台，
 
 3.运行所需sql脚本（本项目使用mysql数据库），在sql文件夹下，在mysql数据库里创建数据库wgcloud，导入wgcloud.sql即可。
 
-4.wgcloud-agent运行所需sigar的so，dll等文件，在安装包里（**注：不在此仓库里**），点击下方下载链接下载安装包，下载完后解压，在wgcloud-agent/lib文件夹下。
+4.wgcloud-agent运行所需sigar的so，dll等文件，在sigarLibs.zip里，解压后可用。
 
 ## **下载**
 
