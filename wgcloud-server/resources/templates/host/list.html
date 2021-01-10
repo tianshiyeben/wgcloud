@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <div  th:replace="common/header.html"></div>
+
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div th:replace="common/chart.html"></div>
+
+<div class="wrapper">
+
+  <div th:replace="common/navbar.html"></div>
+
+  <div th:replace="common/aside.html"></div>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1></h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">主机列表</h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th style="width: 80px">序号</th>
+            <th>IP</th>
+            <th>内存%</th>
+            <th>CPU%</th>
+            <th>更新时间</th>
+              <th>备注</th>
+              <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <th:block th:each="item,iterStat : ${page.list}">
+            <tr>
+              <td th:text="${iterStat.index+1}">1</td>
+              <td>
+                  <th:block th:if="${item.state  == '2'}">
+                      <span title="超过10分钟未上报状态，可能已下线" style="color:red;font-weight: 500;"  th:text="${item.hostname}"></span>
+                  </th:block>
+                  <th:block th:if="${item.state  != '2'}">
+                      <span   th:text="${item.hostname}"></span>
+                  </th:block>
+              </td>
+              <td style="font-size:1.2rem">
+                  <th:block th:if="${item.memPer >= 90}">
+                      <span class="badge bg-danger" th:text="${item.memPer}"></span>
+                  </th:block>
+                  <th:block th:if="${item.memPer < 90 && item.memPer >= 70  }">
+                      <span class="badge bg-warning" th:text="${item.memPer}"></span>
+                  </th:block>
+                  <th:block th:if="${item.memPer < 70  }">
+                      <span class="badge bg-primary" th:text="${item.memPer}"></span>
+                  </th:block>
+              </td>
+              <td  style="font-size:1.2rem">
+                  <th:block th:if="${item.cpuPer >= 90}">
+                      <span class="badge bg-danger" th:text="${item.cpuPer}"></span>
+                  </th:block>
+                  <th:block th:if="${item.cpuPer < 90 && item.cpuPer >= 70  }">
+                      <span class="badge bg-warning" th:text="${item.cpuPer}"></span>
+                  </th:block>
+                  <th:block th:if="${item.cpuPer < 70  }">
+                      <span class="badge bg-primary" th:text="${item.cpuPer}"></span>
+                  </th:block>
+              </td>
+              <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}">Update software</td>
+                <td th:text="${item.hostRemark}"></td>
+              <td>
+                  <button type="button" class="btn btn-default" data-toggle="modal" th:onclick="setHostRemark([[${item.hostname}]],[[${item.hostId}]],[[${item.hostRemark}]])" data-target="#modal-default">
+                     备注
+                  </button>
+                  <button type="button"  th:onclick="view([[${item.id}]])"  class="btn btn-primary">系统信息</button>
+                  <button type="button"  th:onclick="viewChart([[${item.id}]])"  class="btn btn-primary">图表</button>
+                  <button type="button"  th:onclick="viewApps([[${item.hostname}]])"  class="btn btn-primary">进程</button>
+                  <button type="button"  th:onclick="del([[${item.id}]])"  class="btn bg-gradient-danger">删除</button></td>
+
+            </tr>
+          </th:block>
+
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+      <div th:replace="common/page.html"></div>
+    </div>
+    <!-- /.card -->
+
+
+  </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <form method="post" id="form2" th:action="@{'/host/save'}">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">编辑机组</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <input type="hidden" id="ip" name="ip"/>
+                        <input type="hidden" id="id" name="id"/>
+                        <input type="text"  autocomplete="off" class="validate[required,maxSize[40] form-control" name="remark" id="remark" placeholder="华南区">
+                    </p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" onclick="ajaxSaveRemark()" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+  <div th:replace="common/footer.html"></div>
+    <script th:src="@{'/static/js/jQuery/jquery.form.min.js'}" type="text/javascript" charset="utf-8"></script>
+
+</div>
+<!-- ./wrapper -->
+
+<script th:src="@{'/static/js/host.js'}"></script>
+
+</body>
+</html>

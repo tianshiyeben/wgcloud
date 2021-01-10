@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wgcloud.mapper.TcpStateMapper">
+	<resultMap id="resultMap" type="com.wgcloud.entity.TcpState">
+		<id column="ID" property="id" jdbcType="CHAR" />
+		<result column="HOST_NAME" property="hostname" jdbcType="CHAR" />
+		<result column="ACTIVE" property="active" jdbcType="CHAR" />
+		<result column="PASSIVE" property="passive" jdbcType="CHAR" />
+		<result column="RETRANS" property="retrans" jdbcType="CHAR" />
+		<result column="DATE_STR" property="dateStr" jdbcType="CHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="tableColumnList">
+		ID,HOST_NAME, ACTIVE, PASSIVE, RETRANS,DATE_STR,CREATE_TIME
+	</sql>
+	
+	<sql id="queryByParams">
+		<if test="hostname != null">
+			<![CDATA[ AND HOST_NAME = #{hostname} ]]>
+		</if>
+		<if test="startTime != null and endTime !=null and startTime !='' and endTime != '' ">
+			<![CDATA[ AND CREATE_TIME >= #{startTime} and CREATE_TIME <=#{endTime}]]>
+		</if>
+	</sql>
+	
+	<select id="selectById" resultMap="resultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM TCP_STATE
+		WHERE ID=#{id} 
+	</select>
+	
+	
+	<delete id="deleteByAccountAndDate"  parameterType="map">
+		DELETE FROM TCP_STATE WHERE  <![CDATA[  CREATE_TIME <=#{endTime}]]>
+	</delete>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		DELETE FROM TCP_STATE
+		WHERE ID = #{id}
+	</delete>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE FROM
+		TCP_STATE
+		WHERE ID IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<insert id="save" parameterType="com.wgcloud.entity.TcpState">
+		INSERT INTO TCP_STATE
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >ID,</if>
+      		<if test="hostname != null" >HOST_NAME,</if>
+      		<if test="active != null">ACTIVE,</if>
+      		<if test="passive != null" >PASSIVE,</if>
+      		<if test="retrans != null" >RETRANS,</if>
+      		<if test="dateStr != null" >DATE_STR,</if>
+      		<if test="createTime != null" >CREATE_TIME</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >#{id},</if>
+      		<if test="hostname != null" >#{hostname},</if>
+      		<if test="active != null" >#{active},</if>
+      		<if test="passive != null" >#{passive},</if>
+      		<if test="retrans != null" >#{retrans},</if>
+      		<if test="dateStr != null" >#{dateStr},</if>
+      		<if test="createTime != null" >#{createTime}</if>
+    	</trim>
+	</insert>
+	
+	
+	<insert id="insertList" parameterType="java.util.List" >
+	      INSERT INTO TCP_STATE (ID,HOST_NAME,ACTIVE,PASSIVE,RETRANS,DATE_STR,CREATE_TIME)  VALUES
+	      <foreach collection="list" item="item" index="index" separator="," >  
+	        (#{item.id},#{item.hostname},#{item.active},#{item.passive},#{item.retrans},
+	        #{item.dateStr},#{item.createTime})  
+	      </foreach>
+	 </insert>
+	
+	
+	  <select id="selectAllByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM TCP_STATE t
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	<select id="selectByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM TCP_STATE
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	
+</mapper>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<base href="./" th:href="'/'"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>WGClOUD监控系统</title>
+<link type="text/css" rel="stylesheet" th:href="@{'/static/logincss/components.css'}" />
+<link type="text/css" rel="stylesheet" th:href="@{'/static/logincss/fix.css'}" />
+<link type="text/css" rel="stylesheet" th:href="@{'/static/logincss/suri-bootstrap.css'}" />
+<link type="text/css" rel="stylesheet" th:href="@{'/static/logincss/bootstrap.min.css'}" />
+<link type="text/css" rel="stylesheet" th:href="@{'/static/logincss/font-awesome.min.css'}" />
+<link type="text/css" rel="stylesheet" th:href="@{'/static/logincss/ionicons.min.css'}" />
+<link type="text/css" rel="stylesheet" th:href="@{'/static/logincss/atmosfero.css'}" />
+
+<link rel="shortcut icon" type="image/x-icon" th:href="@{'/static/logincss/favicon.png'}"/>
+		
+</head>
+<body class="login-page">
+
+<div class="login-box">
+		<div class="login-box-content">
+			<div class="login-logo">
+				<a href="http://www.wgstart.com" target="_blank" style="color: #fff;font-size: 16px;font-weight:bold"><img width="60" height="60" th:src="@{'/static/logincss/logo.png'}">WGCLOUD</a>
+	  		</div>
+			<div class="login-box-body">
+			<p class="login-box-msg"><label style="color:red;font-weight:bold;" th:text="${error}"></label></p>
+				
+		<form id="form1" th:action="@{'/login/login'}"  method="post" onsubmit="setMd5Pwd()" class="form-horizontal">
+	
+          	<div class="form-group">
+           	<div class="col-sm-12">
+              		<input id="userName" name="userName" placeholder="输入帐号" maxlength="50" autocomplete="off" class="validate[required] form-control" type="text">
+            	</div>
+          	</div>
+          	
+          	<div class="form-group">
+           	<div class="col-sm-12">
+              		<input placeholder='输入密码' id="passwd" name="passwd" maxlength="20" class="validate[required] form-control" autocomplete="off" type="password">
+              		<input type="hidden" id="md5pwd" name="md5pwd" value=""/>
+            	</div>
+          	</div>
+           
+        	<div class="form-group">
+           	<div class="col-sm-12">
+           	<table><tr><td><input id="code" style="width:255px" name="valcode" placeholder="请填写验证码" maxlength="80" class="validate[required,maxSize[4]] form-control" autocomplete="off" type="text"></td>
+              <td><a href="javascript:changeImg()" title="看不清？点击换一张"><img th:src="@{'/code/get'}" id="imgObj"  width="70" height="32" /></a></td></tr></table>
+            	</div>
+          	</div>
+             	
+         	<div class="form-group">
+           	<div class="col-sm-12">
+           		<input value="登录" class="btn btn-primary btn-block" type="submit">
+            	</div>
+          	</div>
+             	
+          	<div class="form-group">
+          	</div>
+		</form>
+		</div>
+		</div>
+	</div>
+
+
+
+	<center>
+		&nbsp;<a target="_blank" href='http://www.wgstart.com'> ©2019  www.wgstart.com . All rights reserved.</a>
+	</center>
+    <link rel="stylesheet" th:href="@{'/static/js/jQuery/validationEngine.jquery.css'}" type="text/css"/>
+    <script th:src="@{'/static/js/jQuery/jquery-3.2.0.min.js'}"></script>
+    <script th:src="@{'/static/js/jQuery/jquery.validationEngine-zh_CN.js'}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{'/static/js/jQuery/jquery.validationEngine.js'}" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{'/static/common/md5.js'}"></script>
+    <script type="text/javascript" th:src="@{'/static/js/login.js'}"></script>
+</body>
+</html>

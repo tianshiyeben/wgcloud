@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WGCLOUD公众看板/主机列表(请收藏)</title>
+  <div  th:replace="common/header.html"></div>
+
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div th:replace="common/chart.html"></div>
+
+<div class="wrapper">
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="margin-left: 10px">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6" id="fuwuqixinxi">
+                <a href="http://www.wgstart.com"  target="_blank">
+                    <img th:src="@{'/static/logincss/logo.png'}" style="height:25px;width:25px;opacity: .8" class="brand-image img-circle elevation-3"
+                    >&nbsp;WGCLOUD-v2.3.6
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item "><a href="/wgcloud/dash/main?dashView=1">监控概要</a></li>
+                    <li class="breadcrumb-item active">主机列表</li>
+                    <li class="breadcrumb-item active"><a  target="_blank" href="https://www.wgstart.com/elasticsearch-head/index.html">ES监控工具</a></li>
+                </ol>
+            </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+  <div class="col-md-12">
+    <div class="card">
+      <!-- /.card-header -->
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th style="width: 80px">序号</th>
+            <th>IP</th>
+            <th>内存%</th>
+            <th>CPU%</th>
+            <th>更新时间</th>
+              <th>备注</th>
+              <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <th:block th:each="item,iterStat : ${page.list}">
+            <tr>
+              <td th:text="${iterStat.index+1}">1</td>
+              <td>
+                  <th:block th:if="${item.state  == '2'}">
+                      <span title="超过10分钟未上报状态，可能已下线" style="color:red;font-weight: 500;"  th:text="${item.hostname}"></span>
+                  </th:block>
+                  <th:block th:if="${item.state  != '2'}">
+                      <span   th:text="${item.hostname}"></span>
+                  </th:block>
+              </td>
+
+              <td style="font-size:1.2rem">
+                  <th:block th:if="${item.memPer >= 90}">
+                      <span class="badge bg-danger" th:text="${item.memPer}"></span>
+                  </th:block>
+                  <th:block th:if="${item.memPer < 90 && item.memPer >= 70  }">
+                      <span class="badge bg-warning" th:text="${item.memPer}"></span>
+                  </th:block>
+                  <th:block th:if="${item.memPer < 70  }">
+                      <span class="badge bg-primary" th:text="${item.memPer}"></span>
+                  </th:block>
+              </td>
+              <td  style="font-size:1.2rem">
+                  <th:block th:if="${item.cpuPer >= 90}">
+                      <span class="badge bg-danger" th:text="${item.cpuPer}"></span>
+                  </th:block>
+                  <th:block th:if="${item.cpuPer < 90 && item.cpuPer >= 70  }">
+                      <span class="badge bg-warning" th:text="${item.cpuPer}"></span>
+                  </th:block>
+                  <th:block th:if="${item.cpuPer < 70  }">
+                      <span class="badge bg-primary" th:text="${item.cpuPer}"></span>
+                  </th:block>
+              </td>
+              <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}">Update software</td>
+                <td th:text="${item.hostRemark}">
+
+                </td>
+                <td> <button type="button"  th:onclick="viewDashView([[${item.id}]])"  class="btn btn-primary">系统信息</button>
+                    <button type="button"  th:onclick="viewChartDashView([[${item.id}]])"  class="btn btn-primary">图表</button>
+                 </td>
+
+            </tr>
+          </th:block>
+
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+      <div th:replace="common/page.html"></div>
+    </div>
+    <!-- /.card -->
+
+
+  </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <div th:replace="common/footer.html"></div>
+
+</div>
+<!-- ./wrapper -->
+<script th:src="@{'/static/js/host.js'}"></script>
+</body>
+</html>

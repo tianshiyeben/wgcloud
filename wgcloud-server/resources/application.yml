@@ -1,0 +1,75 @@
+server:
+  port: 9999
+  servlet:
+    session:
+      timeout: 30m
+    context-path: /wgcloud
+#日志文件输出路径
+logging:
+  path: ./log
+# 数据库 相关设置
+spring:
+  application:
+    name: wgcloud-server
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wgcloud?characterEncoding=utf-8&characterSetResults=utf8&autoReconnect=true&useSSL=false&allowMultiQueries=true
+    username: root
+    password: mysql
+    # hikari连接池的参数 相关设置
+    hikari:
+      # 生效超时
+      validationTimeout: 3000
+      # 定义获取连接的超时时间。最小250ms,默认30s
+      connectionTimeout: 60000
+      # 定义连接空闲时间。最小10s,默认10m
+      idleTimeout: 60000
+      # 定义最小的空闲连接数。推荐不设置。或与最大连接数一致；保持固定的连接数目
+      minimumIdle: 10
+      # 定义最大的连接数。默认10
+      maximumPoolSize: 10
+      # 定义连接的最大生命周期。推荐设置该属性。最小30s，默认30m
+      maxLifeTime: 60000
+      # 从连接池获取到连接后，进行检查的查询语句。推荐设置该属性。默认值为none
+      connectionTestQuery: select 1
+  mvc:
+    static-path-pattern: /static/**
+  thymeleaf:
+    cache: false
+#Mybatis配置
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+
+#自定义配置参数
+base:
+  #登陆账号admin的密码
+  admindPwd: 111111
+  #通信token，agent端和此保持一致
+  wgToken: wgcloud
+  #是否开启公众看板，yes开启，no关闭，公众看板页面无需登陆
+  dashView: yes
+  #数据表监控间隔,单位毫秒，默认60分钟
+  dbTableTimes: 3600000
+  #服务接口监控间隔，单位毫秒，默认10分钟
+  heathTimes: 600000
+
+#告警配置
+mail:
+  #告警邮件总开关，yes开启，no关闭
+  allWarnMail: yes
+  #监控主机内存使用率%报警值，超过此值即发送邮件报警
+  memWarnVal: 98
+  #监控主机cpu使用率%报警值，超过此值即发送邮件报警
+  cpuWarnVal: 98
+  #内存告警邮件，yes开启，no关闭。总开关开启后，此处设置才会生效。以下开关均遵循此规则。
+  memWarnMail: yes
+  #CPU告警邮件，yes开启，no关闭
+  cpuWarnMail: yes
+  #主机下线告警邮件，yes开启，no关闭
+  hostDownWarnMail: yes
+  #进程下线告警邮件，yes开启，no关闭
+  appDownWarnMail: yes
+  #服务接口告警邮件，yes开启，no关闭
+  heathWarnMail: yes

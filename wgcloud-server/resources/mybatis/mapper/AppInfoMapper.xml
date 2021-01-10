@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wgcloud.mapper.AppInfoMapper">
+	<resultMap id="resultMap" type="com.wgcloud.entity.AppInfo">
+		<id column="ID" property="id" jdbcType="CHAR" />
+		<result column="HOST_NAME" property="hostname" jdbcType="CHAR" />
+		<result column="APP_PID" property="appPid" jdbcType="CHAR" />
+		<result column="APP_TYPE" property="appType" jdbcType="CHAR" />
+		<result column="APP_NAME" property="appName" jdbcType="CHAR" />
+		<result column="CPU_PER" property="cpuPer" jdbcType="DOUBLE" />
+		<result column="MEM_PER" property="memPer" jdbcType="DOUBLE" />
+		<result column="STATE" property="state" jdbcType="CHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="tableColumnList">
+		ID,HOST_NAME, APP_PID,APP_NAME,CREATE_TIME,CPU_PER,MEM_PER,APP_TYPE,STATE
+	</sql>
+
+	<sql id="queryByParams">
+		<if test="hostname != null">
+			<![CDATA[ AND HOST_NAME LIKE  CONCAT('%',#{hostname},'%')]]>
+		</if>
+		<if test="startTime != null and endTime !=null and startTime !='' and endTime != '' ">
+			<![CDATA[ AND CREATE_TIME >= #{startTime} and CREATE_TIME <=#{endTime}]]>
+		</if>
+		<if test="cpuPer != null">
+			<![CDATA[ AND CPU_PER >= #{cpuPer} ]]>
+		</if>
+		<if test="cpuPerLe != null">
+			<![CDATA[ AND CPU_PER <= #{cpuPerLe} ]]>
+		</if>
+	</sql>
+	
+	<select id="selectByAccountId" resultMap="resultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM APP_INFO 
+	</select>
+	
+	
+	<select id="selectById" resultMap="resultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM APP_INFO 
+		WHERE ID=#{id} 
+	</select>
+	
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		DELETE FROM APP_INFO 
+		WHERE ID = #{id}
+	</delete>
+
+	<delete id="deleteByDate"  parameterType="map">
+		DELETE FROM APP_INFO WHERE   <![CDATA[  CREATE_TIME <=#{endTime}]]>
+	</delete>
+
+	<delete id="deleteByHostName" parameterType="map">
+		DELETE FROM APP_INFO WHERE <![CDATA[  APP_PID=#{appPid} AND HOST_NAME =#{hostname}]]>
+	</delete>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE FROM
+		APP_INFO 
+		WHERE ID IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<insert id="save" parameterType="com.wgcloud.entity.AppInfo">
+		INSERT INTO APP_INFO 
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >ID,</if>
+      		<if test="hostname != null" >HOST_NAME,</if>
+      		<if test="appPid != null">APP_PID,</if>
+      		<if test="appName != null">APP_NAME,</if>
+			<if test="cpuPer != null">CPU_PER,</if>
+			<if test="memPer != null">MEM_PER,</if>
+			<if test="appType != null">APP_TYPE,</if>
+			<if test="state != null">STATE,</if>
+      		<if test="createTime != null" >CREATE_TIME</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >#{id},</if>
+      		<if test="hostname != null" >#{hostname},</if>
+      		<if test="appPid != null" >#{appPid},</if>
+      		<if test="appName != null" >#{appName},</if>
+			<if test="cpuPer != null" >#{cpuPer},</if>
+			<if test="memPer != null" >#{memPer},</if>
+			<if test="appType != null" >#{appType},</if>
+			<if test="state != null" >#{state},</if>
+      		<if test="createTime != null" >#{createTime}</if>
+    	</trim>
+	</insert>
+
+	<insert id="insertList" parameterType="java.util.List" >
+		INSERT INTO APP_INFO (ID,HOST_NAME, APP_PID,APP_NAME,CREATE_TIME,CPU_PER,MEM_PER,APP_TYPE,STATE)  VALUES
+		<foreach collection="list" item="item" index="index" separator="," >
+			(#{item.id},#{item.hostname},#{item.appPid},#{item.appName},#{item.createTime},#{item.cpuPer},#{item.memPer},#{item.appType},#{item.state})
+		</foreach>
+	</insert>
+
+	<update id="updateList" parameterType="java.util.List" >
+		<foreach collection="list" item="item" index="index" separator=";" >
+			UPDATE APP_INFO
+			<set>
+				<if test="item.hostname != null">
+					HOST_NAME = #{item.hostname},
+				</if>
+				<if test="item.appPid != null">
+					APP_PID = #{item.appPid},
+				</if>
+				<if test="item.appName != null">
+					APP_NAME = #{item.appName},
+				</if>
+				<if test="item.cpuPer != null">
+					CPU_PER = #{item.cpuPer},
+				</if>
+				<if test="item.memPer != null">
+					MEM_PER = #{item.memPer},
+				</if>
+				<if test="item.appType != null">
+					APP_TYPE = #{item.appType},
+				</if>
+				<if test="item.state != null">
+					STATE = #{item.state},
+				</if>
+				<if test="item.createTime != null" >
+					CREATE_TIME= #{item.createTime}
+				</if>
+			</set>
+			WHERE ID = #{item.id}
+		</foreach>
+	</update>
+	
+	
+	<update id="updateById" parameterType="com.wgcloud.entity.AppInfo">
+		UPDATE APP_INFO
+		<set>
+			<if test="hostname != null">
+				HOST_NAME = #{hostname},
+			</if>
+			<if test="appPid != null">
+				APP_PID = #{appPid},
+			</if>
+			<if test="appName != null">
+				APP_NAME = #{appName},
+			</if>
+			<if test="cpuPer != null">
+				CPU_PER = #{cpuPer},
+			</if>
+			<if test="memPer != null">
+				MEM_PER = #{memPer},
+			</if>
+			<if test="appType != null">
+				APP_TYPE = #{appType},
+			</if>
+			<if test="state != null">
+				STATE = #{state},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime}
+			</if>
+		</set>
+		WHERE ID = #{id}
+	</update>
+
+	<select id="countByParams" parameterType="map" resultType="java.lang.Integer">
+		SELECT count(*)  FROM APP_INFO t
+		<where>
+			<include refid="queryByParams" />
+		</where>
+	</select>
+
+
+	<select id="selectAllByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM APP_INFO t
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	<select id="selectByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM APP_INFO
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	
+</mapper>

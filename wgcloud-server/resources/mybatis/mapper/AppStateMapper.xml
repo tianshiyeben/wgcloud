@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wgcloud.mapper.AppStateMapper">
+	<resultMap id="resultMap" type="com.wgcloud.entity.AppState">
+		<id column="ID" property="id" jdbcType="CHAR" />
+		<result column="APP_INFO_ID" property="appInfoId" jdbcType="CHAR" />
+		<result column="CPU_PER" property="cpuPer" jdbcType="DOUBLE" />
+		<result column="MEM_PER" property="memPer" jdbcType="DOUBLE" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="tableColumnList">
+		ID,APP_INFO_ID, CPU_PER,MEM_PER,CREATE_TIME
+	</sql>
+	
+	<select id="selectById" resultMap="resultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM APP_STATE 
+		WHERE ID=#{id} 
+	</select>
+	
+	
+	<delete id="deleteByAppInfoId"  parameterType="java.lang.String">
+		DELETE FROM APP_STATE WHERE  APP_INFO_ID  = #{appInfoId} 
+	</delete>
+	
+	<delete id="deleteByDate"  parameterType="map">
+		DELETE FROM APP_STATE WHERE   <![CDATA[  CREATE_TIME <=#{endTime}]]>
+	</delete>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		DELETE FROM APP_STATE 
+		WHERE ID = #{id}
+	</delete>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE FROM
+		APP_STATE 
+		WHERE ID IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+		
+	<insert id="save" parameterType="com.wgcloud.entity.AppState">
+		INSERT INTO APP_STATE
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >ID,</if>
+      		<if test="appInfoId != null" >APP_INFO_ID,</if>
+      		<if test="cpuPer != null" >CPU_PER,</if>
+      		<if test="memPer != null" >MEM_PER,</if>
+      		<if test="createTime != null" >CREATE_TIME</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >#{id},</if>
+      		<if test="appInfoId != null" >#{appInfoId},</if>
+      		<if test="cpuPer != null" >#{cpuPer},</if>
+      		<if test="memPer != null" >#{memPer},</if>
+      		<if test="createTime != null" >#{createTime}</if>
+    	</trim>
+	</insert>
+	
+	
+	 <insert id="insertList" parameterType="java.util.List" >
+	      INSERT INTO APP_STATE (ID, APP_INFO_ID, CPU_PER,MEM_PER,CREATE_TIME)  VALUES
+	      <foreach collection="list" item="item" index="index" separator="," >  
+	        (#{item.id},#{item.appInfoId},#{item.cpuPer},#{item.memPer},#{item.createTime})  
+	      </foreach>
+	 </insert>
+	 
+	
+	  <select id="selectAllByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM APP_STATE t
+		<where>
+			<if test="appInfoId != null">
+			<![CDATA[ AND APP_INFO_ID  = #{appInfoId} ]]>
+			</if>
+			<if test="startTime != null and endTime !=null and startTime !='' and endTime != '' ">
+				<![CDATA[ AND CREATE_TIME >= #{startTime} and CREATE_TIME <=#{endTime}]]>
+			</if>
+		</where>
+		  ORDER BY CREATE_TIME ASC
+	</select>
+	
+	<select id="selectByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM APP_STATE 
+		<where>
+			<if test="appInfoId != null">
+			<![CDATA[ AND APP_INFO_ID  = #{appInfoId} ]]>
+			</if>
+			<if test="startTime != null and endTime !=null and startTime !='' and endTime != '' ">
+				<![CDATA[ AND CREATE_TIME >= #{startTime} and CREATE_TIME <=#{endTime}]]>
+			</if>
+		</where>
+		  ORDER BY CREATE_TIME DESC
+	</select>
+	
+	
+</mapper>

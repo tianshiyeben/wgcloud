@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wgcloud.mapper.NetIoStateMapper">
+	<resultMap id="resultMap" type="com.wgcloud.entity.NetIoState">
+		<id column="ID" property="id" jdbcType="CHAR" />
+		<result column="HOST_NAME" property="hostname" jdbcType="CHAR" />
+		<result column="RXPCK" property="rxpck" jdbcType="CHAR" />
+		<result column="TXPCK" property="txpck" jdbcType="CHAR" />
+		<result column="RXBYT" property="rxbyt" jdbcType="CHAR" />
+		<result column="TXBYT" property="txbyt" jdbcType="CHAR" />
+		<result column="RXCMP" property="rxcmp" jdbcType="CHAR" />
+		<result column="TXCMP" property="txcmp" jdbcType="CHAR" />
+		<result column="RXMCST" property="rxmcst" jdbcType="CHAR" />
+		<result column="DATE_STR" property="dateStr" jdbcType="CHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="tableColumnList">
+		ID,HOST_NAME, RXPCK,TXPCK,RXBYT, TXBYT, RXCMP, TXCMP, RXMCST,DATE_STR,CREATE_TIME
+	</sql>
+	
+	<sql id="queryByParams">
+		<if test="hostname != null">
+			<![CDATA[ AND HOST_NAME = #{hostname} ]]>
+		</if>
+		<if test="startTime != null and endTime !=null and startTime !='' and endTime != '' ">
+			<![CDATA[ AND CREATE_TIME >= #{startTime} and CREATE_TIME <=#{endTime}]]>
+		</if>
+	</sql>
+	
+	<select id="selectById" resultMap="resultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM NETIO_STATE
+		WHERE ID=#{id} 
+	</select>
+	
+	
+	<delete id="deleteByAccountAndDate"  parameterType="map">
+		DELETE FROM NETIO_STATE WHERE    <![CDATA[  CREATE_TIME <=#{endTime}]]>
+	</delete>
+	
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		DELETE FROM NETIO_STATE
+		WHERE ID = #{id}
+	</delete>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE FROM
+		NETIO_STATE
+		WHERE ID IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<insert id="save" parameterType="com.wgcloud.entity.NetIoState">
+		INSERT INTO NETIO_STATE
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >ID,</if>
+      		<if test="hostname != null" > HOST_NAME,</if>
+      		<if test="txpck != null">TXPCK,</if>
+      		<if test="rxpck != null">RXPCK,</if>
+      		<if test="rxbyt != null">RXBYT,</if>
+      		<if test="txbyt != null" >TXBYT,</if>
+      		<if test="rxcmp != null" >RXCMP,</if>
+      		<if test="txcmp != null" >TXCMP,</if>
+      		<if test="rxmcst != null" >RXMCST,</if>
+      		<if test="dateStr != null" >DATE_STR,</if>
+      		<if test="createTime != null" >CREATE_TIME</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >#{id},</if>
+      		<if test="hostname != null" >#{hostname},</if>
+      		<if test="txpck != null" >#{txpck},</if>
+      		<if test="rxpck != null" >#{rxpck},</if>
+      		<if test="rxbyt != null" >#{rxbyt},</if>
+      		<if test="txbyt != null" >#{txbyt},</if>
+      		<if test="rxcmp != null" >#{rxcmp},</if>
+      		<if test="txcmp != null" >#{txcmp},</if>
+      		<if test="rxmcst != null" >#{rxmcst},</if>
+      		<if test="dateStr != null" >#{dateStr},</if>
+      		<if test="createTime != null" >#{createTime}</if>
+    	</trim>
+	</insert>
+	
+	<insert id="insertList" parameterType="java.util.List" >
+	      INSERT INTO NETIO_STATE (ID,HOST_NAME,TXPCK,RXPCK,RXBYT,TXBYT,RXCMP,TXCMP,RXMCST,DATE_STR,CREATE_TIME)  VALUES
+	      <foreach collection="list" item="item" index="index" separator="," >  
+	        (#{item.id},#{item.hostname},#{item.txpck},#{item.rxpck},#{item.rxbyt},#{item.txbyt},
+	        #{item.rxcmp},#{item.txcmp},#{item.rxmcst},#{item.dateStr},#{item.createTime})  
+	      </foreach>
+	 </insert>
+	
+	
+	  <select id="selectAllByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM NETIO_STATE t
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME ASC
+	</select>
+	
+	<select id="selectByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM NETIO_STATE
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	
+</mapper>

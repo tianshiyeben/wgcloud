@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wgcloud.mapper.HeathMonitorMapper">
+	<resultMap id="resultMap" type="com.wgcloud.entity.HeathMonitor">
+		<id column="ID" property="id" jdbcType="CHAR" />
+		<result column="APP_NAME" property="appName" jdbcType="CHAR" />
+		<result column="HEATH_URL" property="heathUrl" jdbcType="CHAR" />
+		<result column="HEATH_STATUS" property="heathStatus" jdbcType="CHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="tableColumnList">
+		ID,APP_NAME, HEATH_URL,HEATH_STATUS,CREATE_TIME
+	</sql>
+
+	<sql id="queryByParams">
+		<if test="heathStatus != null">
+			<![CDATA[ AND HEATH_STATUS = #{heathStatus} ]]>
+		</if>
+		<if test="startTime != null and endTime !=null and startTime !='' and endTime != '' ">
+			<![CDATA[ AND CREATE_TIME >= #{startTime} and CREATE_TIME <=#{endTime}]]>
+		</if>
+	</sql>
+
+	<select id="selectById" resultMap="resultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM HEATH_MONITOR 
+		WHERE ID=#{id} 
+	</select>
+	
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		DELETE FROM HEATH_MONITOR 
+		WHERE ID = #{id}
+	</delete>
+
+	<delete id="deleteByDate"  parameterType="map">
+		DELETE FROM HEATH_MONITOR WHERE   <![CDATA[  CREATE_TIME <=#{endTime}]]>
+	</delete>
+
+
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE FROM
+		HEATH_MONITOR 
+		WHERE ID IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<insert id="save" parameterType="com.wgcloud.entity.HeathMonitor">
+		INSERT INTO HEATH_MONITOR 
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >ID,</if>
+      		<if test="appName != null">APP_NAME,</if>
+			<if test="heathUrl != null">HEATH_URL,</if>
+			<if test="heathStatus != null">HEATH_STATUS,</if>
+      		<if test="createTime != null" >CREATE_TIME</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >#{id},</if>
+      		<if test="appName != null" >#{appName},</if>
+			<if test="heathUrl != null" >#{heathUrl},</if>
+			<if test="heathStatus != null" >#{heathStatus},</if>
+      		<if test="createTime != null" >#{createTime}</if>
+    	</trim>
+	</insert>
+
+	<insert id="insertList" parameterType="java.util.List" >
+		INSERT INTO HEATH_MONITOR (ID,APP_NAME,HEATH_URL,HEATH_STATUS,CREATE_TIME)  VALUES
+		<foreach collection="list" item="item" index="index" separator="," >
+			(#{item.id},#{item.appName},#{item.heathUrl},#{item.heathStatus},#{item.createTime})
+		</foreach>
+	</insert>
+
+
+	<update id="updateList" parameterType="java.util.List" >
+		<foreach collection="list" item="item" index="index"  separator=";">
+			UPDATE HEATH_MONITOR
+			<set>
+				<if test="item.appName != null">
+					APP_NAME = #{item.appName},
+				</if>
+				<if test="item.heathUrl != null">
+					HEATH_URL= #{item.heathUrl},
+				</if>
+				<if test="item.heathStatus != null" >
+					HEATH_STATUS= #{item.heathStatus},
+				</if>
+				<if test="item.createTime != null" >
+					CREATE_TIME= #{item.createTime},
+				</if>
+			</set>
+			WHERE ID = #{item.id}
+		</foreach>
+	</update>
+
+
+	<update id="updateById" parameterType="com.wgcloud.entity.HeathMonitor">
+		UPDATE HEATH_MONITOR
+		<set>
+			<if test="appName != null">
+				APP_NAME = #{appName},
+			</if>
+			<if test="heathUrl != null">
+				HEATH_URL = #{heathUrl},
+			</if>
+			<if test="heathStatus != null">
+				HEATH_STATUS = #{heathStatus},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime}
+			</if>
+		</set>
+		WHERE ID = #{id}
+	</update>
+
+	<select id="countByParams" parameterType="map" resultType="java.lang.Integer">
+		SELECT count(*)  FROM HEATH_MONITOR t
+		<where>
+			<include refid="queryByParams" />
+		</where>
+	</select>
+
+
+	<select id="selectAllByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM HEATH_MONITOR t
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	<select id="selectByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM HEATH_MONITOR
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	
+</mapper>

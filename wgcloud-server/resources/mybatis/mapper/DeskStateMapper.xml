@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wgcloud.mapper.DeskStateMapper">
+	<resultMap id="resultMap" type="com.wgcloud.entity.DeskState">
+		<id column="ID" property="id" jdbcType="CHAR" />
+		<result column="HOST_NAME" property="hostname" jdbcType="CHAR" />
+		<result column="FILE_STSTEM" property="fileSystem" jdbcType="CHAR" />
+		<result column="SIZE" property="size" jdbcType="CHAR" />
+		<result column="USED" property="used" jdbcType="CHAR" />
+		<result column="AVAIL" property="avail" jdbcType="CHAR" />
+		<result column="USE_PER" property="usePer" jdbcType="CHAR" />
+		<result column="DATE_STR" property="dateStr" jdbcType="CHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="tableColumnList">
+		ID,HOST_NAME, FILE_STSTEM, SIZE, USED, AVAIL,USE_PER,DATE_STR,CREATE_TIME
+	</sql>
+	
+	<sql id="queryByParams">
+		<if test="hostname != null">
+			<![CDATA[ AND HOST_NAME = #{hostname} ]]>
+		</if>
+	</sql>
+
+	<insert id="insertList" parameterType="java.util.List" >
+		INSERT INTO DESK_STATE (ID,HOST_NAME, FILE_STSTEM, SIZE, USED, AVAIL,USE_PER,DATE_STR,CREATE_TIME)  VALUES
+		<foreach collection="list" item="item" index="index" separator="," >
+			(#{item.id},#{item.hostname},#{item.fileSystem},#{item.size},#{item.used},#{item.avail},#{item.usePer},#{item.dateStr},#{item.createTime})
+		</foreach>
+	</insert>
+
+	<select id="selectById" resultMap="resultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM DESK_STATE
+		WHERE ID=#{id} 
+	</select>
+	
+	
+	<delete id="deleteByAccountAndDate"  parameterType="map">
+		DELETE FROM DESK_STATE WHERE   <![CDATA[  CREATE_TIME <=#{endTime}]]>
+	</delete>
+	
+	<delete id="deleteByAccHname"  parameterType="map">
+			DELETE FROM DESK_STATE WHERE
+			<![CDATA[  HOST_NAME  = #{hostname} ]]>
+	</delete>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		DELETE FROM DESK_STATE
+		WHERE ID = #{id}
+	</delete>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE FROM
+		DESK_STATE
+		WHERE ID IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<insert id="save" parameterType="com.wgcloud.entity.DeskState">
+		INSERT INTO DESK_STATE
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >ID,</if>
+      		<if test="hostname != null" > HOST_NAME,</if>
+      		<if test="fileSystem != null">FILE_STSTEM,</if>
+      		<if test="size != null" >SIZE,</if>
+      		<if test="used != null" >USED,</if>
+      		<if test="avail != null" >AVAIL,</if>
+      		<if test="usePer != null" >USE_PER,</if>
+      		<if test="dateStr != null" >DATE_STR,</if>
+      		<if test="createTime != null" >CREATE_TIME</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >#{id},</if>
+      		<if test="hostname != null" >#{hostname},</if>
+      		<if test="fileSystem != null" >#{fileSystem},</if>
+      		<if test="size != null" >#{size},</if>
+      		<if test="used != null" >#{used},</if>
+      		<if test="avail != null" >#{avail},</if>
+      		<if test="usePer != null" >#{usePer},</if>
+      		<if test="dateStr != null" >#{dateStr},</if>
+      		<if test="createTime != null" >#{createTime}</if>
+    	</trim>
+	</insert>
+	
+	
+	  <select id="selectAllByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM DESK_STATE t
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC,USE_PER DESC
+	</select>
+	
+	<select id="selectByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM DESK_STATE
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC,USE_PER DESC
+	</select>
+	
+</mapper>

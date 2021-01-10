@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wgcloud.mapper.HostInfoMapper">
+<resultMap id="resultMap" type="com.wgcloud.entity.HostInfo">
+		<id column="ID" property="id" jdbcType="CHAR" />
+		<result column="IP" property="ip" jdbcType="CHAR" />
+		<result column="PORT" property="port" jdbcType="CHAR" />
+		<result column="ROOT" property="root" jdbcType="CHAR" />
+		<result column="PASSWD" property="passwd" jdbcType="CHAR" />
+	<result column="REMARK" property="remark" jdbcType="CHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="tableColumnList">
+		ID,IP,PORT,ROOT,PASSWD,REMARK,CREATE_TIME
+	</sql>
+
+	<select id="selectById" resultMap="resultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM HOST_INFO 
+		WHERE ID=#{id} 
+	</select>
+
+	
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		DELETE FROM HOST_INFO 
+		WHERE ID = #{id}
+	</delete>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE FROM
+		HOST_INFO 
+		WHERE ID IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<delete id="deleteByIp" parameterType="java.lang.String">
+		DELETE FROM HOST_INFO
+		WHERE IP IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+
+
+	<insert id="save" parameterType="com.wgcloud.entity.HostInfo">
+		INSERT INTO HOST_INFO 
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >ID,</if>
+      		<if test="ip != null" >IP,</if>
+			<if test="port != null" >PORT,</if>
+			<if test="passwd != null" >PASSWD,</if>
+			<if test="root != null" >ROOT,</if>
+			<if test="remark != null" >REMARK,</if>
+      		<if test="createTime != null" >CREATE_TIME</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >#{id},</if>
+      		<if test="ip != null" >#{ip},</if>
+			<if test="port != null" >#{port},</if>
+			<if test="passwd != null" >#{passwd},</if>
+			<if test="root != null" >#{root},</if>
+			<if test="remark != null" >#{remark},</if>
+      		<if test="createTime != null" >#{createTime}</if>
+    	</trim>
+	</insert>
+	
+	
+	<update id="updateById" parameterType="com.wgcloud.entity.HostInfo">
+		UPDATE HOST_INFO
+		<set>
+			<if test="ip != null">
+				IP = #{ip},
+			</if>
+			<if test="port != null">
+				PORT = #{port},
+			</if>
+			<if test="passwd != null">
+				PASSWD = #{passwd},
+			</if>
+			<if test="root != null">
+				ROOT = #{root},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark},
+			</if>
+
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	  <select id="selectAllByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM HOST_INFO t
+		 ORDER BY CREATE_TIME DESC
+	</select>
+
+	
+	<select id="selectByParams" parameterType="com.wgcloud.entity.HostInfo" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM HOST_INFO
+		 ORDER BY CREATE_TIME DESC
+	</select>
+</mapper>

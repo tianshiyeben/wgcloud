@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <div  th:replace="common/header.html"></div>
+
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div th:replace="common/chart.html"></div>
+
+<div class="wrapper">
+
+  <div th:replace="common/navbar.html"></div>
+
+  <div th:replace="common/aside.html"></div>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1></h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item active"></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+  <div class="col-md-12">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title" th:text="${systemInfo.hostname}">详细信息</h3>(每1分钟监控)
+          <div class=" float-sm-right">
+              <a th:href="@{'/dash/systemInfoList'}">返回</a>
+          </div>
+      </div>
+
+
+        <div class="row">
+            <div class="col-12 table-responsive">
+                <table class="table table-striped">
+                    <tbody><tr>
+                    <th:block th:each="item : ${dateList}">
+                        <th:block th:if="${item eq  datenow}">
+                            <td> <button type="button" title="当前已显示该日期相关图表" class="btn btn-block btn-outline-danger btn-sm" th:text="${item}">Primary</button></td>
+                        </th:block>
+                        <th:block th:unless="${item eq  datenow}">
+                            <td> <button type="button"  th:onclick="viewDate([[${systemInfo.id}]],[[${item}]])" class="btn btn-block btn-outline-primary btn-sm" th:text="${item}">Primary</button></td>
+                        </th:block>
+                    </th:block>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.col -->
+        </div>
+        <label style="margin-left: .9rem">cpu使用率%</label>
+        <div id="cpuStateJson"></div>
+
+        <label style="margin-left: .9rem">内存使用率%</label>
+        <div id="memStateJson"></div>
+
+        <label style="margin-left: .9rem">系统负载</label>
+        <div id="ysLoadSstateJson"></div>
+
+        <label style="margin-left: .9rem">网络接收/发送总KB</label>
+        <div id="netIoStateByt"></div>
+
+        <label style="margin-left: .9rem">网络接收/发送总包数</label>
+        <div id="netIoStatePck"></div>
+    </div>
+    <!-- /.card -->
+
+
+  </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <div th:replace="common/footer.html"></div>
+
+</div>
+<!-- ./wrapper -->
+
+<script th:src="@{'/static/js/host.js'}"></script>
+
+
+<script th:inline="javascript">
+    var cpuStateJson =[[${cpuStateList}]];
+    var memStateJson =[[${memStateList}]];
+    var ysLoadSstateJson =[[${ysLoadSstateList}]];
+    var netIoStateJson =[[${netIoStateList}]];
+    $(function(){
+        var chart = new G2.Chart({
+            container: 'cpuStateJson',
+            forceFit: true,
+            height: 500,
+            padding: [30, 40, 70, 40]
+        });
+
+        chart.axis('dateStr', {
+            label: {
+                textStyle: {
+                    fill: '#aaaaaa'
+                }
+            }
+        });
+        chart.axis('iowait', false);
+        chart.axis('idle', false);
+        chart.tooltip({
+            crosshairs: false
+        });
+        chart.legend({
+            position: 'top-center'
+        });
+
+        chart.source(cpuStateJson, {
+            sys: {
+                alias: '使用率',
+                min: 0,
+                max: [[${cpuStateMaxVal}]]
+            },
+            idle: {
+                alias: '空闲率',
+                min: 0,
+                max: [[${cpuStateMaxVal}]]
+            },
+            iowait: {
+                alias: '等待率',
+                min: 0,
+                max: [[${cpuStateMaxVal}]]
+            }
+        });
+        chart.scale('dateStr',{tickCount: 12,alias: '时间'});
+        chart.line().position('dateStr*sys').color('#2fc25b');
+        chart.line().position('dateStr*idle').color('#1890ff');
+        chart.line().position('dateStr*iowait').color('#ffca0b');
+        chart.render();
+
+        var chart2 = new G2.Chart({
+            container: 'memStateJson',
+            forceFit: true,
+            height: 500,
+            padding: [30, 40, 70, 40]
+        });
+        chart2.axis('dateStr', {
+            label: {
+                textStyle: {
+                    fill: '#aaaaaa'
+                }
+            }
+        });
+        chart2.axis('usePer', {
+            label: {
+                textStyle: {
+                    fill: '#aaaaaa'
+                }
+            }
+        });
+        chart2.tooltip({
+            crosshairs: false
+        });
+        chart2.legend({
+            position: 'top-center'
+        });
+        chart2.source(memStateJson, {
+            usePer: {
+                alias: '使用率'
+            }
+        });
+        chart2.scale('dateStr',{tickCount: 12,alias: '时间'});
+        chart2.line().position('dateStr*usePer').color('#1890ff');
+        chart2.render();
+
+        var chart3 = new G2.Chart({
+            container: 'ysLoadSstateJson',
+            forceFit: true,
+            height: 500,
+            padding: [30, 40, 70, 40]
+        });
+        chart3.axis('dateStr', {
+            label: {
+                textStyle: {
+                    fill: '#aaaaaa'
+                }
+            }
+        });
+        chart3.axis('fiveLoad', false);
+        chart3.axis('fifteenLoad', false);
+        chart3.tooltip({
+            crosshairs: false
+        });
+        chart3.legend({
+            position: 'top-center'
+        });
+        chart3.source(ysLoadSstateJson, {
+            oneLoad: {
+                alias: '1分钟',
+                min: 0,
+                max: [[${ysLoadSstateMaxVal}]]
+            },
+            fiveLoad: {
+                alias: '5分钟',
+                min: 0,
+                max: [[${ysLoadSstateMaxVal}]]
+            },
+            fifteenLoad: {
+                alias: '15分钟',
+                min: 0,
+                max: [[${ysLoadSstateMaxVal}]]
+            }
+        });
+        chart3.scale('dateStr',{tickCount: 12,alias: '时间'});
+        chart3.line().position('dateStr*oneLoad').color('#1890ff');
+        chart3.line().position('dateStr*fiveLoad').color('#2fc25b');
+        chart3.line().position('dateStr*fifteenLoad').color('#ffca0b');
+        chart3.render();
+
+        var chart4 = new G2.Chart({
+            container: 'netIoStateByt',
+            forceFit: true,
+            height: 500,
+            padding: [30, 40, 70, 48]
+        });
+        chart4.axis('dateStr', {
+            label: {
+                textStyle: {
+                    fill: '#aaaaaa'
+                }
+            }
+        });
+        chart4.axis('txbyt', false);
+        chart4.tooltip({
+            crosshairs: false
+        });
+        chart4.legend({
+            position: 'top-center'
+        });
+        chart4.source(netIoStateJson, {
+            rxbyt: {
+                alias: '接收总KB',
+                min: 0,
+                max: [[${netIoStateBytMaxVal}]],
+                formatter: val => {    // 设置坐标轴和提示框的文字
+                return val/1000 + 'K';
+    }
+    },
+        txbyt: {
+            alias: '发送总KB',
+                min: 0,
+                max: [[${netIoStateBytMaxVal}]],
+                formatter: val => {
+                return val/1000 + 'K';
+            }
+        }
+    });
+        chart4.scale('dateStr',{tickCount: 12,alias: '时间'});
+        chart4.line().position('dateStr*rxbyt').color('#1890ff');
+        chart4.line().position('dateStr*txbyt').color('#2fc25b');
+        chart4.render();
+
+
+        var chart5 = new G2.Chart({
+            container: 'netIoStatePck',
+            forceFit: true,
+            height: 500,
+            padding: [30, 40, 70, 48]
+        });
+        chart5.axis('dateStr', {
+            label: {
+                textStyle: {
+                    fill: '#aaaaaa'
+                }
+            }
+        });
+        chart5.axis('txpck', false);
+        chart5.tooltip({
+            crosshairs: false
+        });
+        chart5.legend({
+            position: 'top-center'
+        });
+        chart5.source(netIoStateJson, {
+            rxpck: {
+                alias: '接收总包数',
+                min: 0,
+                max: [[${netIoStatePckMaxVal}]],
+                formatter: val => {
+                return val/1000 + 'K';
+    }
+    },
+        txpck: {
+            alias: '发送总包数',
+                min: 0,
+                max: [[${netIoStatePckMaxVal}]],
+                formatter: val => {
+                return val/1000 + 'K';
+            }
+        }
+    });
+    chart5.scale('dateStr',{tickCount: 12,alias: '时间'});
+    chart5.line().position('dateStr*rxpck').color('#1890ff');
+    chart5.line().position('dateStr*txpck').color('#2fc25b');
+    chart5.render();
+    })
+
+</script>
+
+
+</body>
+</html>

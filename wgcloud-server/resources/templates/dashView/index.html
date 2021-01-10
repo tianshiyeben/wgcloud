@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WGCLOUD公众看板(请收藏)</title>
+  <div  th:replace="common/header.html"></div>
+
+
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+
+<div class="wrapper">
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="margin-left: 10px">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6" id="fuwuqixinxi">
+            <a href="http://www.wgstart.com"  target="_blank">
+              <img th:src="@{'/static/logincss/logo.png'}" style="height:25px;width:25px;opacity: .8" class="brand-image img-circle elevation-3"
+              >&nbsp;WGCLOUD-v2.3.6
+            </a>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item active">监控概要</li>
+              <li class="breadcrumb-item "><a href="/wgcloud/dash/systemInfoList?dashView=1">主机列表</a></li>
+              <li class="breadcrumb-item active"><a  target="_blank" href="https://www.wgstart.com/elasticsearch-head/index.html">ES监控工具</a></li>
+            </ol>
+          </div><!-- /.col -->
+         <!-- <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard v1</li>
+            </ol>
+          </div>--><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+
+
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3 th:text="${totalSizeApp}"></h3>
+
+                <p>监控进程</p>
+              </div>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3 th:text="${memPerSizeApp}"></h3>
+
+                <p>进程占用CPU>90%</p>
+              </div>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3 th:text="${dbInfoSize}"></h3>
+
+                <p>数据源</p>
+              </div>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3 th:text="${dbTableSize}"></h3>
+
+                <p>监控数据表数量</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3 th:text="${dbTableSum}"></h3>
+
+                <p>数据表总数据量</p>
+              </div>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3 th:text="${heathSize}"></h3>
+
+                <p>服务接口数量</p>
+              </div>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3 th:text="${heatherrSize}"></h3>
+
+                <p>异常服务接口</p>
+              </div>
+            </div>
+          </div>
+          <!-- ./col -->
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3  th:text="${logSize}">53<sup style="font-size: 20px"></sup></h3>
+
+                <p>已产生系统日志</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.row -->
+
+
+        <!-- Main row -->
+        <div class="row">
+          <!-- Left col -->
+          <section class="col-lg-7 connectedSortable">
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="card" id="chartInfoList">
+
+            </div>
+            <!-- /.card -->
+          </section>
+          <section class="col-lg-5 connectedSortable ui-sortable">
+            <div class="card" id="dbTableList">
+
+            </div>
+          </section>
+        </div>
+
+
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <div th:replace="common/chart.html"></div>
+  <div th:replace="common/footer.html"></div>
+
+</div>
+<!-- ./wrapper -->
+
+
+<script th:inline="javascript">
+
+  const data = [[${chartInfoList}]];
+
+  const chart = new G2.Chart({
+    container: 'chartInfoList',
+    forceFit: true,
+    height: 500,
+    animate: false
+  });
+  chart.source(data, {
+    percent: {
+      formatter: val => {
+      val = (val * 100) + '%';
+  return val;
+  }
+  }
+  });
+  chart.coord('theta', {
+    radius: 0.75,
+    innerRadius: 0.6
+  });
+  chart.tooltip({
+    showTitle: false,
+    itemTpl: '<li><span style="background-color:{color};" class="g2-tooltip-marker"></span>{name}: {value}</li>'
+  });
+  // 辅助文本
+  chart.guide().html({
+    position: [ '50%', '50%' ],
+    html: '<div style="color:#8c8c8c;font-size: 14px;text-align: center;width: 10em;">监控主机<br><span style="color:#8c8c8c;font-size:20px">[[${totalSystemInfoSize}]]</span>台</div>',
+    alignX: 'middle',
+    alignY: 'middle'
+  });
+  const interval = chart.intervalStack()
+          .position('percent')
+          .color('item')
+          .label('count', {
+            formatter: (val, item) => {
+            return item.point.item + ': ' + val;
+  }
+  })
+  .tooltip('item*percent', (item, percent) => {
+    percent = percent * 100 + '%';
+  return {
+    name: item,
+    value: percent
+  };
+  })
+  .style({
+    lineWidth: 1,
+    stroke: '#fff'
+  });
+  chart.render();
+  interval.setSelected(data[0]);
+
+  const data2 = [[${dbTableList}]];
+  const chart2 = new G2.Chart({
+    container: 'dbTableList',
+    forceFit: true,
+    height: 500,
+    padding: [ 20, 40, 50, 124 ]
+  });
+  chart2.source(data2, {
+    value: {
+      min: 0,
+      nice: false,
+      alias: '条'
+    }
+  });
+  chart2.axis('tableName', {
+    label: {
+      textStyle: {
+        fill: '#8d8d8d',
+        fontSize: 12
+      }
+    },
+    tickLine: {
+      alignWithLabel: false,
+      length: 0
+    },
+    line: {
+      lineWidth: 0
+    }
+  });
+  chart2.axis('value', {
+    label: null,
+    title: {
+      offset: 30,
+      textStyle: {
+        fontSize: 12,
+        fontWeight: 300
+      }
+    }
+  });
+  chart2.legend(false);
+  chart2.coord().transpose();
+  chart2.interval().position('tableName*value').size(26)
+          .opacity(1)
+          .label('value', {
+            textStyle: {
+              fill: '#8d8d8d'
+            },
+            offset: 10
+          });
+  chart2.render();
+</script>
+</body>
+</html>

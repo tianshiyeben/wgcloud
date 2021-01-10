@@ -1,0 +1,482 @@
+/* Icons Map to glyphicon */
+
+.ui-icon {
+    text-indent: inherit;
+    position: relative;
+	top: 1px;
+	display: inline-block;
+	font-family: 'Glyphicons Halflings';
+	font-style: normal;
+	font-weight: normal;
+	line-height: inherit !important;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.ui-icon-seek-first:before{
+	content: "\e070";
+}
+.ui-icon-seek-prev:before{
+	content: "\e069";
+}
+.ui-icon-seek-next:before{
+	content: "\e077";
+}
+.ui-icon-seek-end:before{
+	content: "\e076";
+}
+.ui-icon-carat-2-n-s:before{
+	content: "\e150";
+}
+.ui-icon-arrow-1-e:before{
+	content: "\e077";
+}
+.ui-icon-arrowstop-1-e:before{
+	content: "\e076";
+}
+.ui-icon-arrow-1-w:before{
+	content: "\e069";
+}
+.ui-icon-arrowstop-1-w:before{
+	content: "\e070";
+}
+.ui-icon-close:before{
+	content: "\e014";
+}
+
+/* End Icons Map to glyphicon */
+
+.ui-shadow {
+    -webkit-box-shadow: 0 !important;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.ui-state-focus {
+    border-color: #3c8dbc !important;
+    box-shadow: none;
+}
+
+.ui-widget-content {
+    background-color: #fff;
+    border: 1px solid #cccccc;
+}
+
+.ui-datatable table{
+	table-layout: inherit;
+}
+
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td {
+    border-style: none;
+    white-space: normal;
+}
+
+.ui-datatable thead th, .ui-datatable tfoot td {
+    text-align: left;
+}
+
+.ui-datatable .ui-sortable-column-icon {
+    margin: 0 0 0 6px;
+}
+
+.ui-column-filter, .ui-column-customfilter > input, .ui-column-customfilter > select{
+	height: 30px;
+}
+
+.ui-button-text {
+    padding: 0 !important;
+}
+
+.ui-button .ui-button-text{
+	line-height: inherit;
+}
+
+.ui-chkbox .ui-chkbox-box {
+    position: relative;
+    top: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 0 !important;
+    border: 1px solid #ccc;
+    background: #ffffff;
+    font-weight: bold;
+    color: #2c3e50;
+    cursor: pointer;
+}
+
+.ui-icon-check {
+    top: -1px;
+}
+
+.ui-icon-check:before {
+    content: "\e013";
+}
+
+tr.ui-state-highlight td {
+    background-color: #CCC !important;
+}
+
+.ui-selectonemenu,
+.ui-selectonemenu-filter-container,
+.ui-inputfield {
+    width: 100% !important;
+}
+
+.ui-inputfield {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.ui-state-highlight {
+    background-color: #06C;
+    color: #FFFFFF;
+}
+
+.ui-picklist .ui-picklist-list {
+    height: 190px;
+}
+
+.ui-picklist .ui-picklist-buttons {
+    height: auto;
+}
+
+.ui-picklist-header .ui-picklist-buttons-cell {
+    margin-top: 28px;
+}
+
+table .ui-widget-content {
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+}
+
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td, .ui-datatable tfoot th {
+	overflow: inherit;
+}
+
+.ui-datatable .ui-paginator {
+    padding-left: 0;
+    margin: 15px 0 10px 0;
+}
+
+.ui-paginator .ui-paginator-page,
+.ui-paginator .ui-paginator-next, .ui-paginator .ui-paginator-last,
+.ui-paginator .ui-paginator-first, .ui-paginator .ui-paginator-prev,
+.ui-paginator .ui-paginator-current {
+    vertical-align: middle;
+    height: 30px;
+    padding: 6px 9px;
+    margin-left: 0;
+    margin-right: 0;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    background: #fafafa;
+    color: #737373;
+    -webkit-box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.09);
+    -moz-box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.09);
+    box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.09);
+}
+
+.ui-paginator .ui-state-hover {
+    color: #ffffff;
+    background: #428bca;
+    border-color: transparent;
+    cursor: pointer;
+}
+
+.ui-paginator .ui-paginator-pages {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+.ui-paginator .ui-paginator-pages .ui-paginator-page {
+    padding-top: 5px;
+}
+
+.ui-paginator-page.ui-state-active {
+    min-width: 10px;
+    color: #ffffff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #428bca;
+    border-color: transparent;
+    border-radius: 0;
+}
+
+
+/* Calendar */
+
+.datepicker-container {
+    display: block;
+    position: relative;
+}
+
+input.hasDatepicker + .ui-datepicker-trigger {
+    border-radius: 0;
+    height: 34px;
+    margin: 0;
+    padding: 0 10px;
+    box-shadow: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.ui-datepicker {
+    padding: 0;
+    border: none;
+    margin-top: -1px;
+}
+
+.ui-datepicker-header {
+    border: 1px solid #5273BE;
+    border-bottom: none;
+    background: #5273BE;
+    color: #fff;
+}
+
+.ui-datepicker .ui-datepicker-prev,
+.ui-datepicker .ui-datepicker-next {
+    width: auto;
+    float: left;
+    height: auto;
+    cursor: pointer;
+    position: static;
+    line-height: 1.8em;
+    padding-left: 4px;
+}
+
+.ui-datepicker .ui-datepicker-next {
+    float: right;
+    padding-right: 4px;
+}
+
+.ui-datepicker .ui-datepicker-prev > span,
+.ui-datepicker .ui-datepicker-next > span {
+    margin: 0;
+    position: static;
+    color: #fff;
+}
+
+.ui-datepicker .ui-datepicker-prev .glyphicon,
+.ui-datepicker .ui-datepicker-next .glyphicon {
+    line-height: 16px;
+}
+
+.ui-datepicker table {
+    margin: 0;
+}
+
+.ui-datepicker-calendar thead tr {
+    color: #fff;
+    background: #7898CB;
+    border: 1px solid #7898CB;
+}
+
+.ui-datepicker-calendar td {
+    padding: 0;
+    border: 1px solid #ddd;
+}
+
+.ui-datepicker-calendar td a {
+    padding: 7px 2px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.ui-datepicker-calendar td > a.ui-state-default {
+    background: #eee;
+    color: #333;
+}
+
+.ui-datepicker-calendar .ui-datepicker-current-day > a.ui-state-active {
+    font-weight: bold;
+    background: #ddd;
+}
+
+.ui-datepicker-calendar td.ui-datepicker-today > a {
+    color: #fff;
+    font-weight: bold !important;
+    background: #7898CB !important;
+}
+
+.ui-datepicker .ui-datepicker-buttonpane {
+    overflow: hidden;
+    border: none;
+    margin: 0;
+    background: #7898CB;
+    padding: 4px;
+}
+
+.ui-datepicker .ui-datepicker-buttonpane button {
+    padding: 0;
+    border: none;
+    background: none;
+    color: #fff;
+    margin: 0;
+}
+
+
+
+/* File Upload */
+
+
+.ui-fileupload {
+    float: left;
+}
+
+.ui-fileupload-buttonbar {
+    padding: 0;
+}
+
+.ui-fileupload-buttonbar .ui-button {
+    font-size: .8em;
+}
+
+.ui-fileupload-buttonbar .ui-button .ui-button-text {
+    margin-left: 5px;
+    display: inline;
+}
+
+.ui-fileupload-buttonbar .ui-button .ui-icon {
+    margin: 0;
+    position: static;
+}
+
+.ui-fileupload-buttonbar .ui-button.ui-state-disabled {
+    display: none;
+}
+
+div.ui-fileupload-content {
+    padding: 0;
+    border: none;
+}
+
+.ui-fileupload-content .ui-fileupload-files-wrapper {
+    overflow: auto;
+    max-height: 139px;
+}
+
+div.ui-fileupload-content table.ui-fileupload-files {
+    margin: 0;
+    width: 100%;
+    font-size: 0.85em;
+}
+
+div.ui-fileupload-content table tr {
+    border-bottom: 1px solid #eee;
+}
+
+div.ui-fileupload-content table tr:last-child {
+    border-bottom: none;
+}
+
+div.ui-fileupload-content .ui-fileupload-preview {
+    width: 0;
+    padding: 0;
+}
+
+div.ui-fileupload-content .ui-fileupload-preview canvas {
+    display: none;
+}
+
+div.ui-fileupload-content .ui-progressbar {
+    height: 15px;
+    width: 150px;
+    overflow: hidden;
+    border-radius: 1em;
+    border: 1px solid #eee;
+    background-clip: border-box;
+}
+
+div.ui-fileupload-content .ui-progressbar .ui-progressbar-value {
+    margin: 0;
+}
+
+div.ui-fileupload-content .ui-fileupload-cancel,
+div.ui-fileupload-content .ui-fileupload-cancel > .ui-icon {
+    margin: 0;
+    width: auto;
+    position: static;
+}
+
+.ui-fileupload-cancel .ui-button-text {
+    display: none;
+}
+
+
+
+/* Pick List */
+
+
+.ui-picklist .ui-picklist-buttons {
+    width: 44px;
+    overflow: hidden;
+}
+
+.ui-picklist-buttons-cell, .ui-picklist .ui-button {
+    width: 34px;
+}
+
+.ui-picklist > .ui-picklist-buttons {
+    padding-top: 34px;
+}
+
+.ui-picklist.with-filter > .ui-picklist-buttons {
+    padding-top: 0;
+}
+
+.ui-picklist.with-filter {
+    width: auto !important;
+    padding-top: 34px;
+    position: relative;
+}
+
+.ui-picklist.with-filter > div > .ui-picklist-filter-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+
+/* Tree */
+
+
+.ui-tree {
+    padding: 0;
+    width: auto;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.ui-tree .ui-tree-container {
+    padding: 2px 5px;
+}
+
+.ui-tree .ui-treenode-content {
+    position: relative;
+    display: block;
+}
+
+.ui-tree .ui-tree-toggler {
+    width: 14px;
+    color: #aaa;
+    font-size: 10px;
+    line-height: 20px;
+    padding-right: 4px;
+    display: inline-block;
+}
+
+.ui-tree .ui-treenode-label {
+    margin: 0;
+    border-radius: 3px;
+}
+
+.ui-tree .ui-treenode-icon {
+    display: inline-block;
+    line-height: 19px;
+}
+
+.ui-tree .ui-treenode-leaf-icon {
+    width: 14px;
+}

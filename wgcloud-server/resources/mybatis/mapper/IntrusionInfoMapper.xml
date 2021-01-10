@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wgcloud.mapper.IntrusionInfoMapper">
+	<resultMap id="resultMap" type="com.wgcloud.entity.IntrusionInfo">
+		<id column="ID" property="id" jdbcType="CHAR" />
+		<result column="HOST_NAME" property="hostname" jdbcType="CHAR" />
+		<result column="LSMOD" property="lsmod" jdbcType="CHAR" />
+		<result column="PASSWD_INFO" property="passwdInfo" jdbcType="CHAR" />
+		<result column="CRONTAB" property="crontab" jdbcType="CHAR" />
+		<result column="PROMISC" property="promisc" jdbcType="CHAR" />
+		<result column="RPCINFO" property="rpcinfo" jdbcType="CHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="tableColumnList">
+		ID,HOST_NAME, LSMOD, PASSWD_INFO, CRONTAB, PROMISC,RPCINFO,CREATE_TIME
+	</sql>
+	
+	<sql id="queryByParams">
+		<if test="hostname != null">
+			<![CDATA[ AND HOST_NAME = #{hostname} ]]>
+		</if>
+	</sql>
+	
+	
+	<select id="selectById" resultMap="resultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM INTRUSION_INFO WHERE ID=#{id} 
+	</select>
+	
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		DELETE FROM INTRUSION_INFO WHERE ID = #{id}
+	</delete>
+	
+	<delete id="deleteByAccountAndDate"  parameterType="map">
+		DELETE FROM INTRUSION_INFO WHERE  <![CDATA[  CREATE_TIME <=#{endTime}]]>
+	</delete>
+	
+	<delete id="deleteByAccHname"  parameterType="map">
+		DELETE FROM INTRUSION_INFO WHERE  <![CDATA[  HOST_NAME  = #{hostname} ]]>
+	</delete>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE FROM INTRUSION_INFO WHERE ID IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<insert id="insertList" parameterType="java.util.List" >
+	      INSERT INTO INTRUSION_INFO (ID,HOST_NAME,LSMOD,PASSWD_INFO,CRONTAB,PROMISC,RPCINFO,CREATE_TIME)  VALUES
+	      <foreach collection="list" item="item" index="index" separator="," >  
+	        (#{item.id},#{item.hostname},#{item.lsmod},#{item.passwdInfo},#{item.crontab},#{item.promisc},#{item.rpcinfo},#{item.createTime})
+	      </foreach>
+	 </insert>
+	 
+	<insert id="save" parameterType="com.wgcloud.entity.IntrusionInfo">
+		INSERT INTO INTRUSION_INFO
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >ID,</if>
+      		<if test="hostname != null" > HOST_NAME,</if>
+      		<if test="lsmod != null">LSMOD,</if>
+      		<if test="passwdInfo != null" >PASSWD_INFO,</if>
+      		<if test="crontab != null" >CRONTAB,</if>
+      		<if test="promisc != null" >PROMISC,</if>
+      		<if test="rpcinfo != null" >RPCINFO,</if>
+      		<if test="createTime != null" >CREATE_TIME</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >#{id},</if>
+      		<if test="hostname != null" >#{hostname},</if>
+      		<if test="lsmod != null" >#{lsmod},</if>
+      		<if test="passwdInfo != null" >#{passwdInfo},</if>
+      		<if test="crontab != null" >#{crontab},</if>
+      		<if test="promisc != null" >#{promisc},</if>
+      		<if test="rpcinfo != null" >#{rpcinfo},</if>
+      		<if test="createTime != null" >#{createTime}</if>
+    	</trim>
+	</insert>
+	
+	<select id="selectByAccountId" resultMap="resultMap" parameterType="java.lang.String">
+		SELECT
+		ID,HOST_NAME, PROMISC,RPCINFO,CREATE_TIME
+		FROM INTRUSION_INFO
+	</select>
+	
+	  <select id="selectAllByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM INTRUSION_INFO t
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	<select id="selectByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM INTRUSION_INFO
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+</mapper>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <div  th:replace="common/header.html"></div>
+
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div th:replace="common/chart.html"></div>
+
+<div class="wrapper">
+
+  <div th:replace="common/navbar.html"></div>
+
+  <div th:replace="common/aside.html"></div>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1></h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item active"></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+  <div class="col-md-10">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">添加数据表进行监控</h3>
+          <div class=" float-sm-right">
+              <a th:href="@{'/dbTable/list'}">返回</a>
+          </div>
+      </div>
+      <!-- /.card-header -->
+      <!-- form start -->
+        <form role="form" id="form1" method="post" th:action="@{'/dbTable/save'}">
+            <input type="hidden" name="id" th:value="${dbTable.id}"/>
+            <div class="card-body">
+                <div class="form-group">
+                    <label><font color="red">*</font>数据源</label>
+                    <select class="validate[required] form-control"  name="dbInfoId" id="dbInfoId">
+                        <option value="">请选择</option>
+                        <th:block th:each="item,iterStat : ${dbInfoList}">
+                            <option   th:value="${item.id}" th:text="${item.aliasName}">Alabama</option>
+                        </th:block>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fromMailName"><font color="red">*</font>表名称</label>
+                    <input type="text" autocomplete="off"  th:value="${dbTable.tableName}" class="validate[required,maxSize[40]] form-control" name="tableName" id="tableName" placeholder="输入数据库中的表名称，如：Order">
+                </div>
+                <div class="form-group">
+                    <label for="fromPwd"><font color="red">*</font>表别名</label>
+                    <input type="text" autocomplete="off" th:value="${dbTable.remark}" class="validate[required,maxSize[40]] form-control" name="remark" id="remark" placeholder="给表定义一个别名，如：订单表">
+                </div>
+                <div class="form-group">
+                    <label for="fromMailName" title="此处不能输入sql敏感字符：execute,update,delete,insert,create,drop,alter,rename,where,modify">WHERE条件</label>
+                    <input type="text" autocomplete="off" th:value="${dbTable.whereVal}" class="validate[maxSize[200]] form-control" name="whereVal" id="whereVal" placeholder="标准sql语句如：status='1' OR status='2'">
+                </div>
+
+
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">保存</button>
+                <button type="button"  th:onclick="goback()"  class="btn bg-gradient-danger">返回</button>
+            </div>
+
+        </form>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+
+  </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <div th:replace="common/footer.html"></div>
+
+</div>
+<!-- ./wrapper -->
+<link rel="stylesheet" th:href="@{'/static/js/jQuery/validationEngine.jquery.css'}" type="text/css"/>
+<script th:src="@{'/static/js/jQuery/jquery.validationEngine-zh_CN.js'}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{'/static/js/jQuery/jquery.validationEngine.js'}" type="text/javascript" charset="utf-8"></script>
+<script th:inline="javascript">
+    $(document).ready(function(){
+        $("#form1").validationEngine();
+        $("#dbInfoId").val([[${dbTable.dbInfoId}]]);
+    });
+
+    function goback() {
+            window.location.href = "/wgcloud/dbTable/list";
+    }
+    toastr.options.timeOut = 15000;
+    var msg = [[${msg}]];
+    if(msg!='' && msg!=null){
+        toastr.error(msg);
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wgcloud.mapper.DbTableMapper">
+	<resultMap id="resultMap" type="com.wgcloud.entity.DbTable">
+		<id column="ID" property="id" jdbcType="CHAR" />
+		<result column="TABLE_NAME" property="tableName" jdbcType="CHAR" />
+		<result column="WHERE_VAL" property="whereVal" jdbcType="CHAR" />
+		<result column="REMARK" property="remark" jdbcType="CHAR" />
+		<result column="TABLE_COUNT" property="tableCount" jdbcType="BIGINT" />
+		<result column="DATE_STR" property="dateStr" jdbcType="CHAR" />
+		<result column="DBINFO_ID" property="dbInfoId" jdbcType="CHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="tableColumnList">
+		ID,TABLE_NAME, WHERE_VAL,REMARK,CREATE_TIME,TABLE_COUNT,DATE_STR,DBINFO_ID
+	</sql>
+
+	<sql id="queryByParams">
+		<if test="dbInfoId != null">
+			<![CDATA[ AND DBINFO_ID = #{dbInfoId} ]]>
+		</if>
+		<if test="tableName != null">
+			<![CDATA[ AND TABLE_NAME = #{tableName} ]]>
+		</if>
+		<if test="startTime != null and endTime !=null and startTime !='' and endTime != '' ">
+			<![CDATA[ AND CREATE_TIME >= #{startTime} and CREATE_TIME <=#{endTime}]]>
+		</if>
+	</sql>
+
+	<select id="selectById" resultMap="resultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM DB_TABLE 
+		WHERE ID=#{id} 
+	</select>
+	
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		DELETE FROM DB_TABLE 
+		WHERE ID = #{id}
+	</delete>
+
+	<delete id="deleteByDbInfoId" parameterType="java.lang.String">
+		DELETE FROM DB_TABLE
+		WHERE DBINFO_ID = #{dbInfoId}
+	</delete>
+
+	<delete id="deleteByDate"  parameterType="map">
+		DELETE FROM DB_TABLE WHERE   <![CDATA[  CREATE_TIME <=#{endTime}]]>
+	</delete>
+
+
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE FROM
+		DB_TABLE 
+		WHERE ID IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<insert id="save" parameterType="com.wgcloud.entity.DbTable">
+		INSERT INTO DB_TABLE 
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >ID,</if>
+      		<if test="tableName != null" >TABLE_NAME,</if>
+      		<if test="whereVal != null">WHERE_VAL,</if>
+      		<if test="remark != null">REMARK,</if>
+			<if test="dbInfoId != null">DBINFO_ID,</if>
+      		<if test="createTime != null" >CREATE_TIME</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >#{id},</if>
+      		<if test="tableName != null" >#{tableName},</if>
+      		<if test="whereVal != null" >#{whereVal},</if>
+      		<if test="remark != null" >#{remark},</if>
+			<if test="dbInfoId != null" >#{dbInfoId},</if>
+      		<if test="createTime != null" >#{createTime}</if>
+    	</trim>
+	</insert>
+
+
+	<update id="updateById" parameterType="com.wgcloud.entity.DbTable">
+		UPDATE DB_TABLE
+		<set>
+			<if test="tableName != null">
+				TABLE_NAME = #{tableName},
+			</if>
+			<if test="whereVal != null">
+				WHERE_VAL = #{whereVal},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark},
+			</if>
+			<if test="tableCount != null">
+				TABLE_COUNT = #{tableCount},
+			</if>
+			<if test="dateStr != null">
+				DATE_STR = #{dateStr},
+			</if>
+			<if test="dbInfoId != null">
+				DBINFO_ID = #{dbInfoId},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime}
+			</if>
+		</set>
+		WHERE ID = #{id}
+	</update>
+
+	<update id="updateList" parameterType="java.util.List" >
+		<foreach collection="list" item="item" index="index" separator=";" >
+			UPDATE DB_TABLE
+			<set>
+				<if test="item.tableName != null">
+					TABLE_NAME = #{item.tableName},
+				</if>
+				<if test="item.whereVal != null">
+					WHERE_VAL= #{item.whereVal},
+				</if>
+				<if test="item.remark != null" >
+					REMARK= #{item.remark},
+				</if>
+				<if test="item.tableCount != null" >
+					TABLE_COUNT= #{item.tableCount},
+				</if>
+				<if test="item.dateStr != null" >
+					DATE_STR= #{item.dateStr},
+				</if>
+				<if test="item.dbInfoId != null" >
+					DBINFO_ID= #{item.dbInfoId},
+				</if>
+				<if test="item.createTime != null" >
+					CREATE_TIME= #{item.createTime}
+				</if>
+			</set>
+			WHERE ID = #{item.id}
+		</foreach>
+	</update>
+
+
+	<select id="countByParams" parameterType="map" resultType="java.lang.Integer">
+		SELECT COUNT(*)  FROM DB_TABLE t
+	</select>
+
+
+	<select id="sumByParams" parameterType="map" resultType="java.lang.Long">
+		SELECT SUM(t.TABLE_COUNT)  FROM DB_TABLE t
+	</select>
+
+
+	<select id="selectAllByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM DB_TABLE t
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	<select id="selectByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM DB_TABLE
+		<where>
+			<include refid="queryByParams" />
+		</where>
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	
+</mapper>

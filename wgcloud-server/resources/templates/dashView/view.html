@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WGCLOUD公众看板/主机列表/主机信息(请收藏)</title>
+  <div  th:replace="common/header.html"></div>
+
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div th:replace="common/chart.html"></div>
+
+<div class="wrapper">
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="margin-left: 10px">
+    <!-- Content Header (Page header) -->
+    <section class="content-header" >
+      <div class="container-fluid">
+        <div class="row mb-2">
+
+            <div class="col-sm-6" id="fuwuqixinxi">
+                <a href="http://www.wgstart.com"  target="_blank">
+                    <img th:src="@{'/static/logincss/logo.png'}" style="height:25px;width:25px;opacity: .8" class="brand-image img-circle elevation-3"
+                    >&nbsp;WGCLOUD-v2.3.6
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item "><a href="/wgcloud/dash/main?dashView=1">监控概要</a></li>
+                    <li class="breadcrumb-item "><a href="/wgcloud/dash/systemInfoList?dashView=1">主机列表</a></li>
+                    <li class="breadcrumb-item active"><a  target="_blank" href="https://www.wgstart.com/elasticsearch-head/index.html">ES监控工具</a></li>
+                </ol>
+            </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+  <div class="col-md-12">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title" th:text="${systemInfo.hostname}">主机信息</h3>
+          <div class=" float-sm-right">
+              <a th:href="@{'/dash/systemInfoList?dashView=1'}">返回</a>
+          </div>
+      </div>
+      <!-- /.card-header -->
+      <!-- form start -->
+      <form role="form">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="exampleInputEmail1">系统信息</label>
+              <div>系统描述：<span th:text="${systemInfo.versionDetail}"></span>，版本：<span th:text="${systemInfo.version}"></span>，cpu核数：<span th:text="${systemInfo.cpuCoreNum}"></span>
+                  ，cpu型号：<span th:text="${systemInfo.cpuXh}"></span></div>
+          </div>
+        </div>
+        <!-- /.card-body -->
+      </form>
+      <!-- /.card-body -->
+
+        <label style="margin-left: .9rem">磁盘信息</label>
+        <div class="row">
+            <div class="col-12 table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>盘符名称</th>
+                        <th>磁盘空间</th>
+                        <th>已使用</th>
+                        <th>可用</th>
+                        <th>已使用%</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="item : ${deskStateList}">
+                        <tr>
+                            <td th:text="${item.fileSystem}"></td>
+                            <td th:text="${item.size}"></td>
+                            <td th:text="${item.used}"></td>
+                            <td th:text="${item.avail}"></td>
+                            <td th:text="${item.usePer}"></td>
+                        </tr>
+                    </th:block>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.col -->
+        </div>
+
+
+    </div>
+    <!-- /.card -->
+
+
+  </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <div th:replace="common/footer.html"></div>
+
+</div>
+<!-- ./wrapper -->
+
+<script th:src="@{'/static/js/host.js'}"></script>
+
+
+</body>
+</html>

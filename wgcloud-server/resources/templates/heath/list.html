@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <div  th:replace="common/header.html"></div>
+
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div th:replace="common/chart.html"></div>
+
+<div class="wrapper">
+
+  <div th:replace="common/navbar.html"></div>
+
+  <div th:replace="common/aside.html"></div>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1></h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">服务心跳监控列表</h3>
+        <div class=" float-sm-right">
+          <button type="button" onclick="add()" class="btn btn-block btn-primary btn-sm">添加</button>
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th style="width: 80px">序号</th>
+            <th>服务名称</th>
+            <th>响应状态</th>
+            <th>更新时间</th>
+              <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <th:block th:each="item,iterStat : ${page.list}">
+            <tr>
+              <td th:text="${iterStat.index+1}">1</td>
+              <td th:text="${item.appName}">Update software</td>
+              <td  style="font-size:1.2rem">
+
+                <th:block th:if="${item.heathStatus eq '200'}">
+                  <span class="badge bg-primary" th:text="${item.heathStatus}"></span>
+                </th:block>
+                <th:block th:unless="${item.heathStatus eq '200'}">
+                  <span class="badge bg-danger" th:text="${item.heathStatus}"></span>
+                </th:block>
+              </td>
+
+              <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}">Update software</td>
+              <td>
+                <button type="button"  th:onclick="del([[${item.id}]])"  class="btn bg-gradient-danger">删除</button>
+                <button type="button"  th:onclick="edit([[${item.id}]])"  class="btn bg-gradient-primary">编辑</button>
+              <button type="button"  th:onclick="view([[${item.id}]])"  class="btn bg-gradient-primary">查看</button></td>
+            </tr>
+          </th:block>
+
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+      <div th:replace="common/page.html"></div>
+    </div>
+    <!-- /.card -->
+
+
+  </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <div th:replace="common/footer.html"></div>
+
+</div>
+<!-- ./wrapper -->
+
+<script th:src="@{'/static/js/heath.js'}"></script>
+
+</body>
+</html>

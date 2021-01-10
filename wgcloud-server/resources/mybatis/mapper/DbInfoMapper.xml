@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wgcloud.mapper.DbInfoMapper">
+	<resultMap id="resultMap" type="com.wgcloud.entity.DbInfo">
+		<id column="ID" property="id" jdbcType="CHAR" />
+		<result column="DBTYPE" property="dbType" jdbcType="CHAR" />
+		<result column="USER" property="user" jdbcType="CHAR" />
+		<result column="PASSWD" property="passwd" jdbcType="CHAR" />
+		<result column="IP" property="ip" jdbcType="CHAR" />
+		<result column="DBNAME" property="dbName" jdbcType="CHAR" />
+		<result column="PORT" property="port" jdbcType="CHAR" />
+		<result column="DB_STATE" property="dbState" jdbcType="CHAR" />
+		<result column="ALIAS_NAME" property="aliasName" jdbcType="CHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="tableColumnList">
+		ID,DBTYPE, USER,PASSWD,CREATE_TIME,IP,PORT,DBNAME,DB_STATE,ALIAS_NAME
+	</sql>
+	
+	
+	<select id="selectByAccountId" resultMap="resultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM DB_INFO 
+	</select>
+	
+	
+	<select id="selectById" resultMap="resultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM DB_INFO 
+		WHERE ID=#{id} 
+	</select>
+	
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		DELETE FROM DB_INFO 
+		WHERE ID = #{id}
+	</delete>
+
+	<delete id="deleteByDate"  parameterType="map">
+		DELETE FROM DB_INFO WHERE   <![CDATA[  CREATE_TIME <=#{endTime}]]>
+	</delete>
+
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		DELETE FROM
+		DB_INFO 
+		WHERE ID IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<insert id="save" parameterType="com.wgcloud.entity.DbInfo">
+		INSERT INTO DB_INFO 
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >ID,</if>
+      		<if test="dbType != null" >DBTYPE,</if>
+      		<if test="user != null">USER,</if>
+      		<if test="passwd != null">PASSWD,</if>
+			<if test="ip != null">IP,</if>
+			<if test="port != null">PORT,</if>
+			<if test="dbName != null">DBNAME,</if>
+			<if test="dbState != null">DB_STATE,</if>
+			<if test="aliasName != null">ALIAS_NAME,</if>
+      		<if test="createTime != null" >CREATE_TIME</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+      		<if test="id != null" >#{id},</if>
+      		<if test="dbType != null" >#{dbType},</if>
+      		<if test="user != null" >#{user},</if>
+      		<if test="passwd != null" >#{passwd},</if>
+			<if test="ip != null" >#{ip},</if>
+			<if test="port != null" >#{port},</if>
+			<if test="dbName != null" >#{dbName},</if>
+			<if test="dbState != null" >#{dbState},</if>
+			<if test="aliasName != null" >#{aliasName},</if>
+      		<if test="createTime != null" >#{createTime}</if>
+    	</trim>
+	</insert>
+
+
+	<update id="updateById" parameterType="com.wgcloud.entity.DbInfo">
+		UPDATE DB_INFO
+		<set>
+			<if test="dbType != null">
+				DBTYPE = #{dbType},
+			</if>
+			<if test="user != null">
+				USER = #{user},
+			</if>
+			<if test="passwd != null">
+				PASSWD = #{passwd},
+			</if>
+			<if test="ip != null">
+				IP = #{ip},
+			</if>
+			<if test="port != null">
+				PORT = #{port},
+			</if>
+			<if test="dbName != null">
+				DBNAME = #{dbName},
+			</if>
+			<if test="dbState != null">
+				DB_STATE = #{dbState},
+			</if>
+			<if test="aliasName != null">
+				ALIAS_NAME = #{aliasName},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime}
+			</if>
+		</set>
+		WHERE ID = #{id}
+	</update>
+
+	<select id="countByParams" parameterType="map" resultType="java.lang.Integer">
+		SELECT count(*)  FROM DB_INFO t
+		<where>
+			<if test="cpuPer != null">
+				<![CDATA[ AND CPU_PER >= #{cpuPer} ]]>
+			</if>
+		</where>
+	</select>
+
+
+	<select id="selectAllByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM DB_INFO t
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	<select id="selectByParams" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="tableColumnList" />
+		FROM DB_INFO
+		 ORDER BY CREATE_TIME DESC
+	</select>
+	
+	
+</mapper>

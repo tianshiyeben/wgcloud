@@ -1,0 +1,14 @@
+<div class="card-footer clearfix">
+    <ul class="pagination pagination-sm m-0 float-right">
+        <li class="page-item"><a class="page-link"  th:href="@{${pageUrl}+'&page=1'}">«</a></li>
+        <th:block th:each="pageNumber : ${pageNumbers}">
+            <li class="page-item">
+                <a class="page-link" th:text="${page.pageNum}" style="font-weight:bold;color:#000"
+                                     th:if="${page.pageNum} eq ${pageNumber}">1</a>
+                <a class="page-link" th:text="${pageNumber}"
+                                     th:unless="${page.pageNum} eq ${pageNumber}" th:href="@{${pageUrl}+'&page='+${pageNumber}}">1</a>
+            </li>
+        </th:block>
+        <li class="page-item"><a class="page-link" th:href="@{${pageUrl}+'&page='+${page.pages}}">»</a></li>
+    </ul>
+</div>
