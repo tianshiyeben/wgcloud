@@ -20,7 +20,7 @@ WGCLOUD基于轻量级springboot架构，是高性能高并发的分布式监控
 
 4.WGCLOUD采用springboot+bootstrap，完美实现了分布式监控系统，为反哺开源社区，二次开源。
 
-5.v2.x即当前仓库为开源版，**v3.x为商业版（分为免费版和专业版）**，商业版功能更丰富，性能更优秀，[开源商业版区别](<./开源商业版区别.md>)
+5.v2.x即当前仓库为开源版，**v3.x为商业版（分免费版和专业版）**，商业版功能更丰富，性能更优秀，点击查看[开源商业版区别](<./开源商业版区别.md>)
 
 ## **网站**
 
@@ -41,8 +41,6 @@ WGCLOUD基于轻量级springboot架构，是高性能高并发的分布式监控
 4.wgcloud-agent运行所需sigar的so，dll等文件，在sigarLibs.zip里，解压后可用。
 
 **5.如果WGCLOUD帮助到了你，请在[www.wgstart.com](http://www.wgstart.com/help/docs4.html)打赏支持下，有你的支持开源才能做的更好**
-
-**6.如果GPL3.0 不能满足你的需求，请联系我获取更灵活的授权，tianshiyeben@qq.com**
 
 
 
