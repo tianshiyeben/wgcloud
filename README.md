@@ -38,7 +38,7 @@ WGCLOUD基于轻量级springboot架构，是高性能高并发的分布式监控
 
 3.运行所需sql脚本（本项目使用mysql数据库），在sql文件夹下，在mysql数据库里创建数据库wgcloud，导入wgcloud.sql即可。
 
-4.wgcloud-agent运行所需sigar的so，dll等文件，在sigarLibs.zip里，解压后可用。
+4.wgcloud-agent运行所需sigar的so，dll等文件，在sigarLibs.zip里，解压后可用，注意配置开发工具的VM参数：-Djava.library.path=E:\wgcloud-agent-v2.3\lib。
 
 **5.如果WGCLOUD帮助到了你，请在[www.wgstart.com](http://www.wgstart.com/help/docs4.html)打赏支持下，有你的支持开源才能做的更好**
 
