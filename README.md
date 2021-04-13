@@ -30,6 +30,10 @@ WGCLOUD基于轻量级springboot架构，是高性能高并发的分布式监控
 
 打开<http://www.wgstart.com>后，在网站顶部点击【演示】链接即可，免密登录
 
+## **视频**
+
+B站<https://space.bilibili.com/549621501/video>链接有wgcloud相关介绍、安装、使用、配置说明等视频
+
 ## **源码使用**
 
 1.因wgcloud使用springboot框架开发，需要分别新建maven工程wgcloud-server和wgcloud-agent

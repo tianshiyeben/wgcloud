@@ -24,6 +24,10 @@ Wgcloud is a distributed monitoring platform based on Java language. Its core mo
 
 <http://www.wgstart.com>
 
+## video
+
+<https://space.bilibili.com/549621501/video>
+
 ## **Source code use**
 
 1.Because wgcloud is developed with spring boot framework, it is necessary to build new Maven projects, wgcloud server and wgcloud agent respectively
