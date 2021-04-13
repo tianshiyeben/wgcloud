@@ -32,7 +32,7 @@ WGCLOUD基于轻量级springboot架构，是高性能高并发的分布式监控
 
 ## **视频**
 
-B站<https://space.bilibili.com/549621501/video>链接有wgcloud相关介绍、安装、使用、配置说明等视频
+B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 
 ## **源码使用**
 
