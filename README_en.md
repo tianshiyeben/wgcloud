@@ -10,7 +10,7 @@
 
 [中文版README](./README.md)
 
-Wgcloud is a distributed monitoring platform based on Java language. Its core modules include: server cluster monitoring, ES cluster monitoring, CPU monitoring, memory monitoring, data monitoring(mysql，oracle，pg), service heartbeat detection, application process management, disk IO monitoring, system load monitoring, network topology, port monitoring, log file monitoring, monitoring alarm information push.
+Wgcloud is a high-performance and high concurrent distributed monitoring system based on lightweight springboot architecture. Its core modules include:  host monitoring, ES cluster management, CPU monitoring, CPU temperature monitoring, large screen visualization display board, memory monitoring, data monitoring (mysql, Oracle, PG, etc.), service heartbeat detection, application process management, disk space and IO monitoring, hard disk smart health detection, System load monitoring, network topology, port monitoring, log file monitoring, docker monitoring, integrated with web version SSH client tools, monitoring alarm information (can be integrated with wechat pinning SMS, etc.) push .
 
 1.It adopts the collaborative work mode of server and client, which is lighter and more efficient. After cluster optimization, it can support 5000 + host monitoring.
 
@@ -55,6 +55,8 @@ Wgcloud is a distributed monitoring platform based on Java language. Its core mo
 
 
 ![WGCLOUD网络拓扑图](./demo/tpdemo.jpg)
+
+![WGCLOUD主机画像图](./demo/ssh.jpg)
 
 ![WGCLOUD主机画像图](./demo/huaxiang.jpg)
 
