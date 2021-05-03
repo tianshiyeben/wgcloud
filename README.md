@@ -36,7 +36,7 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 
 ## **源码使用**
 
-1.因wgcloud使用springboot框架开发，需要分别新建maven工程wgcloud-server和wgcloud-agent
+1.因wgcloud使用springboot框架开发，需要分别新建maven web工程wgcloud-server和wgcloud-agent
 
 2.然后将wgcloud-server和wgcloud-agent下的源码和pom文件，分别拷贝到刚新建的工程wgcloud-server和wgcloud-agent里，覆盖对应的目录
 
