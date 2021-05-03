@@ -74,10 +74,10 @@
         <label style="margin-left: .9rem">系统负载</label>
         <div id="ysLoadSstateJson"></div>
 
-        <label style="margin-left: .9rem">网络接收/发送总KB</label>
+        <label style="margin-left: .9rem">网络接收/发送，K/s</label>
         <div id="netIoStateByt"></div>
 
-        <label style="margin-left: .9rem">网络接收/发送总包数</label>
+        <label style="margin-left: .9rem">网络接收/发送，包数/s</label>
         <div id="netIoStatePck"></div>
     </div>
     <!-- /.card -->
@@ -108,7 +108,7 @@
         var chart = new G2.Chart({
             container: 'cpuStateJson',
             forceFit: true,
-            height: 500,
+            height: 400,
             padding: [30, 40, 70, 40]
         });
 
@@ -154,7 +154,7 @@
         var chart2 = new G2.Chart({
             container: 'memStateJson',
             forceFit: true,
-            height: 500,
+            height: 400,
             padding: [30, 40, 70, 40]
         });
         chart2.axis('dateStr', {
@@ -233,7 +233,7 @@
         var chart4 = new G2.Chart({
             container: 'netIoStateByt',
             forceFit: true,
-            height: 500,
+            height: 400,
             padding: [30, 40, 70, 48]
         });
         chart4.axis('dateStr', {
@@ -252,19 +252,19 @@
         });
         chart4.source(netIoStateJson, {
             rxbyt: {
-                alias: '接收总KB',
+                alias: '接收',
                 min: 0,
                 max: [[${netIoStateBytMaxVal}]],
                 formatter: val => {    // 设置坐标轴和提示框的文字
-                return val/1000 + 'K';
+                return val + 'K/s';
     }
     },
         txbyt: {
-            alias: '发送总KB',
+            alias: '发送',
                 min: 0,
                 max: [[${netIoStateBytMaxVal}]],
                 formatter: val => {
-                return val/1000 + 'K';
+                return val + 'K/s';
             }
         }
     });
@@ -277,7 +277,7 @@
         var chart5 = new G2.Chart({
             container: 'netIoStatePck',
             forceFit: true,
-            height: 500,
+            height: 400,
             padding: [30, 40, 70, 48]
         });
         chart5.axis('dateStr', {
@@ -296,19 +296,19 @@
         });
         chart5.source(netIoStateJson, {
             rxpck: {
-                alias: '接收总包数',
+                alias: '接收',
                 min: 0,
                 max: [[${netIoStatePckMaxVal}]],
                 formatter: val => {
-                return val/1000 + 'K';
+                return val + '个';
     }
     },
         txpck: {
-            alias: '发送总包数',
+            alias: '发送',
                 min: 0,
                 max: [[${netIoStatePckMaxVal}]],
                 formatter: val => {
-                return val/1000 + 'K';
+                return val + '个';
             }
         }
     });
