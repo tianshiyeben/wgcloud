@@ -20,7 +20,7 @@ WGCLOUD基于轻量级springboot架构，是高性能高并发的分布式监控
 
 4.WGCLOUD采用springboot+bootstrap，完美实现了分布式监控系统，为反哺开源社区，二次开源。
 
-5.v2即当前仓库为开源版，**v3为商业版（分免费个人版和付费专业版）**，商业版功能更多，性能更优秀，请点击查看[开源商业版区别](<./开源商业版区别.md>)
+5.v2即当前仓库为开源版，**v3为商业版（分免费个人版和付费专业版）**，商业版功能更多，性能更优秀，请点击查看[开源版和商业版区别](<./开源版和商业版区别.md>)
 
 ## **网站**
 
@@ -42,7 +42,7 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 
 3.运行所需sql脚本（本项目使用mysql数据库），在sql文件夹下，在mysql数据库里创建数据库wgcloud，导入wgcloud.sql即可。
 
-4.wgcloud-agent运行所需sigar的so，dll等文件，在sigarLibs.zip里，解压后可用，注意配置开发工具的VM参数：-Djava.library.path=E:\wgcloud-agent-v2.3\lib。
+4.wgcloud-agent运行所需sigar的so，dll等文件，在sigarLibs里，解压后可用，注意配置开发工具的VM参数：-Djava.library.path=E:\wgcloud-agent-v2.3\lib。
 
 **5.如果WGCLOUD帮助到了你，请在[www.wgstart.com](http://www.wgstart.com/help/docs4.html)打赏支持下，有你的支持开源才能做的更好**
 

@@ -4,20 +4,18 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- *
- * @ClassName:MD5.java     
  * @version v2.3
+ * @ClassName:MD5.java
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: MD5.java
- * @Copyright: 2019-2020 wgcloud. All rights reserved.
- *
+ * @Copyright: 2017-2021 wgcloud. All rights reserved.
  */
 public class MD5 {
-    
+
     // 全局数组
-    private final static String[] strDigits = { "0", "1", "2", "3", "4", "5",
-            "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
+    private final static String[] strDigits = {"0", "1", "2", "3", "4", "5",
+            "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"};
 
     public MD5() {
     }

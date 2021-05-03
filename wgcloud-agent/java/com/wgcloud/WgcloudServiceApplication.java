@@ -18,9 +18,8 @@ import java.nio.charset.Charset;
 @ComponentScan(basePackages = "com.wgcloud")
 @EnableCaching
 @EnableScheduling
-public class WgcloudServiceApplication
-{
-	public static void main(String[] args) {
+public class WgcloudServiceApplication {
+    public static void main(String[] args) {
         SpringApplication.run(WgcloudServiceApplication.class, args);
     }
 

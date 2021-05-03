@@ -1,99 +1,96 @@
 package com.wgcloud.entity;
 
-import com.wgcloud.FormatUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 
 /**
- *
- * @ClassName:AppState.java     
  * @version V2.3
- * @author: wgcloud     
+ * @ClassName:AppState.java
+ * @author: wgcloud
  * @date: 2019年11月16日
  * @Description: app状态监控
- * @Copyright: 2019-2022 wgcloud. All rights reserved.
- *
+ * @Copyright: 2017-2021 www.wgstart.com. All rights reserved.
  */
 public class AppState extends BaseEntity {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2913111613773445949L;
 
-	
-	/**
-	 * 应用信息ID
-	 */
-	private String appInfoId;
-	
+    /**
+     *
+     */
+    private static final long serialVersionUID = -2913111613773445949L;
 
-	/**
-	 * %CPU
-	 */
+
+    /**
+     * 应用信息ID
+     */
+    private String appInfoId;
+
+
+    /**
+     * %CPU
+     */
     private Double cpuPer;
 
     /**
-	 * %MEM
-	 */
+     * %MEM
+     */
     private Double memPer;
-    
+
     /**
      * 添加时间
      * MM-dd hh:mm:ss
      */
     private String dateStr;
-    
+
     /**
      * 创建时间
      */
-    private Date createTime; 
+    private Date createTime;
 
 
-	public Double getCpuPer() {
-		return cpuPer;
-	}
+    public Double getCpuPer() {
+        return cpuPer;
+    }
 
-	public void setCpuPer(Double cpuPer) {
-		this.cpuPer = cpuPer;
-	}
+    public void setCpuPer(Double cpuPer) {
+        this.cpuPer = cpuPer;
+    }
 
-	
-	public String getAppInfoId() {
-		return appInfoId;
-	}
 
-	public void setAppInfoId(String appInfoId) {
-		this.appInfoId = appInfoId;
-	}
+    public String getAppInfoId() {
+        return appInfoId;
+    }
 
-	public Double getMemPer() {
-		return memPer;
-	}
+    public void setAppInfoId(String appInfoId) {
+        this.appInfoId = appInfoId;
+    }
 
-	public void setMemPer(Double memPer) {
-		this.memPer = memPer;
-	}
+    public Double getMemPer() {
+        return memPer;
+    }
 
-	public Date getCreateTime() {
-		return createTime;
-	}
+    public void setMemPer(Double memPer) {
+        this.memPer = memPer;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public String getDateStr() {
-		if(!StringUtils.isEmpty(dateStr)&&dateStr.length()>16){
-			return dateStr.substring(5);
-		}
-		return dateStr;
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	public void setDateStr(String dateStr) {
-		this.dateStr = dateStr;
-	}
+    public String getDateStr() {
+        if (!StringUtils.isEmpty(dateStr) && dateStr.length() > 16) {
+            return dateStr.substring(5);
+        }
+        return dateStr;
+    }
 
-   
+    public void setDateStr(String dateStr) {
+        this.dateStr = dateStr;
+    }
+
+
 }

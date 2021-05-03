@@ -7,9 +7,9 @@ public class BaseEntity implements Serializable {
 
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8698319936744959815L;
+     *
+     */
+    private static final long serialVersionUID = 8698319936744959815L;
 
 
     private String id;
@@ -18,33 +18,33 @@ public class BaseEntity implements Serializable {
 
     private Integer pageSize;
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public Integer getPage() {
-		if(page==null) {
-			page =  1;
-		}
-		return page;
-	}
+    public Integer getPage() {
+        if (page == null) {
+            page = 1;
+        }
+        return page;
+    }
 
-	public void setPage(Integer page) {
-		this.page = page;
-	}
+    public void setPage(Integer page) {
+        this.page = page;
+    }
 
-	public Integer getPageSize() {
-		if(pageSize==null) {
-			pageSize = 20;
-		}
-		return pageSize;
-	}
+    public Integer getPageSize() {
+        if (pageSize == null) {
+            pageSize = 20;
+        }
+        return pageSize;
+    }
 
-	public void setPageSize(Integer pageSize) {
-		this.pageSize = pageSize;
-	}
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
 }

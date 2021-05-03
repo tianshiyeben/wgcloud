@@ -3,66 +3,64 @@ package com.wgcloud.entity;
 import java.util.Date;
 
 /**
- *
- * @ClassName:SystemInfo.java     
  * @version v2.3
+ * @ClassName:SystemInfo.java
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: 查看系统信息
- * @Copyright: 2019-2020 wgcloud. All rights reserved.
- *
+ * @Copyright: 2017-2021 wgcloud. All rights reserved.
  */
-public class SystemInfo extends BaseEntity{
-	
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 879979812204191283L;
+public class SystemInfo extends BaseEntity {
 
 
-	/**
-	 * host名称
-	 */
-	private String hostname;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 879979812204191283L;
 
-	/**
-	 * 系统版本信息
-	 */
+
+    /**
+     * host名称
+     */
+    private String hostname;
+
+    /**
+     * 系统版本信息
+     */
     private String version;
 
     /**
-	 *系统版本详细信息
-	 */
+     * 系统版本详细信息
+     */
     private String versionDetail;
-    
+
     /**
-	 *内存使用率
-	 */
+     * 内存使用率
+     */
     private Double memPer;
-    
+
     /**
-   	 * core的个数(即核数)
-   	 */
+     * core的个数(即核数)
+     */
     private String cpuCoreNum;
-    
+
     /**
      * cpu使用率
      */
     private Double cpuPer;
-    
+
     /**
      * CPU型号信息
      */
     private String cpuXh;
 
 
-	/**
-	 * 主机状态，1正常，2下线
-	 */
-	private String state;
-    
-    
+    /**
+     * 主机状态，1正常，2下线
+     */
+    private String state;
+
+
     /**
      * 创建时间
      */
@@ -71,95 +69,95 @@ public class SystemInfo extends BaseEntity{
     private String hostId;
     private String hostRemark;
 
-    
-	public String getVersion() {
-		return version;
-	}
 
-	public void setVersion(String version) {
-		this.version = version;
-	}
+    public String getVersion() {
+        return version;
+    }
 
-	public String getVersionDetail() {
-		return versionDetail;
-	}
+    public void setVersion(String version) {
+        this.version = version;
+    }
 
-	public void setVersionDetail(String versionDetail) {
-		this.versionDetail = versionDetail;
-	}
+    public String getVersionDetail() {
+        return versionDetail;
+    }
 
-
-	public String getCpuCoreNum() {
-		return cpuCoreNum;
-	}
-
-	public void setCpuCoreNum(String cpuCoreNum) {
-		this.cpuCoreNum = cpuCoreNum;
-	}
+    public void setVersionDetail(String versionDetail) {
+        this.versionDetail = versionDetail;
+    }
 
 
-	public Date getCreateTime() {
-		return createTime;
-	}
+    public String getCpuCoreNum() {
+        return cpuCoreNum;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    public void setCpuCoreNum(String cpuCoreNum) {
+        this.cpuCoreNum = cpuCoreNum;
+    }
 
 
-	public String getHostname() {
-		return hostname;
-	}
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public void setHostname(String hostname) {
-		this.hostname = hostname;
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	public String getCpuXh() {
-		return cpuXh;
-	}
 
-	public void setCpuXh(String cpuXh) {
-		this.cpuXh = cpuXh;
-	}
+    public String getHostname() {
+        return hostname;
+    }
 
-	public Double getMemPer() {
-		return memPer;
-	}
+    public void setHostname(String hostname) {
+        this.hostname = hostname;
+    }
 
-	public void setMemPer(Double memPer) {
-		this.memPer = memPer;
-	}
+    public String getCpuXh() {
+        return cpuXh;
+    }
 
-	public Double getCpuPer() {
-		return cpuPer;
-	}
+    public void setCpuXh(String cpuXh) {
+        this.cpuXh = cpuXh;
+    }
 
-	public void setCpuPer(Double cpuPer) {
-		this.cpuPer = cpuPer;
-	}
+    public Double getMemPer() {
+        return memPer;
+    }
 
-	public String getState() {
-		return state;
-	}
+    public void setMemPer(Double memPer) {
+        this.memPer = memPer;
+    }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    public Double getCpuPer() {
+        return cpuPer;
+    }
 
-	public String getHostId() {
-		return hostId;
-	}
+    public void setCpuPer(Double cpuPer) {
+        this.cpuPer = cpuPer;
+    }
 
-	public void setHostId(String hostId) {
-		this.hostId = hostId;
-	}
+    public String getState() {
+        return state;
+    }
 
-	public String getHostRemark() {
-		return hostRemark;
-	}
+    public void setState(String state) {
+        this.state = state;
+    }
 
-	public void setHostRemark(String hostRemark) {
-		this.hostRemark = hostRemark;
-	}
+    public String getHostId() {
+        return hostId;
+    }
+
+    public void setHostId(String hostId) {
+        this.hostId = hostId;
+    }
+
+    public String getHostRemark() {
+        return hostRemark;
+    }
+
+    public void setHostRemark(String hostRemark) {
+        this.hostRemark = hostRemark;
+    }
 }

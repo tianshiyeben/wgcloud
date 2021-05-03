@@ -11,33 +11,33 @@ import org.springframework.context.annotation.Configuration;
 public class CommonConfig {
 
 
-	private   String serverUrl = "";
+    private String serverUrl = "";
 
-	private  String bindIp = "";
+    private String bindIp = "";
 
-	private  String wgToken = "";
+    private String wgToken = "";
 
-	public String getServerUrl() {
-		return serverUrl;
-	}
+    public String getServerUrl() {
+        return serverUrl;
+    }
 
-	public void setServerUrl(String serverUrl) {
-		this.serverUrl = serverUrl;
-	}
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
+    }
 
-	public String getBindIp() {
-		return bindIp;
-	}
+    public String getBindIp() {
+        return bindIp;
+    }
 
-	public void setBindIp(String bindIp) {
-		this.bindIp = bindIp;
-	}
+    public void setBindIp(String bindIp) {
+        this.bindIp = bindIp;
+    }
 
-	public String getWgToken() {
-		return wgToken;
-	}
+    public String getWgToken() {
+        return wgToken;
+    }
 
-	public void setWgToken(String wgToken) {
-		this.wgToken = wgToken;
-	}
+    public void setWgToken(String wgToken) {
+        this.wgToken = wgToken;
+    }
 }

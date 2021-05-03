@@ -12,62 +12,61 @@ import org.springframework.context.annotation.Configuration;
 public class CommonConfig {
 
 
-
-	//admin管理员密码
-	private  String admindPwd= "111111";
-	private  String wgToken = "";
-	private  String dashView;
-	private  Integer dbTableTimes = 3600000;
-	private  Integer heathTimes = 600000;
-
-
-	public String getAdmindPwd() {
-		return admindPwd;
-	}
-
-	public void setAdmindPwd(String admindPwd) {
-		this.admindPwd = admindPwd;
-	}
-
-	public String getWgToken() {
-		return wgToken;
-	}
-
-	public void setWgToken(String wgToken) {
-		this.wgToken = wgToken;
-	}
+    //admin管理员密码
+    private String admindPwd = "111111";
+    private String wgToken = "";
+    private String dashView;
+    private Integer dbTableTimes = 3600000;
+    private Integer heathTimes = 600000;
 
 
-	public String getDashView() {
-		if(StringUtils.isEmpty(dashView)){
-			return "true";
-		}
-		return dashView;
-	}
+    public String getAdmindPwd() {
+        return admindPwd;
+    }
 
-	public void setDashView(String dashView) {
-		this.dashView = dashView;
-	}
+    public void setAdmindPwd(String admindPwd) {
+        this.admindPwd = admindPwd;
+    }
 
-	public Integer getDbTableTimes() {
-		if(dbTableTimes==null){
-			return 3600000;
-		}
-		return dbTableTimes;
-	}
+    public String getWgToken() {
+        return wgToken;
+    }
 
-	public void setDbTableTimes(Integer dbTableTimes) {
-		this.dbTableTimes = dbTableTimes;
-	}
+    public void setWgToken(String wgToken) {
+        this.wgToken = wgToken;
+    }
 
-	public Integer getHeathTimes() {
-		if(heathTimes==null){
-			return 600000;
-		}
-		return heathTimes;
-	}
 
-	public void setHeathTimes(Integer heathTimes) {
-		this.heathTimes = heathTimes;
-	}
+    public String getDashView() {
+        if (StringUtils.isEmpty(dashView)) {
+            return "true";
+        }
+        return dashView;
+    }
+
+    public void setDashView(String dashView) {
+        this.dashView = dashView;
+    }
+
+    public Integer getDbTableTimes() {
+        if (dbTableTimes == null) {
+            return 3600000;
+        }
+        return dbTableTimes;
+    }
+
+    public void setDbTableTimes(Integer dbTableTimes) {
+        this.dbTableTimes = dbTableTimes;
+    }
+
+    public Integer getHeathTimes() {
+        if (heathTimes == null) {
+            return 600000;
+        }
+        return heathTimes;
+    }
+
+    public void setHeathTimes(Integer heathTimes) {
+        this.heathTimes = heathTimes;
+    }
 }

@@ -7,21 +7,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
- * @ClassName:DbTableCountMapper.java
  * @version v2.3
+ * @ClassName:DbTableCountMapper.java
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: DbTableCountDao.java
- * @Copyright: 2019-2020 wgcloud. All rights reserved.
- *
+ * @Copyright: 2017-2021 wgcloud. All rights reserved.
  */
 @Repository
 public interface DbTableCountMapper {
 
     public List<DbTableCount> selectAllByParams(Map<String, Object> map) throws Exception;
 
-	public List<DbTableCount> selectByParams(Map<String, Object> params) throws Exception;
+    public List<DbTableCount> selectByParams(Map<String, Object> params) throws Exception;
 
     public DbTableCount selectById(String id) throws Exception;
 
