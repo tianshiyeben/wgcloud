@@ -30,9 +30,9 @@ Wgcloud is a high-performance and high concurrent distributed monitoring system 
 
 ## **Source code use**
 
-1.Because wgcloud is developed with spring boot framework, it is necessary to build new Maven projects, wgcloud server and wgcloud agent respectively
+1.If you use idea (recommended), you can directly open wgcloud server and wgcloud agent. JDK uses 1.8
 
-2.Then copy the source code and POM files under the wgcloud-server and wgcloud-agent to the newly-built project wgcloud server and wgcloud agent respectively, and overwrite the corresponding directory
+2.If you use eclipse, you can import the Maven project wgcloud server and wgcloud agent. JDK uses 1.8
 
 3.Run the required SQL script (MySQL database is used in this project). Under the SQL folder, create the database wgcloud in MySQL database and import wgcloud.sql.
 

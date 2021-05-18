@@ -38,13 +38,13 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 
 ## **源码使用**
 
-1.因wgcloud使用springboot框架开发，需要分别新建maven web工程wgcloud-server和wgcloud-agent
+1.使用IDEA的话（推荐），直接打开wgcloud-server和wgcloud-agent即可，JDK使用1.8
 
-2.然后将wgcloud-server和wgcloud-agent下的源码和pom文件，分别拷贝到刚新建的工程wgcloud-server和wgcloud-agent里，覆盖对应的目录
+2.使用Eclipse的话，导入maven工程wgcloud-server和wgcloud-agent即可，JDK使用1.8
 
-3.运行所需sql脚本（本项目使用mysql数据库），在sql文件夹下，在mysql数据库里创建数据库wgcloud，导入wgcloud.sql即可
+2.运行所需sql脚本（本项目使用mysql数据库），在sql文件夹下，在mysql数据库里创建数据库wgcloud，导入wgcloud.sql即可
 
-4.wgcloud-agent运行所需sigar的so，dll等文件，在sigarLibs里，解压后可用，开发环境注意配置编译器的VM参数即sigarLibs路径：-Djava.library.path=E:\wgcloud-agent-v2.3\sigarLibs
+3.wgcloud-agent运行所需sigar的so，dll等文件，在sigarLibs里，解压后可用，开发环境注意配置编译器的VM参数即sigarLibs路径：-Djava.library.path=E:\wgcloud-agent-v2.3\sigarLibs
 
 ## **功能截图**
 
