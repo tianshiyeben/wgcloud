@@ -10,15 +10,16 @@
 
 [中文版README](./README.md)
 
-Wgcloud is a high-performance and high concurrent distributed monitoring system based on lightweight springboot architecture. Its core modules include:  host monitoring, ES cluster management, CPU monitoring, CPU temperature monitoring, large screen visualization display board, memory monitoring, data monitoring (mysql, Oracle, PG, etc.), service heartbeat detection, application process management, disk space and IO monitoring, hard disk smart health detection, System load monitoring, network topology, port monitoring, log file monitoring, docker monitoring, integrated with web version SSH client tools, monitoring alarm information (can be integrated with wechat pinning SMS, etc.) push .
+Wgcloud design idea is a new generation of very simple operation and maintenance monitoring system, which advocates rapid deployment, reduces the difficulty of operation and maintenance learning, runs automatically, and has no template and script. The current warehouse version is v2.3.6.
 
-1.It adopts the collaborative work mode of server and client, which is lighter and more efficient. After cluster optimization, it can support 5000 + host monitoring.
+Wgcloud is developed based on the microservice springboot architecture, and is a lightweight and high-performance distributed monitoring system. The core collection indexes include: **host system information, ES cluster status, CPU status, CPU temperature monitoring, large screen visualization, memory status, data monitoring (mysql, Oracle, PgSQL, etc.), service interface detection, application process management, disk space and IO monitoring, Hard disk smart health detection, system load monitoring, network topology, port monitoring, log file monitoring, docker monitoring, web SSH, fortress machine, alarm information (email micro nail message, etc.) push** 
 
-2.The server is responsible for receiving data, processing data and generating charts. The agent side is responsible for regularly reporting the indicator data.
-
-3.Support the installation and deployment of mainstream server platforms, such as Linux, windows, Solaris, AIX, HP-UX, etc.
-
-4.Wgcloud adopts the microservice springboot + bootstrap to realize the distributed monitoring system perfectly, which is open-source community and secondary open-source.
+1. the server and client work together, which is lighter and more efficient, and can support thousands of hosts to monitor online at the same time.
+2. The server side is responsible for receiving data, processing data, and generating chart display. The agent side reports the index data every 30 seconds (time adjustable) by default.
+3. support the installation and deployment of mainstream server platforms, such as Linux, windows, MacOS, etc.
+4. Wgcloud adopts springboot+bootstrap to realize the distributed monitoring system perfectly, which is used to feed the open source community and open source for the second time.
+5. v2 means the current warehouse is open source version, V3 is commercial version (free of charge) . It is recommended to deploy commercial version in production environment. Commercial version has better function and performance. 
+6. if you feel wggroup has helped you, you don't need to reward it, just click star to support it
 
 ## site
 
