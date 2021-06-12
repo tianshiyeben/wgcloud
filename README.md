@@ -16,7 +16,7 @@ WGCLOUD基于微服务springboot架构开发，是轻量高性能的分布式监
 
 2.server端负责接受数据，处理数据，生成图表展示。agent端默认每隔30秒(时间可调)上报指标数据。
 
-3.支持主流服务器平台安装部署，如Linux, Windows,macOS等。
+3.支持主流服务器平台安装部署，如Linux, Windows,macOS,Uninx等。
 
 4.WGCLOUD采用springboot+bootstrap，完美实现了分布式监控系统，为反哺开源社区，二次开源。
 
@@ -71,9 +71,15 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 
 1.JDK1.8
 
-2.mysql5.6 或 5.7
+2.mysql5.6及以上
 
-3.跨平台，linux：内核版本2.6.23或更高，CentOS/RHEL 6.0以上。windows：windows server 2003以上
+3.支持监测Linux系列：debian、redhat、centos、ubuntu、麒麟、统信、龙芯、树莓派等。PS：linux内核版本需要2.6.23或更高，CentOS/RHEL 6.0以上
+
+4.支持监测windows系列：windows server2003以上(不含2003)，win7，win8，win10
+
+5.支持监测macOS系列：macOS amd64
+
+6.支持监测solaris
 
 ## 联系
 

@@ -66,7 +66,15 @@ Wgcloud is developed based on the microservice springboot architecture, and is a
 
 1.JDK1.8
 
-3.mysql5.6 或 5.7
+2.Mysql5.6 and above
+
+3.Support monitoring linux series: Debian, RedHat, CentOS, Ubuntu, Qilin, Tongxin, Loongson, raspberry pie, etc. PS: Linux kernel version 2.6.23 or higher, CentOS / RHEL 6.0 or higher
+
+4.Support monitoring windows series: Windows Server 2003 or above (excluding 2003), win7, win8, win10
+
+5.Support monitoring MacOS series: MacOS AMD64
+
+6.Support monitoring of Solaris
 
 
 
