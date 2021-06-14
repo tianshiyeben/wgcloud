@@ -56,15 +56,11 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 
 ![WGCLOUD监控主机列表](./demo/demo3.jpg)
 
-![WGCLOUD监控主机列表](./demo/daping.jpg)
+
 
 ![WGCLOUD监控图表](./demo/demo4.jpg)
 
 
-
-![WGCLOUD网络拓扑图](./demo/tpdemo.jpg)
-
-![WGCLOUD主机画像图](./demo/huaxiang.jpg)
 
 
 ## 运行环境
