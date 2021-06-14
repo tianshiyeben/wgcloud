@@ -22,15 +22,15 @@ WGCLOUD基于微服务springboot架构开发，是轻量高性能的分布式监
 
 5.v2即当前仓库为开源版，**v3为商业版（免费）**，生产环境建议部署商业版，商业版功能和性能更优秀，请点击查看[开源版和商业版区别](<./开源版和商业版区别.md>)
 
-6.如果你觉得WGCLOUD帮助到了你，不需要打赏，只要点击star支持下就好
+6.如果你觉得WGCLOUD帮助到了你，不用打赏我们，只要点击star支持下就好了
 
 ## **网站**
 
 <http://www.wgstart.com>
 
-## **演示**
+## **github仓库**
 
-打开<http://www.wgstart.com>后，在网站顶部点击【演示】链接即可，免密登录
+<https://github.com/tianshiyeben/wgcloud>
 
 ## **视频**
 
