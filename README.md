@@ -16,7 +16,7 @@ WGCLOUD基于微服务springboot架构开发，是轻量高性能的分布式监
 
 2.server端负责接受数据，处理数据，生成图表展示。agent端默认每隔30秒(时间可调)上报指标数据。
 
-3.支持主流服务器平台安装部署，如Linux, Windows,macOS,Uninx等。
+3.支持主流服务器平台安装部署，如Linux, Windows,macOS,Unix等。
 
 4.WGCLOUD采用springboot+bootstrap，完美实现了分布式监控系统，为反哺开源社区，二次开源。
 
