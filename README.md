@@ -54,7 +54,7 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 
 ![WGCLOUD监控主机列表](./demo/demo3.jpg)
 
-![WGCLOUD监控主机列表](./demo/daping.jpg)
+![WGCLOUD监控主机列表](./demo/dp.jpg)
 
 ![WGCLOUD监控图表](./demo/demo4.jpg)
 
