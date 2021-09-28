@@ -28,7 +28,7 @@ WGCLOUD基于微服务springboot架构开发，是轻量高性能的分布式监
 
 <http://www.wgstart.com>
 
-## **Github仓库(2.7k stars)**
+## **Github仓库(2.7k⭐)**
 
 <https://github.com/tianshiyeben/wgcloud>
 
