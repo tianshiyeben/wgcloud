@@ -17,7 +17,7 @@ import java.io.IOException;
 
 /**
  * @version v2.3
- * @ClassName:AgentController.java
+ * @ClassName:AuthRestFilter.java
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: http请求过滤器，拦截不是从路由过来的请求
@@ -43,7 +43,7 @@ public class AuthRestFilter implements Filter {
         final HttpSession session = request.getSession();
         AccountInfo accountInfo = (AccountInfo) session.getAttribute(StaticKeys.LOGIN_KEY);
         String uri = request.getRequestURL().toString();
-        log.info("uri----" + request.getRequestURL());
+//        log.info("uri----" + request.getRequestURL());
         menuActive(session, uri);
         for (String ss : static_resource) {
             if (uri.indexOf(ss) != -1) {
