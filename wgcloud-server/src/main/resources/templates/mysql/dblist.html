@@ -15,7 +15,7 @@
   <div th:replace="common/aside.html"></div>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="font-size: 0.9rem">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -80,8 +80,8 @@
               </td>
               <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}">Update software</td>
               <td>
-                <button type="button"  th:onclick="view([[${item.id}]])"  class="btn bg-gradient-danger">编辑</button>
-                <button type="button"  th:onclick="del([[${item.id}]])"  class="btn bg-gradient-danger">删除</button>
+                <button type="button"  th:onclick="view([[${item.id}]])"  class="btn bg-gradient-danger btn-sm">编辑</button>
+                <button type="button"  th:onclick="del([[${item.id}]])"  class="btn bg-gradient-danger btn-sm">删除</button>
               </td>
             </tr>
           </th:block>

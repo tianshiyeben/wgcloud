@@ -15,7 +15,7 @@
   <div th:replace="common/aside.html"></div>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="font-size: 0.9rem">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -91,10 +91,10 @@
                   <button type="button" class="btn btn-default" data-toggle="modal" th:onclick="setHostRemark([[${item.hostname}]],[[${item.hostId}]],[[${item.hostRemark}]])" data-target="#modal-default">
                      备注
                   </button>
-                  <button type="button"  th:onclick="view([[${item.id}]])"  class="btn btn-primary">系统信息</button>
-                  <button type="button"  th:onclick="viewChart([[${item.id}]])"  class="btn btn-primary">图表</button>
-                  <button type="button"  th:onclick="viewApps([[${item.hostname}]])"  class="btn btn-primary">进程</button>
-                  <button type="button"  th:onclick="del([[${item.id}]])"  class="btn bg-gradient-danger">删除</button></td>
+                  <button type="button"  th:onclick="view([[${item.id}]])"  class="btn btn-primary btn-sm">系统信息</button>
+                  <button type="button"  th:onclick="viewChart([[${item.id}]])"  class="btn btn-primary btn-sm">图表</button>
+                  <button type="button"  th:onclick="viewApps([[${item.hostname}]])"  class="btn btn-primary btn-sm">进程</button>
+                  <button type="button"  th:onclick="del([[${item.id}]])"  class="btn bg-gradient-danger btn-sm">删除</button></td>
 
             </tr>
           </th:block>
