@@ -15,7 +15,7 @@
   <div th:replace="common/aside.html"></div>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="font-size: 0.9rem">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -42,7 +42,7 @@
             <div class="input-group input-group-sm">
               <input class="form-control form-control-navbar" name="hostname" autocomplete="off" th:value="${appInfo.hostname}" type="search" placeholder="输入ip" aria-label="Search">
               <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
+                <button class="btn btn-default" type="submit">
                   <i class="fas fa-search"></i>
                 </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button type="button" onclick="add()" class="btn btn-block btn-primary btn-sm">添加</button>
@@ -94,9 +94,9 @@
               </td>
               <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}">Update software</td>
               <td>
-                <button type="button"  th:onclick="edit([[${item.id}]])"  class="btn bg-gradient-primary">编辑</button>
-                <button type="button"  th:onclick="del([[${item.id}]])"  class="btn bg-gradient-danger">删除</button>
-                <button type="button"  th:onclick="view([[${item.id}]])"  class="btn bg-gradient-primary">图表</button></td>
+                <button type="button"  th:onclick="edit([[${item.id}]])"  class="btn bg-gradient-primary btn-sm">编辑</button>
+                <button type="button"  th:onclick="del([[${item.id}]])"  class="btn bg-gradient-danger btn-sm">删除</button>
+                <button type="button"  th:onclick="view([[${item.id}]])"  class="btn bg-gradient-primary btn-sm">图表</button></td>
             </tr>
           </th:block>
 
