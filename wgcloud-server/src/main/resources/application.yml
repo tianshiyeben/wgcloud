@@ -15,7 +15,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/wgcloud?characterEncoding=utf-8&characterSetResults=utf8&autoReconnect=true&useSSL=false&allowMultiQueries=true
     username: root
-    password: mysql
+    password: 123456
     # hikari连接池的参数 相关设置
     hikari:
       # 生效超时
