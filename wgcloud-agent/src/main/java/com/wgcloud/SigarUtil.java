@@ -117,7 +117,8 @@ public class SigarUtil {
         double sys = 0;
         double wait = 0;
         double idle = 0;
-        for (int i = 0; i < infos.length; i++) {// 不管是单块CPU还是多CPU都适用
+        // 不管是单块CPU还是多CPU都适用
+        for (int i = 0; i < infos.length; i++) {
             CpuInfo info = infos[i];
            /* System.out.println("第" + (i + 1) + "块CPU信息");
             System.out.println("CPU的总量MHz:    " + info.getMhz());// CPU的总量MHz
@@ -303,6 +304,7 @@ public class SigarUtil {
             return null;
         }
         if (systemInfo.getVersionDetail().indexOf("Microsoft") > -1) {
+            //windows系统不支持负载指标
             return null;
         }
         double[] load = sigar.getLoadAverage();
