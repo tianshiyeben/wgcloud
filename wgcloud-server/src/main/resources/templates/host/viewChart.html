@@ -119,8 +119,6 @@
                 }
             }
         });
-        chart.axis('iowait', false);
-        chart.axis('idle', false);
         chart.tooltip({
             crosshairs: false
         });
@@ -133,22 +131,10 @@
                 alias: '使用率',
                 min: 0,
                 max: [[${cpuStateMaxVal}]]
-            },
-            idle: {
-                alias: '空闲率',
-                min: 0,
-                max: [[${cpuStateMaxVal}]]
-            },
-            iowait: {
-                alias: '等待率',
-                min: 0,
-                max: [[${cpuStateMaxVal}]]
             }
         });
         chart.scale('dateStr',{tickCount: 12,alias: '时间'});
         chart.line().position('dateStr*sys').color('#2fc25b');
-        chart.line().position('dateStr*idle').color('#1890ff');
-        chart.line().position('dateStr*iowait').color('#ffca0b');
         chart.render();
 
         var chart2 = new G2.Chart({

@@ -5,6 +5,7 @@ server:
 spring:
   application:
     name: wgcloud-agent
+#日志文件输出路径
 logging:
   path: ./log
 
@@ -13,6 +14,6 @@ base:
   #wgcloud-server端访问地址
   serverUrl: http://localhost:9999
   #本机ip，不要用localhost或127.0.0.1
-  bindIp: 192.168.1.2
+  bindIp: 192.168.1.3
   #通信token，请和server端配置的wgToken保持一致
   wgToken: wgcloud

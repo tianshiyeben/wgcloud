@@ -61,7 +61,7 @@
             <th style="width: 80px">序号</th>
             <th>IP</th>
             <th>进程名称</th>
-            <th>内存使用M</th>
+            <th>内存使用%</th>
             <th>CPU使用率%</th>
             <th>更新时间</th>
               <th>操作</th>
@@ -81,7 +81,7 @@
                 </th:block>
               </td>
               <td th:text="${item.memPer}">Update software</td>
-              <td  style="font-size:1.2rem">
+              <td>
                   <th:block th:if="${item.cpuPer >= 90}">
                       <span class="badge bg-danger" th:text="${item.cpuPer}"></span>
                   </th:block>

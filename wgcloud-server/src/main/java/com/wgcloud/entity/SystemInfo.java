@@ -60,14 +60,18 @@ public class SystemInfo extends BaseEntity {
      */
     private String state;
 
-
     /**
      * 创建时间
      */
     private Date createTime;
 
-    private String hostId;
-    private String hostRemark;
+    //磁盘总使用率%
+    private Double diskPer;
+
+    /**
+     * 主机备注
+     */
+    private String remark;
 
 
     public String getVersion() {
@@ -145,19 +149,19 @@ public class SystemInfo extends BaseEntity {
         this.state = state;
     }
 
-    public String getHostId() {
-        return hostId;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setHostId(String hostId) {
-        this.hostId = hostId;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
-    public String getHostRemark() {
-        return hostRemark;
+    public Double getDiskPer() {
+        return diskPer;
     }
 
-    public void setHostRemark(String hostRemark) {
-        this.hostRemark = hostRemark;
+    public void setDiskPer(Double diskPer) {
+        this.diskPer = diskPer;
     }
 }

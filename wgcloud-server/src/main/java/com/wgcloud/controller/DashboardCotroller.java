@@ -211,7 +211,31 @@ public class DashboardCotroller {
             if (request.getParameter(StaticKeys.DASH_VIEW_ACCOUNT) != null) {
                 url.append("&dashView=1");
             }
-            PageInfo pageInfo = systemInfoService.selectByParams(params, systemInfo.getPage(), systemInfo.getPageSize());
+            PageInfo<SystemInfo> pageInfo = systemInfoService.selectByParams(params, systemInfo.getPage(), systemInfo.getPageSize());
+
+            //设置磁盘总使用率 begin
+            for (SystemInfo systemInfo1 : pageInfo.getList()) {
+                params.put("hostname", systemInfo1.getHostname());
+                List<DeskState> deskStates = deskStateService.selectAllByParams(params);
+                try {
+                    Double sumSize = 0d;
+                    Double useSize = 0d;
+                    for (DeskState deskState : deskStates) {
+                        if (!StringUtils.isEmpty(deskState.getSize()) && !StringUtils.isEmpty(deskState.getUsed())) {
+                            sumSize += Double.valueOf(deskState.getSize().replace("G", ""));
+                            useSize += Double.valueOf(deskState.getUsed().replace("G", ""));
+                        }
+                    }
+                    systemInfo1.setDiskPer(0D);
+                    if (sumSize != 0) {
+                        systemInfo1.setDiskPer(FormatUtil.formatDouble((useSize / sumSize) * 100, 2));
+                    }
+                } catch (Exception e){
+                    logger.error("设置磁盘总使用率错误", e);
+                }
+            }
+            //设置磁盘总使用率 end
+
             PageUtil.initPageNumber(pageInfo, model);
             model.addAttribute("pageUrl", "/dash/systemInfoList?1=1" + url.toString());
             model.addAttribute("page", pageInfo);

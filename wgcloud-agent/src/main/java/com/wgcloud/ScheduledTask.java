@@ -6,12 +6,13 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.wgcloud.entity.*;
 import org.apache.commons.lang3.StringUtils;
-import org.hyperic.sigar.SigarException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import oshi.hardware.HardwareAbstractionLayer;
+import oshi.software.os.OperatingSystem;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -48,9 +49,9 @@ public class ScheduledTask {
     static ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 2, TimeUnit.MINUTES, new LinkedBlockingDeque<>());
 
     /**
-     * 60秒后执行，每隔90秒执行, 单位：ms。
+     * 60秒后执行，每隔120秒执行, 单位：ms。
      */
-    @Scheduled(initialDelay = 59 * 1000L, fixedRate = 90 * 1000)
+    @Scheduled(initialDelay = 59 * 1000L, fixedRate = 120 * 1000)
     public void minTask() {
         List<AppInfo> APP_INFO_LIST_CP = new ArrayList<AppInfo>();
         APP_INFO_LIST_CP.addAll(appInfoList);
@@ -60,22 +61,27 @@ public class ScheduledTask {
         logInfo.setHostname(commonConfig.getBindIp() + "：Agent错误");
         logInfo.setCreateTime(t);
         try {
+            oshi.SystemInfo si = new oshi.SystemInfo();
+
+            HardwareAbstractionLayer hal = si.getHardware();
+            OperatingSystem os = si.getOperatingSystem();
+
             // 操作系统信息
-            systemInfo = SigarUtil.os();
+            systemInfo = OshiUtil.os(hal.getProcessor(), os);
             systemInfo.setCreateTime(t);
             // 文件系统信息
-            List<DeskState> deskStateList = SigarUtil.file(t);
+            List<DeskState> deskStateList = OshiUtil.file(t, os.getFileSystem());
             // cpu信息
-            CpuState cpuState = SigarUtil.cpu();
+            CpuState cpuState = OshiUtil.cpu(hal.getProcessor());
             cpuState.setCreateTime(t);
             // 内存信息
-            MemState memState = SigarUtil.memory();
+            MemState memState = OshiUtil.memory(hal.getMemory());
             memState.setCreateTime(t);
             // 网络流量信息
-            NetIoState netIoState = SigarUtil.net();
+            NetIoState netIoState = OshiUtil.net(hal);
             netIoState.setCreateTime(t);
             // 系统负载信息
-            SysLoadState sysLoadState = SigarUtil.getLoadState(systemInfo);
+            SysLoadState sysLoadState = OshiUtil.getLoadState(systemInfo, hal.getProcessor());
             if (sysLoadState != null) {
                 sysLoadState.setCreateTime(t);
             }
@@ -93,7 +99,7 @@ public class ScheduledTask {
             }
             if (systemInfo != null) {
                 if (memState != null) {
-                    systemInfo.setVersionDetail(systemInfo.getVersion() + "，总内存：" + FormatUtil.mToG(memState.getTotal() + "M") + "G");
+                    systemInfo.setVersionDetail(systemInfo.getVersion() + "，总内存：" + oshi.util.FormatUtil.formatBytes(hal.getMemory().getTotal()));
                     systemInfo.setMemPer(memState.getUsePer());
                 } else {
                     systemInfo.setMemPer(0d);
@@ -120,7 +126,7 @@ public class ScheduledTask {
                     if (StringUtils.isEmpty(pid)) {
                         continue;
                     }
-                    AppState appState = SigarUtil.getLoadPid(pid);
+                    AppState appState = OshiUtil.getLoadPid(pid, os, hal.getMemory());
                     if (appState != null) {
                         appState.setCreateTime(t);
                         appState.setAppInfoId(appInfo.getId());
@@ -134,9 +140,7 @@ public class ScheduledTask {
                 jsonObject.put("appStateList", appStateResList);
             }
 
-        } catch (SigarException e) {
-            e.printStackTrace();
-            logInfo.setInfoContent(e.toString());
+            logger.debug("---------------" + jsonObject.toString());
         } catch (Exception e) {
             e.printStackTrace();
             logInfo.setInfoContent(e.toString());

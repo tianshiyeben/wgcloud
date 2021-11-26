@@ -42,20 +42,22 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">日志列表</h3>
-        <div class="card-tools">
-          <div class="float-sm-right">
-            <!-- SEARCH FORM -->
-            <form class="form-inline ml-3" th:action="@{'/log/list'}">
-              <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar" name="hostname" autocomplete="off" th:value="${logInfo.hostname}" type="search" placeholder="输入摘要关键字" aria-label="Search">
-                <div class="input-group-append">
-                  <button class="btn btn-navbar" type="submit">
-                    <i class="fas fa-search"></i>
-                  </button>
-                </div>
+
+
+        <div class=" float-sm-right">
+          <!-- SEARCH FORM -->
+          <form class="form-inline ml-3" th:action="@{'/log/list'}">
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" name="hostname" autocomplete="off" th:value="${logInfo.hostname}" type="search" placeholder="输入摘要关键字" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-default" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </div>
-            </form>
-          </div>
+
+            </div>
+          </form>
+
         </div>
       </div>
       <!-- /.card-header -->

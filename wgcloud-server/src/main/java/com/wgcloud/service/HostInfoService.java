@@ -18,7 +18,7 @@ import java.util.Map;
  * @ClassName:HostInfoService.java
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
- * @Description: HostInfoService.java
+ * @Description: 暂未用
  * @Copyright: 2017-2021 wgcloud. All rights reserved.
  */
 @Service

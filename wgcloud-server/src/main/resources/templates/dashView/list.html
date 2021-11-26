@@ -69,7 +69,7 @@
                   </th:block>
               </td>
 
-              <td style="font-size:1.2rem">
+              <td>
                   <th:block th:if="${item.memPer >= 90}">
                       <span class="badge bg-danger" th:text="${item.memPer}"></span>
                   </th:block>
@@ -80,7 +80,7 @@
                       <span class="badge bg-primary" th:text="${item.memPer}"></span>
                   </th:block>
               </td>
-              <td  style="font-size:1.2rem">
+              <td>
                   <th:block th:if="${item.cpuPer >= 90}">
                       <span class="badge bg-danger" th:text="${item.cpuPer}"></span>
                   </th:block>
@@ -91,6 +91,17 @@
                       <span class="badge bg-primary" th:text="${item.cpuPer}"></span>
                   </th:block>
               </td>
+                <td>
+                    <th:block th:if="${item.diskPer >= 90}">
+                        <span class="badge bg-danger" th:text="${item.diskPer}"></span>
+                    </th:block>
+                    <th:block th:if="${item.diskPer < 90 && item.diskPer >= 70  }">
+                        <span class="badge bg-warning" th:text="${item.diskPer}"></span>
+                    </th:block>
+                    <th:block th:if="${item.diskPer < 70  }">
+                        <span class="badge bg-primary" th:text="${item.diskPer}"></span>
+                    </th:block>
+                </td>
               <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}">Update software</td>
                 <td th:text="${item.hostRemark}">
 

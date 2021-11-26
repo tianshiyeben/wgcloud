@@ -44,9 +44,8 @@ function ajaxSaveRemark() {
     });
 }
 
-function setHostRemark(hostname, hostId, hostRemark) {
-    $("#id").val(hostId);
-    $("#ip").val(hostname);
+function setHostRemark(id, hostRemark) {
+    $("#id").val(id);
     $("#remark").val(hostRemark);
 }
 

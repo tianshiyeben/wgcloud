@@ -7,7 +7,7 @@ import java.util.Date;
  * @ClassName:HostInfo.java
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
- * @Description: host的IP密码等信息
+ * @Description: host的IP密码等信息，暂未用
  * @Copyright: 2017-2021 wgcloud. All rights reserved.
  */
 public class HostInfo extends BaseEntity {

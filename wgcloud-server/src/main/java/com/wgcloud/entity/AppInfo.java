@@ -39,12 +39,12 @@ public class AppInfo extends BaseEntity {
     private String appName;
 
     /**
-     * 内存使用M
+     * 内存使用率%
      */
     private Double memPer;
 
     /**
-     * cpu使用率
+     * cpu使用率%
      */
     private Double cpuPer;
 

@@ -25,7 +25,7 @@ public class WarnMailUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(WarnMailUtil.class);
 
-    public static final String content_suffix = "<p><a target='_blank' href='http://www.wgstart.com'>WGCLOUD监控系统</a>敬上";
+    public static final String content_suffix = "<p><a target='_blank' href='http://www.wgstart.com'>WGCLOUD</a>敬上";
 
     private static LogInfoService logInfoService = (LogInfoService) ApplicationContextHelper.getBean(LogInfoService.class);
     private static MailConfig mailConfig = (MailConfig) ApplicationContextHelper.getBean(MailConfig.class);
@@ -180,7 +180,7 @@ public class WarnMailUtil {
             }
             try {
                 String title = "主机下线告警：" + systemInfo.getHostname();
-                String commContent = "主机已经超过10分钟未上报数据，可能已经下线：" + systemInfo.getHostname() + "，备注：" + systemInfo.getHostRemark()
+                String commContent = "主机已经超过10分钟未上报数据，可能已经下线：" + systemInfo.getHostname() + "，备注：" + systemInfo.getRemark()
                         + "。如果不再监控该主机在列表删除即可，同时不会再收到该主机告警邮件";
                 //发送邮件
                 sendMail(mailSet.getToMail(), title, commContent);
@@ -196,7 +196,7 @@ public class WarnMailUtil {
             WarnPools.MEM_WARN_MAP.remove(key);
             try {
                 String title = "主机恢复上线通知：" + systemInfo.getHostname();
-                String commContent = "主机已经恢复上线：" + systemInfo.getHostname() + "，备注：" + systemInfo.getHostRemark()
+                String commContent = "主机已经恢复上线：" + systemInfo.getHostname() + "，备注：" + systemInfo.getRemark()
                         + "。";
                 //发送邮件
                 sendMail(mailSet.getToMail(), title, commContent);
@@ -270,8 +270,8 @@ public class WarnMailUtil {
                 email.setSSL(true);
             }
             email.setAuthenticator(new DefaultAuthenticator(StaticKeys.mailSet.getFromMailName(), StaticKeys.mailSet.getFromPwd()));
-            email.setFrom(StaticKeys.mailSet.getFromMailName(), "WGCLOUD监控系统");//发信者
-            email.setSubject(mailTitle);//标题
+            email.setFrom(StaticKeys.mailSet.getFromMailName());//发信者
+            email.setSubject("[WGCLOUD] " + mailTitle);//标题
             email.setCharset("UTF-8");//编码格式
             email.setHtmlMsg(mailContent + content_suffix);//内容
             email.addTo(mails.split(";"));

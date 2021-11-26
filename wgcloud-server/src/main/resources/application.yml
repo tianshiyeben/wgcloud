@@ -2,7 +2,7 @@ server:
   port: 9999
   servlet:
     session:
-      timeout: 30m
+      timeout: 120m
     context-path: /wgcloud
 #日志文件输出路径
 logging:
@@ -63,13 +63,13 @@ mail:
   memWarnVal: 98
   #监控主机cpu使用率%报警值，超过此值即发送邮件报警
   cpuWarnVal: 98
-  #内存告警邮件，yes开启，no关闭。总开关开启后，此处设置才会生效。以下开关均遵循此规则。
+  #内存告警邮件开关，yes开启，no关闭。总开关开启后，此处设置才会生效。以下开关均遵循此规则。
   memWarnMail: yes
-  #CPU告警邮件，yes开启，no关闭
+  #CPU告警邮件开关，yes开启，no关闭
   cpuWarnMail: yes
-  #主机下线告警邮件，yes开启，no关闭
+  #主机下线告警邮件开关，yes开启，no关闭
   hostDownWarnMail: yes
-  #进程下线告警邮件，yes开启，no关闭
+  #进程下线告警邮件开关，yes开启，no关闭
   appDownWarnMail: yes
-  #服务接口告警邮件，yes开启，no关闭
+  #服务接口告警邮件开关，yes开启，no关闭
   heathWarnMail: yes

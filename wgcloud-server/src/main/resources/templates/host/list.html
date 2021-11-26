@@ -46,6 +46,7 @@
             <th>IP</th>
             <th>内存%</th>
             <th>CPU%</th>
+            <th title="所有磁盘已使用%">磁盘%</th>
             <th>更新时间</th>
               <th>备注</th>
               <th>操作</th>
@@ -63,7 +64,7 @@
                       <span   th:text="${item.hostname}"></span>
                   </th:block>
               </td>
-              <td style="font-size:1.2rem">
+              <td>
                   <th:block th:if="${item.memPer >= 90}">
                       <span class="badge bg-danger" th:text="${item.memPer}"></span>
                   </th:block>
@@ -74,7 +75,7 @@
                       <span class="badge bg-primary" th:text="${item.memPer}"></span>
                   </th:block>
               </td>
-              <td  style="font-size:1.2rem">
+              <td>
                   <th:block th:if="${item.cpuPer >= 90}">
                       <span class="badge bg-danger" th:text="${item.cpuPer}"></span>
                   </th:block>
@@ -85,10 +86,21 @@
                       <span class="badge bg-primary" th:text="${item.cpuPer}"></span>
                   </th:block>
               </td>
+                <td>
+                    <th:block th:if="${item.diskPer >= 90}">
+                        <span class="badge bg-danger" th:text="${item.diskPer}"></span>
+                    </th:block>
+                    <th:block th:if="${item.diskPer < 90 && item.diskPer >= 70  }">
+                        <span class="badge bg-warning" th:text="${item.diskPer}"></span>
+                    </th:block>
+                    <th:block th:if="${item.diskPer < 70  }">
+                        <span class="badge bg-primary" th:text="${item.diskPer}"></span>
+                    </th:block>
+                </td>
               <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}">Update software</td>
-                <td th:text="${item.hostRemark}"></td>
+                <td th:text="${item.remark}"></td>
               <td>
-                  <button type="button" class="btn btn-default" data-toggle="modal" th:onclick="setHostRemark([[${item.hostname}]],[[${item.hostId}]],[[${item.hostRemark}]])" data-target="#modal-default">
+                  <button type="button" class="btn btn-default btn-sm" data-toggle="modal" th:onclick="setHostRemark([[${item.id}]],[[${item.remark}]])" data-target="#modal-default">
                      备注
                   </button>
                   <button type="button"  th:onclick="view([[${item.id}]])"  class="btn btn-primary btn-sm">系统信息</button>
@@ -129,7 +141,6 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                        <input type="hidden" id="ip" name="ip"/>
                         <input type="hidden" id="id" name="id"/>
                         <input type="text"  autocomplete="off" class="validate[required,maxSize[40] form-control" name="remark" id="remark" placeholder="华南区">
                     </p>
