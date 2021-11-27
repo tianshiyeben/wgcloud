@@ -69,14 +69,14 @@ public class LoginCotroller {
     public String login(Model model, HttpServletRequest request) {
         String userName = request.getParameter("userName");
         String passwd = request.getParameter("md5pwd");
-        String code = request.getParameter(StaticKeys.SESSION_CODE);
+//        String code = request.getParameter(StaticKeys.SESSION_CODE);
         HttpSession session = request.getSession();
         try {
-            if (!StringUtils.isEmpty(userName) && !StringUtils.isEmpty(passwd) && !StringUtils.isEmpty(code)) {
-                if (!code.equals(session.getAttribute(StaticKeys.SESSION_CODE))) {
+            if (!StringUtils.isEmpty(userName) && !StringUtils.isEmpty(passwd)) {
+                /*if (!code.equals(session.getAttribute(StaticKeys.SESSION_CODE))) {
                     model.addAttribute("error", "验证码错误");
                     return "login/login";
-                }
+                }*/
                 AccountInfo accountInfo = new AccountInfo();
                 if (MD5.GetMD5Code(commonConfig.getAdmindPwd()).equals(passwd) && StaticKeys.ADMIN_ACCOUNT.equals(userName)) {
                     accountInfo.setAccount(StaticKeys.ADMIN_ACCOUNT);
