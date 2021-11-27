@@ -145,7 +145,7 @@ public class NetIoState extends BaseEntity {
 
     public String getDateStr() {
         if (!StringUtils.isEmpty(dateStr) && dateStr.length() > 16) {
-            return dateStr.substring(5);
+            return dateStr.substring(11);
         }
         return dateStr;
     }
