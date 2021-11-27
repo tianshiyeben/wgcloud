@@ -36,7 +36,7 @@
                 </th:block>
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            仪表盘
+                            资源管理
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -59,7 +59,7 @@
                             <th:block th:unless="${session.menuActive eq '12'}">
                                 <a th:href="@{'/dash/systemInfoList'}" class="nav-link">
                             </th:block>
-                                <i class="nav-icon fas fa-chart-pie"></i>
+                                <i class="nav-icon fas fa-desktop"></i>
                                 <p>主机管理</p>
                             </a>
                         </li>
@@ -70,7 +70,7 @@
                             <th:block th:unless="${session.menuActive eq '13'}">
                                 <a th:href="@{'/appInfo/list'}" class="nav-link">
                             </th:block>
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-tasks nav-icon"></i>
                                 <p>进程管理</p>
                             </a>
                         </li>
@@ -100,7 +100,7 @@
                         <th:block th:unless="${session.menuActive eq '41'}">
                             <a th:href="@{'/dbInfo/list'}" class="nav-link">
                         </th:block>
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="fas fa-database nav-icon"></i>
                         <p>数据源管理</p>
                         </a>
                     </li>
@@ -111,7 +111,7 @@
                         <th:block th:unless="${session.menuActive eq '42'}">
                             <a th:href="@{'/dbTable/list'}" class="nav-link">
                         </th:block>
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="fas fa-table nav-icon"></i>
                         <p>数据表管理</p>
                         </a>
                     </li>
@@ -127,7 +127,7 @@
                     <li class="nav-item has-treeview">
                         <a  href="javascript:void(0);" class="nav-link">
                 </th:block>
-                <i class="nav-icon fas fa-tree"></i>
+                <i class="nav-icon fas fa-link"></i>
                 <p>
                     服务接口检测
                     <i class="fas fa-angle-left right"></i>

@@ -23,7 +23,7 @@
 				<a href="http://www.wgstart.com" target="_blank" style="color: #fff;font-size: 16px;font-weight:bold"><img width="60" height="60" th:src="@{'/static/logincss/logo.png'}">WGCLOUD</a>
 	  		</div>
 			<div class="login-box-body">
-			<p class="login-box-msg"><label style="color:red;font-weight:bold;" th:text="${error}"></label></p>
+			<p class="login-box-msg">账号登录</p>
 				
 		<form id="form1" th:action="@{'/login/login'}"  method="post" onsubmit="setMd5Pwd()" class="form-horizontal">
 	
@@ -39,14 +39,9 @@
               		<input type="hidden" id="md5pwd" name="md5pwd" value=""/>
             	</div>
           	</div>
-           
-        	<div class="form-group">
-           	<div class="col-sm-12">
-           	<table><tr><td><input id="code" style="width:255px" name="valcode" placeholder="请填写验证码" maxlength="80" class="validate[required,maxSize[4]] form-control" autocomplete="off" type="text"></td>
-              <td><a href="javascript:changeImg()" title="看不清？点击换一张"><img th:src="@{'/code/get'}" id="imgObj"  width="70" height="32" /></a></td></tr></table>
-            	</div>
-          	</div>
-             	
+
+			<div class="form-group"  style="color:red;font-weight:bold;text-align: center;" th:text="${error}"></div>
+
          	<div class="form-group">
            	<div class="col-sm-12">
            		<input value="登录" class="btn btn-primary btn-block" type="submit">
