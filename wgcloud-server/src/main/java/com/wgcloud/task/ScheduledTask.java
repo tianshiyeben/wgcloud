@@ -483,10 +483,7 @@ public class ScheduledTask {
                 netIoStateMapper.deleteByAccountAndDate(paramsDel);//删除吞吐率监控信息
                 sysLoadStateMapper.deleteByAccountAndDate(paramsDel);//删除负载状态监控信息
                 tcpStateMapper.deleteByAccountAndDate(paramsDel);//删除tcp监控信息
-                appInfoMapper.deleteByDate(paramsDel);
                 appStateMapper.deleteByDate(paramsDel);
-                systemInfoMapper.deleteByAccountAndDate(paramsDel);
-                intrusionInfoMapper.deleteByAccountAndDate(paramsDel);
                 //删除15天前的日志信息
                 logInfoMapper.deleteByDate(paramsDel);
                 //删除15天前数据库表统计信息
