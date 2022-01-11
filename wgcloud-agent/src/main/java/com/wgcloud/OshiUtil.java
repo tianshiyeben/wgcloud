@@ -109,7 +109,10 @@ public class OshiUtil {
             deskState.setAvail((usable / 1024 / 1024 / 1024) + "G");
             deskState.setSize((total / 1024 / 1024 / 1024) + "G");
             double usedSize = (total - usable);
-            double usePercent = FormatUtil.formatDouble(usedSize / total * 100D, 2);
+            double usePercent = 0;
+            if (total > 0) {
+                usePercent = FormatUtil.formatDouble(usedSize / total * 100D, 2);
+            }
             deskState.setUsePer(usePercent + "%");
             deskState.setCreateTime(t);
             list.add(deskState);
