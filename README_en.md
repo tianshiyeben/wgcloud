@@ -6,11 +6,13 @@
 
 
 
-## WGCLOUD-v2.3.6
+## WGCLOUD
 
 [中文版README](./README.md)
 
-Wgcloud design idea is a new generation of very simple operation and maintenance monitoring system, which advocates rapid deployment, reduces the difficulty of operation and maintenance learning, runs automatically, and has no template and script. The current warehouse version is v2.3.7.
+Wgcloud design idea is a new generation of very simple operation and maintenance monitoring system, which advocates rapid deployment, reduces the difficulty of operation and maintenance learning, runs automatically, and has no template and script. 
+
+**The current warehouse version is v2 3.7 for the latest secondary development, please pull the master branch.**
 
 Wgcloud is developed based on the microservice springboot architecture, and is a lightweight and high-performance distributed monitoring system. The core collection indexes include: **Host system information, network flow, CPU status, CPU temperature, memory status, disk space and IO monitoring, hard disk smart health detection, system load, large screen visualization, ES cluster status, business data monitoring (mysql, Oracle, PgSQL, etc.), service interface detection, application process monitoring, network topology, port monitoring, log file monitoring, docker monitoring, web SSH, Fortress machine, alarm information (e-mail, wechat, SMS, etc.) push** 
 
@@ -70,14 +72,14 @@ Wgcloud is developed based on the microservice springboot architecture, and is a
 
 3.Support operating system platform
 
-> Support monitoring linux series: Debian, RedHat, CentOS, Ubuntu, Kirin, Tongxin, godson, raspberry pie, etc. support monitoring windows series: Windows Server 2008 r2201220162019, Windows 7, Windows 8, windows 10 support monitoring UNIX series: Solaris, FreeBSD, OpenBSD support monitoring Mac OS series: Mac OS AMD64
+> Support monitoring linux series: Debian, RedHat, CentOS, Ubuntu, Kirin, Tongxin, godson, raspberry pie, etc. support monitoring windows series: Windows Server 2008 R2 2012 2016 2019, Windows 7, Windows 8, windows 10 support monitoring UNIX series: Solaris, FreeBSD, OpenBSD support monitoring Mac OS series: Mac OS AMD64
 
 
 
-## contact
+## EMAIL
 
 tianshiyeben@qq.com
 
-## thank
+## thanks
 
 Free license from JetBrains
