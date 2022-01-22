@@ -50,7 +50,7 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 
 3.运行所需sql脚本（本项目使用mysql数据库），在sql文件夹下，在mysql数据库里创建数据库wgcloud，导入wgcloud.sql即可
 
-4.bin目录下的脚本文件，为server启动脚本（linux和windows），和打包好的wgcloud-server-release.jar放到同一个目录下即可。agent启动脚本仿照server稍微修改下即可。
+4.bin目录下的脚本文件，为server和agent启动/停止脚本（linux和windows），和打包好的wgcloud-server-release.jar放到同一个目录下即可。
 
 ## **功能截图**
 
