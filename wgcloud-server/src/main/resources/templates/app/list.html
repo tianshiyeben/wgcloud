@@ -39,13 +39,13 @@
         <div class=" float-sm-right">
           <!-- SEARCH FORM -->
           <form class="form-inline ml-3" th:action="@{'/appInfo/list'}">
+            <button type="button" onclick="add()" class="btn btn-primary btn-sm" style="margin-right:5px;">添加</button>
             <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" name="hostname" autocomplete="off" th:value="${appInfo.hostname}" type="search" placeholder="输入ip" aria-label="Search">
+              <input class="form-control"  id="hostname" name="hostname" autocomplete="off" th:value="${appInfo.hostname}" type="text" placeholder="输入ip">
               <div class="input-group-append">
-                <button class="btn btn-default" type="submit">
+                <button class="btn btn-primary" type="submit">
                   <i class="fas fa-search"></i>
-                </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="button" onclick="add()" class="btn btn-block btn-primary btn-sm">添加</button>
+                </button>
               </div>
 
             </div>
