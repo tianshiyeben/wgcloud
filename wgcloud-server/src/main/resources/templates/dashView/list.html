@@ -101,8 +101,9 @@
                         <span class="badge bg-primary" th:text="${item.diskPer}"></span>
                     </th:block>
                 </td>
-              <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}">Update software</td>
                 <td th:text="${item.remark}">
+              <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}">Update software</td>
+
 
                 </td>
                 <td> <button type="button"  th:onclick="viewDashView([[${item.id}]])"  class="btn btn-primary btn-sm">系统信息</button>
