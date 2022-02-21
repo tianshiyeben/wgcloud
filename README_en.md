@@ -14,7 +14,7 @@ Wgcloud design idea is a new generation of very simple operation and maintenance
 
 **The current warehouse version is v2 3.7 for the latest secondary development, please pull the master branch.**
 
-Wgcloud is developed based on the microservice springboot architecture, and is a lightweight and high-performance distributed monitoring system. The core collection indexes include: **Host system information, network flow, CPU status, CPU temperature, memory status, disk space and IO monitoring, hard disk smart health detection, system load, large screen visualization, ES cluster status, business data monitoring (mysql, Oracle, PgSQL, etc.), service interface detection, application process monitoring, network topology, port monitoring, log file monitoring, docker monitoring, web SSH, Fortress machine, alarm information (e-mail, wechat, SMS, etc.) push** 
+Wgcloud is developed based on the microservice springboot architecture, and is a lightweight and high-performance distributed monitoring system. The core collection indexes include: **CPU utilization, CPU temperature, memory utilization, disk capacity, disk IO, smart health status of hard disk, system load, number of connections, network card traffic, hardware system information, etc. Support the monitoring of process applications, files, ports, logs, docker containers, databases, data tables and other resources on the server. Support monitoring service interface API, data communication equipment (such as switch, router, printer), etc. Automatically generate network topology map, large screen visualization, web SSH (Fortress machine), statistical analysis chart, command issuance, batch execution, alarm information push (such as email, nail, wechat, SMS, etc.)** 
 
 1. V2.3.7 abandons the sigar method of v2.3.6 to obtain host indicators, and v2.3.7 uses popular oshi components to collect host indicators
 2. the server and client work together, which is lighter and more efficient, and can support thousands of hosts to monitor online at the same time.
@@ -66,9 +66,9 @@ Wgcloud is developed based on the microservice springboot architecture, and is a
 
 ## Running environment
 
-1.JDK1.8
+1.JDK1.8、JDK11
 
-2.Mysql5.6 and above
+2.Mysql5.6 and above、MariaDB、PostgreSQL
 
 3.Support operating system platform
 
