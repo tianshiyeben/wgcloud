@@ -63,6 +63,9 @@ Wgcloud is developed based on the microservice springboot architecture, and is a
 
 ![WGCLOUD主机画像图](./demo/huaxiang.jpg)
 
+## Example of communication diagram (HTTP protocol)
+
+![WGCLOUD通信图示例](./demo/tongxin.jpg)
 
 ## Running environment
 
@@ -80,6 +83,6 @@ Wgcloud is developed based on the microservice springboot architecture, and is a
 
 tianshiyeben@qq.com
 
-## thanks
+## Thanks
 
 Free license from JetBrains
