@@ -12,9 +12,9 @@ WGCLOUD设计思想为新一代极简运维监控系统，提倡快速部署，�
 
 **当前仓库版本为v2.3.7最新，二次开发请拉取master分支即可**。
 
-WGCLOUD基于微服务springboot架构开发，是轻量高性能的分布式监控系统，核心采集指标包括：**主机系统信息，网络流量，CPU状态，CPU温度，内存状态，磁盘空间和IO监控，硬盘smart健康检测，系统负载，大屏可视化，ES集群状态，数据可视化监控(mysql，oracle，pgsql等)，服务接口检测，应用进程监控，网络拓扑图，端口监控，日志文件监控，docker监控，文件防篡改保护，数通设备监测，Web SSH，堡垒机，指令批量下发，告警信息（邮件微信钉钉短信等）推送**。[english readme](<./README_en.md>)
+WGCLOUD基于微服务springboot架构开发，是轻量高性能的分布式监控系统，核心采集指标包括：**cpu使用率，cpu温度，内存使用率，磁盘容量，磁盘IO，硬盘SMART健康状态，系统负载，连接数量，网卡流量，硬件系统信息等。支持监测服务器上的进程应用、文件、端口、日志、DOCKER容器、数据库、数据表等资源。支持监测服务接口API、数通设备（如交换机、路由器、打印机）等。自动生成网络拓扑图，大屏可视化，web SSH（堡垒机），统计分析图表，指令下发批量执行，告警信息推送（如邮件、钉钉、微信、短信等）**。[english readme](<./README_en.md>)
 
-1.v2.3.7放弃了v2.3.6版本的sigar方式获取主机指标，v2.3.7采用流行的OSHI组件来采集主机指标
+1.v2.3.7放弃了v2.3.6版本的sigar方式获取主机指标，采用流行的OSHI组件来采集主机指标
 
 2.采用服务端和客户端协同工作方式，更轻量，更高效，可支持数千台主机同时在线监控。
 
@@ -32,7 +32,7 @@ WGCLOUD基于微服务springboot架构开发，是轻量高性能的分布式监
 
 <http://www.wgstart.com>
 
-## **Github仓库(2.8k⭐)**
+## **Github仓库(2.9k⭐)**
 
 <https://github.com/tianshiyeben/wgcloud>
 
@@ -72,12 +72,15 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 
 ![WGCLOUD主机画像图](./demo/huaxiang.jpg)
 
+## 通信图示例（http协议）
+
+![WGCLOUD通信图示例](./demo/tongxin.jpg)
 
 ## 运行环境
 
-1.JDK1.8
+1.JDK版本：JDK1.8、JDK11
 
-2.mysql5.6及以上
+2.数据库：MySql5.5及以上、MariaDB、PostgreSQL
 
 3.支持操作系统平台
 
