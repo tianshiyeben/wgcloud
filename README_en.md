@@ -75,7 +75,13 @@ Wgcloud is developed based on the microservice springboot architecture, and is a
 
 3.Support operating system platform
 
-> Support monitoring linux series: Debian, RedHat, CentOS, Ubuntu, Kirin, Tongxin, godson, raspberry pie, etc. support monitoring windows series: Windows Server 2008 R2 2012 2016 2019, Windows 7, Windows 8, windows 10 support monitoring UNIX series: Solaris, FreeBSD, OpenBSD support monitoring Mac OS series: Mac OS AMD64
+> Support monitoring linux series: Debian, RedHat, CentOS, Ubuntu, Kirin, Tongxin, godson, raspberry pie, etc. 
+>
+> support monitoring windows series: Windows Server 2008 R2 2012 2016 2019, Windows 7, Windows 8, windows 10 
+>
+> support monitoring UNIX series: Solaris, FreeBSD, OpenBSD 
+>
+> support monitoring Mac OS series: Mac OS AMD64
 
 
 
