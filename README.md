@@ -12,7 +12,7 @@ WGCLOUD设计思想为新一代极简运维监控系统，提倡快速部署，�
 
 **当前仓库版本为v2.3.7最新，二次开发请拉取master分支即可**。
 
-WGCLOUD基于微服务springboot架构开发，是轻量高性能的分布式监控系统，核心采集指标包括：**cpu使用率，cpu温度，内存使用率，磁盘容量，磁盘IO，硬盘SMART健康状态，系统负载，连接数量，网卡流量，硬件系统信息等。支持监测服务器上的进程应用、文件、端口、日志、DOCKER容器、数据库、数据表等资源。支持监测服务接口API、数通设备（如交换机、路由器、打印机）等。自动生成网络拓扑图，大屏可视化，web SSH（堡垒机），统计分析图表，指令下发批量执行，告警信息推送（如邮件、钉钉、微信、短信等）**。[english readme](<./README_en.md>)
+WGCLOUD基于微服务springboot架构开发，是轻量高性能的分布式监控系统，核心采集指标包括：**cpu使用率，cpu温度，内存使用率，磁盘容量，磁盘IO，硬盘SMART健康状态，系统负载，连接数量，网卡流量，硬件系统信息等。支持监测服务器上的进程应用、文件防篡改、端口、日志、DOCKER容器、数据库、数据表等资源。支持监测服务接口API、数通设备（如交换机、路由器、打印机）等。自动生成网络拓扑图，大屏可视化，web SSH（堡垒机），统计分析图表，指令下发批量执行，告警信息推送（如邮件、钉钉、微信、短信等）**。[english readme](<./README_en.md>)
 
 1.v2.3.7放弃了v2.3.6版本的sigar方式获取主机指标，采用流行的OSHI组件来采集主机指标。
 
@@ -58,11 +58,13 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 
 ![WGCLOUD监控主机列表](./demo/demo3.jpg)
 
-![WGCLOUD监控主机列表](./demo/report.jpg)
+![WGCLOUD监控主机磁盘信息](./demo/demo9.jpg)
 
-![WGCLOUD监控主机列表](./demo/dp.jpg)
+![WGCLOUD监控主机告警报表](./demo/report.jpg)
 
-![WGCLOUD监控图表](./demo/demo4.jpg)
+![WGCLOUD监控主机大屏](./demo/dp.jpg)
+
+![WGCLOUD监控主机状态趋势图](./demo/demo4.jpg)
 
 
 
