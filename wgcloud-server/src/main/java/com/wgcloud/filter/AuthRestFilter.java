@@ -31,8 +31,7 @@ public class AuthRestFilter implements Filter {
     @Autowired
     CommonConfig commonConfig;
 
-    String[] static_resource = {"/agent/minTask", "/agentGo/minTask", "login/toLogin", "login/login", "appInfo/agentList",
-            "/code/get", ".css", ".js", ".jpg", ".png", ".ico", ".gif", "font", ".eot", ".woff", ".svg", ".ttf", ".woff2"};
+    String[] static_resource = {"/agent/minTask", "/agentGo/minTask", "/login/toLogin", "/login/login", "/appInfo/agentList", "/static/"};
 
     String[] dash_views = {"/dash/main", "/dash/systemInfoList", "/dash/detail", "/dash/chart"};
 
@@ -42,18 +41,20 @@ public class AuthRestFilter implements Filter {
         final HttpServletRequest request = (HttpServletRequest) servletRequest;
         final HttpSession session = request.getSession();
         AccountInfo accountInfo = (AccountInfo) session.getAttribute(StaticKeys.LOGIN_KEY);
-        String uri = request.getRequestURL().toString();
-//        log.info("uri----" + request.getRequestURL());
+        String uri = request.getRequestURI();
+        log.debug("uri----" + uri);
+        String servletPath = request.getServletPath();
+        log.debug("servletPath----" + servletPath);
         menuActive(session, uri);
         for (String ss : static_resource) {
-            if (uri.indexOf(ss) != -1) {
+            if (servletPath.startsWith(ss)) {
                 filterChain.doFilter(servletRequest, servletResponse);
                 return;
             }
         }
         if (accountInfo == null) {
             for (String ss : dash_views) {
-                if (uri.indexOf(ss) != -1 && "true".equals(commonConfig.getDashView()) && request.getParameter(StaticKeys.DASH_VIEW_ACCOUNT) != null) {
+                if (servletPath.startsWith(ss) && "true".equals(commonConfig.getDashView()) && request.getParameter(StaticKeys.DASH_VIEW_ACCOUNT) != null) {
                     filterChain.doFilter(servletRequest, servletResponse);
                     return;
                 }
