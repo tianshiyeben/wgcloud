@@ -6,7 +6,8 @@ server:
     context-path: /wgcloud
 #日志文件输出路径
 logging:
-  path: ./log
+  file:
+    path: ./log
 # 数据库 相关设置
 spring:
   application:
