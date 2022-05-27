@@ -22,6 +22,7 @@ Wgcloud is developed based on the microservice springboot architecture, and is a
 4. support the installation and deployment of mainstream server platforms, such as Linux, windows, MacOS, etc.
 5. Wgcloud adopts springboot+bootstrap to realize the distributed monitoring system perfectly, which is used to feed the open source community and open source for the second time.
 6. if you feel wggroup has helped you, you don't need to reward it, just click star to support it
+7. About sharing, the original intention of open source is to share learning. If you can, please add [wgcloud] on your blog and website (if any)[WGCLOUD](http://www.wgstart.com)Link or write a post to share with others to help wgcloud learn and progress. Finally, if you like, you can send us your company name by email, and we will show it to the [thank you] column of wgcloud website.
 
 ## site
 
