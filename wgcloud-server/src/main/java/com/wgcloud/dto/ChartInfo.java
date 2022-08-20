@@ -7,8 +7,8 @@ import com.wgcloud.entity.BaseEntity;
  * @ClassName:ChartInfo.java
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
- * @Description: app端口信息
- * @Copyright: 2017-2021 wgcloud. All rights reserved.
+ * @Description: 图表dto信息
+ * @Copyright: 2017-2022 wgcloud. All rights reserved.
  */
 public class ChartInfo extends BaseEntity {
 
@@ -19,18 +19,12 @@ public class ChartInfo extends BaseEntity {
 
 
     /**
-     * host名称
+     * 名称
      */
     private String item;
 
-    /**
-     * 应用进程ID
-     */
     private Integer count;
 
-    /**
-     * 应用进程名称
-     */
     private Double percent;
 
     public String getItem() {
