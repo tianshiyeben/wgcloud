@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: ApplicationContextHelper.java
- * @Copyright: 2017-2021 wgcloud. All rights reserved.
+ * @Copyright: 2017-2022 wgcloud. All rights reserved.
  */
 @Component
 public class ApplicationContextHelper implements ApplicationContextAware {
