@@ -9,7 +9,7 @@ import java.util.Map;
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: WarnPools.java
- * @Copyright: 2017-2021 wgcloud. All rights reserved.
+ * @Copyright: 2017-2022 wgcloud. All rights reserved.
  */
 public class WarnPools {
 

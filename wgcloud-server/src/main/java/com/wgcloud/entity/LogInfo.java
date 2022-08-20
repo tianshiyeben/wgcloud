@@ -8,7 +8,7 @@ import java.util.Date;
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: 日志信息
- * @Copyright: 2017-2021 wgcloud. All rights reserved.
+ * @Copyright: 2017-2022 wgcloud. All rights reserved.
  */
 public class LogInfo extends BaseEntity {
 

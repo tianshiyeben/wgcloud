@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: ScheduledTask.java
- * @Copyright: 2017-2021 wgcloud. All rights reserved.
+ * @Copyright: 2017-2022 wgcloud. All rights reserved.
  */
 @Component
 public class ScheduledTask {
@@ -347,12 +347,6 @@ public class ScheduledTask {
                 BatchData.SYSLOAD_STATE_LIST.clear();
                 sysLoadStateService.saveRecord(SYSLOAD_STATE_LIST);
             }
-                /*if(BatchData.TCP_STATE_LIST.size()>0){
-                    tcpStateService.saveRecord(BatchData.TCP_STATE_LIST);
-                }
-                if(BatchData.INTRUSION_INFO_LIST.size()>0){
-                    intrusionInfoService.saveRecord(BatchData.INTRUSION_INFO_LIST);
-                }*/
             if (BatchData.LOG_INFO_LIST.size() > 0) {
                 List<LogInfo> LOG_INFO_LIST = new ArrayList<LogInfo>();
                 LOG_INFO_LIST.addAll(BatchData.LOG_INFO_LIST);

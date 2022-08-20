@@ -16,10 +16,10 @@ import org.springframework.web.client.RestTemplate;
 /**
  * @version V1.0
  * @ClassName:RestUtil.java
- * @author: wgcloud
+ * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: RestUtil.java
- * @Copyright: 2019 wgcloud. All rights reserved.
+ * @Copyright: 2017-2022 wgcloud. All rights reserved.
  */
 @Component
 public class RestUtil {
