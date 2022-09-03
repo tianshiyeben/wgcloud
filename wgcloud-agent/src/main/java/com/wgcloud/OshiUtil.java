@@ -23,7 +23,7 @@ import java.util.List;
  * @author: http://www.wgstart.com
  * @date: 2021年11月19日
  * @Description: Oshi工具类
- * @Copyright: 2017-2021 wgcloud. All rights reserved.
+ * @Copyright: 2017-2022 wgcloud. All rights reserved.
  */
 public class OshiUtil {
 
