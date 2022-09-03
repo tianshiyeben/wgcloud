@@ -86,7 +86,7 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 
 1.JDK版本：JDK1.8、JDK11
 
-2.数据库：MySql5.5及以上、MariaDB、PostgreSQL
+2.数据库：MySql5.5及以上、MariaDB、PostgreSQL、Oracle
 
 3.支持系统平台
 
