@@ -30,7 +30,7 @@ WGCLOUD基于微服务springboot架构开发，是轻量高性能的分布式监
 
 8.关于分享，我们开源的初衷在于分享学习，如果可以的话，请在您的博客、网站（如果有的话）帮忙加个[WGCLOUD](http://www.wgstart.com)链接或写个论坛帖子分享给更多的小伙伴，我们将非常感谢。最后若您愿意的话，可以将您单位名称通过邮件发来给我们，我们将展示到WGCLOUD网站的【感谢】栏目
 
-## **唯一网站**
+## **唯一官网**
 
 <http://www.wgstart.com>
 
@@ -92,7 +92,7 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 
 > 支持监测Linux系列：Debian、RedHat、CentOS、ubuntu、麒麟、统信、龙芯、树莓派等
 >
-> 支持监测windows系列：Windows Server 2008 R2，2012，2016，2019，Windows 7，Windows 8，Windows 10
+> 支持监测windows系列：Windows Server 2008 R2，2012，2016，2019，Windows 7，Windows 8，Windows 10，Windows 11
 >
 > 支持监测unix系列：solaris，FreeBSD，OpenBSD
 >
@@ -105,6 +105,10 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 ## 联系
 
 邮箱：tianshiyeben@qq.com
+
+## 赞助支持
+
+https://www.wgstart.com/docs19.html
 
 ## 为什么没有QQ群
 
