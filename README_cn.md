@@ -104,7 +104,7 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 
 ## 联系
 
-邮箱：tianshiyeben@qq.com
+邮箱：**wgcloud@foxmail.com**
 
 ## 赞助支持
 

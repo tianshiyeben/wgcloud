@@ -94,7 +94,7 @@ Wgcloud is developed based on the microservice springboot architecture, and is a
 
 ## EMAIL
 
-tianshiyeben@qq.com
+**wgcloud@foxmail.com**
 
 ## SPONSORS
 
@@ -103,3 +103,4 @@ https://www.wgstart.com/docs19.html
 ## Thanks
 
 Free license from JetBrains
+
