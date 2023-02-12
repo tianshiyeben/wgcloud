@@ -91,9 +91,13 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 3.支持系统平台
 
 > 支持监测Linux系列：Debian，RedHat，CentOS，Ubuntu，Fedora，SUSE，麒麟，统信(UOS)，龙芯(mips)等
+>
 > 支持监测Windows系列：Windows Server 2008 R2，2012，2016，2019，2022，Windows 7，Windows 8，Windows 10，Windows 11
+>
 > 支持监测Unix系列：solaris，FreeBSD，OpenBSD
+>
 > 支持监测MacOS系列：macOS amd64，macOS arm64
+>
 > 其他支持：ARM，Android(安卓)，riscv64，s390x，树莓派等
 
 
