@@ -112,7 +112,7 @@ https://www.wgstart.com/docs19.html
 
 ## 技术交流群
 
-https://www.wgstart.com/9.html
+https://www.wgstart.com/docs9.html
 
 ## 感谢
 
