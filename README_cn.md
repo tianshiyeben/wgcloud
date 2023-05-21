@@ -68,6 +68,8 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 
 ![WGCLOUD监控主机大屏新版本](./demo/dapingNew.jpg)
 
+![WGCLOUD监控主机大屏新版本](./demo/dapingv3.jpg)
+
 ![WGCLOUD监控主机状态趋势图](./demo/demo4.jpg)
 
 
@@ -98,7 +100,7 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 >
 > 支持监测MacOS系列：macOS amd64，macOS arm64
 >
-> 其他支持：ARM，Android(安卓)，riscv64，s390x，树莓派等
+> 其他支持：ARM，Android(安卓)，riscv64，s390x，树莓派，AIX等
 
 
 
@@ -109,10 +111,6 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 ## 赞助支持
 
 https://www.wgstart.com/docs19.html
-
-## 技术交流群
-
-https://www.wgstart.com/docs9.html
 
 ## 感谢
 
