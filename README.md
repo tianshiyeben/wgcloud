@@ -54,7 +54,7 @@ Wgcloud is developed based on the microservice springboot architecture, and is a
 
 ![WGCLOUD监控主机磁盘图表](./demo/demo9.jpg)
 
-![WGCLOUD监控主机告警图表](./demo/report.jpg)
+![WGCLOUD监控主机告警图表](./daping/dapingv4.jpg)
 
 ![WGCLOUD监控主机告警图表](./demo/dp.jpg)
 
