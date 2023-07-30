@@ -14,7 +14,7 @@ import java.util.Map;
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: 主面板信息管理
- * @Copyright: 2017-2022 wgcloud. All rights reserved.
+ * @Copyright: 2017-2023 wgcloud. All rights reserved.
  */
 @Service
 public class DashboardService {
