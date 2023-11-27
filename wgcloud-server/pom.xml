@@ -111,6 +111,7 @@
             <artifactId>mybatis</artifactId>
             <version>3.5.6</version>
         </dependency>
+        <!-- CVE-2023-26119 漏洞修复 2023.11.27 -->
         <dependency>
             <groupId>org.htmlunit</groupId>
             <artifactId>htmlunit</artifactId>
