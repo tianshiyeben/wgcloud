@@ -112,9 +112,9 @@
             <version>3.5.6</version>
         </dependency>
         <dependency>
-            <groupId>net.sourceforge.htmlunit</groupId>
+            <groupId>org.htmlunit</groupId>
             <artifactId>htmlunit</artifactId>
-            <version>2.66.0</version>
+            <version>3.6.0</version>
         </dependency>
         <dependency>
             <groupId>org.jsoup</groupId>
