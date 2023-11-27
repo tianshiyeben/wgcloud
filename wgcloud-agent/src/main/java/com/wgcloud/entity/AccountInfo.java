@@ -8,7 +8,7 @@ import java.util.Date;
  * @author: wgcloud
  * @date: 2019年11月16日
  * @Description: AccountInfo.java
- * @Copyright: 2017-2023 www.wgstart.com. All rights reserved.
+ * @Copyright: 2017-2024 www.wgstart.com. All rights reserved.
  */
 public class AccountInfo extends BaseEntity {
 
