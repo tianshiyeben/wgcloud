@@ -100,7 +100,5 @@ Wgcloud is developed based on the microservice springboot architecture, and is a
 
 https://www.wgstart.com/docs19.html
 
-## Thanks
 
-Free license from JetBrains
 
