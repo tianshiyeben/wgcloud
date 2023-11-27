@@ -12,7 +12,7 @@ import java.util.Map;
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: 查看磁盘大小使用信息
- * @Copyright: 2017-2023 wgcloud. All rights reserved.
+ * @Copyright: 2017-2024 wgcloud. All rights reserved.
  */
 @Repository
 public interface DeskStateMapper {

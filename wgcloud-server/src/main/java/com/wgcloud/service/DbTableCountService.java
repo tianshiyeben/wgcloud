@@ -19,7 +19,7 @@ import java.util.Map;
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: DbTableCountService.java
- * @Copyright: 2017-2023 wgcloud. All rights reserved.
+ * @Copyright: 2017-2024 wgcloud. All rights reserved.
  */
 @Service
 public class DbTableCountService {
