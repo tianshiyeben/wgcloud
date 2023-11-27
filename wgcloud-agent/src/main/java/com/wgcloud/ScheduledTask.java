@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  * @author: wgcloud
  * @date: 2019年11月16日
  * @Description: ScheduledTask.java
- * @Copyright: 2017-2023 www.wgstart.com. All rights reserved.
+ * @Copyright: 2017-2024 www.wgstart.com. All rights reserved.
  */
 @Component
 public class ScheduledTask {
