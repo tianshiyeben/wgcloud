@@ -6,7 +6,7 @@ package com.wgcloud.entity;
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: 主面板概要信息
- * @Copyright: 2017-2023 wgcloud. All rights reserved.
+ * @Copyright: 2017-2024 wgcloud. All rights reserved.
  */
 public class DashboardView extends BaseEntity {
 
