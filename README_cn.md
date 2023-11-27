@@ -24,7 +24,7 @@ WGCLOUD基于微服务springboot架构开发，是轻量高性能的分布式监
 
 5.WGCLOUD采用主流技术框架SpringBoot+Bootstrap，完美实现了分布式监控系统，为反哺开源社区，二次开源
 
-6.**当前仓库为开源版，v3.x版本为商业版（免费但不开源哈），生产环境建议部署商业版**，商业版功能、性能更优秀
+6.**当前仓库为开源版，v3.x版本为商业版（免费但不开源哈），生产环境建议部署商业版**，商业版功能、性能更优秀。商业版请至官网下载（[www.wgstart.com](http://www.wgstart.com)）
 
 7.如果您觉得WGCLOUD帮助到您的工作，那不用打赏我们，star支持下就好了
 
@@ -111,7 +111,3 @@ B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
 ## 赞助支持
 
 https://www.wgstart.com/docs19.html
-
-## 感谢
-
-JetBrains提供的免费license
