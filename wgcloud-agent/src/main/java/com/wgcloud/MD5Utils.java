@@ -16,7 +16,7 @@ import java.security.NoSuchAlgorithmException;
  * @author: http://www.wgstart.com
  * @date: 2019年11月16日
  * @Description: Md5加密处理
- * @Copyright: 2017-2023 www.wgstart.com. All rights reserved.
+ * @Copyright: 2017-2024 www.wgstart.com. All rights reserved.
  */
 @SuppressWarnings("unused")
 public class MD5Utils {
