@@ -23,6 +23,9 @@ import java.util.Map;
 @Service
 public class TcpStateService {
 
+    @Autowired
+    private TcpStateMapper tcpStateMapper;
+
     public PageInfo selectByParams(Map<String, Object> params, int currPage, int pageSize) throws Exception {
         PageHelper.startPage(currPage, pageSize);
         List<TcpState> list = tcpStateMapper.selectByParams(params);
@@ -62,9 +65,6 @@ public class TcpStateService {
         return tcpStateMapper.selectAllByParams(params);
     }
 
-
-    @Autowired
-    private TcpStateMapper tcpStateMapper;
 
 
 }
