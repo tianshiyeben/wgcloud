@@ -24,19 +24,19 @@ Wgcloud is developed based on the microservice springboot architecture, and is a
 6. if you feel wggroup has helped you, you don't need to reward it, just click star to support it
 7. About sharing, the original intention of open source is to share learning. If you can, please add [wgcloud] on your blog and website (if any)[WGCLOUD](http://www.wgstart.com)Link or write a post to share with others to help wgcloud learn and progress. Finally, if you like, you can send us your company name by email, and we will show it to the [thank you] column of wgcloud website.
 
-## site
+## Site
 
 <http://www.wgstart.com>
 
-## video
+## Function List Overview
 
-<https://space.bilibili.com/549621501/video>
+<https://www.wgstart.com/en/help/docs79.html>
 
 ## **Source code use**
 
-1.If you use idea (recommended), you can directly open wgcloud server and wgcloud agent. JDK uses 1.8
+1.If you use idea (recommended), you can directly open wgcloud server and wgcloud agent. JDK uses 1.8 Or 11
 
-2.If you use eclipse, you can import the Maven project wgcloud server and wgcloud agent. JDK uses 1.8
+2.If you use eclipse, you can import the Maven project wgcloud server and wgcloud agent. JDK uses 1.8 Or 11
 
 3.Run the required SQL script (MySQL database is used in this project). Under the SQL folder, create the database wgcloud in MySQL database and import wgcloud.sql.
 
