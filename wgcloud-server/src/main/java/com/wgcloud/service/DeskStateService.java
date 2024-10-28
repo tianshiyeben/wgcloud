@@ -24,6 +24,9 @@ import java.util.Map;
 @Service
 public class DeskStateService {
 
+    @Autowired
+    private DeskStateMapper deskStateMapper;
+
     public PageInfo selectByParams(Map<String, Object> params, int currPage, int pageSize) throws Exception {
         PageHelper.startPage(currPage, pageSize);
         List<DeskState> list = deskStateMapper.selectByParams(params);
@@ -66,9 +69,6 @@ public class DeskStateService {
         return deskStateMapper.deleteByAccHname(params);
     }
 
-
-    @Autowired
-    private DeskStateMapper deskStateMapper;
 
 
 }
