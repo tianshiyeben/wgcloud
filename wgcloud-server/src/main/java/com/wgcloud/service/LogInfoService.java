@@ -28,6 +28,9 @@ public class LogInfoService {
 
     private static final Logger logger = LoggerFactory.getLogger(LogInfoService.class);
 
+    @Autowired
+    private LogInfoMapper logInfoMapper;
+
     public PageInfo selectByParams(Map<String, Object> params, int currPage, int pageSize) throws Exception {
         PageHelper.startPage(currPage, pageSize);
         List<LogInfo> list = logInfoMapper.selectByParams(params);
@@ -75,9 +78,6 @@ public class LogInfoService {
     public List<LogInfo> selectAllByParams(Map<String, Object> params) throws Exception {
         return logInfoMapper.selectAllByParams(params);
     }
-
-    @Autowired
-    private LogInfoMapper logInfoMapper;
 
 
 }
