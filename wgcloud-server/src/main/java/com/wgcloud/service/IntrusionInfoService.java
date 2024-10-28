@@ -24,6 +24,9 @@ import java.util.Map;
 @Service
 public class IntrusionInfoService {
 
+    @Autowired
+    private IntrusionInfoMapper intrusionInfoMapper;
+
     public PageInfo selectByParams(Map<String, Object> params, int currPage, int pageSize) throws Exception {
         PageHelper.startPage(currPage, pageSize);
         List<IntrusionInfo> list = intrusionInfoMapper.selectByParams(params);
@@ -63,9 +66,6 @@ public class IntrusionInfoService {
         return intrusionInfoMapper.selectByAccountId(accountId);
     }
 
-
-    @Autowired
-    private IntrusionInfoMapper intrusionInfoMapper;
 
 
 }
