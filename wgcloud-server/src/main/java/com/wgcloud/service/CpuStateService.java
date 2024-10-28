@@ -23,6 +23,9 @@ import java.util.Map;
 @Service
 public class CpuStateService {
 
+    @Autowired
+    private CpuStateMapper cpuStateMapper;
+
     public PageInfo selectByParams(Map<String, Object> params, int currPage, int pageSize) throws Exception {
         PageHelper.startPage(currPage, pageSize);
         List<CpuState> list = cpuStateMapper.selectByParams(params);
@@ -60,9 +63,6 @@ public class CpuStateService {
         return cpuStateMapper.selectAllByParams(params);
     }
 
-
-    @Autowired
-    private CpuStateMapper cpuStateMapper;
 
 
 }
