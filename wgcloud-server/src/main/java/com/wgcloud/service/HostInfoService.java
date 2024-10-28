@@ -24,6 +24,9 @@ import java.util.Map;
 @Service
 public class HostInfoService {
 
+    @Autowired
+    private HostInfoMapper hostInfoMapper;
+
     public PageInfo selectByParams(Map<String, Object> params, int currPage, int pageSize) throws Exception {
         PageHelper.startPage(currPage, pageSize);
         List<HostInfo> list = hostInfoMapper.selectByParams(params);
@@ -59,10 +62,6 @@ public class HostInfoService {
     public List<HostInfo> selectAllByParams(Map<String, Object> params) throws Exception {
         return hostInfoMapper.selectAllByParams(params);
     }
-
-
-    @Autowired
-    private HostInfoMapper hostInfoMapper;
 
 
 }
