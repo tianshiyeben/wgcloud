@@ -23,6 +23,9 @@ import java.util.Map;
 @Service
 public class MemStateService {
 
+    @Autowired
+    private MemStateMapper memStateMapper;
+
     public PageInfo selectByParams(Map<String, Object> params, int currPage, int pageSize) throws Exception {
         PageHelper.startPage(currPage, pageSize);
         List<MemState> list = memStateMapper.selectByParams(params);
@@ -59,10 +62,6 @@ public class MemStateService {
     public List<MemState> selectAllByParams(Map<String, Object> params) throws Exception {
         return memStateMapper.selectAllByParams(params);
     }
-
-
-    @Autowired
-    private MemStateMapper memStateMapper;
 
 
 }
