@@ -23,6 +23,9 @@ import java.util.Map;
 @Service
 public class AppStateService {
 
+    @Autowired
+    private AppStateMapper appStateMapper;
+
     public PageInfo selectByParams(Map<String, Object> params, int currPage, int pageSize) throws Exception {
         PageHelper.startPage(currPage, pageSize);
         List<AppState> list = appStateMapper.selectByParams(params);
@@ -65,9 +68,6 @@ public class AppStateService {
         return appStateMapper.selectAllByParams(params);
     }
 
-
-    @Autowired
-    private AppStateMapper appStateMapper;
 
 
 }
