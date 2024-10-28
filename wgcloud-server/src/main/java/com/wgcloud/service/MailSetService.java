@@ -21,6 +21,8 @@ import java.util.Map;
 @Service
 public class MailSetService {
 
+    @Autowired
+    private MailSetMapper mailSetMapper;
 
     public void save(MailSet MailSet) throws Exception {
         MailSet.setId(UUIDUtil.getUUID());
@@ -45,9 +47,6 @@ public class MailSetService {
         return mailSetMapper.updateById(MailSet);
     }
 
-
-    @Autowired
-    private MailSetMapper mailSetMapper;
 
 
 }
