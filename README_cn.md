@@ -30,23 +30,27 @@ WGCLOUD基于微服务springboot架构开发，是轻量高性能的分布式监
 
 8.关于分享，我们开源的初衷在于分享学习，如果可以的话，请在您的博客、网站（如果有的话）帮忙加个[WGCLOUD](http://www.wgstart.com)链接或写个论坛帖子分享给更多的小伙伴，我们将非常感谢。最后若您愿意的话，可以将您单位名称通过邮件发来给我们，我们将展示到WGCLOUD网站的【感谢】栏目
 
-## **唯一官网**
+## **官网**
 
 <http://www.wgstart.com>
+
+## 实用在线小工具
+
+<https://www.wgstart.com/help/docs8.html>
 
 ## **Github**仓库
 
 <https://github.com/tianshiyeben/wgcloud>
 
-## **视频**
+## **功能清单**
 
-B站WGCLOUD相关视频地址，<https://space.bilibili.com/549621501/video>
+<https://www.wgstart.com/help/docs79.html>
 
 ## **源码使用**
 
-1.使用IDEA的话（推荐），直接打开wgcloud-server和wgcloud-agent即可，JDK使用1.8
+1.使用IDEA的话（推荐），直接打开wgcloud-server和wgcloud-agent即可，JDK使用1.8或者JDK11
 
-2.使用Eclipse的话，导入maven工程wgcloud-server和wgcloud-agent即可，JDK使用1.8
+2.使用Eclipse的话，导入maven工程wgcloud-server和wgcloud-agent即可，JDK使用1.8或者JDK11
 
 3.运行所需sql脚本（本项目使用mysql数据库），在sql文件夹下，在mysql数据库里创建数据库wgcloud，导入wgcloud.sql即可
 
