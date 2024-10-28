@@ -25,6 +25,9 @@ import java.util.Map;
 @Service
 public class HeathMonitorService {
 
+    @Autowired
+    private HeathMonitorMapper heathMonitorMapper;
+
     public PageInfo selectByParams(Map<String, Object> params, int currPage, int pageSize) throws Exception {
         PageHelper.startPage(currPage, pageSize);
         List<HeathMonitor> list = heathMonitorMapper.selectByParams(params);
@@ -83,9 +86,6 @@ public class HeathMonitorService {
         return heathMonitorMapper.selectAllByParams(params);
     }
 
-
-    @Autowired
-    private HeathMonitorMapper heathMonitorMapper;
 
 
 }
