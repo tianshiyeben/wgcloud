@@ -14,7 +14,7 @@ logging:
 base:
   #wgcloud-server端访问地址
   serverUrl: http://localhost:9999
-  #本机ip，不要用localhost或127.0.0.1
+  #本机ip，不要用localhost或127.0.0.1，不要重复
   bindIp: 192.168.1.2
-  #通信token，请和server端配置的wgToken保持一致
+  #通信token，请和server端配置文件里的wgToken保持一致
   wgToken: wgcloud
