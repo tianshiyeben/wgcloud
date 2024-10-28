@@ -84,6 +84,16 @@ WGCLOUD基于微服务springboot架构开发，是轻量高性能的分布式监
 
 ![WGCLOUD主机画像图](./demo/huaxiang.jpg)
 
+![GPU数据监测](./GPU/gpu.jpg)
+
+![firewall防火墙监测](./firewall/firewall.jpg)
+
+![Crontab](./crontab/crontab.jpg)
+
+![全量进程](./demo/allProcess.jpg)
+
+![动环监控](./demo/donghuan.jpg)
+
 ## 通信图示例（http协议）
 
 ![WGCLOUD通信图示例](./demo/tongxin.jpg)
