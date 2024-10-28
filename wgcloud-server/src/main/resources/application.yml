@@ -45,7 +45,7 @@ mybatis:
 
 #自定义配置参数
 base:
-  #登陆账号admin的密码
+  #登录账号管理员admin的密码
   admindPwd: 111111
   #通信token，agent端和此保持一致
   wgToken: wgcloud
