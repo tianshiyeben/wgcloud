@@ -24,6 +24,9 @@ import java.util.Map;
 @Service
 public class SystemInfoService {
 
+    @Autowired
+    private SystemInfoMapper systemInfoMapper;
+
     public PageInfo selectByParams(Map<String, Object> params, int currPage, int pageSize) throws Exception {
         PageHelper.startPage(currPage, pageSize);
         List<SystemInfo> list = systemInfoMapper.selectByParams(params);
@@ -86,9 +89,6 @@ public class SystemInfoService {
         return systemInfoMapper.deleteByAccHname(params);
     }
 
-
-    @Autowired
-    private SystemInfoMapper systemInfoMapper;
 
 
 }
