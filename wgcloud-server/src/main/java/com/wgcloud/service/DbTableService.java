@@ -25,6 +25,9 @@ import java.util.Map;
 @Service
 public class DbTableService {
 
+    @Autowired
+    private DbTableMapper dbTableMapper;
+
     public PageInfo selectByParams(Map<String, Object> params, int currPage, int pageSize) throws Exception {
         PageHelper.startPage(currPage, pageSize);
         List<DbTable> list = dbTableMapper.selectByParams(params);
@@ -79,10 +82,6 @@ public class DbTableService {
     public List<DbTable> selectAllByParams(Map<String, Object> params) throws Exception {
         return dbTableMapper.selectAllByParams(params);
     }
-
-
-    @Autowired
-    private DbTableMapper dbTableMapper;
 
 
 }
