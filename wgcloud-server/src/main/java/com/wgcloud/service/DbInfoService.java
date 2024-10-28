@@ -24,6 +24,9 @@ import java.util.Map;
 @Service
 public class DbInfoService {
 
+    @Autowired
+    private DbInfoMapper dbInfoMapper;
+
     public PageInfo selectByParams(Map<String, Object> params, int currPage, int pageSize) throws Exception {
         PageHelper.startPage(currPage, pageSize);
         List<DbInfo> list = dbInfoMapper.selectByParams(params);
@@ -59,10 +62,6 @@ public class DbInfoService {
     public List<DbInfo> selectAllByParams(Map<String, Object> params) throws Exception {
         return dbInfoMapper.selectAllByParams(params);
     }
-
-
-    @Autowired
-    private DbInfoMapper dbInfoMapper;
 
 
 }
