@@ -24,6 +24,9 @@ import java.util.Map;
 @Service
 public class DbTableCountService {
 
+    @Autowired
+    private DbTableCountMapper dbTableCountMapper;
+
     public PageInfo selectByParams(Map<String, Object> params, int currPage, int pageSize) throws Exception {
         PageHelper.startPage(currPage, pageSize);
         List<DbTableCount> list = dbTableCountMapper.selectByParams(params);
@@ -74,10 +77,6 @@ public class DbTableCountService {
     public int deleteByDate(Map<String, Object> map) throws Exception {
         return dbTableCountMapper.deleteByDate(map);
     }
-
-
-    @Autowired
-    private DbTableCountMapper dbTableCountMapper;
 
 
 }
