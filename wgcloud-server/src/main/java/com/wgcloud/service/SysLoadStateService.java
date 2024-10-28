@@ -23,6 +23,9 @@ import java.util.Map;
 @Service
 public class SysLoadStateService {
 
+    @Autowired
+    private SysLoadStateMapper sysLoadStateMapper;
+
     public PageInfo selectByParams(Map<String, Object> params, int currPage, int pageSize) throws Exception {
         PageHelper.startPage(currPage, pageSize);
         List<SysLoadState> list = sysLoadStateMapper.selectByParams(params);
@@ -60,9 +63,6 @@ public class SysLoadStateService {
         return sysLoadStateMapper.selectAllByParams(params);
     }
 
-
-    @Autowired
-    private SysLoadStateMapper sysLoadStateMapper;
 
 
 }
