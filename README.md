@@ -8,7 +8,7 @@
 
 ## WGCLOUD
 
-[中文版README](./README_cn.md)
+[中文版 README](./README_cn.md)
 
 Wgcloud design idea is a new generation of very simple operation and maintenance monitoring system, which advocates rapid deployment, reduces the difficulty of operation and maintenance learning, runs automatically, and has no template and script. 
 
