@@ -96,11 +96,11 @@ WGCLOUD基于微服务springboot架构开发，是轻量高性能的分布式监
 
 ![动环监控](./demo/donghuan.jpg)
 
-## 通信图示例（http协议）
+## 🌻 通信图示例（http协议）
 
 ![WGCLOUD通信图示例](./demo/tongxin.jpg)
 
-## 运行环境
+## 🌻 运行环境
 
 1.JDK版本：JDK1.8、JDK11
 
@@ -120,10 +120,10 @@ WGCLOUD基于微服务springboot架构开发，是轻量高性能的分布式监
 
 
 
-## 联系
+## 🍀 联系
 
 邮箱：**wgcloud@foxmail.com**
 
-## 赞助支持
+## 🌽 赞助支持
 
 https://www.wgstart.com/docs19.html
