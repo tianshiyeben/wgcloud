@@ -1,50 +1,60 @@
 <p align="center">
-  <a target="_blank" href="http://www.wgstart.com">
+  <a  target="_blank" href="http://www.wgstart.com">
     <img src="./demo/logo.png">
   </a>
  </p>
 
 
 
-## WGCLOUD
+## WGCLOUD运维监控系统介绍
 
-[中文版 README](./README_cn.md)
+WGCLOUD设计思想为新一代极简运维监控系统，提倡快速部署，最大限度降低运维的学习难度，全自动化运行，无模板和脚本。
 
-Wgcloud design idea is a new generation of very simple operation and maintenance monitoring system, which advocates rapid deployment, reduces the difficulty of operation and maintenance learning, runs automatically, and has no template and script. 
+**当前仓库为开源版本v2.3.7最新，二次开发请拉取master分支即可**。
 
-**The current warehouse version is v2 3.7 for the latest secondary development, please pull the master branch.**
+WGCLOUD基于微服务springboot架构开发，是轻量高性能的分布式监控系统，核心采集指标包括：**cpu使用率，cpu温度，内存使用率，磁盘容量，磁盘IO，硬盘SMART健康状态，系统负载，MAC地址，连接数量，网卡流量，硬件系统信息等。支持监测服务器上的进程应用、文件防篡改、端口、日志、DOCKER容器、数据库、数据表等资源。支持监测服务接口API、数通设备（如交换机、路由器、打印机）等。自动生成网络拓扑图，大屏可视化，web SSH（堡垒机），统计分析图表，指令下发批量执行，告警信息推送（如邮件、钉钉、微信、短信等）**。
 
-Wgcloud is developed based on the microservice springboot architecture, and is a lightweight and high-performance distributed monitoring system. The core collection indexes include: **CPU utilization, CPU temperature, memory utilization, disk capacity, disk IO, smart health status of hard disk, system load, number of connections, network card traffic, hardware system information, etc. Support the monitoring of process applications, files, ports, logs, docker containers, databases, data tables and other resources on the server. Support monitoring service interface API, data communication equipment (such as switch, router, printer), etc. Automatically generate network topology map, large screen visualization, web SSH (Fortress machine), statistical analysis chart, command issuance, batch execution, alarm information push (such as email, nail, wechat, SMS, etc.)** 
+1.   v2.3.7放弃了之前版本的sigar方式获取主机指标，采用流行的OSHI组件来采集主机指标
+2.   采用服务端和代理端协同工作方式，更轻量，更高效，可支持数千台主机同时在线监控
+3.   server端负责接受数据，处理数据，生成图表展示。agent端默认每隔2分钟(时间可调)上报主机指标数据
+4.   支持主流服务器平台安装部署，如Linux, Windows,macOS,Unix等
+5.   WGCLOUD采用主流技术框架SpringBoot+Bootstrap，完美实现了分布式监控系统，为反哺开源社区，二次开源
+6.   **当前仓库为开源版**
+7.   **商业版请到官网下载（[www.wgstart.com](http://www.wgstart.com)），商业版免费但是不开源，生产环境建议部署商业版本，因为商业版功能更多、性能更优秀、安全性更好、更稳定、版本更新更活跃**
+8.   如果您觉得WGCLOUD帮助到您的工作，那不用打赏我们，star支持下就好了
+9.   关于分享，我们开源的初衷在于分享学习，如果可以的话，请在您的博客、网站（如果有的话）帮忙加个[WGCLOUD](http://www.wgstart.com)链接或写个论坛帖子分享给更多的小伙伴，我们将非常感谢
 
-1. V2.3.7 abandons the sigar method of v2.3.6 to obtain host indicators, and v2.3.7 uses popular oshi components to collect host indicators
-2. the server and client work together, which is lighter and more efficient, and can support thousands of hosts to monitor online at the same time.
-3. The server side is responsible for receiving data, processing data, and generating chart display. The agent side reports the index data every 30 seconds (time adjustable) by default.
-4. support the installation and deployment of mainstream server platforms, such as Linux, windows, MacOS, etc.
-5. Wgcloud adopts springboot+bootstrap to realize the distributed monitoring system perfectly, which is used to feed the open source community and open source for the second time.
-6. if you feel wggroup has helped you, you don't need to reward it, just click star to support it
-7. About sharing, the original intention of open source is to share learning. If you can, please add [wgcloud] on your blog and website (if any)[WGCLOUD](http://www.wgstart.com)Link or write a post to share with others to help wgcloud learn and progress. Finally, if you like, you can send us your company name by email, and we will show it to the [thank you] column of wgcloud website.
-
-## 🎉 WGCLOUD Site
+## **🎉 WGCLOUD官网**
 
 <http://www.wgstart.com>
 
-## ✨ Function List Overview
+## **✨ 在线演示**
 
-<https://www.wgstart.com/en/help/docs79.html>
+<http://www.wgstart.com/docs22.html>
 
-## **👏 Source code use**
+## 🌽 实用在线小工具
 
-1.If you use idea (recommended), you can directly open wgcloud server and wgcloud agent. JDK uses 1.8 Or 11
+<https://www.wgstart.com/docs12.html>
 
-2.If you use eclipse, you can import the Maven project wgcloud server and wgcloud agent. JDK uses 1.8 Or 11
+## **🚀 Github**仓库
 
-3.Run the required SQL script (MySQL database is used in this project). Under the SQL folder, create the database wgcloud in MySQL database and import wgcloud.sql.
+<https://github.com/tianshiyeben/wgcloud>
 
-**4. If you feel that wgcloud has helped you, please support [www.wgstart.com](http://www.wgstart.com). With your support, open source can do better. Thank you.**
+## **🐳 功能清单**
 
-## **✨ Demo**
+<https://www.wgstart.com/help/docs79.html>
 
+## **👏 源码使用**
 
+1.使用IDEA的话（推荐），直接打开wgcloud-server和wgcloud-agent即可，JDK使用1.8或者JDK11
+
+2.使用Eclipse的话，导入maven工程wgcloud-server和wgcloud-agent即可，JDK使用1.8或者JDK11
+
+3.运行所需sql脚本（本项目使用mysql数据库），在sql文件夹下，在mysql数据库里创建数据库wgcloud，导入wgcloud.sql即可
+
+4.bin目录下的脚本文件，为server和agent启动/停止脚本（linux和windows），和打包好的wgcloud-server-release.jar放到同一个目录下即可
+
+## **✨ 功能截图**
 
 
 
@@ -52,13 +62,19 @@ Wgcloud is developed based on the microservice springboot architecture, and is a
 
 ![WGCLOUD监控主机列表](./demo/demo3.jpg)
 
-![WGCLOUD监控主机磁盘图表](./demo/demo9.jpg)
+![WGCLOUD监控主机磁盘信息](./demo/demo9.jpg)
 
-![WGCLOUD监控主机告警图表](./daping/dapingv4.jpg)
+![WGCLOUD监控主机暗夜黑主题](./demo/chatu1.jpg)
 
-![WGCLOUD监控主机告警图表](./demo/dp.jpg)
+![WGCLOUD监控主机暗夜黑主题](./demo/chatu3.jpg)
 
-![WGCLOUD监控主机告警图表](./demo/dapingNew.jpg)
+![WGCLOUD监控主机告警报表](./daping/dapingv4.jpg)
+
+![WGCLOUD监控主机大屏](./demo/dp.jpg)
+
+![WGCLOUD监控主机大屏新版本](./demo/dapingNew.jpg)
+
+![WGCLOUD监控主机大屏新版本](./demo/dapingv3.jpg)
 
 ![WGCLOUD监控主机状态趋势图](./demo/demo4.jpg)
 
@@ -66,49 +82,48 @@ Wgcloud is developed based on the microservice springboot architecture, and is a
 
 ![WGCLOUD网络拓扑图](./demo/tpdemo.jpg)
 
-![WGCLOUD主机画像图](./demo/ssh.jpg)
+![WGCLOUD主机web ssh客户端图](./demo/ssh.jpg)
 
 ![WGCLOUD主机画像图](./demo/huaxiang.jpg)
 
-![GPU数据监测](D:/kaiyuan/GPU/gpu.jpg)
+![GPU数据监测](./GPU/gpu.jpg)
 
-![firewall防火墙监测](D:/kaiyuan/firewall/firewall.jpg)
+![firewall防火墙监测](./firewall/firewall.jpg)
 
-![Crontab](D:/kaiyuan/crontab/crontab.jpg)
+![Crontab](./crontab/crontab.jpg)
 
-![全量进程](D:/kaiyuan/demo/allProcess.jpg)
+![全量进程](./demo/allProcess.jpg)
 
-![动环监控](D:/kaiyuan/demo/donghuan.jpg)
+![动环监控](./demo/donghuan.jpg)
 
-## Example of communication diagram (HTTP protocol)
+## 🌻 通信图示例（http协议）
 
 ![WGCLOUD通信图示例](./demo/tongxin.jpg)
 
-## Running environment
+## 🌻 运行环境
 
-1.JDK1.8、JDK11
+1.JDK版本：JDK1.8、JDK11
 
-2.Mysql5.6 and above、MariaDB、PostgreSQL、Oracle
+2.数据库：MySql5.5及以上、MariaDB、PostgreSQL、Oracle
 
-3.Support operating system platform
+3.支持系统平台
 
-> Support monitoring linux series: Debian, RedHat, CentOS, Ubuntu ..... 
+> 支持监测Linux系列：Debian，RedHat，CentOS，Ubuntu，Fedora，SUSE，麒麟，统信(UOS)，龙芯(mips)等
 >
-> support monitoring windows series: Windows Server 2008 R2 2012 , 2016 , 2019, Windows 7, Windows 8, windows 10 ,windows 11
+> 支持监测Windows系列：Windows Server 2008 R2，2012，2016，2019，2022，Windows 7，Windows 8，Windows 10，Windows 11
 >
-> support monitoring UNIX series: Solaris, FreeBSD, OpenBSD ......
+> 支持监测Unix系列：solaris，FreeBSD，OpenBSD
 >
-> support monitoring Mac OS series: Mac OS AMD64
+> 支持监测MacOS系列：macOS amd64，macOS arm64
+>
+> 其他支持：ARM，Android(安卓)，riscv64，s390x，树莓派，AIX等
 
 
 
-## EMAIL
+## 🍀 联系我们
 
-**wgcloud@foxmail.com**
+邮箱：**wgcloud@foxmail.com**
 
-## SPONSORS
+## 🌽 赞助支持
 
 https://www.wgstart.com/docs19.html
-
-
-
