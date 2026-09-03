@@ -14,49 +14,61 @@ WGCLOUD设计思想为新一代极简运维监控系统，提倡快速部署，�
 
 WGCLOUD基于微服务SpringBoot架构开发，是轻量高性能的分布式运维监控系统，核心采集指标包括：
 
-**（1）监控服务器和主机的cpu使用率，cpu温度，内存使用率，磁盘容量空间，磁盘IO读写速率，磁盘IOPS，硬盘SMART健康状态，系统负载，MAC地址，连接数量，网卡流量，硬件系统信息，BIOS信息，主板信息，PCI，GPU，防火墙状态，CRONTAB，系统用户最近登录数据，Windows系统服务列表，运行进程，运行端口等信息，以及服务器IPMI监控等**
+> **监控服务器和主机的cpu使用率，cpu温度，内存使用率，磁盘容量空间，磁盘IO读写速率，磁盘IOPS，硬盘SMART健康状态，系统负载，MAC地址，连接数量，网卡流量，硬件系统信息，BIOS信息，主板信息，PCI，GPU，防火墙状态，CRONTAB，系统用户最近登录数据，Windows系统服务列表，运行进程，运行端口等信息，以及服务器IPMI监控等**
+>
+> **支持监测服务器上的进程应用、文件防篡改、端口、日志、DOCKER容器、数据库、数据表等资源**
+>
+> **支持监测服务接口API、网络设备（比如交换机、路由器、打印机）等。自动生成网络拓扑图，大屏可视化，web SSH（堡垒机），巡检报告，指令下发批量执行，告警信息推送（如邮件、钉钉、微信、短信等），自动发现设备，AI自动分析，计划任务，中间件监控，资产管理**
 
-**（2）支持监测服务器上的进程应用、文件防篡改、端口、日志、DOCKER容器、数据库、数据表等资源**
+1.  v2.3.7放弃了之前版本的sigar方式获取主机指标，采用流行的OSHI组件来采集主机指标
 
-**（3）支持监测服务接口API、网络设备（比如交换机、路由器、打印机）等。自动生成网络拓扑图，大屏可视化，web SSH（堡垒机），巡检报告，指令下发批量执行，告警信息推送（如邮件、钉钉、微信、短信等），自动发现设备，AI自动分析，计划任务，中间件监控，资产管理**。
+2.  采用服务端和代理端协同工作方式，更轻量，更高效，可支持数千台主机同时在线监控
 
-1.   v2.3.7放弃了之前版本的sigar方式获取主机指标，采用流行的OSHI组件来采集主机指标
-2.   采用服务端和代理端协同工作方式，更轻量，更高效，可支持数千台主机同时在线监控
-3.   server端负责接受数据，处理数据，生成图表展示。agent端默认每隔2分钟(时间可调)上报主机指标数据
-4.   支持主流服务器平台安装部署，如Linux, Windows,macOS,Unix等
-5.   WGCLOUD采用主流技术框架SpringBoot+Bootstrap，完美实现了分布式监控系统，为反哺开源社区，二次开源
-6.   **当前仓库为开源版**
-7.   **商业版请到官网下载（[www.wgstart.com](http://www.wgstart.com)），商业版免费但是不开源，生产环境建议部署商业版本，因为商业版功能更多、性能更优秀、安全性更好、更稳定、版本更新更活跃，支持也更好**
-8.   如果您觉得WGCLOUD帮助到您的工作，那不用打赏我们，点击star支持下就好了
-9.   关于分享，我们开源的初衷在于分享学习，如果可以的话，请在您的博客、网站（如果有的话）帮忙加个[WGCLOUD](http://www.wgstart.com)链接或写个论坛帖子分享给更多的小伙伴，我们将非常感谢
+3.  server端负责接受数据，处理数据，生成图表展示。agent端默认每隔2分钟(时间可调)上报主机指标数据
+
+4.  支持主流服务器平台安装部署，如Linux，Windows，macOS，Unix等
+
+5.  WGCLOUD采用主流技术框架SpringBoot+Bootstrap，完美实现了分布式监控系统，为反哺开源社区，二次开源
+
+6.  **当前仓库为开源版**
+
+7.  **WGCLOUD商业版请到官网下载（[www.wgstart.com](http://www.wgstart.com)），商业版可以免费使用，但是不开源，生产环境建议部署商业版本，因为商业版功能更多、性能更优秀、安全性更好、更稳定、版本更新更活跃，支持也更好**
+
+8.  如果您觉得WGCLOUD帮助到您的工作，那不用打赏我们，点击star支持下就好了
+
+9.  关于分享，我们开源的初衷在于分享学习，如果可以的话，请在您的博客、网站（如果有的话）帮忙加个[WGCLOUD](http://www.wgstart.com)链接或写个论坛帖子分享给更多的小伙伴，我们将非常感谢
+
+   
 
 ## **🎉 WGCLOUD官网文档**
 
 **WGCLOUD监控系统** 在线文档和下载：<http://www.wgstart.com>
 
-**WGCAT工单系统** 在线文档和下载：<https://www.wgstart.com/docs25.html>
-
-**WGFIX资产设备系统** 在线文档和下载：<https://www.wgstart.com/docs25.html>
-
-**WGLOG日志审计系统** 在线文档和下载：<https://www.wgstart.com/docs25.html>
-
 
 
 ## **✨ 在线演示**
 
-<http://www.wgstart.com/docs22.html>
+http://www.wgstart.com/docs22.html
+
+
 
 ## 🌽 实用在线小工具
 
 <https://www.wgstart.com/docs12.html>
 
+
+
 ## **🚀 Github**仓库
 
 <https://github.com/tianshiyeben/wgcloud>
 
+
+
 ## **🐳 功能清单**
 
 <https://www.wgstart.com/docs27.html>
+
+
 
 ## **👏 源码使用**
 
@@ -67,6 +79,40 @@ WGCLOUD基于微服务SpringBoot架构开发，是轻量高性能的分布式运
 3.运行所需sql脚本（本项目使用mysql数据库），在sql文件夹下，在mysql数据库里创建数据库wgcloud，导入wgcloud.sql即可
 
 4.bin目录下的脚本文件，为server和agent启动/停止脚本（linux和windows），和打包好的wgcloud-server-release.jar放到同一个目录下即可
+
+
+
+## 🍀 联系我们
+
+https://www.wgstart.com/docs9a.html
+
+
+
+## 🌽 赞助支持
+
+https://www.wgstart.com/docs19.html
+
+
+
+## 🌻 运行环境
+
+1. JDK版本：JDK1.8、JDK11
+
+2. 数据库：MySql5.5及以上、MariaDB、PostgreSQL、Oracle
+
+3. 支持系统平台
+
+> 支持监测Linux系列：Debian，RedHat，CentOS，Ubuntu，Fedora，SUSE，麒麟，统信(UOS)，龙芯(mips)等
+>
+> 支持监测Windows系列：Windows Server 2008 R2，Windows 2012，Windows 2016，Windows 2019，Windows 2022，Windows 7，Windows 8，Windows 10，Windows 11，Windows 2025
+>
+> 支持监测Unix系列：solaris，FreeBSD，OpenBSD
+>
+> 支持监测MacOS系列：macOS amd64，macOS arm64
+>
+> 其他支持：ARM，Android(安卓)，riscv64，s390x，树莓派，AIX等
+
+
 
 ## **✨ 功能截图**
 
@@ -89,6 +135,8 @@ WGCLOUD基于微服务SpringBoot架构开发，是轻量高性能的分布式运
 ![WGCLOUD监控主机大屏新版本](./demo/dapingNew.jpg)
 
 ![WGCLOUD监控主机大屏新版本](./demo/dapingv3.jpg)
+
+![WGLOG日志审计系统](./log/dashboard.jpg)
 
 ![WGCLOUD监控主机状态趋势图](./demo/demo4.jpg)
 
@@ -114,30 +162,6 @@ WGCLOUD基于微服务SpringBoot架构开发，是轻量高性能的分布式运
 
 ![WGCLOUD通信图示例](./demo/tongxin.jpg)
 
-## 🌻 运行环境
-
-1.JDK版本：JDK1.8、JDK11
-
-2.数据库：MySql5.5及以上、MariaDB、PostgreSQL、Oracle
-
-3.支持系统平台
-
-> 支持监测Linux系列：Debian，RedHat，CentOS，Ubuntu，Fedora，SUSE，麒麟，统信(UOS)，龙芯(mips)等
->
-> 支持监测Windows系列：Windows Server 2008 R2，2012，2016，2019，2022，Windows 7，Windows 8，Windows 10，Windows 11
->
-> 支持监测Unix系列：solaris，FreeBSD，OpenBSD
->
-> 支持监测MacOS系列：macOS amd64，macOS arm64
->
-> 其他支持：ARM，Android(安卓)，riscv64，s390x，树莓派，AIX等
 
 
 
-## 🍀 联系我们
-
-邮箱：**wgcloud@foxmail.com**
-
-## 🌽 赞助支持
-
-https://www.wgstart.com/docs19.html
