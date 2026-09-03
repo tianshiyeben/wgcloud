@@ -10,7 +10,7 @@ logging:
   file:
     path: ./log
 
-#自定义配置参数
+#自定义配置参数，更多配置请查看 www.wgstart.com
 base:
   #wgcloud-server端访问地址
   serverUrl: http://localhost:9999
