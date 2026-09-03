@@ -47,7 +47,7 @@ mybatis:
 base:
   #登录账号管理员admin的密码
   admindPwd: 111111
-  #通信token，agent端和此保持一致
+  #通信token，agent端和此值保持一致
   wgToken: wgcloud
   #是否开启公众看板，yes开启，no关闭，公众看板页面无需登陆
   dashView: yes
@@ -56,7 +56,7 @@ base:
   #服务接口监控间隔，单位毫秒，默认10分钟
   heathTimes: 600000
 
-#告警配置
+#告警配置，更多配置请查看说明www.wgstart.com
 mail:
   #告警邮件总开关，yes开启，no关闭
   allWarnMail: yes
